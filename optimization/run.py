@@ -111,8 +111,9 @@ def main() -> int:
         project_root = get_project_root()
         log_dir = project_root / "results" / "Logs"
         log_dir.mkdir(parents=True, exist_ok=True)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        log_file = log_dir / f"monte_carlo_run_{timestamp}.log"
+        # Date-time first so logs sort chronologically by filename (ISO-like: YYYY-MM-DD_HH-MM-SS)
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        log_file = log_dir / f"{timestamp}_monte_carlo_run.log"
         
         # Add file handler to root logger
         root_logger = logging.getLogger()
