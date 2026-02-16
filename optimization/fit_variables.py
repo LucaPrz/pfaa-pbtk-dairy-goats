@@ -10,8 +10,6 @@ ALL_PARAMETERS_SIMPLE = ["E_milk", "k_ehc", "k_elim", "k_renal", "k_a", "k_feces
 
 REQUIRED_PARAMETERS = ["k_a", "k_elim"]  # Same for both models
 
-# Matrices that count toward "at least one above LOQ" for including a compound-isomer pair in fitting.
-# Only these biological matrices are used; intake/derived (Hay, Hay x Feed Amount, etc.) are excluded.
 FIT_RELEVANT_MATRICES = [
     "Brain", "Feces", "Heart", "Kidney", "Liver", "Lung",
     "Milk", "Muscle", "Plasma", "Spleen", "Urine",
@@ -88,6 +86,27 @@ def check_pair_fittable(
 
     is_fittable = len(matrices_above_loq) > 0
     return is_fittable, matrices_above_loq
+
+
+def get_matrices_above_loq(
+    pair_data: pd.DataFrame,
+    loq: float = 0.5,
+    loq_milk: float = 0.005,
+) -> List[str]:
+    """
+    Return the list of FIT_RELEVANT_MATRICES that have at least one
+    measurement above the relevant LOQ in pair_data (for logging).
+    """
+    matrices_above_loq: List[str] = []
+    for matrix_name in FIT_RELEVANT_MATRICES:
+        matrix_data = pair_data[pair_data["Matrix"].str.strip().str.lower() == matrix_name.lower()]
+        if matrix_data.empty:
+            continue
+        conc = pd.to_numeric(matrix_data["Concentration"], errors="coerce").dropna()
+        threshold = loq_milk if matrix_name.lower() == "milk" else loq
+        if (conc > threshold).any():
+            matrices_above_loq.append(matrix_name)
+    return matrices_above_loq
 
 
 def check_data_signals(

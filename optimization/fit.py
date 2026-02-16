@@ -133,9 +133,10 @@ def run_global_fit_for_pair(
         return None
     
     total_points = len(df_pair)
-    matrices = df_pair['Matrix'].unique()
     animals = df_pair['Animal'].unique()
-    logger.info(f"[GLOBAL FIT] {compound} {isomer} - Data: {total_points} points, {len(matrices)} matrices, {len(animals)} animals")
+    from optimization.fit_variables import get_matrices_above_loq
+    matrices_above_loq = get_matrices_above_loq(df_pair, context.config.loq, context.config.loq_milk)
+    logger.info(f"[GLOBAL FIT] {compound} {isomer} - Data: {total_points} points, {len(matrices_above_loq)} matrices above LOQ, {len(animals)} animals")
 
     try:
         fit_config = FitConfig(compound=compound, isomer=isomer)
