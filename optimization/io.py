@@ -45,10 +45,14 @@ class DataCache:
     data_path:
         Path to the cleaned PFAS measurement CSV
         (`data/raw/pfas_data_no_e1.csv` in this repository).
+    fittable_pairs:
+        If provided, get_all_pairs() returns only these (compound, isomer) pairs.
+        Used so only pairs with hay > 0 and ≥1 matrix above LOQ are processed.
     """
 
     compounds: Sequence[str]
     data_path: Path
+    fittable_pairs: Optional[Sequence[Tuple[str, str]]] = None
 
     def __post_init__(self) -> None:
         if not self.data_path.exists():
@@ -76,8 +80,10 @@ class DataCache:
 
     def get_all_pairs(self) -> List[Tuple[str, str]]:
         """
-        Return all distinct (compound, isomer) pairs present in the cache.
+        Return distinct (compound, isomer) pairs to process.
 
+        If fittable_pairs was set, returns only those pairs (that also exist in the cache).
+        Otherwise returns all pairs present in the cache.
         Pairs are sorted alphabetically for deterministic processing order.
         """
         pairs_df = (
@@ -85,7 +91,11 @@ class DataCache:
             .drop_duplicates()
             .sort_values(["Compound", "Isomer"])
         )
-        return [tuple(x) for x in pairs_df.to_numpy()]  # type: ignore[list-item]
+        all_pairs = [tuple(x) for x in pairs_df.to_numpy()]  # type: ignore[list-item]
+        if self.fittable_pairs is None:
+            return all_pairs
+        allowed = set(self.fittable_pairs)
+        return [p for p in all_pairs if p in allowed]
 
 
 def _load_urine_and_feces(project_root: Path) -> Tuple[Dict[str, float], Dict[str, float], float]:

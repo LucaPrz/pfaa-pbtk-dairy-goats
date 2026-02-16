@@ -1,0 +1,122 @@
+2026-02-15 12:27:04,843 - INFO - Loading data files...
+2026-02-15 12:27:04,854 - INFO - Loaded intake and physiological data: 16920 intake rows, 3 animals with urine volumes, 3 animals with feces mass, 3 animals with milk yield series
+2026-02-15 12:27:04,854 - INFO - Determining compounds from data signals (at least one signal required)...
+2026-02-15 12:27:04,911 - INFO - Found 19 compounds with detectable signals
+2026-02-15 12:27:04,916 - INFO - 
+All compound-isomer pairs to process (35 total):
+2026-02-15 12:27:04,916 - INFO -   PFBA         | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFDA         | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFDA         | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFDS         | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFDS         | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFDoDA       | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFDoDA       | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFDoDS       | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFDoDS       | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFHpA        | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFHpA        | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFHpS        | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFHpS        | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFHxA        | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFHxS        | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFHxS        | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFNA         | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFNA         | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFNS         | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFNS         | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFOA         | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFOA         | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFOS         | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFOS         | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFPeA        | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFTeDA       | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFTeDA       | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFTrDA       | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFTrDA       | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFTrDS       | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFTrDS       | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFUnDA       | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFUnDA       | Linear    
+2026-02-15 12:27:04,916 - INFO -   PFUnDS       | Branched  
+2026-02-15 12:27:04,916 - INFO -   PFUnDS       | Linear    
+2026-02-15 12:27:04,916 - INFO - 
+2026-02-15 12:27:04,916 - INFO - === STARTING FULL MONTE CARLO RUN ===
+2026-02-15 12:27:04,916 - INFO - Total compounds to process: 1
+2026-02-15 12:27:04,932 - INFO - === PHASE 1: Running global mean fits ===
+2026-02-15 12:27:04,967 - INFO - [GLOBAL FIT] Starting PFOS Linear
+2026-02-15 12:27:04,969 - INFO - [GLOBAL FIT] PFOS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-15 12:27:04,972 - INFO - [GLOBAL FIT] PFOS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc', 'k_renal']
+2026-02-15 12:28:51,489 - INFO - [GLOBAL FIT] PFOS Linear - Success: loss=2.33, iterations=38
+2026-02-15 12:28:51,489 - INFO - [GLOBAL FIT] PFOS Linear - Parameters: k_a=0.265, k_elim=0.071, k_feces=0.034, k_ehc=0.159, k_renal=0.067
+2026-02-15 12:28:51,491 - INFO - [GLOBAL FIT] PFOS Linear - Saved parameters to /Users/lucaprzygoda/Desktop/Paper1_clean/results/optimization/global_fit/fit_PFOS_Linear.csv
+2026-02-15 12:28:51,491 - INFO - [GLOBAL FIT] PFOS Linear - Completed in 106.5s
+2026-02-15 12:28:51,493 - INFO - === PHASE 1/3 COMPLETED ===
+2026-02-15 12:28:51,493 - INFO - Global mean fits: 1/1 successful in 106.6s
+2026-02-15 12:28:51,493 - INFO - === Estimating pooled sigma from all fits ===
+2026-02-15 12:28:51,495 - INFO - [SIGMA EST] Estimating pooled sigma from 1 compound-isomer pairs (pooled residuals per matrix)...
+2026-02-15 12:28:51,672 - INFO - [SIGMA EST] urine: pooled σ=0.280 (from 6 pooled residuals)
+2026-02-15 12:28:51,672 - INFO - [SIGMA EST] spleen: pooled σ=0.299 (from 3 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] kidney: pooled σ=0.809 (from 3 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] plasma: pooled σ=0.486 (from 24 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] brain: pooled σ=0.407 (from 3 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] lung: pooled σ=0.252 (from 3 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] milk: pooled σ=0.547 (from 27 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] feces: pooled σ=0.479 (from 13 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] muscle: pooled σ=0.247 (from 3 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] liver: pooled σ=0.161 (from 3 pooled residuals)
+2026-02-15 12:28:51,673 - INFO - [SIGMA EST] heart: pooled σ=0.346 (from 3 pooled residuals)
+2026-02-15 12:28:51,674 - INFO - [SIGMA EST] Saved pooled sigma estimates to /Users/lucaprzygoda/Desktop/Paper1_clean/results/optimization/sigma_estimates/sigma_pooled.csv
+2026-02-15 12:28:51,712 - INFO - Pooled sigma estimates computed successfully
+2026-02-15 12:28:51,712 - INFO -   urine: σ=0.280
+2026-02-15 12:28:51,712 - INFO -   intestine: σ=0.400
+2026-02-15 12:28:51,712 - INFO -   spleen: σ=0.299
+2026-02-15 12:28:51,712 - INFO -   kidney: σ=0.809
+2026-02-15 12:28:51,712 - INFO -   plasma: σ=0.486
+2026-02-15 12:28:51,712 - INFO -   brain: σ=0.407
+2026-02-15 12:28:51,712 - INFO -   lung: σ=0.252
+2026-02-15 12:28:51,713 - INFO -   milk: σ=0.547
+2026-02-15 12:28:51,713 - INFO -   rest: σ=0.400
+2026-02-15 12:28:51,713 - INFO -   feces: σ=0.479
+2026-02-15 12:28:51,713 - INFO -   stomach: σ=0.400
+2026-02-15 12:28:51,713 - INFO -   muscle: σ=0.247
+2026-02-15 12:28:51,713 - INFO -   liver: σ=0.161
+2026-02-15 12:28:51,713 - INFO -   heart: σ=0.346
+2026-02-15 12:28:51,713 - INFO - === PHASE 2: Running jackknife fits ===
+2026-02-15 12:28:51,746 - INFO - [JACKKNIFE] Starting PFOS Linear
+2026-02-15 12:28:51,761 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E2 (1/3)
+2026-02-15 12:30:10,790 - INFO - [JACKKNIFE] PFOS Linear - Animal E2 completed in 79.0s (loss=2.50)
+2026-02-15 12:30:10,791 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E3 (2/3)
+2026-02-15 12:31:34,566 - INFO - [JACKKNIFE] PFOS Linear - Animal E3 completed in 83.8s (loss=2.20)
+2026-02-15 12:31:34,566 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E4 (3/3)
+2026-02-15 12:32:59,010 - INFO - [JACKKNIFE] PFOS Linear - Animal E4 completed in 84.4s (loss=1.88)
+2026-02-15 12:32:59,013 - INFO - [JACKKNIFE] PFOS Linear - Saved jackknife results to /Users/lucaprzygoda/Desktop/Paper1_clean/results/optimization/jackknife/jackknife_PFOS_Linear_LOAO.csv
+2026-02-15 12:32:59,013 - INFO - [JACKKNIFE] PFOS Linear - Completed in 247.3s
+2026-02-15 12:32:59,014 - INFO - === PHASE 2/3 COMPLETED ===
+2026-02-15 12:32:59,014 - INFO - Jackknife fits: 1/1 successful in 247.3s
+2026-02-15 12:32:59,014 - INFO - === PHASE 3: Running Monte Carlo sampling ===
+2026-02-15 12:32:59,048 - INFO - [MONTE CARLO] Starting PFOS Linear
+2026-02-15 12:32:59,050 - INFO - [MONTE CARLO] PFOS Linear - Covariance matrix computed from 3 jackknife samples
+2026-02-15 12:32:59,050 - INFO - [MONTE CARLO] PFOS Linear - Covariance matrix condition number: 4.46e+06
+2026-02-15 12:32:59,051 - INFO - [MONTE CARLO] PFOS Linear - Covariance matrix diagonal (variances): [0.02094015 0.00716477 0.00159873 0.01669674 0.00154599]
+2026-02-15 12:32:59,051 - INFO - [MONTE CARLO] PFOS Linear - Max correlation: k_elim vs k_a = -1.000
+2026-02-15 12:32:59,052 - INFO - [MONTE CARLO] PFOS Linear - Phase 1 point estimates (linear): [0.15904192 0.07123142 0.0672044  0.26491917 0.03432546]
+2026-02-15 12:32:59,052 - INFO - [MONTE CARLO] PFOS Linear - Phase 1 central values (log10): [-0.7984884  -1.14732839 -1.17260232 -0.57688662 -1.46438361]
+2026-02-15 12:32:59,052 - INFO - [MONTE CARLO] PFOS Linear - Jackknife medians (log10, diagnostic): [-0.81039031 -1.15079782 -1.17158798 -0.55604884 -1.46424459]
+2026-02-15 12:32:59,053 - INFO - [MONTE CARLO] PFOS Linear - Jackknife means (log10, diagnostic): [-0.78538502 -1.14696343 -1.18138424 -0.55971143 -1.46023476]
+2026-02-15 12:32:59,053 - INFO - [MONTE CARLO] PFOS Linear - Jackknife stds (log10, diagonal): [0.12532001 0.07330462 0.03462719 0.11190419 0.03405126]
+2026-02-15 12:32:59,053 - INFO - [MONTE CARLO] PFOS Linear - Generating 10000 samples in log10-space around Phase 1 estimates using full covariance matrix
+2026-02-15 12:32:59,057 - INFO - [MONTE CARLO] PFOS Linear - Sample means: [0.16902975 0.0723768  0.0674558  0.27818269 0.03448742]
+2026-02-15 12:32:59,057 - INFO - [MONTE CARLO] PFOS Linear - Sample stds: [0.05804529 0.01425215 0.0061963  0.08459191 0.00311336]
+2026-02-15 12:32:59,059 - INFO - [MONTE CARLO] PFOS Linear - Collecting predictions for: ['urine', 'kidney', 'spleen', 'plasma', 'brain', 'lung', 'milk', 'feces', 'muscle', 'liver', 'heart', 'elim']
+2026-02-15 12:39:06,500 - INFO - [MONTE CARLO] PFOS Linear - Saved predictions to /Users/lucaprzygoda/Desktop/Paper1_clean/results/optimization/monte_carlo/predictions_PFOS_Linear_monte_carlo.csv
+2026-02-15 12:39:06,500 - INFO - [MONTE CARLO] PFOS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-02-15 12:39:06,501 - INFO - [MONTE CARLO] PFOS Linear - Completed in 367.5s
+2026-02-15 12:39:06,629 - INFO - === PHASE 3/3 COMPLETED ===
+2026-02-15 12:39:06,629 - INFO - Monte Carlo sampling: 1/1 successful in 367.6s
+2026-02-15 12:39:06,638 - INFO - === ALL PHASES COMPLETED ===
+2026-02-15 12:39:06,638 - INFO - Total execution time: 721.7s (0.2 hours)
+2026-02-15 12:39:06,638 - INFO - Success rates: Global=1/1, Jackknife=1/1, Monte Carlo=1/1
+2026-02-15 12:39:06,638 - INFO - Average global fit time: 106.6s per compound
+2026-02-15 12:39:06,638 - INFO - Average jackknife time: 247.3s per compound
+2026-02-15 12:39:06,638 - INFO - Average Monte Carlo time: 367.6s per compound
+2026-02-15 12:39:06,638 - INFO - Fully successful compounds: 1/1

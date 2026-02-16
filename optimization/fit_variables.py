@@ -10,6 +10,13 @@ ALL_PARAMETERS_SIMPLE = ["E_milk", "k_ehc", "k_elim", "k_renal", "k_a", "k_feces
 
 REQUIRED_PARAMETERS = ["k_a", "k_elim"]  # Same for both models
 
+# Matrices that count toward "at least one above LOQ" for including a compound-isomer pair in fitting.
+# Only these biological matrices are used; intake/derived (Hay, Hay x Feed Amount, etc.) are excluded.
+FIT_RELEVANT_MATRICES = [
+    "Brain", "Feces", "Heart", "Kidney", "Liver", "Lung",
+    "Milk", "Muscle", "Plasma", "Spleen", "Urine",
+]
+
 SIGNAL_DEPENDENT_PARAMETERS = {
     # Milk route is governed by fixed plasma–milk partition and milk yield,
     # so there is no free k_milk parameter in the full model anymore.
@@ -31,6 +38,57 @@ def _check_matrix_signal(pair_data: pd.DataFrame, matrix_name: str, loq: float) 
         return False
     conc = pd.to_numeric(matrix_data['Concentration'], errors='coerce').dropna()
     return (conc > loq).any()
+
+
+def check_pair_fittable(
+    compound: str,
+    isomer: str,
+    data_df: pd.DataFrame,
+    loq: float = 0.5,
+    loq_milk: float = 0.005,
+) -> Tuple[bool, List[str]]:
+    """
+    Determine if a compound-isomer pair should be included in fitting.
+
+    A pair is fittable iff:
+    a) Hay concentration is not 0 (at least one positive hay measurement).
+    b) At least one of FIT_RELEVANT_MATRICES has a measurement above LOQ
+       (Milk uses loq_milk, others use loq).
+
+    Returns
+    -------
+    (is_fittable, matrices_above_loq)
+        matrices_above_loq is the list of FIT_RELEVANT_MATRICES that have
+        at least one measurement above the relevant LOQ (for logging).
+    """
+    pair_data = data_df[
+        (data_df["Compound"] == compound) & (data_df["Isomer"] == isomer)
+    ]
+    if pair_data.empty:
+        return False, []
+
+    # a) Hay concentration not 0
+    hay_data = pair_data[pair_data["Matrix"].str.lower() == "hay"]
+    if hay_data.empty:
+        return False, []
+    hay_conc = pd.to_numeric(hay_data["Concentration"], errors="coerce").dropna()
+    if not (hay_conc > 0).any():
+        return False, []
+
+    # b) At least one of FIT_RELEVANT_MATRICES above LOQ
+    matrices_above_loq: List[str] = []
+    for matrix_name in FIT_RELEVANT_MATRICES:
+        matrix_data = pair_data[pair_data["Matrix"].str.strip().str.lower() == matrix_name.lower()]
+        if matrix_data.empty:
+            continue
+        conc = pd.to_numeric(matrix_data["Concentration"], errors="coerce").dropna()
+        threshold = loq_milk if matrix_name.lower() == "milk" else loq
+        if (conc > threshold).any():
+            matrices_above_loq.append(matrix_name)
+
+    is_fittable = len(matrices_above_loq) > 0
+    return is_fittable, matrices_above_loq
+
 
 def check_data_signals(
     compound: str,

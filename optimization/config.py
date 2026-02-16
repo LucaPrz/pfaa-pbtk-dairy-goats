@@ -58,6 +58,7 @@ class ModelConfig:
     param_names: List[str] = field(default_factory=lambda: ["k_ehc", "k_elim", "k_renal", "k_a", "k_feces"])
     animals: List[str] = field(default_factory=lambda: ["E2", "E3", "E4"])
     compounds: Optional[List[str]] = None  # Will be determined from data if None
+    fittable_pairs: Optional[List[Tuple[str, str]]] = None  # (compound, isomer) with hay > 0 and ≥1 matrix above LOQ
     eps: float = 1e-6
     time_vector: np.ndarray = field(default_factory=lambda: np.arange(0, 141, 1))
     matrix_weights: Dict[str, float] = field(default_factory=lambda: {
@@ -112,27 +113,26 @@ class ModelConfig:
         return self.sigma_per_matrix.get(matrix_name.lower(), self.sigma_default)
     
     def get_compounds_from_data(self, data_path: Optional[Path] = None, data_df: Optional[pd.DataFrame] = None) -> List[str]:
-        from optimization.fit_variables import check_data_signals
-        
+        from optimization.fit_variables import check_pair_fittable
+
         # Compounds to ignore (summary/aggregate compounds)
         compounds_to_ignore = {
-            "Sum", "Sum EFSA-4", "Sum branched", "Sum linear", 
+            "Sum", "Sum EFSA-4", "Sum branched", "Sum linear",
             "Summe PFCA", "Summe PFSA"
         }
-        
+
         # Load data if not provided
         if data_df is None:
             if data_path is None:
-                # Try to find default data path within the clean project
                 from optimization.io import get_project_root
                 project_root = get_project_root()
                 data_path = project_root / "data" / "raw" / "pfas_data_no_e1.csv"
-            
+
             if not data_path.exists():
                 raise FileNotFoundError(f"Data file not found: {data_path}")
-            
+
             data_df = pd.read_csv(data_path)
-        
+
         # Get all unique compound-isomer pairs (excluding "Total" isomer and ignored compounds)
         pairs = (
             data_df[["Compound", "Isomer"]]
@@ -140,29 +140,27 @@ class ModelConfig:
             .query('Isomer != "Total"')
             .query('Compound not in @compounds_to_ignore')
         )
-        
-        # Check signals for each pair and collect pairs with at least one signal
+
+        # Include a pair only if (a) hay concentration is not 0 and (b) at least one
+        # of FIT_RELEVANT_MATRICES has a measurement above LOQ. Log matrices above LOQ.
         pairs_with_signals = []
         compounds_with_signals = set()
-        
+
         for _, row in pairs.iterrows():
-            compound = row['Compound']
-            isomer = row['Isomer']
-            
-            # Check if this pair has any detectable signals
-            signals = check_data_signals(compound, isomer, data_df)
-            
-            # Include this pair if it has at least one output signal AND a input signal (hay)
-            if any([
-                signals.get("milk_signal", False),
-                signals.get("plasma_signal", False),
-                signals.get("feces_signal", False),
-                signals.get("feces_depuration_signal", False),
-                signals.get("urine_signal", False)
-            ]) and signals.get("intake_data", False):
+            compound = row["Compound"]
+            isomer = row["Isomer"]
+            is_fittable, matrices_above_loq = check_pair_fittable(
+                compound, isomer, data_df, loq=self.loq, loq_milk=self.loq_milk
+            )
+            if is_fittable:
                 pairs_with_signals.append((compound, isomer))
                 compounds_with_signals.add(compound)
-        
+                logger.info(
+                    f"  {compound} {isomer}: matrices above LOQ: %s",
+                    ", ".join(matrices_above_loq),
+                )
+
+        self.fittable_pairs = sorted(pairs_with_signals, key=lambda x: (x[0], x[1]))
         compounds_list = sorted(list(compounds_with_signals))
         return compounds_list
     
@@ -287,16 +285,21 @@ def setup_context(project_root: Optional[Path] = None, use_simple_model: bool = 
     # Determine compounds from data if not explicitly set
     data_path = project_root / "data" / "raw" / "pfas_data_no_e1.csv"
     if config.compounds is None:
-        logger.info("Determining compounds from data signals (at least one signal required)...")
+        logger.info(
+            "Determining compound-isomer pairs: hay concentration not 0 and "
+            "at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ."
+        )
         config.compounds = config.get_compounds_from_data(data_path=data_path)
-        logger.info(f"Found {len(config.compounds)} compounds with detectable signals")
+        n_pairs = len(config.fittable_pairs) if config.fittable_pairs else 0
+        logger.info(f"Found {len(config.compounds)} compounds ({n_pairs} compound-isomer pairs) meeting criteria")
     else:
         logger.info(f"Using explicitly set compounds: {', '.join(config.compounds)}")
     
-    # Create data cache
+    # Create data cache (only fittable pairs are returned by get_all_pairs if set)
     data_cache = DataCache(
         compounds=config.compounds,
-        data_path=data_path
+        data_path=data_path,
+        fittable_pairs=config.fittable_pairs,
     )
     
     # Create and return context

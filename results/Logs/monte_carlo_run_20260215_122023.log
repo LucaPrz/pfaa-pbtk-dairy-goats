@@ -1,0 +1,50 @@
+2026-02-15 12:20:23,246 - INFO - Loading data files...
+2026-02-15 12:20:23,258 - INFO - Loaded intake and physiological data: 16920 intake rows, 3 animals with urine volumes, 3 animals with feces mass, 3 animals with milk yield series
+2026-02-15 12:20:23,260 - INFO - Determining compounds from data signals (at least one signal required)...
+2026-02-15 12:20:23,313 - INFO - Found 19 compounds with detectable signals
+2026-02-15 12:20:23,318 - INFO - 
+All compound-isomer pairs to process (35 total):
+2026-02-15 12:20:23,318 - INFO -   PFBA         | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFDA         | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFDA         | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFDS         | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFDS         | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFDoDA       | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFDoDA       | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFDoDS       | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFDoDS       | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFHpA        | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFHpA        | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFHpS        | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFHpS        | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFHxA        | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFHxS        | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFHxS        | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFNA         | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFNA         | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFNS         | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFNS         | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFOA         | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFOA         | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFOS         | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFOS         | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFPeA        | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFTeDA       | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFTeDA       | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFTrDA       | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFTrDA       | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFTrDS       | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFTrDS       | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFUnDA       | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFUnDA       | Linear    
+2026-02-15 12:20:23,318 - INFO -   PFUnDS       | Branched  
+2026-02-15 12:20:23,318 - INFO -   PFUnDS       | Linear    
+2026-02-15 12:20:23,318 - INFO - 
+2026-02-15 12:20:23,318 - INFO - === STARTING FULL MONTE CARLO RUN ===
+2026-02-15 12:20:23,318 - INFO - Total compounds to process: 1
+2026-02-15 12:20:23,334 - INFO - === PHASE 1: Running global mean fits ===
+2026-02-15 12:20:23,369 - INFO - [GLOBAL FIT] Starting PFOS Linear
+2026-02-15 12:20:23,371 - INFO - [GLOBAL FIT] PFOS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-15 12:20:23,374 - INFO - [GLOBAL FIT] PFOS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc', 'k_renal']
+2026-02-15 12:20:27,179 - WARNING - User interrupted during global fit phase
+2026-02-15 12:20:28,509 - WARNING - Interrupted by user
