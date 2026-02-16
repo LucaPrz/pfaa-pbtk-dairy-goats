@@ -1,7 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_a,0.7885089732883939,PFOA,Branched
-k_elim,13.015228471003779,PFOA,Branched
-k_milk,0.019111052305446054,PFOA,Branched
-k_renal,77.76096501640474,PFOA,Branched
+k_a,0.783462005079768,PFOA,Branched
+k_elim,18.58648046680916,PFOA,Branched
+k_renal,144.80142051077567,PFOA,Branched
 k_feces,0.0,PFOA,Branched
 k_ehc,0.0,PFOA,Branched

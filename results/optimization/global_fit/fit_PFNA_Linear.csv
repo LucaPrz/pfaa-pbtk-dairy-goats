@@ -1,7 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_a,386.9489851195598,PFNA,Linear
-k_elim,2.2024069793933636,PFNA,Linear
-k_milk,0.10330126958081916,PFNA,Linear
+k_a,0.4280451985791042,PFNA,Linear
+k_elim,30.10815219413284,PFNA,Linear
 k_feces,0.0,PFNA,Linear
 k_ehc,0.0,PFNA,Linear
 k_renal,0.0,PFNA,Linear

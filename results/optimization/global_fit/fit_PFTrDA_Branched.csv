@@ -1,7 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_a,240.8435330887305,PFTrDA,Branched
-k_elim,1.3001048715852022,PFTrDA,Branched
-k_milk,0.03604703073451352,PFTrDA,Branched
+k_a,0.22915885242023779,PFTrDA,Branched
+k_elim,52.09805941839296,PFTrDA,Branched
 k_feces,0.0,PFTrDA,Branched
 k_ehc,0.0,PFTrDA,Branched
 k_renal,0.0,PFTrDA,Branched
