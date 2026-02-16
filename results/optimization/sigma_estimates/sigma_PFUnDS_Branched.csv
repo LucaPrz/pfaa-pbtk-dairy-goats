@@ -1,0 +1,15 @@
+Matrix,Sigma,Compound,Isomer
+intestine,0.4,PFUnDS,Branched
+brain,3.475005319113366,PFUnDS,Branched
+rest,0.4,PFUnDS,Branched
+kidney,0.7252424779265281,PFUnDS,Branched
+stomach,0.4,PFUnDS,Branched
+muscle,0.9603164667252455,PFUnDS,Branched
+urine,1.6446990221663564,PFUnDS,Branched
+spleen,0.7103253877472392,PFUnDS,Branched
+liver,0.6929840478073379,PFUnDS,Branched
+lung,0.7041020429173268,PFUnDS,Branched
+heart,0.6505578858125589,PFUnDS,Branched
+feces,0.2959745740671397,PFUnDS,Branched
+plasma,0.6548093697797157,PFUnDS,Branched
+milk,0.9414889148022265,PFUnDS,Branched

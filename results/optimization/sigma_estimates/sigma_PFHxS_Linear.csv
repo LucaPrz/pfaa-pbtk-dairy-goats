@@ -1,0 +1,16 @@
+Matrix,Sigma,Compound,Isomer
+mammary,0.4,PFHxS,Linear
+kidney,0.5,PFHxS,Linear
+feces,0.5,PFHxS,Linear
+stomach,0.4,PFHxS,Linear
+brain,0.5,PFHxS,Linear
+urine,0.06101502910956083,PFHxS,Linear
+heart,0.5,PFHxS,Linear
+spleen,0.5,PFHxS,Linear
+muscle,0.5,PFHxS,Linear
+lung,0.5,PFHxS,Linear
+liver,0.5,PFHxS,Linear
+rest,0.4,PFHxS,Linear
+milk,0.5251404018346983,PFHxS,Linear
+intestine,0.4,PFHxS,Linear
+plasma,0.5576676569224542,PFHxS,Linear

@@ -1,0 +1,21 @@
+Identifiability Diagnostics: PFUnDA Branched
+============================================================
+
+Condition Number: 1.00e+00
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^2 root): 1.00e+00
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 1.57e+02
+  2. 0.00e+00
+
+Unidentifiable Parameter Combinations:
+  1. Eigenvalue: 0.00e+00
+     Parameters: k_a, k_elim
+     Contributions: {'k_a': 0.9999999999, 'k_elim': 0.0}
+
+Correlation Matrix:
+        k_a  k_elim
+k_a     1.0     0.0
+k_elim  0.0     1.0

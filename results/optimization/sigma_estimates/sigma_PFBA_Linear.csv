@@ -1,0 +1,16 @@
+Matrix,Sigma,Compound,Isomer
+urine,1.5037025030663809,PFBA,Linear
+mammary,0.4,PFBA,Linear
+lung,0.5,PFBA,Linear
+spleen,0.5,PFBA,Linear
+kidney,0.5,PFBA,Linear
+intestine,0.4,PFBA,Linear
+heart,0.5,PFBA,Linear
+rest,0.4,PFBA,Linear
+muscle,0.5,PFBA,Linear
+liver,0.5,PFBA,Linear
+plasma,0.7486787263221037,PFBA,Linear
+brain,0.5,PFBA,Linear
+stomach,0.4,PFBA,Linear
+feces,0.6467933055482866,PFBA,Linear
+milk,1.0753529919829807,PFBA,Linear

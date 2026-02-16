@@ -1,0 +1,7 @@
+Parameter,Value,Compound,Isomer
+k_a,7.930372083511461,PFUnDS,Linear
+k_elim,1.6372911408848307,PFUnDS,Linear
+k_milk,0.1634651532462316,PFUnDS,Linear
+k_feces,0.0354391824831914,PFUnDS,Linear
+k_ehc,143.2183102990061,PFUnDS,Linear
+k_renal,0.0,PFUnDS,Linear

@@ -1,0 +1,24 @@
+Identifiability Diagnostics: PFOS Branched
+============================================================
+
+Condition Number: 5.51e+02
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^5 root): 3.53e+00
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 2.62e+04
+  2. 6.47e+03
+  3. 1.26e+03
+  4. 3.61e+02
+  5. 4.76e+01
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+              k_a    k_elim   k_feces     k_ehc   k_renal
+k_a      1.000000 -0.257575  0.351770 -0.267817 -0.797780
+k_elim  -0.257575  1.000000 -0.594880  0.076724  0.242394
+k_feces  0.351770 -0.594880  1.000000 -0.788525 -0.501507
+k_ehc   -0.267817  0.076724 -0.788525  1.000000  0.579336
+k_renal -0.797780  0.242394 -0.501507  0.579336  1.000000

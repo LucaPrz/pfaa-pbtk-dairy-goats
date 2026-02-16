@@ -1,0 +1,20 @@
+Identifiability Diagnostics: PFTrDS Linear
+============================================================
+
+Condition Number: 3.47e+01
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^3 root): 3.26e+00
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 4.73e+03
+  2. 1.01e+03
+  3. 1.36e+02
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+              k_a    k_elim   k_feces
+k_a      1.000000  0.571091 -0.807548
+k_elim   0.571091  1.000000 -0.843787
+k_feces -0.807548 -0.843787  1.000000

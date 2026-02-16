@@ -1,0 +1,11 @@
+Matrix,Sigma,Compound,Isomer
+plasma,0.4,PFHpS,Branched
+feces,0.5,PFHpS,Branched
+urine,0.5,PFHpS,Branched
+liver,0.5,PFHpS,Branched
+kidney,0.5,PFHpS,Branched
+lung,0.5,PFHpS,Branched
+spleen,0.5,PFHpS,Branched
+heart,0.5,PFHpS,Branched
+brain,0.5,PFHpS,Branched
+muscle,0.5,PFHpS,Branched

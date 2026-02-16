@@ -1,0 +1,18 @@
+Identifiability Diagnostics: PFDoDA Linear
+============================================================
+
+Condition Number: 2.17e+07
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^2 root): 4.66e+03
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 8.50e+03
+  2. 3.91e-04
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+             k_a    k_elim
+k_a     1.000000 -0.084722
+k_elim -0.084722  1.000000

@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE (optional)
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project-specific: keep code and config, ignore generated outputs if large
+# Uncomment below if you do NOT want to track results (reproducible via run.py):
+# results/
+# data/processed/
+
+# Logs (often regenerated)
+*.log
+results/Logs/
+
+# R / other (if you use R in this project)
+.Rhistory
+.Rapp.history
+.Rdata

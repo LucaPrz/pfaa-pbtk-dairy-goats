@@ -1,0 +1,20 @@
+Identifiability Diagnostics: PFHxA Linear
+============================================================
+
+Condition Number: 6.58e+01
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^3 root): 4.04e+00
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 1.76e+04
+  2. 8.45e+03
+  3. 2.68e+02
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+              k_a   k_elim   k_renal
+k_a      1.000000 -0.80163 -0.745537
+k_elim  -0.801630  1.00000  0.941920
+k_renal -0.745537  0.94192  1.000000

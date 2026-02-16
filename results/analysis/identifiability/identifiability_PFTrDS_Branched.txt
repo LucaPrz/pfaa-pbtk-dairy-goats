@@ -1,0 +1,22 @@
+Identifiability Diagnostics: PFTrDS Branched
+============================================================
+
+Condition Number: 1.63e+04
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^4 root): 1.13e+01
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 1.29e+04
+  2. 5.61e+02
+  3. 2.57e+02
+  4. 7.87e-01
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+              k_a    k_elim   k_feces     k_ehc
+k_a      1.000000 -0.065232  0.044108  0.998852
+k_elim  -0.065232  1.000000 -0.368271 -0.021997
+k_feces  0.044108 -0.368271  1.000000  0.035714
+k_ehc    0.998852 -0.021997  0.035714  1.000000

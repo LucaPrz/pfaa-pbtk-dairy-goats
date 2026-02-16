@@ -1,0 +1,718 @@
+\section{Methods}
+\label{sec:methods}
+
+\subsection{In-vivo feeding study}
+\label{subsec:in_vivo}
+
+Two groups of four German Noble White dairy goats were housed in straw-bedded stalls and assigned to either a control group (C) or an exposure group (E). The control group was fed ad libitum with PFAS-free hay throughout the entire study period, while the exposure group received hay originating from a highly contaminated site (Brilon/Scharfenberg incident) for a duration of eight weeks.
+
+During the exposure phase, the cumulative intake of PFAAs in the exposure group amounted to 4.4 mg per kilogram body weight (bw), comprising 1.7 mg/kg bw of linear (n‑PFAA) isomers and 2.7 mg/kg bw of branched (br‑PFAA) isomers. Following this period, all goats entered a 12‑week depuration phase, during which the exposure group was fed PFAA free hay.
+
+Milk samples were collected daily throughout the study. Hay and blood samples were taken weekly, while urine and feces were collected individually over three selected weeks when the animals were housed singly. At the conclusion of the experiment, goats of the exposure group were slaughtered, and organs and tissues were sampled for PFAS analysis using LC‑MS/MS.
+
+Due to illness, one animal from the exposure group (E1) was excluded from the analysis.
+
+\subsection{Dataset}
+\label{subsec:dataset}
+
+The dataset comprises measurements of PFAAs in multiple biological matrices. PFAA concentrations were quantified, with limits of quantification (LOQ) of 0.005 µg/L for milk and 0.5 µg/L for plasma, feces, urine, and organ tissues.
+
+A total of 37 substances were analyzed, of which 30 exhibited detectable signals (above LOQ) in the feed and in at least one other matrix and were included in the kinetic modeling. \Tabref{tab:data_signals} provides an overview of all compound-isomer pairs and their detectable signals. 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l l c c c c c c}
+        Compound & Isomer & Milk & Plasma & Feces & Urine & Muscle & Other Tissues \\
+        \midrule
+        \midrule
+        PFBA & Linear & Yes & Yes & Yes & Yes & No & No \\
+        PFDA & Branched & Yes & No & No & No & No & No \\
+        PFDA & Linear & Yes & Yes & No & No & No & Yes \\
+        PFDS & Branched & Yes & Yes & Yes & No & No & Yes \\
+        PFDS & Linear & Yes & Yes & Yes & No & Yes & Yes \\
+        PFDoDA & Branched & Yes & No & No & No & No & No \\
+        PFDoDA & Linear & Yes & Yes & No & No & No & No \\
+        PFDoDS & Branched & Yes & Yes & Yes & No & No & No \\
+        PFDoDS & Linear & Yes & Yes & Yes & No & No & Yes \\
+        PFHpA & Linear & No & No & No & Yes & No & No \\
+        PFHpS & Branched & No & Yes & No & No & No & No \\
+        PFHpS & Linear & Yes & Yes & No & No & No & No \\
+        PFHxA & Linear & No & No & No & Yes & No & No \\
+        PFHxS & Linear & Yes & Yes & No & Yes & No & No \\
+        PFNA & Linear & Yes & No & No & No & No & No \\
+        PFNS & Branched & Yes & Yes & Yes & Yes & Yes & Yes \\
+        PFNS & Linear & Yes & Yes & Yes & No & Yes & Yes \\
+        PFOA & Branched & Yes & Yes & No & Yes & No & No \\
+        PFOA & Linear & Yes & Yes & Yes & Yes & No & Yes \\
+        PFOS & Branched & Yes & Yes & Yes & Yes & Yes & Yes \\
+        PFOS & Linear & Yes & Yes & Yes & Yes & Yes & Yes \\
+        PFPeA & Linear & Yes & No & Yes & Yes & Yes & No \\
+        PFTeDA & Branched & Yes & No & No & No & No & No \\
+        PFTeDA & Linear & No & Yes & No & No & No & No \\
+        PFTrDA & Branched & Yes & No & No & No & No & No \\
+        PFTrDA & Linear & Yes & Yes & No & No & No & No \\
+        PFTrDS & Branched & Yes & Yes & Yes & No & No & No \\
+        PFTrDS & Linear & Yes & No & Yes & No & No & Yes \\
+        PFUnDA & Branched & Yes & No & No & No & No & No \\
+        PFUnDA & Linear & Yes & Yes & No & No & No & No \\
+        PFUnDS & Branched & Yes & Yes & Yes & No & No & Yes \\
+        PFUnDS & Linear & Yes & Yes & Yes & No & No & Yes \\
+        \bottomrule
+    \end{tabular}
+    \caption{Data signals available for each compound-isomer pair. "Yes" indicates detectable signal above LOQ, "No" indicates no detectable signal or signal below LOQ. "Other Tissues" includes Spleen, Liver, Kidney, Heart, Lung, and Brain.}
+    \label{tab:data_signals}
+\end{table}
+
+\subsection{Mass balance}
+\label{subsec:mass_balance}
+
+\subsubsection{PFAA intake calculation}
+\label{subsubsec:intake}
+
+The daily intake of PFAAs for dairy goats from hay concentrations and hay intake data over the in-vivo feeding study period (days 0–140) is calculated as following:
+
+\begin{equation}
+    I = C_{\text{hay}} \cdot M_{\text{hay}}
+\label{eq:intake}
+\end{equation}
+
+where $I$ is daily PFAA intake from hay (µg/day), $C_{\text{hay}}$ is the PFAA concentration in hay (µg/kg), and $M_{\text{hay}}$ is the daily hay intake (kg/day) from the contaminated batch.
+
+During the isolation weeks within the exposure time window (weeks one and six), the weekly mean feed intake per animal is used. For all other weeks, the average for each animal across all isolation weeks (one, six and nine) is applied.
+
+\subsubsection{Urine volume calculation}
+\label{subsubsec:urine_volume}
+
+The average daily creatinine excretion in goats was measured at 0.424 mmol per kilogram bodyweight \cite{ref1}. Given the creatinine concentration in the urine, it is possible to calculate the urine volume with the following formula:
+
+\begin{equation}
+    V_{\text{urine}} = \frac{k_{\text{cr}} \cdot BW^{0.75}}{C_{\text{crea}}}
+\label{eq:urine_volume}
+\end{equation}
+
+where $V_{\text{urine}}$ is the urine volume (L/day), $BW$ is body weight (kg), $C_{\text{crea}}$ is the creatinine concentration in urine (mmol/L), and $k_{\text{cr}} = 0.424~\text{mmol/kg}$ is the average daily creatinine excretion per kilogram body weight.
+
+Spot urine sampling introduces variability in urinary creatinine concentrations that is caused by differences in urine dilution. As creatinine concentrations are physiologically constrained at the upper end but may reach very low values, the distribution is right-skewed.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/Urine_volume_dist_all_animals.png}
+    \caption{Distributions of the estimated urine volumes for each animal. High volume outliers causes skewness in the distributions.}
+    \label{fig:urine_volume_dist}
+\end{figure}
+
+To account for this, the median was used as a more robust measure against outliers.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{l c}
+        Animal & Median urine volume [L/day] \\
+        \midrule
+        \midrule
+        E2 & 1.44 \\
+        E3 & 1.94 \\
+        E4 & 1.18 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Median urine volume for each animal in liter per day}
+    \label{tab:urine_volume}
+\end{table}
+
+\subsubsection{Feces volume calculation}
+\label{subsubsec:feces_volume}
+
+The daily feces volume is calculated using dry matter digestibility values from the literature \cite{ref2}. Organic matter digestibility for goats fed hay ranges from 42.2\% to 65.7\%, with a mean value of 58.0\% for hay diets fed to dairy goats.
+
+The feces dry matter output is calculated from the total dry matter intake and digestibility:
+
+\begin{equation}
+    M_{\text{fec,DM}} = M_{\text{DM,tot}} \cdot (1 - D_{\text{OM}})
+\label{eq:feces_dm}
+\end{equation}
+
+where $M_{\text{fec,DM}}$ is feces dry matter output (kg/day), $M_{\text{DM,tot}}$ is total dry matter intake (kg/day, including hay and supplement), and $D_{\text{OM}}$ is organic matter digestibility (fraction). The feces dry matter is then converted to wet mass using the water content of feces:
+
+\begin{equation}
+    M_{\text{fec,wet}} = \frac{M_{\text{fec,DM}}}{1 - w_{\text{fec}}}
+\label{eq:feces_wet}
+\end{equation}
+
+Finally, the feces volume is calculated assuming a density of 1.0 kg/L:
+
+\begin{equation}
+    V_{\text{feces}} = \frac{M_{\text{fec,wet}}}{\rho_{\text{feces}}}
+\label{eq:feces_volume}
+\end{equation}
+
+Here, $M_{\text{fec,DM}}$ and $M_{\text{fec,wet}}$ are expressed in kg/day, $V_{\text{feces}}$ in L/day, $\rho_{\text{feces}}$ in kg/L, and $w_{\text{fec}}$ is the water fraction of feces.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{l c c}
+        Animal & Water content [\%] & Median wet feces volume [L/day] \\
+        \midrule
+        \midrule
+        E2 & 64.9 & 2.36 \\
+        E3 & 70.0 & 2.64 \\
+        E4 & 62.0 & 1.51 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Median feces volume for each animal in liter per day calculated using 58\% digestibility}
+    \label{tab:feces_volume}
+\end{table}
+
+\subsubsection{Complete mass balance}
+\label{subsubsec:mass_balance_complete}
+
+The complete mass balance for each PFAS compound and isomer is calculated by accounting for all intake and elimination pathways. The mass balance equation is:
+
+\begin{equation}
+    \text{MB} = \frac{B_{\text{tot}} + E_{\text{tot}}}{I_{\text{tot}}}
+    \label{eq:mass_balance}
+\end{equation}
+
+where:
+
+Total Intake $I_{\text{tot}}$ is the cumulative PFAS intake over the study period (days 0–140), calculated as:
+
+\begin{equation}
+    I_{\text{tot}} = \sum_{t=0}^{140} \text{Intake}(t)
+\label{eq:total_intake}
+\end{equation}
+
+Total Eliminated $E_{\text{tot}}$ is the sum of cumulative elimination via all excretion pathways:
+
+\begin{equation}
+    E_{\text{tot}} = \text{AUC}_{\text{milk}} + \text{AUC}_{\text{urine}} + \text{AUC}_{\text{feces}}
+\label{eq:total_eliminated}
+\end{equation}
+
+The area under the curve (AUC) was calculated using trapezoidal integration, where elimination via milk, urine, and feces was determined as the product of concentration (µg/L or µg/kg) and the respective daily excretion volume or mass (L/day or kg/day), integrated over time.
+
+Total Body Burden $B_{\text{tot}}$ is the sum of PFAS amounts remaining in body tissues on the last measurement day:
+
+\begin{equation}
+    B_{\text{tot}} = \sum_{i} C_i \cdot V_i
+\label{eq:body_burden}
+\end{equation}
+
+where $\text{MB}$ is the dimensionless mass balance fraction, $I_{\text{tot}}$ is total intake (µg), $E_{\text{tot}}$ is total eliminated mass (µg), $B_{\text{tot}}$ is total body burden (µg), $C_i$ is the concentration in tissue $i$ (µg/L for plasma, µg/kg for tissues), and $V_i$ is the corresponding volume (L) or mass (kg) of tissue $i$, derived from animal-specific physiological parameters based on body weight.
+
+For measurements below LOQ, concentrations were set to LOQ/2 if at least one animal in the same compound-isomer group had measurements above LOQ.
+
+Across all compounds and animals the experimentally derived mass balance was low, with a mean of approximately 0.28 (28$\%$) and a median of about 0.19 (19$\%$), and individual means ranging from nearly 0 to slightly above 1. This reflects a conservative lower bound on total recovery, since only measured tissues and excretion routes within the finite sampling window contribute to the numerator, while the denominator is the full modeled intake over the exposure period. In particular, extensive censoring at or below LOQ, sparse and incomplete excretion time series and the restricted tissue panel at slaughter all contribute to underestimation of the true system-wide mass balance.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/mass_balance.png}
+    \caption{Per-compound mass balance across all goats, expressed as the fraction of modeled intake recovered in measured body burden (terminal tissues) and cumulative excretion. Bars show mean mass balance with 95$\%$ confidence intervals, and points represent individual animals.}
+    \label{fig:Fifmassbal}
+\end{figure}
+
+\subsection{Model structure}
+\label{subsec:model_structure}
+
+The model consists of 11 physiological compartments representing the stomachs, intestines, liver, spleen, plasma, brain, heart, lungs, kidneys, muscles, and a residual ``rest'' compartment. The rest compartment aggregates all tissues that are not explicitly modeled, such as skin, bones, and blood cells. In addition, the model tracks three excretion pools (milk, urine, and feces) and includes an unspecified elimination pathway implemented to ensure overall mass balance. The transport of PFAA mass between compartments is illustrated in \Figref{fig:model_structure}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figures/model_structure.png}
+    \caption{Representation of the movement of PFAAs through the goat.}
+    \label{fig:model_structure}
+\end{figure}
+
+PFAA ingested with contaminated hay first enters the stomachs compartment. This compartment represents a simplification of the goat's four stomachs (rumen, reticulum, omasum, and abomasum) and serves as a transition compartment, with transfer to the intestines governed by the rate constant $k_{\text{sto}}$. The intestines compartment similarly represents a simplified aggregation of the small and large intestines. From the intestines, PFAAs may either be eliminated via feces, governed by $k_{\text{feces}}$, or absorbed into the portal vein at a rate determined by the absorption constant $k_{a}$ and thereby entering the liver.
+
+Within the liver, PFAAs can either be transported back to the intestines via enterohepatic circulation or released into the plasma through the hepatic vein. From the plasma compartment, PFAAs are distributed to various tissues and organs according to the respective blood flows. The spleen drains into the portal vein and therefore returns PFAA mass to the liver rather than directly to the plasma.
+
+Elimination occurs directly from the plasma via three routes. First, renal excretion to urine is described by a first-order rate constant $k_{\text{renal}}$. Second, milk excretion is implemented as a direct clearance from plasma, without an explicit mammary tissue compartment. At quasi-equilibrium the milk concentration is assumed to be proportional to the plasma concentration via a milk--plasma partition coefficient $P_{\text{milk}}$, and the resulting daily clearance is proportional to the time-varying milk yield provided by the physiology sub-model. Third, an unspecified plasma elimination pathway with rate $k_{\text{elim}}$ represents additional loss processes not captured by the measured excretion routes.
+
+The unspecified plasma elimination rate $k_{\text{elim}}$ represents the aggregate of poorly characterized or experimentally unobserved loss processes (e.g.\ minor biliary routes, binding and sequestration outside the measured tissue panel, or experimental losses), and its inclusion is motivated by the incomplete experimental mass balance described in \ref{subsec:mass_balance}. Rather than inflating the specific, physiologically interpretable excretion routes ($k_{\text{renal}}$, $k_{\text{feces}}$, milk clearance) beyond what is supported by the corresponding urine, feces and milk data, $k_{\text{elim}}$ provides a flexible sink term whose magnitude is constrained by the plasma and tissue time courses.
+
+\subsection{Differential equations}
+\label{subsec:differential_equations}
+
+\subsubsection{Gastrointestinal System}
+\label{subsubsec:gi_system}
+
+\begin{equation}
+\frac{\mathrm{d}A_{\text{sto}}}{\mathrm{d}t} = u(t) - A_{\text{sto}} \cdot k_{\text{sto}}
+\label{eq:dA_sto}
+\end{equation}
+
+\begin{equation}
+\frac{\mathrm{d}A_{\text{int}}}{\mathrm{d}t} = A_{\text{sto}} \cdot k_{\text{sto}} - A_{\text{int}} \cdot (k_a + k_{\text{feces}}) + A_{\text{liv}} \cdot k_{\text{ehc}}
+\label{eq:dA_int}
+\end{equation}
+
+\subsubsection{Liver and Spleen}
+\label{subsubsec:liver_spleen}
+
+\begin{equation}
+\frac{\mathrm{d}A_{\text{liv}}}{\mathrm{d}t} = A_{\text{int}} \cdot k_a + \frac{Q_{\text{spleen}}}{PC_{\text{spleen}} \cdot V_{\text{spleen}}} \cdot A_{\text{spleen}} - \frac{Q_{\text{hepatic}} + Q_{\text{intestine}}}{PC_{\text{liver}} \cdot V_{\text{liver}}} \cdot A_{\text{liv}} - A_{\text{liv}} \cdot k_{\text{ehc}} + \frac{Q_{\text{hepatic}} + Q_{\text{intestine}}}{V_{\text{plasma}}} \cdot A_{\text{pla}}
+\label{eq:dA_liv}
+\end{equation}
+
+\begin{equation}
+\frac{\mathrm{d}A_{\text{spleen}}}{\mathrm{d}t} = \frac{Q_{\text{spleen}}}{V_{\text{plasma}}} \cdot A_{\text{pla}} - \frac{Q_{\text{spleen}}}{PC_{\text{spleen}} \cdot V_{\text{spleen}}} \cdot A_{\text{spleen}}
+\label{eq:dA_spleen}
+\end{equation}
+
+\subsubsection{Plasma}
+\label{subsubsec:plasma}
+
+\begin{equation}
+\frac{\mathrm{d}A_{\text{pla}}}{\mathrm{d}t} = \frac{Q_{\text{hepatic}} + Q_{\text{intestine}}}{PC_{\text{liver}} \cdot V_{\text{liver}}} \cdot A_{\text{liv}} + \sum_{\text{org}} \frac{Q_{\text{org}}}{PC_{\text{org}} \cdot V_{\text{org}}} \cdot A_{\text{org}} - \frac{Q_{\text{total}}}{V_{\text{plasma}}} \cdot A_{\text{pla}} - A_{\text{pla}} \cdot k_{\text{elim}} - A_{\text{pla}} \cdot k_{\text{milk}}(t)
+\label{eq:dA_pla}
+\end{equation}
+
+where $Q_{\text{total}} = Q_{\text{hepatic}} + Q_{\text{intestine}} + Q_{\text{spleen}} + Q_{\text{kidney}} + Q_{\text{muscle}} + Q_{\text{heart}} + Q_{\text{brain}} + Q_{\text{rest}} + Q_{\text{lung}}$ and the sum is over all organs (kidney, muscle, heart, brain, rest, lung) and does not include spleen because spleen flows directly to liver. The time-dependent effective milk clearance rate $k_{\text{milk}}(t)$ links plasma mass to milk excretion and is given by
+\begin{equation}
+    k_{\text{milk}}(t) = \frac{P_{\text{milk}} \cdot \text{Lact}(t)}{V_{\text{plasma}}},
+    \label{eq:k_milk}
+\end{equation}
+where $P_{\text{milk}}$ is the milk--plasma partition coefficient and $\text{Lact}(t)$ is the milk yield (kg/day) at time $t$ provided by the physiology sub-model (Section~\ref{subsec:physiology}).
+
+\subsubsection{Kidney}
+\label{subsubsec:kidney}
+
+\begin{equation}
+\frac{\mathrm{d}A_{\text{kidney}}}{\mathrm{d}t} = \frac{Q_{\text{kidney}}}{V_{\text{plasma}}} \cdot A_{\text{pla}} - \frac{Q_{\text{kidney}}}{PC_{\text{kidney}} \cdot V_{\text{kidney}}} \cdot A_{\text{kidney}} - A_{\text{kidney}} \cdot k_{\text{renal}}
+\label{eq:dA_kidney}
+\end{equation}
+
+\subsubsection{Other (muscle, heart, brain, rest, lung)}
+\label{subsubsec:other_organs}
+
+For each organ $\text{org} \in \{\text{muscle}, \text{heart}, \text{brain}, \text{rest}, \text{lung}\}$:
+
+\begin{equation}
+\frac{\mathrm{d}A_{\text{org}}}{\mathrm{d}t} = \frac{Q_{\text{org}}}{V_{\text{plasma}}} \cdot A_{\text{pla}} - \frac{Q_{\text{org}}}{PC_{\text{org}} \cdot V_{\text{org}}} \cdot A_{\text{org}}
+\label{eq:dA_org}
+\end{equation}
+
+\subsubsection{Notation}
+\label{subsubsec:notation}
+
+$A_{\text{comp}}$: Mass in compartment (µg)
+
+$u(t)$: Input rate into stomach (µg/d)
+
+$k_{\text{sto}}$: Stomach emptying rate (1/d)
+
+$k_a$: Intestinal absorption rate (1/d)
+
+$k_{\text{feces}}$: Fecal excretion rate (1/d)
+
+$k_{\text{ehc}}$: Enterohepatic recirculation rate (1/d)
+
+$k_{\text{renal}}$: Renal excretion rate (1/d)
+
+$k_{\text{elim}}$: Plasma elimination rate (1/d)
+
+$Q_{\text{org}}$: Blood flow to organ (L/d)
+
+$V_{\text{org}}$: Volume of organ (L)
+
+$PC_{\text{org}}$: Partition coefficient for organ (dimensionless)
+
+$P_{\text{milk}}$: Milk--plasma partition coefficient (dimensionless)
+
+\subsection{Parameters}
+\label{subsec:parameters}
+
+\subsubsection{Physiological parameters}
+\label{subsubsec:physiological}
+
+The organ or tissue volume of compartment $i$ is described as a portion of the total body weight:
+
+\begin{equation}
+V_i = v_i \cdot \mathrm{bw}
+\label{eq:volume}
+\end{equation}
+
+where $V_i$ is the compartment volume, $v_i$ is the volume fraction (portion of total body weight), and $\mathrm{bw}$ is the body weight.
+
+For plasma volume, the literature provides blood volume fractions. Therefore, plasma volume is calculated as:
+
+\begin{equation}
+V_{\text{plasma}} = v_{\text{blood}} \cdot \mathrm{bw} \cdot (1 - \text{hematocrit})
+\label{eq:plasma_volume}
+\end{equation}
+
+The plasma flow to each compartment is dependent on the cardiac output and is formally described as:
+
+\begin{equation}
+Q_i = q_i \cdot (1 - \text{hematocrit}) \cdot \mathrm{co} \cdot \mathrm{bw} \cdot 24
+\label{eq:plasma_flow}
+\end{equation}
+
+where $Q_i$ represents the plasma flow to compartment $i$ (L/d), $q_i$ is the fraction of cardiac output to compartment $i$, $(1 - \text{hematocrit})$ is the plasma fraction of blood, $\mathrm{co}$ is the cardiac output per kg body weight (L/(h·kg)), $\mathrm{bw}$ is body weight (kg), and the factor 24 converts from per-hour to per-day rates.
+
+The remaining volume and plasma flow are allocated to the ``rest'' compartment to ensure mass balance. The volume fraction and the fraction of cardiac output are based on \cite{ref3}.
+
+\subsubsection{Partition coefficients}
+\label{subsubsec:partition}
+
+In PBTK models, partition coefficients describe how a chemical distributes at equilibrium between blood and another physiological compartment.
+
+Formally, the partition coefficient between compartment $i$ and blood is defined as the ratio of concentrations at equilibrium:
+
+\begin{equation}
+P_i = \frac{C_i}{C_b}
+\label{eq:partition}
+\end{equation}
+
+A high partition coefficient indicates a strong accumulation in that tissue, whereas a low partition coefficient specify a low affinity to that tissue. They link blood concentrations to tissues concentration by determining the steady state concentration.
+
+In this study, partition coefficients were calculated using tissue-plasma ratios from the in-vivo feeding study. If the plasma concentration was not measured at the slaughter day, it was estimated using an exponential decay function fitted to depuration phase measurements. If both the organ and plasma concentrations were below the Limit of Quantification (LOQ), the partition coefficient was set to the organ-specific median value calculated from all substances with measurable data for that organ. If only one compartment (organ or plasma) was below LOQ, the direct ratio was still calculated using the measured value and half the LOQ.
+
+\subsubsection{Kinetic parameters}
+\label{subsubsec:kinetic}
+
+Kinetic parameters are substance-specific and are estimated via optimization. They govern the key processes represented in the model, including the gastric transit rate $k_{\text{sto}}$, absorption rate $k_{a}$, fecal excretion rate $k_{\text{feces}}$, urinary excretion rate $k_{\text{renal}}$, and an unspecified elimination rate $k_{\text{elim}}$. All rate constants are expressed in units of $d^{-1}$. Milk excretion is represented by a time-dependent effective clearance $k_{\text{milk}}(t)$ from plasma, which is not fitted directly but is determined by the milk--plasma partition coefficient $P_{\text{milk}}$ and the physiology-driven milk yield (Section~\ref{subsec:physiology}).
+
+The gastric transit rate $k_{\text{sto}}$ is not fitted but fixed a priori and calculated according to equation 4.1 of the INRA red book \cite{ref4}:
+
+\begin{equation}
+k_{\text{sto}}=(2.53 + (1.22 \cdot NI))-((2.61 \cdot (PCO^2))/6000)
+\label{eq:k_sto}
+\end{equation}
+
+where $NI$ denotes the nutrient intake and $PCO$ represents the proportion of concentrate in the diet.
+
+Fitting parameters without corresponding data can result in overfitting and poor parameter identifiability. To address this, the script evaluates for each compound or isomer which compartments contain quantifiable concentrations (above the LOQ) and adapts the fitting strategy accordingly. Core parameters describing absorption and elimination ($k_{a}$ and $k_{\text{elim}}$) are always fitted, while compartment-specific parameters are only fitted when the respective data are available; otherwise, they are fixed to zero.
+
+\subsection{Model solving}
+\label{subsec:model_solving}
+
+The differential equations from the model structure form a linear system of first-order ODEs that can be described as:
+
+\begin{equation}
+\frac{\mathrm{d}A}{\mathrm{d}t} = T \cdot A + u
+\label{eq:ode_system}
+\end{equation}
+
+where $A$ is the vector of compartment masses (µg), $T$ is the transition matrix (1/d), and $u$ is the input vector (µg/d).
+
+The system is solved using an analytical matrix solution. In this formulation, the amount of substance in each compartment at the current time step depends only on the amount in the previous time step, the matrix exponential of the system matrix, and the steady state concentration:
+
+\begin{equation}
+A(t) = A^{*} + e^{T \cdot dt} \cdot (A(t-1) - A^{*})
+\label{eq:matrix_solution}
+\end{equation}
+
+The current compartment mass $A(t)$ equals the steady-state mass $A^{*}$ plus the exponential decay of the deviation from steady state, where $e^{T \cdot dt}$ determines how much of the initial deviation $(A(t-1)-A^{*})$ remains after time step $dt$.
+
+In other words, the current concentration is calculated by how far the concentration is away from the steady state and how much it moves towards it.
+
+The integral of compartment mass over the time step from $t_0$ to $t_1$ equals the steady-state contribution $A^* \cdot dt$ plus the integrated deviation from steady state, computed analytically using the matrix exponential $(e^{T \cdot dt} - I) \cdot T^{-1}$ applied to the initial deviation $(A(t_0) - A^{*})$:
+
+\begin{equation}
+\int_{t_0}^{t_1} A(\tau) \, \mathrm{d}\tau = A^* \cdot dt + (e^{T \cdot dt} - I) \cdot T^{-1} \cdot (A(t_0) - A^{*})
+\label{eq:integral}
+\end{equation}
+
+The invertibility condition of the transition matrix requires the system to converge to zero in the depuration phase (when there is no input), as all eigenvalues of $T$ must have negative real parts for the matrix exponential to decay. Therefore, excreted mass is calculated by integrating the compartment amounts over each time step and multiplying by the corresponding excretion rate constants.
+
+Excretion is tracked using a projection vector $\pi_i$ that selects compartment $i$, and the cumulative excretion from time $0$ to $T$ is calculated as:
+
+\begin{equation}
+E_C(T) = \int_0^{t_n} \pi_i(A(t)) \, k_C(t) \, \mathrm{d}t,
+\label{eq:excretion}
+\end{equation}
+
+where $\pi_i$ is the projection vector (a row vector with 1 at position $i$ and 0 elsewhere), $k_C(t)$ is the (possibly time-dependent) excretion rate for route $C$ (constant for feces, urine and unspecified elimination, time-varying for milk via $k_{\text{milk}}(t)$), and $t_{n}$ is the last time point.
+
+\subsection{Optimization}
+\label{subsec:optimization}
+
+\subsubsection{Loss function}
+\label{subsubsec:loss}
+
+The objective of the optimization procedure is to find kinetic parameters that best describe the experimental data. This is achieved by minimizing the discrepancy between observed and model-predicted concentrations across all compartments.
+
+Initial parameter estimation is performed using a weighted log-scale root mean squared error (log-RMSE) loss function. For each compartment $i$ and time point $j$, residuals are defined as:
+
+\begin{equation}
+\delta_{i,j} =
+\begin{cases}
+\log(y_{i,j}^{\text{obs}} + \varepsilon) - \log(y_{i,j}^{\text{pred}} + \varepsilon), & \text{if } y_{i,j}^{\text{obs}} > \text{LOQ}_i \\
+0, & \text{if } y_{i,j}^{\text{obs}} \leq \text{LOQ}_i \text{ and } y_{i,j}^{\text{pred}} \leq \text{LOQ}_i \\
+\log(\text{LOQ}_i + \varepsilon) - \log(y_{i,j}^{\text{pred}} + \varepsilon), & \text{if } y_{i,j}^{\text{obs}} \leq \text{LOQ}_i \text{ and } y_{i,j}^{\text{pred}} > \text{LOQ}_i
+\end{cases}
+\label{eq:residuals}
+\end{equation}
+
+where $\log(y_{i,j}^{\text{obs}})$ and $\log(y_{i,j}^{\text{pred}})$ denote observed and predicted concentrations, respectively, $\text{LOQ}_i$ is the limit of quantification for compartment $i$, and $\varepsilon$ is a small constant ($10^{-6}$) added to ensure numerical stability.
+
+The total loss function is defined as a weighted sum of compartment-specific log-RMSEs:
+
+\begin{equation}
+\mathcal{L}_{\text{RMSE}}(\theta) = \sum_{i \in \mathcal{M}} w_i \cdot \text{log-RMSE}_i(\theta)
+\label{eq:loss_rmse}
+\end{equation}
+
+where $\mathcal{M}$ denotes the set of modeled compartments, $w_i$ is the weight assigned to compartment $i$, and $\theta$ is the vector of model parameters. For each compartment $i$, the log-RMSE is computed as:
+
+\begin{equation}
+\text{log-RMSE}_i = \sqrt{ \frac{1}{N_i} \sum_{j=1}^{N_i} \delta_{i,j}^2 }
+\label{eq:log_rmse}
+\end{equation}
+
+where $N_i$ is the number of time points contributing to the loss for compartment $i$.
+
+Following the initial fit, effective error standard deviations ($\sigma_i$) are estimated separately for each compartment $i$ from the all residuals of uncensored observations of all compound-isomer pairs:
+
+\begin{equation}
+\hat{\sigma}_i = \sqrt{ \frac{1}{N_{i,\text{unc}} - 1} \sum_{j: y_{i,j}^{\text{obs}} > \text{LOQ}_i} \left( \log(y_{i,j}^{\text{obs}}) - \log(y_{i,j}^{\text{pred}}) \right)^2 }
+\label{eq:sigma}
+\end{equation}
+
+where $N_{i,\text{unc}}$ is the number of uncensored observations for compartment $i$, and $y_{i,j}^{\text{pred}}$ are predictions from the initial fit. This ensures that effective error estimates reflect the actual variability in the experimental data.
+
+The estimated $\hat{\sigma}_i$ values are then used in a censored likelihood framework (Tobit model) to properly account for left-censored observations below the LOQ. The likelihood assumes log-normal effective error:
+
+\begin{equation}
+\log(y_{i,j}^{\text{obs}}) \sim \mathcal{N}\left( \log(y_{i,j}^{\text{pred}}), \sigma_i^2 \right)
+\label{eq:likelihood}
+\end{equation}
+
+For uncensored observations ($y_{i,j}^{\text{obs}} > \text{LOQ}_i$), the log-likelihood contribution is:
+
+\begin{equation}
+\ell_{i,j}^{\text{unc}} = -\log(y_{i,j}^{\text{obs}}) - \log(\sigma_i) - \frac{1}{2}\log(2\pi) - \frac{1}{2\sigma_i^2}\left( \log(y_{i,j}^{\text{obs}}) - \log(y_{i,j}^{\text{pred}}) \right)^2
+\label{eq:ll_unc}
+\end{equation}
+
+For censored observations ($y_{i,j}^{\text{obs}} \leq \text{LOQ}_i$), the log-likelihood contribution uses the cumulative distribution function:
+
+\begin{equation}
+\ell_{i,j}^{\text{cens}} = \log\left[ \Phi\left( \frac{\log(\text{LOQ}_i) - \log(y_{i,j}^{\text{pred}})}{\sigma_i} \right) \right]
+\label{eq:ll_cens}
+\end{equation}
+
+where $\Phi(\cdot)$ is the standard normal cumulative distribution function. This formulation properly accounts for the probability that the true (unobserved) concentration is below the LOQ, given the model prediction.
+
+The total negative log-likelihood is:
+
+\begin{equation}
+\mathcal{L}(\theta) = -\sum_{i \in \mathcal{M}} w_i \sum_{j=1}^{N_i} \ell_{i,j}
+\label{eq:total_loss}
+\end{equation}
+
+where $\ell_{i,j}$ is either $\ell_{i,j}^{\text{unc}}$ or $\ell_{i,j}^{\text{cens}}$ depending on whether observation $j$ in compartment $i$ is censored. This approach uses all available data probabilistically, while avoiding the identifiability issues that would arise from simultaneously estimating both model parameters and effective error variance.
+
+Compartment weights reflect their relative importance. Plasma, which is central to overall kinetics, and milk, the most relevant consumer product, are assigned a weight of 1. Muscle, the second most relevant consumer product, is weighted at 0.8. Liver and kidney, which play important roles in distribution and elimination, are weighted at 0.5. Feces and urine, which provide information on elimination pathways, are also weighted at 0.5. All remaining compartments are assigned a weight of 0.1.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{l c}
+        Compartment & Weight \\
+        \midrule
+        \midrule
+        Plasma, milk & 1.0 \\
+        Muscle & 0.8 \\
+        Liver, kidney, feces, urine & 0.5 \\
+        Spleen, lungs, heart, rest, brain & 0.1 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Compartment weights applied in the loss function}
+    \label{tab:compartment_weights}
+\end{table}
+
+\subsubsection{Global optimization}
+\label{subsubsec:global_opt}
+
+Global parameter estimation is performed separately for each compound-isomer pair using all available experimental data. The optimization is conducted in logarithmic parameter space to ensure strictly positive parameter values and to improve numerical stability.
+
+The optimization problem is formulated as:
+
+\begin{equation}
+\hat{\theta} = \arg\min_{\log_{10}(\theta) \in \mathcal{B}} \mathcal{L}(\theta)
+\label{eq:optimization}
+\end{equation}
+
+where $\hat{\theta}$ denotes the optimal parameter vector, $\log_{10}(\theta)$ represents the parameter vector in log-space, and $\mathcal{B}$ defines the feasible region in log-space. Each parameter is constrained to the interval $[\log_{10}(10^{-3}), \log_{10}(10^{2})]$, corresponding to a linear-space range of $[0.001, 1000]$. Bounds were chosen to span several orders of magnitude around plausible physiological rates reported for PFAAs and to avoid numerically unstable regimes.
+
+Parameter selection is performed dynamically based on the presence of detectable signals in the experimental data. The absorption rate constant ($k_a$) and elimination rate constant ($k_{\text{elim}}$) are always estimated, as they are required for basic model functionality. Additional parameters are included only when corresponding data signals are detected above the limit of quantification:
+
+\begin{itemize}
+    \item $P_{\text{milk}}$: estimated if milk concentrations exceed the milk-specific LOQ (0.005 µg/kg)
+    \item $k_{\text{ehc}}$: estimated if feces concentrations during the depuration phase exceed the LOQ (0.5 µg/kg)
+    \item $k_{\text{renal}}$: estimated if urine concentrations exceed the LOQ (0.5 µg/kg)
+    \item $k_{\text{feces}}$: estimated if feces concentrations (exposure or depuration phase) exceed the LOQ (0.5 µg/kg)
+\end{itemize}
+
+Parameters for which no signal is detected are fixed to zero, effectively removing the corresponding pathway from the model.
+
+Global optimization is performed using the differential evolution (DE) algorithm \cite{ref5}, a population-based stochastic optimization method for multi-modal objective functions. The DE algorithm is configured with the following settings: population size of 15, maximum iterations of 1000, convergence tolerance of 0.01, mutation factor range of (0.5, 1.0), crossover probability of 0.7, and a final local polishing step using the best solution as the initial guess. The optimization is initialized with a fixed random seed to ensure reproducibility.
+
+The resulting point estimates $\hat{\theta}$ represent the best-fit parameters that minimize the weighted negative log-likelihood across all compartments and time points for each compound-isomer pair.
+
+\subsubsection{Jackknife uncertainty analysis}
+\label{subsubsec:jackknife}
+
+To quantify parameter uncertainty and assess the inter-animal variability, a leave-one-animal-out (LOAO) jackknife resampling procedure is employed. For each compound-isomer pair, the global optimization procedure is repeated $n$ times, where $n$ is the number of animals with available data. In each iteration, data from one animal is excluded, and parameters are estimated using data from the remaining $n-1$ animals.
+
+Let $\hat{\theta}_{(-i)}$ denote the parameter estimate obtained when animal $i$ is excluded. The jackknife procedure yields a set of $n$ parameter estimates:
+
+\begin{equation}
+\mathcal{J} = \{\hat{\theta}_{(-1)}, \hat{\theta}_{(-2)}, \ldots, \hat{\theta}_{(-n)}\}
+\label{eq:jackknife_set}
+\end{equation}
+
+The jackknife standard deviation in log-space, computed as:
+
+\begin{equation}
+\sigma_{\text{jack},j} = \sqrt{\frac{n-1}{n} \sum_{i=1}^{n} \left( \log_{10}(\hat{\theta}_{(-i),j}) - \bar{\log}_{10}(\hat{\theta}_{j}) \right)^2 }
+\label{eq:jackknife_sd}
+\end{equation}
+
+where $\bar{\log}_{10}(\hat{\theta}_{j}) = \frac{1}{n} \sum_{i=1}^{n} \log_{10}(\hat{\theta}_{(-i),j})$ is the mean of the jackknife estimates in log-space for parameter $j$, serves as a measure of parameter uncertainty. This uncertainty estimate accounts for both inter-animal variability and the finite sample size of the experimental data.
+
+\subsubsection{Monte Carlo sampling}
+\label{subsubsec:monte_carlo}
+
+To propagate parameter uncertainty through the model and obtain prediction intervals, a Monte Carlo sampling approach is employed. Parameter uncertainty is characterized by assuming that the log-transformed parameters follow a multivariate normal distribution, with means given by the global point estimates and covariance matrix estimated from the jackknife results:
+
+\begin{equation}
+\log_{10}(\theta) \sim \mathcal{N}\left( \log_{10}(\hat{\theta}), \hat{\Sigma} \right)
+\label{eq:mc_dist}
+\end{equation}
+
+where $\hat{\Sigma}$ is the jackknife covariance matrix, computed as:
+
+\begin{equation}
+\hat{\Sigma} = \frac{n-1}{n} \sum_{i=1}^{n} \left( \mathbf{z}_{(-i)} - \bar{\mathbf{z}} \right) \left( \mathbf{z}_{(-i)} - \bar{\mathbf{z}} \right)^T
+\label{eq:covariance}
+\end{equation}
+
+where $\mathbf{z}_{(-i)} = \log_{10}(\hat{\theta}_{(-i)})$ is the log-transformed parameter vector from jackknife iteration $i$, and $\bar{\mathbf{z}} = \frac{1}{n} \sum_{i=1}^{n} \mathbf{z}_{(-i)}$ is the mean log-transformed parameter vector. This full covariance matrix captures parameter correlations (e.g., trade-offs between absorption and elimination rates) that are inherent in PBPT models but would be missed by assuming independent parameters.
+
+A total of $M = 10,000$ parameter sets are sampled from this multivariate normal distribution in log-space and subsequently transformed to linear space:
+
+\begin{equation}
+\theta^{(m)} = 10^{\log_{10}(\theta^{(m)})}, \quad m = 1, 2, \ldots, M
+\label{eq:mc_transform}
+\end{equation}
+
+For each sampled parameter set $\theta^{(m)}$, the model is simulated for all animals in the dataset, generating time-series predictions for each compartment. The resulting ensemble of predictions is used to compute empirical prediction intervals.
+
+For each compartment $i$ and time point $t$, the prediction median and 95\% confidence interval are computed as:
+
+\begin{align}
+\text{Median}_{i,t} &= \text{median}\left( \{y_{i,t}^{(m)} : m = 1, \ldots, M\} \right) \\
+\text{CI}_{i,t}^{2.5\%} &= \text{percentile}\left( \{y_{i,t}^{(m)} : m = 1, \ldots, M\}, 2.5 \right) \\
+\text{CI}_{i,t}^{97.5\%} &= \text{percentile}\left( \{y_{i,t}^{(m)} : m = 1, \ldots, M\}, 97.5 \right)
+\label{eq:prediction_intervals}
+\end{align}
+
+where $y_{i,t}^{(m)}$ denotes the predicted concentration in compartment $i$ at time $t$ for parameter set $m$.
+
+The Monte Carlo procedure also enables separation of parameter uncertainty from inter-animal variability. For each parameter set, predictions are generated across all animals, allowing computation of animal-specific means and standard deviations. The parameter uncertainty interval is then defined as the 95\% confidence interval of the animal-averaged predictions across all Monte Carlo samples, while the animal variation is quantified as the mean standard deviation across animals for each parameter set, averaged over all Monte Carlo samples.
+
+\subsection{Parameter identifiability}
+\label{subsec:identifiability}
+
+Parameter identifiability analysis is performed to assess the reliability and uniqueness of the estimated parameters. The analysis is based on the Fisher Information Matrix (FIM), which quantifies the amount of information that the experimental data provides about each parameter.
+
+The Fisher Information Matrix is computed from the sensitivity of model predictions to parameter perturbations. For a parameter vector $\theta$ estimated in $\log_{10}$ space, the FIM is defined as:
+
+\begin{equation}
+\mathcal{I}(\theta) = \sum_{i=1}^{n} \frac{1}{\sigma_i^2} \left( \frac{\partial \log y_i}{\partial \log_{10} \theta} \right)^T \left( \frac{\partial \log y_i}{\partial \log_{10} \theta} \right)
+\label{eq:fim}
+\end{equation}
+
+where $n$ is the number of observations, $\sigma_i$ is the effective error estimate (Section~\ref{subsubsec:loss}) for $i$, $y_i$ is the predicted concentration, and the partial derivatives are computed with respect to parameters in $\log_{10}$ space.
+
+The gradient matrix $\frac{\partial \log y_i}{\partial \log_{10} \theta}$ is computed using finite differences. For each parameter $\theta_j$, a small perturbation $\epsilon$ is applied:
+
+\begin{equation}
+\frac{\partial \log y_i}{\partial \log_{10} \theta_j} \approx \frac{\log y_i(\theta_j + \epsilon) - \log y_i(\theta_j)}{\epsilon} \cdot \theta_j \cdot \ln(10)
+\label{eq:gradient}
+\end{equation}
+
+where $\epsilon = 10^{-6} \times \max(1, |\theta_j|)$ to ensure appropriate scaling for parameters of different magnitudes. The gradient computation accounts for all experimental data across all animals, compartments, and time points.
+
+The identifiability of parameters is assessed through eigenvalue decomposition of the Fisher Information Matrix:
+
+\begin{equation}
+\mathcal{I}(\theta) = Q \Lambda Q^T
+\label{eq:eigenvalue}
+\end{equation}
+
+where $\Lambda$ is a diagonal matrix of eigenvalues $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_p$ and $Q$ contains the corresponding eigenvectors. The condition number $\kappa = \lambda_{\max} / \lambda_{\min}$ provides a global measure of identifiability, with large values ($\kappa > 10^6$) indicating potential identifiability problems.
+
+Small eigenvalues ($\lambda_i < 10^{-6}$) indicate directions in parameter space where the data provide little information, corresponding to unidentifiable parameter combinations. The eigenvectors associated with these small eigenvalues reveal which parameters are confounded, as parameters with large contributions to these eigenvectors cannot be independently estimated from the available data.
+
+The analysis also computes the parameter correlation matrix from the inverse of the Fisher Information Matrix, which approximates the covariance matrix of the parameter estimates. High correlations (near $\pm 1$) between parameters indicate that they cannot be independently identified from the data.
+
+Identifiability diagnostics are computed separately for each compound-isomer pair using the fitted parameters from the optimization (Section~\ref{subsec:optimization}) and the corresponding experimental data. The results include the condition number, eigenvalue spectrum, unidentifiable parameter combinations, and the full parameter correlation matrix.
+
+\subsection{Physiology sub-model}
+\label{subsec:physiology}
+
+The physiology sub-model enables extrapolation to different exposure scenarios. It includes milk yield (lactation curve), body weight trajectory, and dry matter intake (DMI) curve from the INRA red book \cite{ref4}, which vary with breed (Alpine, Saanen) and parity (primiparous, multiparous).
+
+\subsubsection{Milk yield (lactation curve)}
+\label{subsubsec:lactation}
+
+Milk yield follows a parity-specific potential lactation curve that peaks early in lactation and declines over time. The lactation function is:
+
+\begin{equation}
+\text{Lact}(d) = \text{potLac} \cdot f_{\text{parity}}(d),
+\label{eq:lactation}
+\end{equation}
+
+where $d$ is days since parturition, $\text{Lact}(d)$ is milk yield (kg/day), and $\text{potLac}$ is the breed- and parity-specific potential lactation parameter (Table~\ref{tab:physiology_params}). The shape functions $f_{\text{parity}}(d)$ are given by
+\begin{align}
+f_{\text{multiparous}}(d) &= 0.0054 \cdot e^{-0.00342 \cdot d} - 0.00222 \cdot e^{-0.0555 \cdot d}, \\
+f_{\text{primiparous}}(d) &= 0.00669 \cdot e^{-0.00342 \cdot d} - 0.00345 \cdot e^{-0.0555 \cdot d},
+\end{align}
+which capture the characteristic lactation pattern with an initial peak followed by exponential decline. For goats, $\text{potLac}$ is chosen such that peak yields are in the range of 3--4 kg/day, whereas for Holstein cows the same shape functions are used but $\text{potLac}$ is scaled to realistic Holstein yields (multiparous peak $\approx 32$ kg/day).
+
+\subsubsection{Body weight trajectory}
+\label{subsubsec:bodyweight}
+
+Body weight changes over time following an exponential approach to a minimum weight, with an additional growth term:
+
+\begin{equation}
+BW(d) = BW_{\min} + (BW_0 - BW_{\min}) \cdot e^{-a \cdot d} + e^{b \cdot (d - d_0)}
+\label{eq:bodyweight}
+\end{equation}
+
+where $BW_{\min}$ is the minimum body weight (kg), $BW_0$ is the initial body weight (kg), $a$ controls the rate of weight loss, $b$ controls growth rate, $d_0$ is the day when growth begins, and $BW(d)$ is expressed in kg. Parameters are breed- and parity-specific (Table~\ref{tab:physiology_params}).
+
+\subsubsection{Dry matter intake (DMI)}
+\label{subsubsec:dmi}
+
+Dry matter intake is modeled as a linear function of body weight, milk yield, and concentrate intake:
+
+\begin{equation}
+\text{DMI}(d) = 0.23 + 0.014 \cdot BW(d) + 0.298 \cdot \text{Lact}(d) + 0.260 \cdot \text{DMI}_{\text{co}}
+\label{eq:dmi}
+\end{equation}
+
+where $\text{DMI}_{\text{co}}$ is the daily concentrate intake (kg/day) and $\text{DMI}(d)$ is total dry matter intake (kg/day). This empirical relationship captures the dependence of feed intake on metabolic demands (body weight and milk production) and supplementary feeding.
+
+\subsubsection{Breeds, species and parity}
+\label{subsubsec:breeds}
+
+Physiological parameters differ by breed, species and parity, reflecting differences in body size, milk production potential, and metabolic characteristics. Table~\ref{tab:physiology_params} provides the parameter values used for each breed-parity combination in goats and for a representative Holstein dairy cow profile.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{l l c c c c c c}
+        Breed / species & Parity & $BW_{\min}$ (kg) & $BW_0$ (kg) & $a$ & $b$ & $d_0$ & potLac \\
+        \midrule
+        \midrule
+        Alpine goat & primiparous & 48.8 & 52.1 & 0.158 & 0.0095 & 8 & 880 \\
+        Alpine goat & multiparous & 62.6 & 68.8 & 0.077 & 0.0079 & 27 & 950 \\
+        Saanen goat & primiparous & 51.8 & 56.4 & 0.158 & 0.0095 & 8 & 880 \\
+        Saanen goat & multiparous & 70.3 & 78.7 & 0.077 & 0.0079 & 27 & 950 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters used to solve the equations in the physiological submodel for goats and Holstein dairy cows (body weight and potential lactation).}
+    \label{tab:physiology_params}
+\end{table}

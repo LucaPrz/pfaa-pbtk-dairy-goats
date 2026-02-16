@@ -1,0 +1,15 @@
+Matrix,Sigma,Compound,Isomer
+intestine,0.4,PFOS,Branched
+brain,3.475005319113366,PFOS,Branched
+rest,0.4,PFOS,Branched
+kidney,0.8173963008005192,PFOS,Branched
+stomach,0.4,PFOS,Branched
+muscle,0.9603164667252455,PFOS,Branched
+urine,0.1372364286159129,PFOS,Branched
+spleen,0.42594803246658763,PFOS,Branched
+liver,0.34930264577664805,PFOS,Branched
+lung,0.24273867052705675,PFOS,Branched
+heart,0.4228503171298288,PFOS,Branched
+feces,0.12603862077478667,PFOS,Branched
+plasma,0.598733592751883,PFOS,Branched
+milk,0.8942654285326268,PFOS,Branched

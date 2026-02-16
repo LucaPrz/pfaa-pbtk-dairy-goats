@@ -1,0 +1,18 @@
+Identifiability Diagnostics: PFDoDA Branched
+============================================================
+
+Condition Number: 1.34e+00
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^2 root): 1.16e+00
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 6.46e+02
+  2. 4.83e+02
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+             k_a    k_elim
+k_a     1.000000 -0.108782
+k_elim -0.108782  1.000000

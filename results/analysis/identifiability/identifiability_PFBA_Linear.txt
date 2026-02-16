@@ -1,0 +1,22 @@
+Identifiability Diagnostics: PFBA Linear
+============================================================
+
+Condition Number: 9.47e+02
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^4 root): 5.55e+00
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 5.87e+04
+  2. 9.68e+03
+  3. 3.08e+02
+  4. 6.20e+01
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+              k_a    k_elim   k_feces   k_renal
+k_a      1.000000 -0.510579 -0.222342 -0.441030
+k_elim  -0.510579  1.000000 -0.163475  0.960774
+k_feces -0.222342 -0.163475  1.000000 -0.073721
+k_renal -0.441030  0.960774 -0.073721  1.000000

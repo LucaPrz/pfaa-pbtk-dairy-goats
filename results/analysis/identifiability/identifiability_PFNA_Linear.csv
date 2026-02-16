@@ -1,0 +1,3 @@
+Parameter,Fisher_Info_Diagonal,Max_Eigenvalue,Min_Eigenvalue,Condition_Number,Condition_Number_Per_Dim
+k_a,0.0,2882.097896911218,0.0,1.0,1.0
+k_elim,2882.097896911218,2882.097896911218,0.0,1.0,1.0

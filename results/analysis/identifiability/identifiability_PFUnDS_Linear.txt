@@ -1,0 +1,22 @@
+Identifiability Diagnostics: PFUnDS Linear
+============================================================
+
+Condition Number: 1.31e+04
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^4 root): 1.07e+01
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 1.49e+04
+  2. 1.08e+03
+  3. 1.43e+02
+  4. 1.14e+00
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+              k_a    k_elim   k_feces     k_ehc
+k_a      1.000000 -0.061077  0.054311  0.998036
+k_elim  -0.061077  1.000000 -0.918590 -0.028983
+k_feces  0.054311 -0.918590  1.000000  0.041903
+k_ehc    0.998036 -0.028983  0.041903  1.000000

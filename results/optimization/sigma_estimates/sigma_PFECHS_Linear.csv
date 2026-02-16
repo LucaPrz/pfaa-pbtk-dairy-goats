@@ -1,0 +1,11 @@
+Matrix,Sigma,Compound,Isomer
+plasma,0.4,PFECHS,Linear
+feces,0.5,PFECHS,Linear
+urine,0.5,PFECHS,Linear
+liver,0.5,PFECHS,Linear
+kidney,0.5,PFECHS,Linear
+lung,0.5,PFECHS,Linear
+spleen,0.5,PFECHS,Linear
+heart,0.5,PFECHS,Linear
+brain,0.5,PFECHS,Linear
+muscle,0.5,PFECHS,Linear

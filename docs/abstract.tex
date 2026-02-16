@@ -1,0 +1,31 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+\title{Physiologically Based Toxicokinetic Modeling of PFAAs in Dairy Goats to Support Feed Guidance and Milk Safety Assessment}
+\author{L.\ Przygoda$^{1}$, H.\ Just$^{1}$, S.\ Lerch$^{2}$, J.-L.\ Moenning$^{1}$,\\
+J.\ Kowalczyk$^{1}$, R.\ Pieper$^{1}$, J.\ Numata$^{1}$\\[0.5ex]
+\small $^{1}$Department of Safety in the Food Chain, German Federal Institute for Risk Assessment (BfR),\\
+\small Max-Dohrn-Straße 8--10, 10589 Berlin, Germany\\
+\small $^{2}$Ruminant Nutrition and Emissions, Agroscope, 1725 Posieux, Switzerland\\[0.5ex]
+\small Corresponding author: Luca Przygoda, \texttt{luca.przygoda@bfr.bund.de}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Per- and polyfluoroalkyl acids (PFAAs) are persistent, bioaccumulative environmental contaminants that can lead to long-lasting residues in edible animal products and thus pose a concern for food safety and human exposure. In dairy livestock, carry-over from contaminated feed into milk is a particularly relevant pathway, making quantitative toxicokinetic models essential tools to rapidly link feed contamination to internal dose and milk concentrations.
+
+We analysed an in~vivo feeding study in which dairy goats received PFAA-contaminated hay followed by a depuration phase, and developed a multi-compartment physiologically based toxicokinetic (PBTK) model with first-order kinetics describing gastrointestinal uptake, systemic distribution, enterohepatic circulation, and renal and fecal elimination. The linear mass-balance ODE system was solved analytically, enabling efficient parameter estimation via global optimization of a Tobit likelihood to account for concentrations below quantification limits. Model performance was evaluated using predefined criteria (R²\,$>$\,0.7, geometric mean fold error\,$<$\,2, $|\text{bias}|$\,$<$\,0.2); 16 of 30 compound--isomer combinations met these benchmarks.
+
+Fisher information--based identifiability analysis showed that global elimination and enterohepatic circulation parameters were well constrained, whereas renal and fecal excretion rates were weakly informed and correlated with alternative clearance pathways. Coupling the PBTK model to a physiology submodel providing time-resolved dry matter intake, body weight, and milk yield for representative dairy goat breeds, we performed covariance-aware Monte Carlo simulations based on a leave-one-animal-out jackknife to derive maximum allowable feed concentrations ensuring that the 95\,\% upper confidence bound of milk levels remains below EU indicative limits. Estimated thresholds were 0.06\,\si{\micro\gram\per\kilogram} feed for PFOS and 1.4--1.8\,\si{\micro\gram\per\kilogram} feed for PFHxS.
+
+This work advances physiology-based PBTK prediction of PFAA internal dose and milk transfer across multiple compounds and isomers while explicitly addressing parameter identifiability and uncertainty.
+\end{abstract}
+
+\end{document}
