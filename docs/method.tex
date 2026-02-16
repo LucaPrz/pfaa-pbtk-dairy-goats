@@ -15,7 +15,7 @@ Due to illness, one animal from the exposure group (E1) was excluded from the an
 \subsection{Dataset}
 \label{subsec:dataset}
 
-The dataset comprises measurements of PFAAs in multiple biological matrices. PFAA concentrations were quantified, with limits of quantification (LOQ) of 0.005 µg/L for milk and 0.5 µg/L for plasma, feces, urine, and organ tissues.
+The dataset comprises measurements of PFAAs in multiple biological matrices. PFAA concentrations were quantified, with limits of quantification (LOQ) of 0.005 µg/L for milk and 0.5 µg/L for plasma, feces, urine, and organ tissues. Throughout, tissue concentrations are reported as mass per kg (µg/kg) for solid matrices and per volume (µg/L) for plasma, milk, urine, and feces, consistent with the body burden formulation (Eq.~\ref{eq:body_burden}).
 
 A total of 37 substances were analyzed, of which 30 exhibited detectable signals (above LOQ) in the feed and in at least one other matrix and were included in the kinetic modeling. \Tabref{tab:data_signals} provides an overview of all compound-isomer pairs and their detectable signals. 
 
@@ -381,7 +381,7 @@ k_{\text{sto}}=(2.53 + (1.22 \cdot NI))-((2.61 \cdot (PCO^2))/6000)
 
 where $NI$ denotes the nutrient intake and $PCO$ represents the proportion of concentrate in the diet.
 
-Fitting parameters without corresponding data can result in overfitting and poor parameter identifiability. To address this, the script evaluates for each compound or isomer which compartments contain quantifiable concentrations (above the LOQ) and adapts the fitting strategy accordingly. Core parameters describing absorption and elimination ($k_{a}$ and $k_{\text{elim}}$) are always fitted, while compartment-specific parameters are only fitted when the respective data are available; otherwise, they are fixed to zero.
+Fitting parameters without corresponding data can result in overfitting and poor parameter identifiability. To address this, the analysis pipeline evaluates for each compound or isomer which compartments contain quantifiable concentrations (above the LOQ) and adapts the fitting strategy accordingly. Core parameters describing absorption and elimination ($k_{a}$ and $k_{\text{elim}}$) are always fitted, while compartment-specific parameters are only fitted when the respective data are available; otherwise, they are fixed to zero.
 
 \subsection{Model solving}
 \label{subsec:model_solving}
@@ -546,7 +546,7 @@ Parameter selection is performed dynamically based on the presence of detectable
 
 Parameters for which no signal is detected are fixed to zero, effectively removing the corresponding pathway from the model.
 
-Global optimization is performed using the differential evolution (DE) algorithm \cite{ref5}, a population-based stochastic optimization method for multi-modal objective functions. The DE algorithm is configured with the following settings: population size of 15, maximum iterations of 1000, convergence tolerance of 0.01, mutation factor range of (0.5, 1.0), crossover probability of 0.7, and a final local polishing step using the best solution as the initial guess. The optimization is initialized with a fixed random seed to ensure reproducibility.
+Global optimization is performed using the differential evolution (DE) algorithm \cite{ref5} (SciPy implementation), a population-based stochastic optimization method for multi-modal objective functions. The DE algorithm is configured with the following settings: population size of 15, maximum iterations of 1000, convergence tolerance of 0.01, mutation factor range of (0.5, 1.0), crossover probability of 0.7, and a final local polishing step using the best solution as the initial guess. The optimization is initialized with a fixed random seed to ensure reproducibility.
 
 The resulting point estimates $\hat{\theta}$ represent the best-fit parameters that minimize the weighted negative log-likelihood across all compartments and time points for each compound-isomer pair.
 
@@ -574,21 +574,28 @@ where $\bar{\log}_{10}(\hat{\theta}_{j}) = \frac{1}{n} \sum_{i=1}^{n} \log_{10}(
 \subsubsection{Monte Carlo sampling}
 \label{subsubsec:monte_carlo}
 
-To propagate parameter uncertainty through the model and obtain prediction intervals, a Monte Carlo sampling approach is employed. Parameter uncertainty is characterized by assuming that the log-transformed parameters follow a multivariate normal distribution, with means given by the global point estimates and covariance matrix estimated from the jackknife results:
+To propagate parameter uncertainty through the model and obtain prediction intervals, a Monte Carlo sampling approach is employed. Parameter uncertainty is characterized by assuming that the log-transformed parameters follow a multivariate normal distribution, with means given by the global point estimates and a diagonal covariance matrix whose entries are given by the jackknife variances in log-space:
 
 \begin{equation}
-\log_{10}(\theta) \sim \mathcal{N}\left( \log_{10}(\hat{\theta}), \hat{\Sigma} \right)
+\hat{\Sigma}_{\text{diag}} = \mathrm{diag}\left(\sigma_{\text{jack},1}^2, \ldots, \sigma_{\text{jack},p}^2\right),
+\end{equation}
+Only the diagonal is used for Monte Carlo sampling to avoid unstable draws from a poorly conditioned full covariance when $n$ is small.
+
+so that
+
+\begin{equation}
+\log_{10}(\theta) \sim \mathcal{N}\left( \log_{10}(\hat{\theta}), \hat{\Sigma}_{\text{diag}} \right)
 \label{eq:mc_dist}
 \end{equation}
 
-where $\hat{\Sigma}$ is the jackknife covariance matrix, computed as:
+where $p$ is the number of fitted parameters. For diagnostic purposes, the full jackknife covariance matrix can also be computed as
 
 \begin{equation}
 \hat{\Sigma} = \frac{n-1}{n} \sum_{i=1}^{n} \left( \mathbf{z}_{(-i)} - \bar{\mathbf{z}} \right) \left( \mathbf{z}_{(-i)} - \bar{\mathbf{z}} \right)^T
 \label{eq:covariance}
 \end{equation}
 
-where $\mathbf{z}_{(-i)} = \log_{10}(\hat{\theta}_{(-i)})$ is the log-transformed parameter vector from jackknife iteration $i$, and $\bar{\mathbf{z}} = \frac{1}{n} \sum_{i=1}^{n} \mathbf{z}_{(-i)}$ is the mean log-transformed parameter vector. This full covariance matrix captures parameter correlations (e.g., trade-offs between absorption and elimination rates) that are inherent in PBPT models but would be missed by assuming independent parameters.
+where $\mathbf{z}_{(-i)} = \log_{10}(\hat{\theta}_{(-i)})$ is the log-transformed parameter vector from jackknife iteration $i$, and $\bar{\mathbf{z}} = \frac{1}{n} \sum_{i=1}^{n} \mathbf{z}_{(-i)}$ is the mean log-transformed parameter vector. This full covariance matrix can reveal parameter correlations (e.g., trade-offs between absorption and elimination rates) but is not used directly for Monte Carlo sampling when the number of animals is small and the covariance is poorly conditioned.
 
 A total of $M = 10,000$ parameter sets are sampled from this multivariate normal distribution in log-space and subsequently transformed to linear space:
 
@@ -610,7 +617,15 @@ For each compartment $i$ and time point $t$, the prediction median and 95\% conf
 
 where $y_{i,t}^{(m)}$ denotes the predicted concentration in compartment $i$ at time $t$ for parameter set $m$.
 
-The Monte Carlo procedure also enables separation of parameter uncertainty from inter-animal variability. For each parameter set, predictions are generated across all animals, allowing computation of animal-specific means and standard deviations. The parameter uncertainty interval is then defined as the 95\% confidence interval of the animal-averaged predictions across all Monte Carlo samples, while the animal variation is quantified as the mean standard deviation across animals for each parameter set, averaged over all Monte Carlo samples.
+The Monte Carlo procedure also enables separation of parameter uncertainty from inter-animal variability and observational noise. For each parameter set, predictions are generated across all animals, allowing computation of animal-specific means and standard deviations. Three nested 95\% intervals are defined:
+
+\begin{itemize}
+    \item A \emph{parameter-only} interval, obtained as the 2.5th and 97.5th percentiles of the animal-averaged predictions across all Monte Carlo samples. This interval reflects uncertainty in the population mean trajectory due to parameter uncertainty.
+    \item A \emph{parameter plus inter-animal variation} interval, obtained as the 2.5th and 97.5th percentiles of all animal-specific predictions across all Monte Carlo samples. This interval represents the distribution of true (noise-free) concentrations for a randomly chosen animal.
+    \item An \emph{observation-level} prediction interval, obtained by adding log-normal observational noise with variance $\Sigma_i^2$ (estimated from the Tobit fit) to the animal-specific predictions in log-space and computing the 2.5th and 97.5th percentiles of the resulting pseudo-observations. This interval quantifies the expected range of single measured concentrations for a random animal.
+\end{itemize}
+
+Together, these three intervals provide a stacked decomposition of uncertainty into contributions from parameter uncertainty, inter-animal variability, and observational error.
 
 \subsection{Parameter identifiability}
 \label{subsec:identifiability}

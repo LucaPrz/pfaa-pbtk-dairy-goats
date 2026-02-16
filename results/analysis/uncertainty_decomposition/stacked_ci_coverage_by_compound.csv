@@ -1,0 +1,4 @@
+Compound,Isomer,CI_Level,Coverage,N
+PFOS,Linear,Param_only,0.5274725274725275,91
+PFOS,Linear,Param_plus_Animal,0.6373626373626373,91
+PFOS,Linear,Param_plus_Animal_plus_Obs,0.967032967032967,91

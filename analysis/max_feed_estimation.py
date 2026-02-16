@@ -119,7 +119,11 @@ def generate_mc_parameter_samples(
     random_seed: Optional[int] = 42,
 ) -> np.ndarray:
     """
-    Generate Monte Carlo samples in log10-space using jackknife covariance.
+    Generate Monte Carlo samples in log10-space using jackknife diagonal covariance.
+
+    Uses marginal jackknife standard deviations in log10-space only (no correlations),
+    consistent with optimization/mc.py and docs/mc_jackknife_covariance_analysis.md:
+    with few animals the full jackknife covariance is rank-deficient and not used for MC.
 
     Returns:
         mc_params: array of shape (n_samples, n_params) in linear space.
@@ -139,28 +143,16 @@ def generate_mc_parameter_samples(
     phase1_log = np.log10(np.clip(phase1_vec, eps_param, None))
     jk_log = np.log10(np.clip(jk_vals_linear, eps_param, None))
 
-    # Covariance in log10-space from jackknife
+    # Diagonal covariance: jackknife std in log10 per parameter (same as optimization/mc.py)
     n_jk = jk_log.shape[0]
-    if n_jk > 1:
-        z_mean = np.mean(jk_log, axis=0)
-        z_centered = jk_log - z_mean
-        cov = ((n_jk - 1) / n_jk) * np.dot(z_centered.T, z_centered)
-        # Regularise if needed
-        min_eig = float(np.min(np.linalg.eigvals(cov)))
-        if min_eig < 1e-8:
-            cov += np.eye(len(param_names)) * 1e-8
-    else:
-        # Diagonal covariance if only one jackknife sample
-        stds_log = np.std(jk_log, axis=0, ddof=0)
-        cov = np.diag(np.maximum(stds_log**2, 1e-6))
+    ddof = 1 if n_jk > 1 else 0
+    stds_log = np.std(jk_log, axis=0, ddof=ddof)
+    stds_log = np.sqrt(np.maximum(stds_log**2, 1e-6))
+    stds_log = np.nan_to_num(stds_log, nan=0.1, posinf=1.0, neginf=0.1)
 
     rng = np.random.default_rng(random_seed)
-    try:
-        samples_log = rng.multivariate_normal(phase1_log, cov, size=n_samples)
-    except np.linalg.LinAlgError:
-        # Fallback: diagonal only
-        diag_cov = np.diag(np.diag(cov))
-        samples_log = rng.multivariate_normal(phase1_log, diag_cov, size=n_samples)
+    # Sample: mean + std * Z (equivalent to diagonal multivariate normal)
+    samples_log = phase1_log + rng.standard_normal((n_samples, len(param_names))) * stds_log
 
     # Transform back to linear space
     return 10.0 ** samples_log

@@ -54,6 +54,30 @@ You can estimate how much variance each would add by **sensitivity runs**:
 
 Then “missing” from that source ≈ Var_X; sum over sources for a rough total. This requires running the model (or optimization/solve) with perturbed inputs; it is not automated in the current script but can be done with small one-off scripts or by hand.
 
+## 3. Stacked CI coverage
+
+The script `analysis/stacked_ci_coverage.py` uses Monte Carlo outputs and matched observations to report **empirical coverage** of the three stacked intervals:
+
+- **Param only**: 95% CI of the mean trajectory (parameter uncertainty).
+- **Param + animal**: 95% CI over all animal-series (parameter + between-animal variation).
+- **Param + animal + observational**: observation-level 95% interval (adds Sigma in log-space).
+
+**Usage:**
+
+```bash
+python analysis/stacked_ci_coverage.py
+python analysis/stacked_ci_coverage.py --pattern "PFOS_Linear"   # optional: single compound-isomer
+```
+
+Outputs in `results/analysis/uncertainty_decomposition/`:
+
+- `stacked_ci_coverage.csv` – overall coverage and N per CI level.
+- `stacked_ci_coverage_by_compound.csv` – coverage per compound-isomer per level.
+- `stacked_ci_coverage_by_compartment.csv` – coverage per compartment per level.
+- `stacked_ci_decomposition_summary.csv` – mean log-width of each interval (and Sigma, Animal_Variation where available) per compound-isomer-compartment.
+
+Interpretation: param-only coverage is typically lower (≈50–60% for a 95% band) because it does not include animal or observation noise; the full stacked band (param + animal + obs) should be close to 95% if the variance decomposition is well calibrated.
+
 ## Summary
 
 | What you have | How to estimate missing |

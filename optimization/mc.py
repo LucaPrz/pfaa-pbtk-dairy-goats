@@ -212,15 +212,33 @@ def run_monte_carlo_for_pair(
                 param_uncertainty_upper = np.nanpercentile(per_sample_means, 97.5, axis=0)
                 animal_variation = np.nanmean(animal_stds, axis=0)
 
-                # Observation-level prediction interval: add measurement noise (sigma) in log-space
+                # Observation-level prediction interval and variance decomposition in log-space
                 sigma_comp = context.config.get_sigma(comp, compound=compound, isomer=isomer)
                 eps = context.config.eps
+
+                # 1) Observation-level CI: add measurement noise (sigma) in log-space to stacked predictions
                 log_pred = np.log(np.maximum(stacked, eps))
                 noise = rng.normal(0, sigma_comp, size=stacked.shape)
                 log_obs = log_pred + noise
                 obs_draws = np.exp(log_obs)
                 obs_ci_lower = np.nanpercentile(obs_draws, 2.5, axis=0)
                 obs_ci_upper = np.nanpercentile(obs_draws, 97.5, axis=0)
+
+                # 2) Exact variance decomposition in log-space using raw MC draws
+                #    log_reshaped: (n_samples, n_animals, n_timepoints)
+                log_reshaped = np.log(np.maximum(reshaped, eps))
+                # Parameter variance: variance across samples of the animal-mean log prediction
+                log_means_per_sample = np.nanmean(log_reshaped, axis=1)  # (n_samples, n_timepoints)
+                ddof_param = 1 if n_samples > 1 else 0
+                var_param_log = np.nanvar(log_means_per_sample, axis=0, ddof=ddof_param)  # (n_timepoints,)
+                # Animal variance: mean over samples of within-sample variance across animals
+                ddof_animal = 1 if n_animals > 1 else 0
+                var_within_animals = np.nanvar(log_reshaped, axis=1, ddof=ddof_animal)  # (n_samples, n_timepoints)
+                var_animal_log = np.nanmean(var_within_animals, axis=0)  # (n_timepoints,)
+                # Observational variance in log-space (constant over time for this compartment)
+                var_obs_log = float(sigma_comp ** 2)
+                # Total variance
+                var_total_log = var_param_log + var_animal_log + var_obs_log
 
                 # Vectorized record creation
                 n_timepoints = len(context.config.time_vector)
@@ -239,6 +257,10 @@ def run_monte_carlo_for_pair(
                         'CI_Observation_Lower': float(obs_ci_lower[t_idx]),
                         'CI_Observation_Upper': float(obs_ci_upper[t_idx]),
                         'Sigma': float(sigma_comp),
+                        'Var_param_log': float(var_param_log[t_idx]),
+                        'Var_animal_log': float(var_animal_log[t_idx]),
+                        'Var_obs_log': var_obs_log,
+                        'Var_total_log': float(var_total_log[t_idx]),
                     }
                     for t_idx in range(n_timepoints)
                 ])
