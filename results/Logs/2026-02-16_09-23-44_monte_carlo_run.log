@@ -1,0 +1,195 @@
+2026-02-16 09:23:44,525 - INFO - Loading data files...
+2026-02-16 09:23:44,574 - INFO - Loaded intake and physiological data: 16920 intake rows, 3 animals with urine volumes, 3 animals with feces mass, 3 animals with milk yield series
+2026-02-16 09:23:44,574 - INFO - Determining compound-isomer pairs: hay concentration not 0 and at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ.
+2026-02-16 09:23:44,612 - INFO -   PFBA Linear: matrices above LOQ: Feces, Milk, Plasma, Urine
+2026-02-16 09:23:44,624 - INFO -   PFPeA Linear: matrices above LOQ: Feces, Milk, Muscle, Urine
+2026-02-16 09:23:44,635 - INFO -   PFHxA Linear: matrices above LOQ: Urine
+2026-02-16 09:23:44,647 - INFO -   PFHpA Linear: matrices above LOQ: Urine
+2026-02-16 09:23:44,658 - INFO -   PFOA Linear: matrices above LOQ: Brain, Feces, Milk, Plasma, Urine
+2026-02-16 09:23:44,670 - INFO -   PFOA Branched: matrices above LOQ: Milk, Plasma, Urine
+2026-02-16 09:23:44,681 - INFO -   PFDA Linear: matrices above LOQ: Liver, Milk, Plasma
+2026-02-16 09:23:44,693 - INFO -   PFUnDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 09:23:44,704 - INFO -   PFDoDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 09:23:44,715 - INFO -   PFTrDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 09:23:44,727 - INFO -   PFTeDA Linear: matrices above LOQ: Plasma
+2026-02-16 09:23:44,738 - INFO -   PFHxS Linear: matrices above LOQ: Milk, Plasma, Urine
+2026-02-16 09:23:44,749 - INFO -   PFHpS Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 09:23:44,762 - INFO -   PFOS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-16 09:23:44,774 - INFO -   PFOS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-16 09:23:44,786 - INFO -   PFNS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-16 09:23:44,798 - INFO -   PFNS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-16 09:23:44,810 - INFO -   PFDS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-16 09:23:44,822 - INFO -   PFDS Branched: matrices above LOQ: Feces, Heart, Kidney, Liver, Lung, Milk, Plasma, Spleen
+2026-02-16 09:23:44,834 - INFO -   PFUnDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-16 09:23:44,845 - INFO -   PFUnDS Branched: matrices above LOQ: Feces, Liver, Milk, Plasma
+2026-02-16 09:23:44,857 - INFO -   PFDoDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-16 09:23:44,868 - INFO -   PFDoDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-16 09:23:44,880 - INFO -   PFTrDS Linear: matrices above LOQ: Brain, Feces, Milk
+2026-02-16 09:23:44,891 - INFO -   PFTrDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-16 09:23:44,907 - INFO -   PFNA Linear: matrices above LOQ: Milk
+2026-02-16 09:23:44,945 - INFO -   PFDA Branched: matrices above LOQ: Milk
+2026-02-16 09:23:44,956 - INFO -   PFUnDA Branched: matrices above LOQ: Milk
+2026-02-16 09:23:44,965 - INFO -   PFDoDA Branched: matrices above LOQ: Milk
+2026-02-16 09:23:44,973 - INFO -   PFTrDA Branched: matrices above LOQ: Milk
+2026-02-16 09:23:44,981 - INFO -   PFTeDA Branched: matrices above LOQ: Milk
+2026-02-16 09:23:44,990 - INFO - Found 19 compounds (31 compound-isomer pairs) meeting criteria
+2026-02-16 09:23:45,005 - INFO - 
+All compound-isomer pairs to process (31 total):
+2026-02-16 09:23:45,005 - INFO -   PFBA         | Linear    
+2026-02-16 09:23:45,005 - INFO -   PFDA         | Branched  
+2026-02-16 09:23:45,005 - INFO -   PFDA         | Linear    
+2026-02-16 09:23:45,005 - INFO -   PFDS         | Branched  
+2026-02-16 09:23:45,005 - INFO -   PFDS         | Linear    
+2026-02-16 09:23:45,005 - INFO -   PFDoDA       | Branched  
+2026-02-16 09:23:45,005 - INFO -   PFDoDA       | Linear    
+2026-02-16 09:23:45,005 - INFO -   PFDoDS       | Branched  
+2026-02-16 09:23:45,005 - INFO -   PFDoDS       | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFHpA        | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFHpS        | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFHxA        | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFHxS        | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFNA         | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFNS         | Branched  
+2026-02-16 09:23:45,006 - INFO -   PFNS         | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFOA         | Branched  
+2026-02-16 09:23:45,006 - INFO -   PFOA         | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFOS         | Branched  
+2026-02-16 09:23:45,006 - INFO -   PFOS         | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFPeA        | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFTeDA       | Branched  
+2026-02-16 09:23:45,006 - INFO -   PFTeDA       | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFTrDA       | Branched  
+2026-02-16 09:23:45,006 - INFO -   PFTrDA       | Linear    
+2026-02-16 09:23:45,006 - INFO -   PFTrDS       | Branched  
+2026-02-16 09:23:45,007 - INFO -   PFTrDS       | Linear    
+2026-02-16 09:23:45,007 - INFO -   PFUnDA       | Branched  
+2026-02-16 09:23:45,007 - INFO -   PFUnDA       | Linear    
+2026-02-16 09:23:45,007 - INFO -   PFUnDS       | Branched  
+2026-02-16 09:23:45,007 - INFO -   PFUnDS       | Linear    
+2026-02-16 09:23:45,007 - INFO - 
+2026-02-16 09:23:45,007 - INFO - === STARTING FULL MONTE CARLO RUN ===
+2026-02-16 09:23:45,007 - INFO - Total compounds to process: 31
+2026-02-16 09:23:45,115 - INFO - === PHASE 1: Running global mean fits ===
+2026-02-16 09:23:45,268 - INFO - [GLOBAL FIT] Starting PFBA Linear
+2026-02-16 09:23:45,272 - INFO - [GLOBAL FIT] PFBA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:45,287 - INFO - [GLOBAL FIT] PFBA Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_renal']
+2026-02-16 09:23:45,287 - INFO - [GLOBAL FIT] PFBA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-02-16 09:23:45,375 - INFO - [GLOBAL FIT] Starting PFDA Branched
+2026-02-16 09:23:45,379 - INFO - [GLOBAL FIT] PFDA Branched - Data: 150 points, 5 matrices, 3 animals
+2026-02-16 09:23:45,389 - INFO - [GLOBAL FIT] PFDA Branched - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:45,390 - INFO - [GLOBAL FIT] PFDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:45,485 - INFO - [GLOBAL FIT] Starting PFDA Linear
+2026-02-16 09:23:45,489 - INFO - [GLOBAL FIT] PFDA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:45,503 - INFO - [GLOBAL FIT] PFDA Linear - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:45,503 - INFO - [GLOBAL FIT] PFDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:45,594 - INFO - [GLOBAL FIT] Starting PFDS Branched
+2026-02-16 09:23:45,598 - INFO - [GLOBAL FIT] PFDS Branched - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:45,612 - INFO - [GLOBAL FIT] PFDS Branched - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:45,612 - INFO - [GLOBAL FIT] PFDS Branched - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:45,707 - INFO - [GLOBAL FIT] Starting PFDS Linear
+2026-02-16 09:23:45,711 - INFO - [GLOBAL FIT] PFDS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:45,725 - INFO - [GLOBAL FIT] PFDS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:45,725 - INFO - [GLOBAL FIT] PFDS Linear - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:45,822 - INFO - [GLOBAL FIT] Starting PFDoDA Branched
+2026-02-16 09:23:45,826 - INFO - [GLOBAL FIT] PFDoDA Branched - Data: 150 points, 5 matrices, 3 animals
+2026-02-16 09:23:45,837 - INFO - [GLOBAL FIT] PFDoDA Branched - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:45,837 - INFO - [GLOBAL FIT] PFDoDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:45,935 - INFO - [GLOBAL FIT] Starting PFDoDA Linear
+2026-02-16 09:23:45,940 - INFO - [GLOBAL FIT] PFDoDA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:45,954 - INFO - [GLOBAL FIT] PFDoDA Linear - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:45,954 - INFO - [GLOBAL FIT] PFDoDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:46,051 - INFO - [GLOBAL FIT] Starting PFDoDS Branched
+2026-02-16 09:23:46,055 - INFO - [GLOBAL FIT] PFDoDS Branched - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,070 - INFO - [GLOBAL FIT] PFDoDS Branched - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:46,070 - INFO - [GLOBAL FIT] PFDoDS Branched - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:46,167 - INFO - [GLOBAL FIT] Starting PFDoDS Linear
+2026-02-16 09:23:46,171 - INFO - [GLOBAL FIT] PFDoDS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,185 - INFO - [GLOBAL FIT] PFDoDS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:46,185 - INFO - [GLOBAL FIT] PFDoDS Linear - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:46,280 - INFO - [GLOBAL FIT] Starting PFHpA Linear
+2026-02-16 09:23:46,284 - INFO - [GLOBAL FIT] PFHpA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,298 - INFO - [GLOBAL FIT] PFHpA Linear - Fitting parameters: ['k_a', 'k_elim', 'k_renal']
+2026-02-16 09:23:46,298 - INFO - [GLOBAL FIT] PFHpA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-02-16 09:23:46,394 - INFO - [GLOBAL FIT] Starting PFHpS Linear
+2026-02-16 09:23:46,399 - INFO - [GLOBAL FIT] PFHpS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,413 - INFO - [GLOBAL FIT] PFHpS Linear - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:46,413 - INFO - [GLOBAL FIT] PFHpS Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:46,509 - INFO - [GLOBAL FIT] Starting PFHxA Linear
+2026-02-16 09:23:46,513 - INFO - [GLOBAL FIT] PFHxA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,527 - INFO - [GLOBAL FIT] PFHxA Linear - Fitting parameters: ['k_a', 'k_elim', 'k_renal']
+2026-02-16 09:23:46,527 - INFO - [GLOBAL FIT] PFHxA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-02-16 09:23:46,622 - INFO - [GLOBAL FIT] Starting PFHxS Linear
+2026-02-16 09:23:46,626 - INFO - [GLOBAL FIT] PFHxS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,640 - INFO - [GLOBAL FIT] PFHxS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_renal']
+2026-02-16 09:23:46,640 - INFO - [GLOBAL FIT] PFHxS Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-02-16 09:23:46,737 - INFO - [GLOBAL FIT] Starting PFNA Linear
+2026-02-16 09:23:46,741 - INFO - [GLOBAL FIT] PFNA Linear - Data: 150 points, 5 matrices, 3 animals
+2026-02-16 09:23:46,751 - INFO - [GLOBAL FIT] PFNA Linear - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:46,751 - INFO - [GLOBAL FIT] PFNA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:46,848 - INFO - [GLOBAL FIT] Starting PFNS Branched
+2026-02-16 09:23:46,852 - INFO - [GLOBAL FIT] PFNS Branched - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,866 - INFO - [GLOBAL FIT] PFNS Branched - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc', 'k_renal']
+2026-02-16 09:23:46,959 - INFO - [GLOBAL FIT] Starting PFNS Linear
+2026-02-16 09:23:46,964 - INFO - [GLOBAL FIT] PFNS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:46,979 - INFO - [GLOBAL FIT] PFNS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:46,979 - INFO - [GLOBAL FIT] PFNS Linear - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:47,072 - INFO - [GLOBAL FIT] Starting PFOA Branched
+2026-02-16 09:23:47,076 - INFO - [GLOBAL FIT] PFOA Branched - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:47,090 - INFO - [GLOBAL FIT] PFOA Branched - Fitting parameters: ['k_a', 'k_elim', 'k_renal']
+2026-02-16 09:23:47,090 - INFO - [GLOBAL FIT] PFOA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-02-16 09:23:47,188 - INFO - [GLOBAL FIT] Starting PFOA Linear
+2026-02-16 09:23:47,192 - INFO - [GLOBAL FIT] PFOA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:47,206 - INFO - [GLOBAL FIT] PFOA Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_renal']
+2026-02-16 09:23:47,206 - INFO - [GLOBAL FIT] PFOA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-02-16 09:23:47,302 - INFO - [GLOBAL FIT] Starting PFOS Branched
+2026-02-16 09:23:47,307 - INFO - [GLOBAL FIT] PFOS Branched - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:47,322 - INFO - [GLOBAL FIT] PFOS Branched - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc', 'k_renal']
+2026-02-16 09:23:47,417 - INFO - [GLOBAL FIT] Starting PFOS Linear
+2026-02-16 09:23:47,420 - INFO - [GLOBAL FIT] PFOS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:47,433 - INFO - [GLOBAL FIT] PFOS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc', 'k_renal']
+2026-02-16 09:23:47,528 - INFO - [GLOBAL FIT] Starting PFPeA Linear
+2026-02-16 09:23:47,533 - INFO - [GLOBAL FIT] PFPeA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:47,546 - INFO - [GLOBAL FIT] PFPeA Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_renal']
+2026-02-16 09:23:47,546 - INFO - [GLOBAL FIT] PFPeA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-02-16 09:23:47,643 - INFO - [GLOBAL FIT] Starting PFTeDA Branched
+2026-02-16 09:23:47,646 - INFO - [GLOBAL FIT] PFTeDA Branched - Data: 150 points, 5 matrices, 3 animals
+2026-02-16 09:23:47,656 - INFO - [GLOBAL FIT] PFTeDA Branched - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:47,656 - INFO - [GLOBAL FIT] PFTeDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:47,758 - INFO - [GLOBAL FIT] Starting PFTeDA Linear
+2026-02-16 09:23:47,762 - INFO - [GLOBAL FIT] PFTeDA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:47,776 - INFO - [GLOBAL FIT] PFTeDA Linear - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:47,776 - INFO - [GLOBAL FIT] PFTeDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:47,871 - INFO - [GLOBAL FIT] Starting PFTrDA Branched
+2026-02-16 09:23:47,875 - INFO - [GLOBAL FIT] PFTrDA Branched - Data: 150 points, 5 matrices, 3 animals
+2026-02-16 09:23:47,886 - INFO - [GLOBAL FIT] PFTrDA Branched - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:47,886 - INFO - [GLOBAL FIT] PFTrDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:47,986 - INFO - [GLOBAL FIT] Starting PFTrDA Linear
+2026-02-16 09:23:47,990 - INFO - [GLOBAL FIT] PFTrDA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:48,004 - INFO - [GLOBAL FIT] PFTrDA Linear - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:48,004 - INFO - [GLOBAL FIT] PFTrDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:48,099 - INFO - [GLOBAL FIT] Starting PFTrDS Branched
+2026-02-16 09:23:48,103 - INFO - [GLOBAL FIT] PFTrDS Branched - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:48,119 - INFO - [GLOBAL FIT] PFTrDS Branched - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:48,119 - INFO - [GLOBAL FIT] PFTrDS Branched - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:48,216 - INFO - [GLOBAL FIT] Starting PFTrDS Linear
+2026-02-16 09:23:48,221 - INFO - [GLOBAL FIT] PFTrDS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:48,234 - INFO - [GLOBAL FIT] PFTrDS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces']
+2026-02-16 09:23:48,234 - INFO - [GLOBAL FIT] PFTrDS Linear - Fixed parameters: {'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:48,331 - INFO - [GLOBAL FIT] Starting PFUnDA Branched
+2026-02-16 09:23:48,334 - INFO - [GLOBAL FIT] PFUnDA Branched - Data: 150 points, 5 matrices, 3 animals
+2026-02-16 09:23:48,344 - INFO - [GLOBAL FIT] PFUnDA Branched - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:48,344 - INFO - [GLOBAL FIT] PFUnDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:48,446 - INFO - [GLOBAL FIT] Starting PFUnDA Linear
+2026-02-16 09:23:48,450 - INFO - [GLOBAL FIT] PFUnDA Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:48,463 - INFO - [GLOBAL FIT] PFUnDA Linear - Fitting parameters: ['k_a', 'k_elim']
+2026-02-16 09:23:48,464 - INFO - [GLOBAL FIT] PFUnDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_renal': 0.0}
+2026-02-16 09:23:48,559 - INFO - [GLOBAL FIT] Starting PFUnDS Branched
+2026-02-16 09:23:48,563 - INFO - [GLOBAL FIT] PFUnDS Branched - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:48,578 - INFO - [GLOBAL FIT] PFUnDS Branched - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:48,578 - INFO - [GLOBAL FIT] PFUnDS Branched - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:48,672 - INFO - [GLOBAL FIT] Starting PFUnDS Linear
+2026-02-16 09:23:48,675 - INFO - [GLOBAL FIT] PFUnDS Linear - Data: 231 points, 15 matrices, 3 animals
+2026-02-16 09:23:48,690 - INFO - [GLOBAL FIT] PFUnDS Linear - Fitting parameters: ['k_a', 'k_elim', 'k_feces', 'k_ehc']
+2026-02-16 09:23:48,690 - INFO - [GLOBAL FIT] PFUnDS Linear - Fixed parameters: {'k_renal': 0.0}
+2026-02-16 09:23:52,196 - WARNING - User interrupted during global fit phase
+2026-02-16 09:23:53,117 - WARNING - Interrupted by user

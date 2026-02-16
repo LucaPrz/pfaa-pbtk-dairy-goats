@@ -1,2 +1,15 @@
 Matrix,Sigma,Compound,Isomer
-milk,0.30814360016393844,PFDA,Branched
+spleen,0.34057617810589813,PFDA,Branched
+muscle,0.6193111876529891,PFDA,Branched
+heart,0.3823253100906719,PFDA,Branched
+feces,0.5541553294539356,PFDA,Branched
+kidney,0.6206835259403256,PFDA,Branched
+milk,0.266403897826103,PFDA,Branched
+liver,0.35945208107756044,PFDA,Branched
+stomach,0.4,PFDA,Branched
+lung,0.35452387155006626,PFDA,Branched
+brain,2.8449963583787214,PFDA,Branched
+intestine,0.4,PFDA,Branched
+plasma,0.6976936020183785,PFDA,Branched
+rest,0.4,PFDA,Branched
+urine,1.428828392145921,PFDA,Branched
