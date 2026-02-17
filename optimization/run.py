@@ -200,42 +200,71 @@ def main() -> int:
         if not args.mc_only:
             overall_pbar = tqdm(total=len(selected_pairs) * total_phases, desc="Overall Progress", unit="task")
         
-            logger.info("=== PHASE 1: Running global mean fits ===")
+            # ------------------------------------------------------------------
+            # PHASE 1: Global fits (two-stage)
+            #   Stage 1: log-RMSE fits to get reasonable means
+            #   Sigma estimation: pooled σ per matrix from stage-1 residuals
+            #   Stage 2: censored-likelihood (Tobit) fits using those σ
+            # ------------------------------------------------------------------
+            logger.info("=== PHASE 1: Running global mean fits (two-stage: log-RMSE then censored likelihood) ===")
             start_time = time.time()
             
             # Create partial function with context
             run_global_partial = partial(run_global_fit_for_pair, context=context)
+
+            # --- Stage 1: log-RMSE global fits ---
+            logger.info("[PHASE 1 / Stage 1] Log-RMSE global fits (no sigma needed)")
+            prev_loss_mode = context.config.use_log_rmse_for_fitting
+            context.config.use_log_rmse_for_fitting = True
             try:
-                results_mean = pool.map(run_global_partial, selected_pairs)
+                _ = pool.map(run_global_partial, selected_pairs)
             except KeyboardInterrupt:
-                logger.warning("User interrupted during global fit phase")
+                logger.warning("User interrupted during Stage 1 (log-RMSE) global fit phase")
                 raise  # Re-raise to ensure finally block executes
             except Exception as e:
-                logger.error(f"Global fit phase failed: {e}", exc_info=True)
+                logger.error(f"Stage 1 (log-RMSE) global fit phase failed: {e}", exc_info=True)
                 raise  # Re-raise to ensure finally block executes
-            
-            update_progress(overall_pbar, len(selected_pairs))
-            mean_time = time.time() - start_time
-            current_phase += 1
-            successful_mean = count_successful(results_mean)
-            logger.info(f"=== PHASE {current_phase}/{total_phases} COMPLETED ===")
-            logger.info(f"Global mean fits: {successful_mean}/{len(selected_pairs)} successful in {mean_time:.1f}s")
-            
-            # Estimate pooled sigma from all fits
-            logger.info("=== Estimating pooled sigma from all fits ===")
+
+            # --- Sigma estimation from stage-1 fits ---
+            logger.info("=== Estimating pooled sigma from Stage 1 fits ===")
             try:
                 from optimization.sigma_estimation import estimate_and_save_pooled_sigma
                 sigma_estimates = estimate_and_save_pooled_sigma(context, pairs=selected_pairs)
                 if sigma_estimates:
-                    logger.info(f"Pooled sigma estimates computed successfully")
+                    logger.info("Pooled sigma estimates computed successfully")
                     for matrix, sigma in sigma_estimates.items():
                         logger.info(f"  {matrix}: σ={sigma:.3f}")
                 else:
                     logger.warning("Pooled sigma estimation returned None")
             except Exception as e:
                 logger.error(f"Pooled sigma estimation failed: {e}", exc_info=True)
-                # Don't fail the entire run if sigma estimation fails
+                # Don't fail the entire run if sigma estimation fails; fall back to defaults
+
+            # --- Stage 2: censored-likelihood (Tobit) global fits ---
+            logger.info("[PHASE 1 / Stage 2] Censored-likelihood (Tobit) global fits using estimated sigma")
+            context.config.use_log_rmse_for_fitting = False
+            try:
+                results_mean = pool.map(run_global_partial, selected_pairs)
+            except KeyboardInterrupt:
+                logger.warning("User interrupted during Stage 2 (Tobit) global fit phase")
+                raise  # Re-raise to ensure finally block executes
+            except Exception as e:
+                logger.error(f"Stage 2 (Tobit) global fit phase failed: {e}", exc_info=True)
+                raise  # Re-raise to ensure finally block executes
+            finally:
+                # Restore previous loss mode in case other code relies on it
+                context.config.use_log_rmse_for_fitting = prev_loss_mode
             
+            update_progress(overall_pbar, len(selected_pairs))
+            mean_time = time.time() - start_time
+            current_phase += 1
+            successful_mean = count_successful(results_mean)
+            logger.info(f"=== PHASE {current_phase}/{total_phases} COMPLETED ===")
+            logger.info(f"Global mean fits (two-stage): {successful_mean}/{len(selected_pairs)} successful in {mean_time:.1f}s")
+            
+            # ------------------------------------------------------------------
+            # PHASE 2: Jackknife fits (use censored-likelihood by default)
+            # ------------------------------------------------------------------
             logger.info("=== PHASE 2: Running jackknife fits ===")
             start_time = time.time()
             

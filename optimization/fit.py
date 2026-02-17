@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import differential_evolution
 from tqdm import tqdm
+from statsmodels.nonparametric.smoothers_lowess import lowess
 
 if str(Path(__file__).resolve().parent.parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -39,16 +40,21 @@ def build_intake_function(
     days = sub["Day"].astype(int).values
     values = sub["PFAS_Intake_ug_day"].astype(float).values
 
-    if moving_average_window is not None and moving_average_window >= 2:
-        # Center-weighted moving average over contiguous days; at edges use available points (min_periods=1)
-        max_day = int(sub["Day"].max())
-        series = pd.Series(values, index=days).reindex(np.arange(0, max_day + 1), fill_value=0.0)
-        smoothed = series.rolling(
-            window=moving_average_window, center=True, min_periods=1
-        ).mean()
-        day_to_intake = smoothed.to_dict()
-    else:
-        day_to_intake = dict(zip(days, values))
+    # Smooth intake using LOWESS
+    max_day = int(sub["Day"].max())
+    full_days = np.arange(0, max_day + 1)
+    series = pd.Series(values, index=days).reindex(full_days, fill_value=0.0)
+    smoothed = lowess(
+        endog=series.values,
+        exog=full_days,
+        frac=0.4,
+        it=3,
+        return_sorted=False,
+    )
+    # Enforce non-negative intake after smoothing
+    smoothed = np.clip(smoothed, 0.0, None)
+    day_to_intake = dict(zip(full_days, smoothed))
+
 
     def intake_func(t: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
         t_arr = np.atleast_1d(t)

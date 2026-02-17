@@ -86,6 +86,10 @@ def collect_residuals_for_pair(
                 continue
             
             df_matrix = use_data[use_data['Matrix'].str.lower() == matrix_name]
+            # Exclude all baseline observations (Day 0) from residual collection
+            # for sigma estimation, consistent with the fitting and GOF logic.
+            if "Day" in df_matrix.columns:
+                df_matrix = df_matrix[df_matrix["Day"] > 0]
             if df_matrix.empty:
                 continue
             

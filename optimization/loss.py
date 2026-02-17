@@ -372,6 +372,11 @@ def loss_function(
     y_pred = None  # Track last y_pred for validation
     for matrix_name, weight in context.config.matrix_weights.items():
         df_matrix = use_data[use_data["Matrix"].str.lower() == matrix_name]
+        # Exclude all baseline observations (Day 0) from fitting. Day 0 often
+        # reflects pre-exposure background that the current model does not
+        # explicitly represent and can distort parameter estimation.
+        if "Day" in df_matrix.columns:
+            df_matrix = df_matrix[df_matrix["Day"] > 0]
         if df_matrix.empty:
             continue
 

@@ -75,9 +75,9 @@ class ModelConfig:
         "feces": 0.5, "urine": 0.5
     })
     use_dynamic_parameters: bool = True  # Enable dynamic parameter selection based on data signals
-    use_log_rmse_for_fitting: bool = False  # If True, fit with log RMSE then estimate sigma; if False, use censored likelihood directly
+    use_log_rmse_for_fitting: bool = True  # If True, fit with log RMSE then estimate sigma; if False, use censored likelihood directly
 
-    # Smooth daily intake with a moving average (number of days). None = no smoothing.
+    # Smooth daily intake using LOWESS if not None. None = no smoothing.
     intake_moving_average_window: Optional[int] = 10
 
     # Default param names for simple model (no mammary parameter; E_milk is fixed from data)

@@ -191,6 +191,12 @@ def calculate_r2_rrmse_and_bias(
 
 def compute_summary_table(df: pd.DataFrame) -> pd.DataFrame:
     """Compute R², fold error, bias and CI coverage per compound-isomer."""
+    # Exclude all baseline observations (Day 0) across compartments from GOF
+    # metrics. Day 0 values often reflect pre-exposure background that the
+    # model does not explicitly represent and can dominate fold/bias metrics.
+    if "Day" in df.columns:
+        df = df[df["Day"] > 0].copy()
+
     rows: List[Dict[str, any]] = []
     for (compound, isomer), g in df.groupby(["Compound", "Isomer"]):
         g = g.copy()
@@ -249,6 +255,10 @@ def compute_summary_table(df: pd.DataFrame) -> pd.DataFrame:
 
 def compute_compartment_summary_table(df: pd.DataFrame) -> pd.DataFrame:
     """Compute R², fold error, bias and CI coverage per compound–isomer–compartment."""
+    # Exclude all baseline observations (Day 0) across compartments from GOF.
+    if "Day" in df.columns:
+        df = df[df["Day"] > 0].copy()
+
     rows: List[Dict[str, any]] = []
     for (compound, isomer, compartment), g in df.groupby(
         ["Compound", "Isomer", "Compartment"]
