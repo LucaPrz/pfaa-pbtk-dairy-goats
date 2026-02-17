@@ -11,7 +11,7 @@ if str(Path(__file__).resolve().parent.parent) not in sys.path:
 
 import model.diagnose as default_matrix_module
 from model.solve import SimulationResult
-from optimization.config import ModelConfig, TimeHandler, FitConfig, get_matrix_module
+from optimization.config import ModelConfig, FitConfig, get_matrix_module
 
 if TYPE_CHECKING:
     from optimization.config import FittingContext
@@ -74,20 +74,29 @@ def predict_milk_concentration(
     animal: str,
     milk_yield_by_animal: Dict[str, np.ndarray]
 ) -> np.ndarray:
-    # Use pre-computed lookup array for O(1) access instead of DataFrame filtering
+    """
+    Convert daily milk mass (µg) to concentration (µg/L ≈ µg/kg).
+
+    The solver uses milk yield at the *start* of each step (t0) to compute
+    excretion during [t0, t1]. So daily_milk_mass[i] was produced with
+    volume = yield at index i-1. We divide by that same yield to get
+    concentration; using yield[i] would wrongly under-predict when yield
+    increases day-to-day.
+    """
     yields = milk_yield_by_animal.get(animal)
     if yields is None:
-        # Fallback: create default array if animal not found
         yields = np.ones(len(daily_milk_mass), dtype=np.float32)
     else:
-        # Ensure yields array is long enough, pad with 1.0 if needed
         if len(yields) < len(daily_milk_mass):
             yields = np.pad(yields, (0, len(daily_milk_mass) - len(yields)), constant_values=1.0)
-        # Take only the days we need
-        yields = yields[:len(daily_milk_mass)]
-    
-    # Vectorized division: daily_milk_mass / yields, ensuring non-negative
-    concentrations = np.maximum(daily_milk_mass / yields, 0.0)
+        yields = yields[:len(daily_milk_mass)].astype(np.float32)
+
+    # Yield that produced the milk on day i is yield at start of step → yields[i-1]
+    yield_used = np.empty_like(yields)
+    yield_used[0] = yields[0] if yields[0] > 0 else 1.0  # day 0: no milk mass, avoid 0/0
+    yield_used[1:] = yields[:-1]
+    yield_used = np.maximum(yield_used, 1e-10)  # avoid division by zero
+    concentrations = np.maximum(daily_milk_mass / yield_used, 0.0)
     return concentrations.astype(np.float32)
 
 def predict_single_observation(
@@ -106,7 +115,7 @@ def predict_single_observation(
     # back to the default diagnose module.
     m = matrix_module if matrix_module is not None else default_matrix_module
     try:
-        t_idx = TimeHandler.observation_to_prediction_time(t)
+        t_idx = int(t)
 
         if matrix_name == "milk":
             cumulative = simulation_tuple.milk_array
@@ -376,7 +385,7 @@ def loss_function(
             if sim is None or all_params is None:
                 y_pred.append(np.nan)
                 continue
-            # predict_single_observation handles day 0 → day 1 shift internally
+            # predict_single_observation uses observation time as model index (Day 0 = baseline)
             y_pred.append(predict_single_observation(
                 sim, all_params, matrix_name, t, animal,
                 context.urine_volume_by_animal,

@@ -25,6 +25,7 @@ import numpy as np
 import pandas as pd
 import logging
 from scipy.stats import linregress
+import matplotlib.pyplot as plt
 
 # Small value to avoid log(0)
 EPS = 1e-6
@@ -67,13 +68,10 @@ def load_observations(data_path: Path) -> pd.DataFrame:
 def match_predictions_observations(
     pred_df: pd.DataFrame,
     obs_df: pd.DataFrame,
-    shift_day0_to_day1: bool = True,
 ) -> pd.DataFrame:
     """
-    Match predictions with observations by Compound, Isomer, Matrix/Compartment, and Day/Time.
-
-    If shift_day0_to_day1 is True, day 0 observations are matched with day 1 predictions
-    (assuming day 0 observations are taken at the end of the first exposure day).
+    Match predictions with observations by Compound, Isomer, Matrix/Compartment, and Day.
+    Observation Day d is matched to prediction Time d (Day 0 = baseline).
     """
     # Map observation matrix names to prediction compartment names
     matrix_map = {
@@ -94,24 +92,14 @@ def match_predictions_observations(
     obs_df["Compartment"] = obs_df["Matrix"].map(matrix_map)
     obs_df = obs_df.dropna(subset=["Compartment"])  # Remove unmapped matrices
 
-    # Shift day 0 observations to match day 1 predictions if requested
-    if shift_day0_to_day1:
-        obs_df["Time_to_match"] = obs_df["Day"].apply(lambda d: 1 if d == 0 else d)
-    else:
-        obs_df["Time_to_match"] = obs_df["Day"]
-
-    # Merge on Compound, Isomer, Compartment, and Day/Time
+    # Merge on Compound, Isomer, Compartment, and Day
     merged = obs_df.merge(
         pred_df,
-        left_on=["Compound", "Isomer", "Compartment", "Time_to_match"],
+        left_on=["Compound", "Isomer", "Compartment", "Day"],
         right_on=["Compound", "Isomer", "Compartment", "Time"],
         how="inner",
         suffixes=("_obs", "_pred"),
     )
-
-    # Keep original Day column for reference
-    merged = merged.rename(columns={"Day": "Day_original"})
-    merged["Day"] = merged["Day_original"]
 
     return merged
 
@@ -321,6 +309,100 @@ def compute_compartment_summary_table(df: pd.DataFrame) -> pd.DataFrame:
     return summary_df
 
 
+def plot_log_pred_vs_obs_for_passing(
+    log_df: pd.DataFrame,
+    summary_df: pd.DataFrame,
+    output_dir: Path,
+    r2_threshold: float = 0.7,
+    gmfe_threshold: float = 2.0,
+    bias_abs_threshold: float = 0.2,
+) -> None:
+    """
+    Create a log10(predicted) vs log10(observed) scatter plot including only
+    compound–isomer pairs that pass predefined goodness-of-fit criteria.
+
+    Passing criteria (per compound–isomer):
+      - R² > r2_threshold
+      - GM_Fold_Error < gmfe_threshold
+      - |Bias_log10| < bias_abs_threshold
+
+    The plot is saved as:
+      <output_dir>/log_pred_vs_log_obs_passing_compounds.png
+    """
+    if log_df.empty or summary_df.empty:
+        logger.warning("[GOF] Cannot plot log_pred vs log_obs: empty input data.")
+        return
+
+    crit_r2 = summary_df["R2"] > r2_threshold
+    crit_gm = summary_df["GM_Fold_Error"] < gmfe_threshold
+    crit_bias = summary_df["Bias_log10"].abs() < bias_abs_threshold
+    passing = summary_df[crit_r2 & crit_gm & crit_bias][["Compound", "Isomer"]]
+
+    if passing.empty:
+        logger.warning("[GOF] No compound–isomer pairs pass the GOF thresholds; skipping plot.")
+        return
+
+    passing_pairs = set(map(tuple, passing.values))
+    mask = log_df[["Compound", "Isomer"]].apply(tuple, axis=1).isin(passing_pairs)
+    df_pass = log_df[mask].copy()
+    if df_pass.empty:
+        logger.warning("[GOF] No matched observations for passing compounds; skipping plot.")
+        return
+    
+    from auxiliary.plot_style import set_paper_plot_style
+    set_paper_plot_style()
+
+    # Light grey y=x reference line
+    min_val = float(min(df_pass["log_obs"].min(), df_pass["log_pred"].min()))
+    max_val = float(max(df_pass["log_obs"].max(), df_pass["log_pred"].max()))
+    plt.plot([min_val, max_val], [min_val, max_val], color="lightgray", linestyle="--", label="1:1 line")
+
+    # Scatter points; color by compound–isomer label to distinguish in legend
+    df_pass["Label"] = df_pass["Compound"] + " " + df_pass["Isomer"]
+    for label, g in df_pass.groupby("Label"):
+        plt.scatter(g["log_obs"], g["log_pred"], s=10, alpha=0.7, label=label)
+
+    plt.xlabel("log10(observed concentration)")
+    plt.ylabel("log10(predicted concentration)")
+    plt.legend(fontsize=6, markerscale=2, loc="best")
+
+    # Overall R² and GM fold error for passing compounds (for annotation)
+    from math import isfinite
+    obs = df_pass["log_obs"].values
+    pred = df_pass["log_pred"].values
+    valid = np.isfinite(obs) & np.isfinite(pred)
+    if valid.sum() > 1:
+        slope, intercept, r_value, p_value, std_err = linregress(obs[valid], pred[valid])
+        r2_overall = float(r_value ** 2)
+
+        obs_val = df_pass["obs_value"].values[valid]
+        pred_val = df_pass["pred_value"].values[valid]
+        ratio = np.clip(pred_val / obs_val, EPS, None)
+        log_ratio = np.log10(ratio)
+        gmfe_overall = float(10.0 ** np.mean(np.abs(log_ratio)))
+
+        text = f"R² = {r2_overall:.2f}\nGMFE = {gmfe_overall:.2f}"
+        plt.text(
+            0.05,
+            0.95,
+            text,
+            transform=plt.gca().transAxes,
+            ha="left",
+            va="top",
+            fontsize=8,
+            bbox=dict(boxstyle="round", facecolor="white", alpha=0.7),
+        )
+    plt.tight_layout()
+
+    # Save under global figures folder for consistency across analyses
+    figures_dir = get_results_root() / "figures"
+    figures_dir.mkdir(parents=True, exist_ok=True)
+    out_path = figures_dir / "log_pred_vs_log_obs_passing_compounds.png"
+    plt.savefig(out_path, dpi=300)
+    plt.close()
+    logger.info(f"[GOF] Saved log_pred vs log_obs plot for passing compounds to {out_path}")
+
+
 def main() -> None:
     """Compute and save goodness-of-fit summary tables."""
     logging.basicConfig(
@@ -342,9 +424,7 @@ def main() -> None:
     obs_df = load_observations(data_path)
 
     logger.info("[GOF] Matching predictions with observations...")
-    matched_df = match_predictions_observations(
-        pred_df, obs_df, shift_day0_to_day1=True
-    )
+    matched_df = match_predictions_observations(pred_df, obs_df)
     logger.info(f"[GOF] Matched {len(matched_df)} observation–prediction pairs.")
 
     if matched_df.empty:
@@ -374,6 +454,12 @@ def main() -> None:
     compartment_summary_path = output_dir / "goodness_of_fit_summary_by_compartment.csv"
     compartment_summary_df.to_csv(compartment_summary_path, index=False)
     logger.info(f"[GOF] Saved per-compartment summary to {compartment_summary_path}")
+
+    # Optional: log10(predicted) vs log10(observed) plot for passing compounds
+    try:
+        plot_log_pred_vs_obs_for_passing(log_df, summary_df, output_dir=output_dir)
+    except Exception as e:
+        logger.warning(f"[GOF] Failed to create log_pred vs log_obs plot: {e}")
 
 
 if __name__ == "__main__":

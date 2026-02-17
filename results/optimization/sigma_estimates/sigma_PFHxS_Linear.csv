@@ -1,4 +1,5 @@
 Matrix,Sigma,Compound,Isomer
+<<<<<<< HEAD
 spleen,0.34057617810589813,PFHxS,Linear
 liver,0.35945208107756044,PFHxS,Linear
 rest,0.4,PFHxS,Linear
@@ -13,3 +14,19 @@ feces,0.5541553294539356,PFHxS,Linear
 urine,0.060923215215319224,PFHxS,Linear
 muscle,0.6193111876529891,PFHxS,Linear
 milk,0.5114554115255686,PFHxS,Linear
+=======
+milk,0.49045945007128466,PFHxS,Linear
+kidney,0.5,PFHxS,Linear
+liver,0.5,PFHxS,Linear
+brain,0.5,PFHxS,Linear
+heart,0.5,PFHxS,Linear
+muscle,0.5,PFHxS,Linear
+feces,0.5,PFHxS,Linear
+rest,0.4,PFHxS,Linear
+urine,0.07286728914578852,PFHxS,Linear
+lung,0.5,PFHxS,Linear
+plasma,0.5291110332930652,PFHxS,Linear
+stomach,0.4,PFHxS,Linear
+intestine,0.4,PFHxS,Linear
+spleen,0.5,PFHxS,Linear
+>>>>>>> 46da790ecb1d303a2c468b6f2cb8dbf77161eda7

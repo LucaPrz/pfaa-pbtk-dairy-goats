@@ -175,12 +175,13 @@ def coverage_by_compartment(df: pd.DataFrame) -> pd.DataFrame:
 
 def decomposition_summary(matched_df: pd.DataFrame, eps: float = 1e-9) -> pd.DataFrame:
     """
-    Summarise interval widths (in log-space) and Sigma/Animal_Variation where available.
-    One row per compound-isomer-compartment (or aggregate) with:
-      - mean log-width per CI level, and
-      - approximate variance components in log10-space:
-          Var_param, Var_animal, Var_obs, Var_total,
-        assuming approximately normal log10 distributions and central 95% CIs.
+    Summarise:
+      - interval widths (in log-space), and
+      - exact variance components in log-space where available
+        (Var_param_log, Var_animal_log, Var_obs_log, Var_total_log from MC outputs),
+      together with Sigma/Animal_Variation where available.
+
+    One row per compound–isomer–compartment.
     """
     df = matched_df.copy()
     rows: List[Dict[str, object]] = []
@@ -194,10 +195,6 @@ def decomposition_summary(matched_df: pd.DataFrame, eps: float = 1e-9) -> pd.Dat
             continue
         df[f"LogWidth_{level}"] = _log_width(df[lo_col], df[hi_col], eps=eps)
 
-    agg_cols = [c for c in df.columns if c.startswith("LogWidth_")]
-    if not agg_cols:
-        return pd.DataFrame()
-
     group_cols = ["Compound", "Isomer", "Compartment"]
     for key, g in df.groupby(group_cols):
         comp, iso, compartment = key
@@ -208,46 +205,25 @@ def decomposition_summary(matched_df: pd.DataFrame, eps: float = 1e-9) -> pd.Dat
             "N": len(g),
         }
 
-        # Mean log-widths (base-10) per CI level
-        for c in agg_cols:
+        # Mean log-widths (base-10) per CI level (descriptive only)
+        for c in [col for col in df.columns if col.startswith("LogWidth_")]:
             level_name = c.replace("LogWidth_", "")
             row[f"Mean_LogWidth_{level_name}"] = g[c].mean()
 
-        # Approximate variance decomposition in log10-space using CI widths.
-        # For a normal log10(Y) ~ N(mu, s^2), a central 95% CI has width 2 * z * s
-        # in log10 units, with z ≈ 1.96. Thus s ≈ width / (2*z), Var = s^2.
-        z_95 = 1.96
-        denom = 2.0 * z_95
+        # Exact variance components in log-space, if present from MC predictions
+        for col in ["Var_param_log", "Var_animal_log", "Var_obs_log", "Var_total_log"]:
+            if col in g.columns:
+                row[col] = float(np.nanmean(g[col]))
 
-        width_param = row.get("Mean_LogWidth_Param_only", None)
-        width_param_animal = row.get("Mean_LogWidth_Param_plus_Animal", None)
-        width_total = row.get("Mean_LogWidth_Param_plus_Animal_plus_Obs", None)
-
-        var_param = var_param_animal = var_total = var_animal = var_obs = None
-
-        if isinstance(width_param, (float, int)) and np.isfinite(width_param):
-            s_param = width_param / denom
-            var_param = float(max(s_param ** 2, 0.0))
-            row["Var_param_log10"] = var_param
-
-        if isinstance(width_param_animal, (float, int)) and np.isfinite(width_param_animal):
-            s_param_animal = width_param_animal / denom
-            var_param_animal = float(max(s_param_animal ** 2, 0.0))
-            row["Var_param_plus_animal_log10"] = var_param_animal
-
-        if isinstance(width_total, (float, int)) and np.isfinite(width_total):
-            s_total = width_total / denom
-            var_total = float(max(s_total ** 2, 0.0))
-            row["Var_total_log10"] = var_total
-
-        # Derived components: Var_animal and Var_obs (clipped at zero)
-        if var_param is not None and var_param_animal is not None:
-            var_animal = max(var_param_animal - var_param, 0.0)
-            row["Var_animal_log10"] = var_animal
-
-        if var_param_animal is not None and var_total is not None:
-            var_obs = max(var_total - var_param_animal, 0.0)
-            row["Var_obs_log10"] = var_obs
+        # Optional fractions of total variance (only if all components present and Var_total_log > 0)
+        var_p = row.get("Var_param_log", None)
+        var_a = row.get("Var_animal_log", None)
+        var_o = row.get("Var_obs_log", None)
+        var_tot = row.get("Var_total_log", None)
+        if all(isinstance(v, (float, int)) and np.isfinite(v) for v in [var_p, var_a, var_o, var_tot]) and var_tot > 0:
+            row["Frac_param_log"] = var_p / var_tot
+            row["Frac_animal_log"] = var_a / var_tot
+            row["Frac_obs_log"] = var_o / var_tot
 
         if "Animal_Variation" in g.columns:
             row["Mean_Animal_Variation"] = g["Animal_Variation"].mean()
@@ -263,7 +239,6 @@ def run(
     data_path: Optional[Path] = None,
     predictions_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
-    shift_day0_to_day1: bool = True,
     pattern: Optional[str] = None,
 ) -> None:
     if results_root is None:
@@ -287,9 +262,7 @@ def run(
             return
 
     obs_df = load_observations(data_path)
-    matched_df = match_predictions_observations(
-        pred_df, obs_df, shift_day0_to_day1=shift_day0_to_day1
-    )
+    matched_df = match_predictions_observations(pred_df, obs_df)
 
     if matched_df.empty:
         logger.warning("[STACKED_CI] No matched observation–prediction pairs.")
@@ -349,13 +322,8 @@ def main() -> None:
         default=None,
         help="Optional: restrict to compound_isomer (e.g. PFOS_Linear) or compound.",
     )
-    parser.add_argument(
-        "--no-day0-shift",
-        action="store_true",
-        help="Do not shift day-0 observations to day-1 for matching.",
-    )
     args = parser.parse_args()
-    run(shift_day0_to_day1=not args.no_day0_shift, pattern=args.pattern)
+    run(pattern=args.pattern)
 
 
 if __name__ == "__main__":

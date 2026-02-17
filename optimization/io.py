@@ -162,10 +162,8 @@ def _load_milk_yield_by_animal(project_root: Path, max_day: int = 140) -> Dict[s
     """
     Build per‑animal daily milk‑yield time series from the raw feed table.
 
-    Day 0 has no measurement in the CSV (days run 1..max_day). It is filled with
-    the yield on day 1 so that simulation at t=0 does not divide by zero when
-    computing milk concentration; this is a reasonable stand‑in for the first
-    experimental day.
+    animal_data.csv may include Day 0 (same date as Day 1, baseline). If Day 0
+    is missing, Day 0 is filled with day 1 yield to avoid divide-by-zero at t=0.
 
     Returns
     -------
@@ -174,15 +172,18 @@ def _load_milk_yield_by_animal(project_root: Path, max_day: int = 140) -> Dict[s
         milk yield in kg/day.  Missing days (other than 0) are filled with 0.
     """
     data_root = project_root / "data"
-    feed_path = data_root / "raw" / "feed_intake_milk_yield.csv"
-    if not feed_path.exists():
-        raise FileNotFoundError(f"Feed/milk table not found: {feed_path}")
+    animal_data_path = data_root / "raw" / "animal_data.csv"
+    if not animal_data_path.exists():
+        raise FileNotFoundError(
+            f"Animal data not found: {animal_data_path}. "
+            "Run `python data/scripts/generate_animal_data_csv.py` first."
+        )
 
-    df = pd.read_csv(feed_path)
+    df = pd.read_csv(animal_data_path)
     required_cols = {"Day", "Animal", "Milk_Yield_kg_per_day"}
     missing = required_cols - set(df.columns)
     if missing:
-        raise ValueError(f"{feed_path} is missing columns: {sorted(missing)}")
+        raise ValueError(f"{animal_data_path} is missing columns: {sorted(missing)}")
 
     df = df.copy()
     df["Day"] = df["Day"].astype(int)
@@ -194,12 +195,74 @@ def _load_milk_yield_by_animal(project_root: Path, max_day: int = 140) -> Dict[s
             day = int(row["Day"])
             if 0 <= day <= max_day and pd.notna(row["Milk_Yield_kg_per_day"]):
                 series[day] = float(row["Milk_Yield_kg_per_day"])
-        # Day 0: no measurement in CSV; use day 1 yield to avoid divide-by-zero at t=0
-        if series[1] > 0:
+        # Day 0: if not in CSV or zero, use day 1 yield to avoid divide-by-zero at t=0
+        if series[0] == 0 and series[1] > 0:
             series[0] = series[1]
         milk_yield_by_animal[str(animal)] = series
 
     return milk_yield_by_animal
+
+
+def _load_body_weight_by_animal(project_root: Path, max_day: int = 140) -> Dict[str, np.ndarray]:
+    """
+    Build per‑animal daily body‑weight time series from the unified animal data.
+
+    animal_data.csv may include Day 0 (same date as Day 1, baseline). If Day 0
+    is missing, it is filled with day 1 weight so the model has a defined baseline at t=0.
+
+    Returns
+    -------
+    dict:
+        Animal → np.ndarray of shape (max_day + 1,) containing daily
+        body weight in kg. Missing days (if any) are forward‑filled from
+        the last known value.
+    """
+    data_root = project_root / "data"
+    animal_data_path = data_root / "raw" / "animal_data.csv"
+    if not animal_data_path.exists():
+        raise FileNotFoundError(
+            f"Animal data not found: {animal_data_path}. "
+            "Run `python data/scripts/generate_animal_data_csv.py` first."
+        )
+
+    df = pd.read_csv(animal_data_path)
+    required_cols = {"Day", "Animal", "Body_Weight_kg"}
+    missing = required_cols - set(df.columns)
+    if missing:
+        raise ValueError(f"{animal_data_path} is missing columns: {sorted(missing)}")
+
+    df = df.copy()
+    df["Day"] = df["Day"].astype(int)
+    body_weight_by_animal: Dict[str, np.ndarray] = {}
+
+    for animal, group in df.groupby("Animal"):
+        g = group.sort_values("Day")
+        series = np.empty(max_day + 1, dtype=float)
+        series[:] = np.nan
+
+        for _, row in g.iterrows():
+            day = int(row["Day"])
+            if 0 <= day <= max_day and pd.notna(row["Body_Weight_kg"]):
+                series[day] = float(row["Body_Weight_kg"])
+
+        # Forward‑fill missing days using last known value
+        last = np.nan
+        for d in range(1, max_day + 1):
+            if not np.isnan(series[d]):
+                last = series[d]
+            elif not np.isnan(last):
+                series[d] = last
+
+        # Day 0: use day 1 body weight if available
+        if not np.isnan(series[1]):
+            series[0] = series[1]
+        else:
+            valid = series[~np.isnan(series)]
+            series[0] = valid[0] if valid.size > 0 else np.nan
+
+        body_weight_by_animal[str(animal)] = series
+
+    return body_weight_by_animal
 
 
 def load_data(config, project_root: Optional[Path] = None):
@@ -236,15 +299,18 @@ def load_data(config, project_root: Optional[Path] = None):
     urine_volume_by_animal, feces_mass_by_animal, feces_mass_default = _load_urine_and_feces(
         project_root
     )
-    milk_yield_by_animal = _load_milk_yield_by_animal(project_root, max_day=int(config.time_vector.max()))
+    max_day = int(config.time_vector.max())
+    milk_yield_by_animal = _load_milk_yield_by_animal(project_root, max_day=max_day)
+    body_weight_by_animal = _load_body_weight_by_animal(project_root, max_day=max_day)
 
     logger.info(
         "Loaded intake and physiological data: %d intake rows, %d animals with urine volumes, "
-        "%d animals with feces mass, %d animals with milk yield series",
+        "%d animals with feces mass, %d animals with milk yield series, %d animals with body weight series",
         len(intake_df),
         len(urine_volume_by_animal),
         len(feces_mass_by_animal),
         len(milk_yield_by_animal),
+        len(body_weight_by_animal),
     )
 
     return (
@@ -253,6 +319,7 @@ def load_data(config, project_root: Optional[Path] = None):
         feces_mass_by_animal,
         milk_yield_by_animal,
         feces_mass_default,
+        body_weight_by_animal,
     )
 
 
