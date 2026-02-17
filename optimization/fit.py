@@ -22,18 +22,10 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-# Load body weight time series per animal from interpolated CSV (clean data layout)
-BODY_WEIGHTS_CSV = Path(__file__).resolve().parent.parent / "data" / "raw" / "body_weight_interpolated.csv"
-_bw_df = pd.read_csv(BODY_WEIGHTS_CSV)
-BODY_WEIGHT_SERIES: Dict[str, np.ndarray] = {
-    col: _bw_df[col].to_numpy(dtype=float)
-    for col in _bw_df.columns
-    if col.lower() != "date"
-}
-
 def build_intake_function(
     sim_config: SimulationConfig,
-    intake_df: pd.DataFrame
+    intake_df: pd.DataFrame,
+    moving_average_window: Optional[int] = None,
 ) -> Callable[[Union[float, np.ndarray]], Union[float, np.ndarray]]:
     sub = intake_df[
         (intake_df["Animal"] == sim_config.animal) &
@@ -42,14 +34,27 @@ def build_intake_function(
     ]
     if sub.empty:
         return lambda t: np.zeros_like(np.atleast_1d(t), dtype=float) if np.asarray(t).size > 1 else 0.0
-    
-    day_to_intake = dict(zip(sub["Day"].astype(int), sub["PFAS_Intake_ug_day"].astype(float)))
-    
+
+    sub = sub.sort_values("Day").drop_duplicates(subset=["Day"], keep="first")
+    days = sub["Day"].astype(int).values
+    values = sub["PFAS_Intake_ug_day"].astype(float).values
+
+    if moving_average_window is not None and moving_average_window >= 2:
+        # Center-weighted moving average over contiguous days; at edges use available points (min_periods=1)
+        max_day = int(sub["Day"].max())
+        series = pd.Series(values, index=days).reindex(np.arange(0, max_day + 1), fill_value=0.0)
+        smoothed = series.rolling(
+            window=moving_average_window, center=True, min_periods=1
+        ).mean()
+        day_to_intake = smoothed.to_dict()
+    else:
+        day_to_intake = dict(zip(days, values))
+
     def intake_func(t: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
         t_arr = np.atleast_1d(t)
         out = np.array([day_to_intake.get(int(day), 0.0) for day in t_arr])
         return out if t_arr.size > 1 else float(out[0])
-    
+
     return intake_func
 
 def simulate_model(
@@ -80,11 +85,19 @@ def simulate_model(
     
     all_params = params_mod.build_parameters(config=sim_config.to_dict(), fit_params=fit_params_dict)
     
-    # Build intake function
-    intake_function = build_intake_function(sim_config, context.intake_df)
+    # Build intake function (optionally smoothed with moving average)
+    intake_function = build_intake_function(
+        sim_config,
+        context.intake_df,
+        moving_average_window=getattr(
+            context.config, "intake_moving_average_window", None
+        ),
+    )
 
-    # Use full body weight time series from CSV for this animal, if available
-    body_weight_array = BODY_WEIGHT_SERIES.get(sim_config.animal)
+    # Use full body weight time series from unified animal data, if available
+    body_weight_array = None
+    if sim_config.animal in context.body_weight_by_animal:
+        body_weight_array = context.body_weight_by_animal[sim_config.animal]
     
     milk_yield_array = None
     if sim_config.animal in context.milk_yield_by_animal:
@@ -215,33 +228,7 @@ def run_global_fit_for_pair(
         fit_df.to_csv(fit_csv_path, index=False)
         logger.info(f"[GLOBAL FIT] {compound} {isomer} - Saved parameters to {fit_csv_path}")
         
-        # Note: Sigma estimation is now done globally after all fits complete
-        # See estimate_and_save_pooled_sigma() in sigma_estimation.py
-        
-        # Compute identifiability diagnostics (optional, can be disabled for speed)
-        try:
-            from Analysis.identifiability import compute_identifiability_diagnostics, save_identifiability_report
-            logger.info(f"[GLOBAL FIT] {compound} {isomer} - Computing identifiability diagnostics...")
-            diagnostics = compute_identifiability_diagnostics((compound, isomer), context)
-            if diagnostics is not None:
-                # Save diagnostics
-                output_dir = context.folder_phase1.parent / "Identifiability"
-                output_dir.mkdir(parents=True, exist_ok=True)
-                output_path = output_dir / f'identifiability_{compound}_{isomer}'
-                save_identifiability_report(diagnostics, output_path)
-                logger.info(f"[GLOBAL FIT] {compound} {isomer} - Identifiability diagnostics saved")
-                
-                # Log key findings
-                cond_num = diagnostics['condition_number']
-                if cond_num > 1e6:
-                    logger.warning(f"[GLOBAL FIT] {compound} {isomer} - High condition number ({cond_num:.2e}), parameters may be poorly identifiable")
-                if diagnostics['unidentifiable_directions']:
-                    for unid in diagnostics['unidentifiable_directions']:
-                        params_str = ', '.join(unid['parameters'])
-                        logger.warning(f"[GLOBAL FIT] {compound} {isomer} - Unidentifiable combination: {params_str} (eigenvalue: {unid['eigenvalue']:.2e})")
-        except Exception as e:
-            # Don't fail the fit if identifiability diagnostics fail
-            logger.debug(f"[GLOBAL FIT] {compound} {isomer} - Identifiability diagnostics failed: {e}", exc_info=True)
+        # Note: Sigma estimation is done globally after all fits (see sigma_estimation.py)
         
         elapsed_time = time.time() - start_time
         logger.info(f"[GLOBAL FIT] {compound} {isomer} - Completed in {elapsed_time:.1f}s")

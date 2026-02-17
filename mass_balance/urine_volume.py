@@ -47,7 +47,7 @@ def _get_paths() -> Dict[str, Path]:
 
 def load_body_weight_timeseries() -> pd.DataFrame:
     """
-    Load body weight (kg) per goat and date from the interpolated body weight file.
+    Load body weight (kg) per goat and date from the unified `animal_data.csv`.
 
     Returns a long-format DataFrame with columns:
         - date (datetime64[ns], date only)
@@ -55,23 +55,24 @@ def load_body_weight_timeseries() -> pd.DataFrame:
         - BW_kg
     """
     data_root = get_data_root()
-    bw_path = data_root / "raw" / "body_weight_interpolated.csv"
-    bw = pd.read_csv(bw_path)
+    animal_data_path = data_root / "raw" / "animal_data.csv"
+    if not animal_data_path.exists():
+        raise FileNotFoundError(
+            f"Animal data not found: {animal_data_path}. "
+            "Run `python data/scripts/generate_animal_data_csv.py` first."
+        )
 
-    # Parse date column and normalise to date only
-    bw["date"] = pd.to_datetime(bw["date"]).dt.normalize()
+    df = pd.read_csv(animal_data_path)
+    required_cols = {"Animal", "Date", "Body_Weight_kg"}
+    missing = required_cols - set(df.columns)
+    if missing:
+        raise ValueError(f"{animal_data_path} is missing columns: {sorted(missing)}")
 
-    # All columns except 'date' are assumed to be animal IDs (E2, E3, E4, ...)
-    value_cols = [c for c in bw.columns if c.lower() != "date"]
+    df = df.copy()
+    df["date"] = pd.to_datetime(df["Date"]).dt.normalize()
+    df = df.rename(columns={"Body_Weight_kg": "BW_kg"})
 
-    # Wide (date, E2, E3, E4, ...) -> long (date, Animal, BW_kg)
-    bw_long = bw.melt(
-        id_vars="date",
-        value_vars=value_cols,
-        var_name="Animal",
-        value_name="BW_kg",
-    )
-
+    bw_long = df[["date", "Animal", "BW_kg"]]
     return bw_long
 
 

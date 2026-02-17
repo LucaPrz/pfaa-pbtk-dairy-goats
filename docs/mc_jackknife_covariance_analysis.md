@@ -70,3 +70,34 @@ If you **always** have three animals, you will **always** have 3 jackknife sampl
 - **Diagonal:** Prediction intervals reflect **marginal uncertainty for all 5 parameters**. Intervals can be wider or different in shape (e.g. more “box-like” in parameter space), but they do not rely on spurious correlations. With only 3 animals we cannot estimate a meaningful 5×5 correlation matrix anyway, so diagonal is the defensible choice.
 
 **Bottom line:** With 3 animals, the full jackknife covariance does **not** add valid information over the diagonal; it only adds numerical issues and misleading ±1 correlations. Using diagonal is the right choice and is what the code does when `n_jackknife ≤ ndim`.
+
+---
+
+## Why identifiability can “appear” or worsen after a pipeline change
+
+When the data pipeline or model is updated (e.g. unified `animal_data.csv`, body weight from context, milk concentration formula fix), the **global-fit optimum can move** to a different region of parameter space. That can make **jackknife (LOAO) spread** look much larger “now” than “before”, even though the number of animals (3) and the method are unchanged.
+
+**Observed pattern (PFOS Linear):**
+
+| Run (pipeline) | Intake rows | Body weight | Phase 1 k_a (approx) | Phase 1 k_ehc (approx) | Jackknife std (log10) range |
+|----------------|-------------|-------------|------------------------|-------------------------|-----------------------------|
+| 14:52 (older)   | 16 920      | from CSV    | ~0.20                  | ~0.19                   | **0.05–0.09** (tight)       |
+| 17:25 (current)| 17 766      | from context| ~79                    | ~17                     | **0.06–1.48** (very wide)  |
+
+So “before” you had **small jackknife stds** and a narrow param-only CI; “now” you have **large jackknife stds** and a wide param-only CI.
+
+**Why this happens:**
+
+1. **Different optimum**  
+   The new pipeline (correct intake, correct milk formula, unified physiology) finds a **different best-fit point**: e.g. higher k_a and k_ehc. So you are no longer in the same “corner” of parameter space as in the old run.
+
+2. **Flatter likelihood in the new region**  
+   In the **new** optimum region, the likelihood can be **flatter**: several very different parameter sets (e.g. high k_a + high k_ehc vs lower k_a + lower k_ehc) give similar fits. With only 3 animals, leave-one-animal-out then gives LOAO estimates that differ a lot (e.g. k_a 84 vs 850), so **jackknife stds in log10 become large** → wide param-only CI.
+
+3. **Old pipeline may have “pinned” the fit**  
+   The old setup (e.g. different intake source, or the milk concentration bug) can have put the optimum in a region where the curvature was **higher** (sharper peak), so the three LOAO fits stayed close and jackknife stds were small. So “before” you had **better-looking identifiability** partly because the fit was in a different (and possibly wrong) part of parameter space, not because the model was better identified in an absolute sense.
+
+4. **Correlated parameters**  
+   Identifiability diagnostics (e.g. `identifiability_PFOS_Linear.txt`) show strong correlations (e.g. k_a vs k_renal ≈ −0.86, k_elim vs k_feces ≈ −0.82). Those **trade-offs** mean that when one animal is left out, the optimizer can compensate with a different combination of parameters; with n = 3 that shows up as large LOAO variation and hence large jackknife stds.
+
+**Takeaway:** The identifiability issue is **not new** in principle; with 3 animals and 5 (or more) correlated parameters it is **structurally limited**. What changed is that the **corrected model and data** moved the optimum to a region where this limit is **more visible** (wider jackknife spread and param-only CI). The optional **jackknife std cap** in config (`mc_jackknife_std_cap_log10`) keeps the param-only band interpretable for reporting without changing the underlying identifiability; use `None` if you want to report the uncapped (honest) uncertainty.

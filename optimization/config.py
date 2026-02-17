@@ -75,7 +75,10 @@ class ModelConfig:
         "feces": 0.5, "urine": 0.5
     })
     use_dynamic_parameters: bool = True  # Enable dynamic parameter selection based on data signals
-    use_log_rmse_for_fitting: bool = True  # If True, fit with log RMSE then estimate sigma; if False, use censored likelihood directly
+    use_log_rmse_for_fitting: bool = False  # If True, fit with log RMSE then estimate sigma; if False, use censored likelihood directly
+
+    # Smooth daily intake with a moving average (number of days). None = no smoothing.
+    intake_moving_average_window: Optional[int] = 10
 
     # Default param names for simple model (no mammary parameter; E_milk is fixed from data)
     _param_names_simple: List[str] = field(default_factory=lambda: ["k_ehc", "k_elim", "k_renal", "k_a", "k_feces"])
@@ -189,9 +192,9 @@ class ModelConfig:
             return {}
     
     def get_log_bounds(self, param_names: List[str]) -> List[Tuple[float, float]]:
-        # Bounds per parameter in log10 space
-        # Range: -3.0 to 3.0 corresponds to linear values from 0.001 to 1000
-        return [(-3.0, 3.0)] * len(param_names)
+        # Bounds per parameter in log10 space (linear 0.001 to ~316)
+        global_low, global_high = -3.0, 2.5
+        return [(global_low, global_high) for _ in param_names]
     
     de_config: Dict = field(default_factory=lambda: {
         'strategy': 'best1bin',
@@ -225,18 +228,6 @@ class SimulationConfig:
             'animal': self.animal
         }
 
-class TimeHandler:
-    """
-    Handles mapping between observation times and model prediction indices.
-
-    Assumption:
-    - Model state at index 0 represents pre-exposure baseline.
-    - Observations at Day 0 correspond to model Day 1.
-    """   
-    @staticmethod
-    def observation_to_prediction_time(obs_time: float) -> int:
-        return 1 if obs_time == 0 else int(obs_time)
-
 # Forward declaration to avoid circular import
 # Will be properly imported in context.py or run.py
 from typing import TYPE_CHECKING
@@ -252,6 +243,7 @@ class FittingContext:
     feces_mass_by_animal: Dict[str, float]
     feces_mass_default: float
     milk_yield_by_animal: Dict[str, np.ndarray]
+    body_weight_by_animal: Dict[str, np.ndarray]
     folder_phase1: Path
     folder_phase2: Path
     folder_phase3: Path
@@ -278,7 +270,14 @@ def setup_context(project_root: Optional[Path] = None, use_simple_model: bool = 
     
     # Load all data
     logger.info("Loading data files...")
-    intake_df, urine_volume_by_animal, feces_mass_by_animal, milk_yield_by_animal, feces_mass_default = load_data(
+    (
+        intake_df,
+        urine_volume_by_animal,
+        feces_mass_by_animal,
+        milk_yield_by_animal,
+        feces_mass_default,
+        body_weight_by_animal,
+    ) = load_data(
         config, project_root=project_root
     )
     
@@ -311,6 +310,7 @@ def setup_context(project_root: Optional[Path] = None, use_simple_model: bool = 
         feces_mass_by_animal=feces_mass_by_animal,
         feces_mass_default=feces_mass_default,
         milk_yield_by_animal=milk_yield_by_animal,
+        body_weight_by_animal=body_weight_by_animal,
         folder_phase1=folder_phase1,
         folder_phase2=folder_phase2,
         folder_phase3=folder_phase3

@@ -1,0 +1,46 @@
+2026-02-16 19:33:20,134 - INFO - Loading data files...
+2026-02-16 19:33:20,162 - INFO - Loaded intake and physiological data: 17766 intake rows, 3 animals with urine volumes, 3 animals with feces mass, 3 animals with milk yield series, 3 animals with body weight series
+2026-02-16 19:33:20,162 - INFO - Determining compound-isomer pairs: hay concentration not 0 and at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ.
+2026-02-16 19:33:20,175 - INFO -   PFBA Linear: matrices above LOQ: Feces, Milk, Plasma, Urine
+2026-02-16 19:33:20,177 - INFO -   PFPeA Linear: matrices above LOQ: Feces, Milk, Muscle, Urine
+2026-02-16 19:33:20,180 - INFO -   PFHxA Linear: matrices above LOQ: Urine
+2026-02-16 19:33:20,182 - INFO -   PFHpA Linear: matrices above LOQ: Urine
+2026-02-16 19:33:20,185 - INFO -   PFOA Linear: matrices above LOQ: Brain, Feces, Milk, Plasma, Urine
+2026-02-16 19:33:20,187 - INFO -   PFOA Branched: matrices above LOQ: Milk, Plasma, Urine
+2026-02-16 19:33:20,189 - INFO -   PFDA Linear: matrices above LOQ: Liver, Milk, Plasma
+2026-02-16 19:33:20,192 - INFO -   PFUnDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 19:33:20,194 - INFO -   PFDoDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 19:33:20,197 - INFO -   PFTrDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 19:33:20,199 - INFO -   PFTeDA Linear: matrices above LOQ: Plasma
+2026-02-16 19:33:20,202 - INFO -   PFHxS Linear: matrices above LOQ: Milk, Plasma, Urine
+2026-02-16 19:33:20,204 - INFO -   PFHpS Linear: matrices above LOQ: Milk, Plasma
+2026-02-16 19:33:20,207 - INFO -   PFOS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-16 19:33:20,210 - INFO -   PFOS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-16 19:33:20,213 - INFO -   PFNS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-16 19:33:20,215 - INFO -   PFNS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-16 19:33:20,218 - INFO -   PFDS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-16 19:33:20,220 - INFO -   PFDS Branched: matrices above LOQ: Feces, Heart, Kidney, Liver, Lung, Milk, Plasma, Spleen
+2026-02-16 19:33:20,223 - INFO -   PFUnDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-16 19:33:20,225 - INFO -   PFUnDS Branched: matrices above LOQ: Feces, Liver, Milk, Plasma
+2026-02-16 19:33:20,228 - INFO -   PFDoDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-16 19:33:20,230 - INFO -   PFDoDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-16 19:33:20,233 - INFO -   PFTrDS Linear: matrices above LOQ: Brain, Feces, Milk
+2026-02-16 19:33:20,235 - INFO -   PFTrDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-16 19:33:20,239 - INFO -   PFNA Linear: matrices above LOQ: Milk
+2026-02-16 19:33:20,246 - INFO -   PFDA Branched: matrices above LOQ: Milk
+2026-02-16 19:33:20,248 - INFO -   PFUnDA Branched: matrices above LOQ: Milk
+2026-02-16 19:33:20,250 - INFO -   PFDoDA Branched: matrices above LOQ: Milk
+2026-02-16 19:33:20,252 - INFO -   PFTrDA Branched: matrices above LOQ: Milk
+2026-02-16 19:33:20,254 - INFO -   PFTeDA Branched: matrices above LOQ: Milk
+2026-02-16 19:33:20,256 - INFO - Found 19 compounds (31 compound-isomer pairs) meeting criteria
+2026-02-16 19:33:20,261 - ERROR - Failed to setup context: FittingContext.__init__() missing 1 required positional argument: 'body_weight_by_animal'
+Traceback (most recent call last):
+  File "/Users/lucaprzygoda/Desktop/pfaa-pbtk-dairy-goats/optimization/run.py", line 129, in main
+    context = setup_context(project_root=project_root, use_simple_model=args.simple_model)
+  File "/Users/lucaprzygoda/Desktop/pfaa-pbtk-dairy-goats/optimization/config.py", line 317, in setup_context
+    return FittingContext(
+        config=config,
+    ...<8 lines>...
+        folder_phase3=folder_phase3
+    )
+TypeError: FittingContext.__init__() missing 1 required positional argument: 'body_weight_by_animal'
