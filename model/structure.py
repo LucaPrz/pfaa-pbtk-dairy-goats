@@ -165,7 +165,7 @@ class PBTKStructure:
             + Q["Q_rest"]
             + Q["Q_lung"]
         )
-        T[ci["plasma"], ci["plasma"]] += -total_flow / V["V_plasma"] - AE["k_elim"]
+        T[ci["plasma"], ci["plasma"]] += -total_flow / V["V_plasma"] - AE["k_elim"] - AE.get("k_urine", 0.0)
 
         if milk_yield > 0:
             V_plasma = V.get("V_plasma", 0.0)
@@ -185,7 +185,7 @@ class PBTKStructure:
     ) -> None:
         T[ci["kidney"], ci["kidney"]] -= Q["Q_kidney"] / (
             PC["Kidney"] * V["V_kidney"]
-        ) + AE["k_renal"]
+        )
         T[ci["kidney"], ci["plasma"]] += Q["Q_kidney"] / V["V_plasma"]
         T[ci["plasma"], ci["kidney"]] += Q["Q_kidney"] / (
             PC["Kidney"] * V["V_kidney"]

@@ -85,6 +85,9 @@ def run_monte_carlo_for_pair(
             return None
         
         mean_df = pd.read_csv(mean_path)
+        # Backward compatibility: old fit files use k_renal; model now uses k_urine
+        mean_df = mean_df.copy()
+        mean_df.loc[mean_df["Parameter"] == "k_renal", "Parameter"] = "k_urine"
         if not all(name in mean_df['Parameter'].values for name in context.config.param_names):
             logger.warning(f"[MONTE CARLO] Phase 1 file missing required parameters. Skipping {compound} {isomer}.")
             return None
@@ -103,6 +106,9 @@ def run_monte_carlo_for_pair(
             return None
         
         jackknife_df = pd.read_csv(jackknife_path)
+        # Backward compatibility: old jackknife files use k_renal column; model now uses k_urine
+        if "k_renal" in jackknife_df.columns and "k_urine" not in jackknife_df.columns:
+            jackknife_df = jackknife_df.rename(columns={"k_renal": "k_urine"})
         if not all(name in jackknife_df.columns for name in context.config.param_names):
             logger.warning(f"[MONTE CARLO] Jackknife file missing required parameters. Skipping {compound} {isomer}.")
             return None

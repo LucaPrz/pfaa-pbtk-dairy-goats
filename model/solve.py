@@ -189,10 +189,10 @@ class PBTKSolver(PBTKStructure):
                         k_milk_eff = (P_milk * milk_yield_now) / V_plasma
                         milk_total += k_milk_eff * plasma_integral
 
-            k_renal_net = AE.get("k_renal", 0.0)
-            if k_renal_net > 0:
-                pi_kidney = self.projection_vector("kidney")
-                urine_total += k_renal_net * float(pi_kidney @ integral)
+            k_urine = AE.get("k_urine", 0.0)
+            if k_urine > 0:
+                pi_plasma = self.projection_vector("plasma")
+                urine_total += k_urine * float(pi_plasma @ integral)
 
             pi_intestine = self.projection_vector("intestine")
             feces_total += AE["k_feces"] * float(pi_intestine @ integral)

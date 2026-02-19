@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 # Mammary compartment with fixed plasma–milk partition (no free k_milk)
-ALL_PARAMETERS = ["k_ehc", "k_elim", "k_renal", "k_a", "k_feces"]
+ALL_PARAMETERS = ["k_ehc", "k_elim", "k_urine", "k_a", "k_feces"]
 
 # Core parameters that are always estimated.
 REQUIRED_PARAMETERS = ["k_elim", "k_a"]
@@ -18,7 +18,7 @@ SIGNAL_DEPENDENT_PARAMETERS = {
     # Milk route is governed by fixed plasma–milk partition and milk yield (no free k_milk).
     "k_ehc": "feces_depuration_signal",
     "k_feces": "feces_signal",
-    "k_renal": "urine_signal",
+    "k_urine": "urine_signal",
 }
 
 def _check_matrix_signal(pair_data: pd.DataFrame, matrix_name: str, loq: float) -> bool:
@@ -175,9 +175,9 @@ def get_parameter_config(
     else:
         fixed["k_ehc"] = 0.0
     if signals.get("urine_signal", False):
-        params_to_fit.append("k_renal")
+        params_to_fit.append("k_urine")
     else:
-        fixed["k_renal"] = 0.0
+        fixed["k_urine"] = 0.0
 
     seen = set()
     unique_params = []

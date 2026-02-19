@@ -36,6 +36,9 @@ def collect_residuals_for_pair(
 
         fit_df = pd.read_csv(fit_path)
         fit_params_dict = dict(zip(fit_df['Parameter'], fit_df['Value']))
+        # Backward compatibility: old fit files use k_renal; model now uses k_urine
+        if "k_renal" in fit_params_dict and "k_urine" not in fit_params_dict:
+            fit_params_dict["k_urine"] = fit_params_dict["k_renal"]
 
         # Get parameter configuration
         from optimization.fit_variables import get_parameter_config

@@ -71,7 +71,7 @@ DEFAULT_ABSORPTION_EXCRETION = {
     "k_sto": (2.53 + (1.22 * 1.0)) - ((2.61 * (1.0 ** 2)) / 6000.0),  # NI=1.0, PCO=1.0
     "k_a": 10,
     "k_feces": 0.05,
-    "k_renal": 0,
+    "k_urine": 0,
     "k_ehc": 1.69,
     "k_elim": 0,
 }
@@ -201,6 +201,9 @@ def build_parameters(config, fit_params=None) -> dict:
         for key in list(param_dict.keys()):
             if fit_params and key in fit_params:
                 param_dict[key] = fit_params[key]
+    # Backward compatibility: old fit files use k_renal; model now uses k_urine
+    if fit_params and "k_renal" in fit_params and "k_urine" not in fit_params:
+        absorption_excretion["k_urine"] = fit_params["k_renal"]
     
     parameters = {
         "physiological": physiological_dict,

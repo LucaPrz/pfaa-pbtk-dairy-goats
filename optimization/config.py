@@ -44,7 +44,7 @@ class ModelConfig:
 
     # Default parameter names (used as fallback or for compounds not in signal data)
     # Mammary with fixed plasma–milk partition (no free k_milk)
-    param_names: List[str] = field(default_factory=lambda: ["k_ehc", "k_elim", "k_renal", "k_a", "k_feces"])
+    param_names: List[str] = field(default_factory=lambda: ["k_ehc", "k_elim", "k_urine", "k_a", "k_feces"])
     animals: List[str] = field(default_factory=lambda: ["E2", "E3", "E4"])
     compounds: Optional[List[str]] = None  # Will be determined from data if None
     fittable_pairs: Optional[List[Tuple[str, str]]] = None  # (compound, isomer) with hay > 0 and ≥1 matrix above LOQ

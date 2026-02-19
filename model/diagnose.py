@@ -81,8 +81,8 @@ class PBTKModel(PBTKSolver):
             expected_violation = 0.0
             if name == "intestine":
                 expected_violation = -AE["k_feces"]
-            elif name == "kidney":
-                expected_violation = -AE.get("k_renal", 0.0)
+            elif name == "plasma":
+                expected_violation = -(AE.get("k_elim", 0.0) + AE.get("k_urine", 0.0))
 
             is_expected = abs(sum_val - expected_violation) < self.MASS_CONSERVATION_TOLERANCE
 
