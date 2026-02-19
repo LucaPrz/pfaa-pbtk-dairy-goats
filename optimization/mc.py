@@ -13,14 +13,48 @@ from tqdm import tqdm
 if str(Path(__file__).resolve().parent.parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from optimization.config import SimulationConfig, get_matrix_module
+from optimization.config import SimulationConfig, FitConfig, get_matrix_module
 from optimization.fit import simulate_model
-from optimization.loss import predict_time_series
+from optimization.loss import predict_time_series, loss_function
 
 if TYPE_CHECKING:
     from optimization.config import FittingContext
 
 logger = logging.getLogger(__name__)
+
+
+def numerical_hessian(
+    f: Any,
+    x: np.ndarray,
+    step: Optional[np.ndarray] = None,
+) -> np.ndarray:
+    """Numerically approximate the Hessian of a scalar function at x (central differences)."""
+    x = np.asarray(x, dtype=float)
+    n = x.size
+    H = np.zeros((n, n), dtype=float)
+    if step is None:
+        step = np.full(n, 1e-2, dtype=float)
+    else:
+        step = np.asarray(step, dtype=float)
+    f_x = float(f(x))
+    for i in range(n):
+        ei = np.zeros(n, dtype=float)
+        ei[i] = step[i]
+        H[i, i] = (float(f(x + ei)) - 2.0 * f_x + float(f(x - ei))) / (step[i] ** 2)
+    for i in range(n):
+        ei = np.zeros(n, dtype=float)
+        ei[i] = step[i]
+        for j in range(i + 1, n):
+            ej = np.zeros(n, dtype=float)
+            ej[j] = step[j]
+            f_pp = float(f(x + ei + ej))
+            f_pm = float(f(x + ei - ej))
+            f_mp = float(f(x - ei + ej))
+            f_mm = float(f(x - ei - ej))
+            val = (f_pp - f_pm - f_mp + f_mm) / (4.0 * step[i] * step[j])
+            H[i, j] = val
+            H[j, i] = val
+    return H
 
 def run_monte_carlo_for_pair(
     pair: Tuple[str, str],
@@ -86,21 +120,73 @@ def run_monte_carlo_for_pair(
         # For diagnostics, compute jackknife medians/means in log10-space
         medians_log = np.median(jackknife_fits_log, axis=0)
         means_log = np.mean(jackknife_fits_log, axis=0)
-        # Diagonal covariance: marginal variance per parameter from jackknife std in log10.
-        # With 3 animals we have at most 3 jackknife samples and 5+ parameters; see
-        # docs/mc_jackknife_covariance_analysis.md.
         jackknife_stds_log = np.std(jackknife_fits_log, axis=0, ddof=1 if jackknife_fits_log.shape[0] > 1 else 0)
-        # Avoid NaN (e.g. if a param is constant) and ensure numerically safe stds
         stds_log = np.sqrt(np.maximum(jackknife_stds_log ** 2, 1e-4))
         stds_log = np.nan_to_num(stds_log, nan=0.1, posinf=1.0, neginf=0.1).astype(np.float64)
 
-        logger.info(f"[MONTE CARLO] {compound} {isomer} - Phase 1 point estimates (linear): {phase1_vals_linear}")
-        logger.info(f"[MONTE CARLO] {compound} {isomer} - Phase 1 central values (log10): {phase1_vals_log}")
-        logger.info(f"[MONTE CARLO] {compound} {isomer} - Jackknife stds (log10, diagonal): {jackknife_stds_log}")
-        logger.info(f"[MONTE CARLO] {compound} {isomer} - Generating {n_mc_samples} samples in log10-space around Phase 1 (diagonal covariance)")
+        # Prefer full covariance sampling (Hessian-based) so parameter correlations
+        # (e.g. k_ehc vs k_feces) are respected and prediction bands are not
+        # inflated by implausible parameter combinations.
+        use_full_cov = False
+        try:
+            df_pair = context.data_cache.get_pair_data(compound, isomer)
+            param_names_fit = context.config.get_param_names(compound, isomer, df_pair)
+            fixed_params = context.config.get_fixed_parameters(compound, isomer, df_pair)
+            if param_names_fit:
+                fit_config = FitConfig(compound=compound, isomer=isomer)
 
-        # Sample in log10: mean + std * Z with Z standard normal (equivalent to diagonal multivariate normal, no matmul)
-        mc_samples_log = phase1_vals_log + rng.standard_normal((n_mc_samples, ndim), dtype=np.float64) * stds_log
+                def loss_wrapper(log_fit_params: np.ndarray) -> float:
+                    return float(
+                        loss_function(
+                            log_fit_params,
+                            fit_config=fit_config,
+                            use_data=df_pair,
+                            context=context,
+                            simulate_model_func=lambda p, sim_cfg: simulate_model(
+                                p, sim_cfg, context,
+                                param_names=param_names_fit,
+                                fixed_params=fixed_params,
+                            ),
+                        )
+                    )
+
+                phase1_fit_linear = np.array(
+                    [mean_df[mean_df["Parameter"] == n]["Value"].iloc[0] for n in param_names_fit],
+                    dtype=float,
+                )
+                x0 = np.log10(np.clip(phase1_fit_linear, eps_param, None)).astype(np.float64)
+                log_bounds = context.config.get_log_bounds(param_names_fit)
+                steps = np.array([(hi - lo) * 1e-2 for (lo, hi) in log_bounds], dtype=float)
+                H = numerical_hessian(loss_wrapper, x0, step=steps)
+                ridge = 1e-6 * max(float(np.max(np.diag(H))), 1e-6)
+                cov_log = np.linalg.pinv(H + ridge * np.eye(H.shape[0]))
+                cov_log = 0.5 * (cov_log + cov_log.T)
+                evals, evecs = np.linalg.eigh(cov_log)
+                evals = np.maximum(evals, 1e-8)
+                cov_log = evecs @ np.diag(evals) @ evecs.T
+                L = np.linalg.cholesky(cov_log)
+                n_fit = len(param_names_fit)
+                Z = rng.standard_normal((n_mc_samples, n_fit), dtype=np.float64)
+                fitted_samples_log = x0 + (Z @ L.T)
+                name_to_idx = {n: i for i, n in enumerate(context.config.param_names)}
+                fitted_indices = np.array([name_to_idx[n] for n in param_names_fit])
+                mc_samples_log = np.tile(phase1_vals_log, (n_mc_samples, 1))
+                mc_samples_log[:, fitted_indices] = fitted_samples_log
+                use_full_cov = True
+                logger.info(f"[MONTE CARLO] {compound} {isomer} - Using Hessian full covariance (log10)")
+        except Exception as e:
+            logger.warning(f"[MONTE CARLO] {compound} {isomer} - Hessian covariance failed, using diagonal: {e}")
+
+        if not use_full_cov:
+            logger.info(f"[MONTE CARLO] {compound} {isomer} - Phase 1 point estimates (linear): {phase1_vals_linear}")
+            logger.info(f"[MONTE CARLO] {compound} {isomer} - Phase 1 central values (log10): {phase1_vals_log}")
+            logger.info(f"[MONTE CARLO] {compound} {isomer} - Jackknife stds (log10, diagonal): {jackknife_stds_log}")
+            logger.info(f"[MONTE CARLO] {compound} {isomer} - Generating {n_mc_samples} samples in log10-space (diagonal covariance)")
+            mc_samples_log = phase1_vals_log + rng.standard_normal((n_mc_samples, ndim), dtype=np.float64) * stds_log
+        else:
+            logger.info(f"[MONTE CARLO] {compound} {isomer} - Phase 1 point estimates (linear): {phase1_vals_linear}")
+            logger.info(f"[MONTE CARLO] {compound} {isomer} - Phase 1 central values (log10): {phase1_vals_log}")
+            logger.info(f"[MONTE CARLO] {compound} {isomer} - Generating {n_mc_samples} samples in log10-space (full covariance)")
         
         # Transform samples back to linear space (vectorized)
         mc_samples = 10.0 ** mc_samples_log

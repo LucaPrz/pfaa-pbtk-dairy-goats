@@ -3,12 +3,11 @@ from typing import List, Dict, Tuple, Optional, Any
 import pandas as pd
 import numpy as np
 
-# Full model: mammary compartment with fixed plasma–milk partition (no free k_milk)
+# Mammary compartment with fixed plasma–milk partition (no free k_milk)
 ALL_PARAMETERS = ["k_ehc", "k_elim", "k_renal", "k_a", "k_feces"]
-# Simple model: perfusion-limited milk from plasma, E_milk
-ALL_PARAMETERS_SIMPLE = ["E_milk", "k_ehc", "k_elim", "k_renal", "k_a", "k_feces"]
 
-REQUIRED_PARAMETERS = ["k_a", "k_elim"]  # Same for both models
+# Core parameters that are always estimated.
+REQUIRED_PARAMETERS = ["k_elim", "k_a"]
 
 FIT_RELEVANT_MATRICES = [
     "Brain", "Feces", "Heart", "Kidney", "Liver", "Lung",
@@ -16,14 +15,7 @@ FIT_RELEVANT_MATRICES = [
 ]
 
 SIGNAL_DEPENDENT_PARAMETERS = {
-    # Milk route is governed by fixed plasma–milk partition and milk yield,
-    # so there is no free k_milk parameter in the full model anymore.
-    "k_ehc": "feces_depuration_signal",
-    "k_feces": "feces_signal",
-    "k_renal": "urine_signal",
-}
-SIGNAL_DEPENDENT_PARAMETERS_SIMPLE = {
-    "E_milk": "milk_signal",
+    # Milk route is governed by fixed plasma–milk partition and milk yield (no free k_milk).
     "k_ehc": "feces_depuration_signal",
     "k_feces": "feces_signal",
     "k_renal": "urine_signal",
@@ -171,9 +163,8 @@ def get_parameter_config(
     if not any_signal:
         return [], {}
 
-    use_simple = getattr(config, "use_simple_model", False) if config is not None else False
     params_to_fit = list(REQUIRED_PARAMETERS)
-    fixed = {}
+    fixed: Dict[str, float] = {}
 
     if signals.get("feces_signal", False):
         params_to_fit.append("k_feces")

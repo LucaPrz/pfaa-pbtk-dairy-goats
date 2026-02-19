@@ -1,0 +1,156 @@
+2026-02-18 18:06:56,930 - INFO - Loading data files...
+2026-02-18 18:06:56,949 - INFO - Loaded intake and physiological data: 17766 intake rows, 3 animals with urine volumes, 3 animals with feces mass, 3 animals with milk yield series, 3 animals with body weight series
+2026-02-18 18:06:56,949 - INFO - Determining compound-isomer pairs: hay concentration not 0 and at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ.
+2026-02-18 18:06:56,958 - INFO -   PFBA Linear: matrices above LOQ: Feces, Milk, Plasma, Urine
+2026-02-18 18:06:56,961 - INFO -   PFPeA Linear: matrices above LOQ: Feces, Milk, Muscle, Urine
+2026-02-18 18:06:56,963 - INFO -   PFHxA Linear: matrices above LOQ: Urine
+2026-02-18 18:06:56,966 - INFO -   PFHpA Linear: matrices above LOQ: Urine
+2026-02-18 18:06:56,968 - INFO -   PFOA Linear: matrices above LOQ: Brain, Feces, Milk, Plasma, Urine
+2026-02-18 18:06:56,971 - INFO -   PFOA Branched: matrices above LOQ: Milk, Plasma, Urine
+2026-02-18 18:06:56,974 - INFO -   PFDA Linear: matrices above LOQ: Liver, Milk, Plasma
+2026-02-18 18:06:56,977 - INFO -   PFUnDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-18 18:06:56,979 - INFO -   PFDoDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-18 18:06:56,982 - INFO -   PFTrDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-18 18:06:56,984 - INFO -   PFTeDA Linear: matrices above LOQ: Plasma
+2026-02-18 18:06:56,987 - INFO -   PFHxS Linear: matrices above LOQ: Milk, Plasma, Urine
+2026-02-18 18:06:56,989 - INFO -   PFHpS Linear: matrices above LOQ: Milk, Plasma
+2026-02-18 18:06:56,992 - INFO -   PFOS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-18 18:06:56,994 - INFO -   PFOS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-18 18:06:56,997 - INFO -   PFNS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-18 18:06:56,999 - INFO -   PFNS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-18 18:06:57,002 - INFO -   PFDS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-18 18:06:57,004 - INFO -   PFDS Branched: matrices above LOQ: Feces, Heart, Kidney, Liver, Lung, Milk, Plasma, Spleen
+2026-02-18 18:06:57,006 - INFO -   PFUnDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-18 18:06:57,009 - INFO -   PFUnDS Branched: matrices above LOQ: Feces, Liver, Milk, Plasma
+2026-02-18 18:06:57,011 - INFO -   PFDoDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-18 18:06:57,013 - INFO -   PFDoDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-18 18:06:57,016 - INFO -   PFTrDS Linear: matrices above LOQ: Brain, Feces, Milk
+2026-02-18 18:06:57,018 - INFO -   PFTrDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-18 18:06:57,021 - INFO -   PFNA Linear: matrices above LOQ: Milk
+2026-02-18 18:06:57,029 - INFO -   PFDA Branched: matrices above LOQ: Milk
+2026-02-18 18:06:57,031 - INFO -   PFUnDA Branched: matrices above LOQ: Milk
+2026-02-18 18:06:57,033 - INFO -   PFDoDA Branched: matrices above LOQ: Milk
+2026-02-18 18:06:57,034 - INFO -   PFTrDA Branched: matrices above LOQ: Milk
+2026-02-18 18:06:57,036 - INFO -   PFTeDA Branched: matrices above LOQ: Milk
+2026-02-18 18:06:57,038 - INFO - Found 19 compounds (31 compound-isomer pairs) meeting criteria
+2026-02-18 18:06:57,043 - INFO - 
+All compound-isomer pairs to process (31 total):
+2026-02-18 18:06:57,043 - INFO -   PFBA         | Linear    
+2026-02-18 18:06:57,043 - INFO -   PFDA         | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFDA         | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFDS         | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFDS         | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFDoDA       | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFDoDA       | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFDoDS       | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFDoDS       | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFHpA        | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFHpS        | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFHxA        | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFHxS        | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFNA         | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFNS         | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFNS         | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFOA         | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFOA         | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFOS         | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFOS         | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFPeA        | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFTeDA       | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFTeDA       | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFTrDA       | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFTrDA       | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFTrDS       | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFTrDS       | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFUnDA       | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFUnDA       | Linear    
+2026-02-18 18:06:57,044 - INFO -   PFUnDS       | Branched  
+2026-02-18 18:06:57,044 - INFO -   PFUnDS       | Linear    
+2026-02-18 18:06:57,044 - INFO - 
+2026-02-18 18:06:57,044 - INFO - === STARTING FULL MONTE CARLO RUN ===
+2026-02-18 18:06:57,044 - INFO - Total compounds to process: 1
+2026-02-18 18:06:57,061 - INFO - === PHASE 1: Running global mean fits (two-stage: log-RMSE then censored likelihood) ===
+2026-02-18 18:06:57,061 - INFO - [PHASE 1 / Stage 1] Log-RMSE global fits (no sigma needed)
+2026-02-18 18:06:57,099 - INFO - [GLOBAL FIT] Starting PFOS Linear
+2026-02-18 18:06:57,103 - INFO - [GLOBAL FIT] PFOS Linear - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-02-18 18:06:57,105 - INFO - [GLOBAL FIT] PFOS Linear - Fitting parameters: ['k_elim', 'k_feces', 'k_ehc', 'k_renal']
+2026-02-18 18:06:57,106 - INFO - [GLOBAL FIT] PFOS Linear - Fixed parameters: {'k_a': 100.0}
+2026-02-18 18:08:24,479 - INFO - [GLOBAL FIT] PFOS Linear - Success: loss=1.88, iterations=32
+2026-02-18 18:08:24,480 - INFO - [GLOBAL FIT] PFOS Linear - Parameters: k_elim=0.031, k_feces=0.325, k_ehc=8.132, k_renal=0.054, k_a=100.000
+2026-02-18 18:08:24,482 - INFO - [GLOBAL FIT] PFOS Linear - Saved parameters to /Users/lucaprzygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOS_Linear.csv
+2026-02-18 18:08:24,482 - INFO - [GLOBAL FIT] PFOS Linear - Completed in 87.4s
+2026-02-18 18:08:24,483 - INFO - === Estimating pooled sigma from Stage 1 fits ===
+2026-02-18 18:08:24,484 - INFO - [SIGMA EST] Estimating pooled sigma from 1 compound-isomer pairs (pooled residuals per matrix)...
+2026-02-18 18:08:24,648 - INFO - [SIGMA EST] spleen: pooled σ=0.178 (from 3 pooled residuals)
+2026-02-18 18:08:24,648 - INFO - [SIGMA EST] liver: pooled σ=0.200 (from 3 pooled residuals)
+2026-02-18 18:08:24,648 - INFO - [SIGMA EST] heart: pooled σ=0.138 (from 3 pooled residuals)
+2026-02-18 18:08:24,648 - INFO - [SIGMA EST] brain: pooled σ=0.203 (from 3 pooled residuals)
+2026-02-18 18:08:24,649 - INFO - [SIGMA EST] urine: pooled σ=0.349 (from 6 pooled residuals)
+2026-02-18 18:08:24,649 - INFO - [SIGMA EST] kidney: pooled σ=0.548 (from 3 pooled residuals)
+2026-02-18 18:08:24,649 - INFO - [SIGMA EST] feces: pooled σ=0.387 (from 13 pooled residuals)
+2026-02-18 18:08:24,649 - INFO - [SIGMA EST] milk: pooled σ=0.347 (from 27 pooled residuals)
+2026-02-18 18:08:24,649 - INFO - [SIGMA EST] muscle: pooled σ=0.271 (from 3 pooled residuals)
+2026-02-18 18:08:24,649 - INFO - [SIGMA EST] lung: pooled σ=0.279 (from 3 pooled residuals)
+2026-02-18 18:08:24,649 - INFO - [SIGMA EST] plasma: pooled σ=0.410 (from 24 pooled residuals)
+2026-02-18 18:08:24,650 - INFO - [SIGMA EST] Saved pooled sigma estimates to /Users/lucaprzygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/sigma_estimates/sigma_pooled.csv
+2026-02-18 18:08:24,697 - INFO - Pooled sigma estimates computed successfully
+2026-02-18 18:08:24,697 - INFO -   spleen: σ=0.178
+2026-02-18 18:08:24,697 - INFO -   rest: σ=0.400
+2026-02-18 18:08:24,697 - INFO -   liver: σ=0.200
+2026-02-18 18:08:24,697 - INFO -   heart: σ=0.138
+2026-02-18 18:08:24,697 - INFO -   brain: σ=0.203
+2026-02-18 18:08:24,697 - INFO -   urine: σ=0.349
+2026-02-18 18:08:24,697 - INFO -   kidney: σ=0.548
+2026-02-18 18:08:24,697 - INFO -   stomach: σ=0.400
+2026-02-18 18:08:24,697 - INFO -   feces: σ=0.387
+2026-02-18 18:08:24,697 - INFO -   milk: σ=0.347
+2026-02-18 18:08:24,697 - INFO -   intestine: σ=0.400
+2026-02-18 18:08:24,697 - INFO -   muscle: σ=0.271
+2026-02-18 18:08:24,697 - INFO -   lung: σ=0.279
+2026-02-18 18:08:24,697 - INFO -   plasma: σ=0.410
+2026-02-18 18:08:24,697 - INFO - [PHASE 1 / Stage 2] Censored-likelihood (Tobit) global fits using estimated sigma
+2026-02-18 18:08:24,730 - INFO - [GLOBAL FIT] Starting PFOS Linear
+2026-02-18 18:08:24,733 - INFO - [GLOBAL FIT] PFOS Linear - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-02-18 18:08:24,735 - INFO - [GLOBAL FIT] PFOS Linear - Fitting parameters: ['k_elim', 'k_feces', 'k_ehc', 'k_renal']
+2026-02-18 18:08:24,735 - INFO - [GLOBAL FIT] PFOS Linear - Fixed parameters: {'k_a': 100.0}
+2026-02-18 18:09:31,607 - INFO - [GLOBAL FIT] PFOS Linear - Success: loss=238.44, iterations=22
+2026-02-18 18:09:31,607 - INFO - [GLOBAL FIT] PFOS Linear - Parameters: k_elim=0.026, k_feces=0.467, k_ehc=5.615, k_renal=0.060, k_a=100.000
+2026-02-18 18:09:31,608 - INFO - [GLOBAL FIT] PFOS Linear - Saved parameters to /Users/lucaprzygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOS_Linear.csv
+2026-02-18 18:09:31,608 - INFO - [GLOBAL FIT] PFOS Linear - Completed in 66.9s
+2026-02-18 18:09:31,609 - INFO - === PHASE 1/3 COMPLETED ===
+2026-02-18 18:09:31,609 - INFO - Global mean fits (two-stage): 1/1 successful in 154.5s
+2026-02-18 18:09:31,609 - INFO - === PHASE 2: Running jackknife fits ===
+2026-02-18 18:09:31,642 - INFO - [JACKKNIFE] Starting PFOS Linear
+2026-02-18 18:09:31,655 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E2 (1/3)
+2026-02-18 18:10:26,379 - INFO - [JACKKNIFE] PFOS Linear - Animal E2 completed in 54.7s (loss=153.72)
+2026-02-18 18:10:26,380 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E3 (2/3)
+2026-02-18 18:11:06,539 - INFO - [JACKKNIFE] PFOS Linear - Animal E3 completed in 40.2s (loss=159.89)
+2026-02-18 18:11:06,540 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E4 (3/3)
+2026-02-18 18:12:05,872 - INFO - [JACKKNIFE] PFOS Linear - Animal E4 completed in 59.3s (loss=159.08)
+2026-02-18 18:12:05,875 - INFO - [JACKKNIFE] PFOS Linear - Saved jackknife results to /Users/lucaprzygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFOS_Linear_LOAO.csv
+2026-02-18 18:12:05,875 - INFO - [JACKKNIFE] PFOS Linear - Completed in 154.2s
+2026-02-18 18:12:05,876 - INFO - === PHASE 2/3 COMPLETED ===
+2026-02-18 18:12:05,876 - INFO - Jackknife fits: 1/1 successful in 154.3s
+2026-02-18 18:12:05,876 - INFO - === PHASE 3: Running Monte Carlo sampling ===
+2026-02-18 18:12:05,909 - INFO - [MONTE CARLO] Starting PFOS Linear
+2026-02-18 18:12:07,482 - INFO - [MONTE CARLO] PFOS Linear - Using Hessian full covariance (log10)
+2026-02-18 18:12:07,483 - INFO - [MONTE CARLO] PFOS Linear - Phase 1 point estimates (linear): [5.61468185e+00 2.59819128e-02 5.95321492e-02 1.00000000e+02
+ 4.67008236e-01]
+2026-02-18 18:12:07,483 - INFO - [MONTE CARLO] PFOS Linear - Phase 1 central values (log10): [ 0.74932515 -1.58532888 -1.22524844  2.         -0.33067546]
+2026-02-18 18:12:07,483 - INFO - [MONTE CARLO] PFOS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-02-18 18:12:07,484 - INFO - [MONTE CARLO] PFOS Linear - Sample means: [5.63184220e+00 2.77772679e-02 6.07520588e-02 1.00000000e+02
+ 4.68580880e-01]
+2026-02-18 18:12:07,484 - INFO - [MONTE CARLO] PFOS Linear - Sample stds: [0.39364143 0.01052493 0.01217638 0.         0.0346026 ]
+2026-02-18 18:12:07,486 - INFO - [MONTE CARLO] PFOS Linear - Collecting predictions for: ['spleen', 'liver', 'heart', 'brain', 'urine', 'kidney', 'feces', 'milk', 'muscle', 'lung', 'plasma', 'elim']
+2026-02-18 18:19:24,798 - INFO - [MONTE CARLO] PFOS Linear - Saved predictions to /Users/lucaprzygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFOS_Linear_monte_carlo.csv
+2026-02-18 18:19:24,798 - INFO - [MONTE CARLO] PFOS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-02-18 18:19:24,799 - INFO - [MONTE CARLO] PFOS Linear - Completed in 438.9s
+2026-02-18 18:19:24,915 - INFO - === PHASE 3/3 COMPLETED ===
+2026-02-18 18:19:24,915 - INFO - Monte Carlo sampling: 1/1 successful in 439.0s
+2026-02-18 18:19:24,924 - INFO - === ALL PHASES COMPLETED ===
+2026-02-18 18:19:24,924 - INFO - Total execution time: 747.9s (0.2 hours)
+2026-02-18 18:19:24,924 - INFO - Success rates: Global=1/1, Jackknife=1/1, Monte Carlo=1/1
+2026-02-18 18:19:24,924 - INFO - Average global fit time: 154.5s per compound
+2026-02-18 18:19:24,924 - INFO - Average jackknife time: 154.3s per compound
+2026-02-18 18:19:24,924 - INFO - Average Monte Carlo time: 439.0s per compound
+2026-02-18 18:19:24,924 - INFO - Fully successful compounds: 1/1

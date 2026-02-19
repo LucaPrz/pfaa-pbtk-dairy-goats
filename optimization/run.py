@@ -94,8 +94,6 @@ def main() -> int:
                        help='Max parallel processes for outer pool (default: CPU count or number of pairs)')
     parser.add_argument('--n-mc', type=int, default=None,
                        help='Override number of Monte Carlo samples')
-    parser.add_argument('--simple-model', action='store_true',
-                       help='Use simplified PBTK (no mammary compartment; perfusion-limited milk from plasma)')
     args = parser.parse_args()
     
     # Setup basic console logging first (before file logging setup)
@@ -126,12 +124,10 @@ def main() -> int:
     
     # Setup context (loads all data, creates directories, etc.)
     try:
-        context = setup_context(project_root=project_root, use_simple_model=args.simple_model)
+        context = setup_context(project_root=project_root)
     except Exception as e:
         logger.error(f"Failed to setup context: {e}", exc_info=True)
         return EXIT_ERROR
-    if context.config.use_simple_model:
-        logger.info("Using simplified PBTK model (no mammary compartment; perfusion-limited milk from plasma)")
     compound_isomer_pairs = context.data_cache.get_all_pairs()
     
     # Print all pairs being processed
@@ -214,7 +210,7 @@ def main() -> int:
 
             # --- Stage 1: log-RMSE global fits ---
             logger.info("[PHASE 1 / Stage 1] Log-RMSE global fits (no sigma needed)")
-            prev_loss_mode = context.config.use_log_rmse_for_fitting
+            # Stage 1 always uses log-RMSE, independent of the global default.
             context.config.use_log_rmse_for_fitting = True
             try:
                 _ = pool.map(run_global_partial, selected_pairs)
@@ -242,6 +238,7 @@ def main() -> int:
 
             # --- Stage 2: censored-likelihood (Tobit) global fits ---
             logger.info("[PHASE 1 / Stage 2] Censored-likelihood (Tobit) global fits using estimated sigma")
+            # Stage 2 and all subsequent fits (jackknife, Hessian, etc.) use censored likelihood.
             context.config.use_log_rmse_for_fitting = False
             try:
                 results_mean = pool.map(run_global_partial, selected_pairs)
@@ -251,9 +248,6 @@ def main() -> int:
             except Exception as e:
                 logger.error(f"Stage 2 (Tobit) global fit phase failed: {e}", exc_info=True)
                 raise  # Re-raise to ensure finally block executes
-            finally:
-                # Restore previous loss mode in case other code relies on it
-                context.config.use_log_rmse_for_fitting = prev_loss_mode
             
             update_progress(overall_pbar, len(selected_pairs))
             mean_time = time.time() - start_time

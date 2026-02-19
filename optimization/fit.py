@@ -47,7 +47,7 @@ def build_intake_function(
     smoothed = lowess(
         endog=series.values,
         exog=full_days,
-        frac=0.4,
+        frac=0.3,
         it=3,
         return_sorted=False,
     )
@@ -116,7 +116,7 @@ def simulate_model(
         milk_yield_array=milk_yield_array
     )
     
-    # Run simulation (full or simple model from config)
+    # Run simulation
     model = matrix_mod.PBTKModel(
         params=all_params,
         intake_function=intake_function,

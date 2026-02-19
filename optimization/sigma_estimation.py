@@ -37,7 +37,7 @@ def collect_residuals_for_pair(
         fit_df = pd.read_csv(fit_path)
         fit_params_dict = dict(zip(fit_df['Parameter'], fit_df['Value']))
 
-        # Get parameter configuration (respects use_simple_model for E_milk vs k_milk)
+        # Get parameter configuration
         from optimization.fit_variables import get_parameter_config
         data_df = context.data_cache.get_pair_data(compound, isomer)
         param_names, fixed_params = get_parameter_config(compound, isomer, data_df, config=context.config)

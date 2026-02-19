@@ -129,7 +129,8 @@ def plot_extrapolation_example(
 
     ax.set_xlabel("Time (days)")
     ax.set_ylabel(f"{compartment} concentration (µg/kg)")
-    ax.set_ylim(bottom=ymin)
+    ax.set_yscale("log")
+    ax.set_ylim(bottom=1e-1)
     ax.legend(loc="best", fontsize=8)
     ax.grid(True, which="both", alpha=0.3)
 

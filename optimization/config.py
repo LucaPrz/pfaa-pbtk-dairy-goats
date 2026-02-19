@@ -8,30 +8,22 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Excretion streams (model outputs); same for full and simple model
+# Excretion streams (model outputs)
 VALID_EXCRETION_STREAMS = {"feces", "urine", "milk"}
 
 
 def get_matrix_module(config: Any) -> Any:
     """
-    Return the matrix-like module (full or simple) according to config.
+    Return the matrix module containing PBTKModel.
 
-    In the clean codebase the core model class `PBTKModel` lives in
-    `model/diagnose.py`, so we expose that module here.  The simplified
-    model (when enabled) currently reuses the same implementation.
+    The core model class `PBTKModel` lives in `model/diagnose.py`.
     """
-    # For now the simplified model reuses the same diagnose module.
     from model import diagnose as matrix_module
     return matrix_module
 
 
 def get_parameters_module(config: Any) -> Any:
-    """
-    Return the parameters module (full or simple) according to config.
-
-    The actual implementation lives in `parameters/parameters.py`, and we
-    currently use the same module for both full and simplified models.
-    """
+    """Return the parameters module (parameters/parameters.py)."""
     from parameters import parameters as params_module
     return params_module
 
@@ -50,11 +42,8 @@ class ModelConfig:
     mc_chunk_size: int = 1000  # Process MC samples in chunks to reduce memory usage
     mc_random_seed: Optional[int] = 42  # Random seed for MC reproducibility
 
-    # Use simplified PBTK (no mammary compartment; perfusion-limited milk from plasma)
-    use_simple_model: bool = False
-
     # Default parameter names (used as fallback or for compounds not in signal data)
-    # Parameter names for full model (mammary with fixed plasma–milk partition; no free k_milk)
+    # Mammary with fixed plasma–milk partition (no free k_milk)
     param_names: List[str] = field(default_factory=lambda: ["k_ehc", "k_elim", "k_renal", "k_a", "k_feces"])
     animals: List[str] = field(default_factory=lambda: ["E2", "E3", "E4"])
     compounds: Optional[List[str]] = None  # Will be determined from data if None
@@ -76,16 +65,6 @@ class ModelConfig:
     })
     use_dynamic_parameters: bool = True  # Enable dynamic parameter selection based on data signals
     use_log_rmse_for_fitting: bool = True  # If True, fit with log RMSE then estimate sigma; if False, use censored likelihood directly
-
-    # Smooth daily intake using LOWESS if not None. None = no smoothing.
-    intake_moving_average_window: Optional[int] = 10
-
-    # Default param names for simple model (no mammary parameter; E_milk is fixed from data)
-    _param_names_simple: List[str] = field(default_factory=lambda: ["k_ehc", "k_elim", "k_renal", "k_a", "k_feces"])
-
-    def __post_init__(self) -> None:
-        if self.use_simple_model and self.param_names == ["k_milk", "k_ehc", "k_elim", "k_renal", "k_a", "k_feces"]:
-            self.param_names = list(self._param_names_simple)
 
     def get_sigma(self, matrix_name: str, compound: Optional[str] = None, isomer: Optional[str] = None) -> float:
         try:
@@ -192,9 +171,24 @@ class ModelConfig:
             return {}
     
     def get_log_bounds(self, param_names: List[str]) -> List[Tuple[float, float]]:
-        # Bounds per parameter in log10 space (linear 0.001 to ~316)
+        """
+        Bounds per parameter in log10 space.
+
+        Default global bounds correspond to linear 1e-3 to ~316 1/day. For some
+        parameters (e.g. k_ehc), we restrict the range slightly to reduce
+        extreme, weakly identifiable values that drive very wide tails in the
+        extrapolation CIs without improving fit.
+        """
         global_low, global_high = -3.0, 2.5
-        return [(global_low, global_high) for _ in param_names]
+        per_param_bounds = {
+            # Enterohepatic recirculation: restrict to 1e-2–1e2 1/day
+            "k_ehc": (-3.0, 2.5),
+        }
+        bounds: List[Tuple[float, float]] = []
+        for name in param_names:
+            low, high = per_param_bounds.get(name, (global_low, global_high))
+            bounds.append((low, high))
+        return bounds
     
     de_config: Dict = field(default_factory=lambda: {
         'strategy': 'best1bin',
@@ -248,7 +242,7 @@ class FittingContext:
     folder_phase2: Path
     folder_phase3: Path
 
-def setup_context(project_root: Optional[Path] = None, use_simple_model: bool = False) -> FittingContext:
+def setup_context(project_root: Optional[Path] = None) -> FittingContext:
     # Import here to avoid circular imports
     from optimization.io import DataCache, load_data, get_project_root
 
@@ -256,7 +250,7 @@ def setup_context(project_root: Optional[Path] = None, use_simple_model: bool = 
         # Project root is the repository root (pfaa-pbtk-dairy-goats)
         project_root = get_project_root()
 
-    config = ModelConfig(use_simple_model=use_simple_model)
+    config = ModelConfig()
 
     # Use original optimisation folder structure under results/optimization/
     # so this clean project remains compatible with existing fit files.
