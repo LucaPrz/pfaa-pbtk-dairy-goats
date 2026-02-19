@@ -1,6 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_a,0.359497900705076,PFTeDA,Linear
-k_elim,0.422185970749486,PFTeDA,Linear
+k_elim,0.9881621198517184,PFTeDA,Linear
+k_a,0.9919283726518402,PFTeDA,Linear
 k_feces,0.0,PFTeDA,Linear
 k_ehc,0.0,PFTeDA,Linear
-k_renal,0.0,PFTeDA,Linear
+k_urine,0.0,PFTeDA,Linear
