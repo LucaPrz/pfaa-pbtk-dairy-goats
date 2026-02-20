@@ -31,6 +31,7 @@ if str(_CLEAN_ROOT) not in sys.path:
 from auxiliary.project_paths import get_data_root, get_results_root
 from auxiliary.plot_style import set_paper_plot_style
 from parameters import parameters
+from optimization.fit_variables import check_data_signals
 
 
 def load_urine_volumes() -> Dict[str, float]:
@@ -391,6 +392,37 @@ def calculate_mass_balance() -> None:
         raise FileNotFoundError(f"Daily intake table not found: {intake_path}")
 
     df_pfas = pd.read_csv(pfas_path)
+    # Ensure numeric concentrations
+    df_pfas = df_pfas.copy()
+    df_pfas["Concentration"] = pd.to_numeric(df_pfas["Concentration"], errors="coerce")
+
+    # ------------------------------------------------------------------
+    # Timepoint-wise LOQ imputation (experimental mass-balance only)
+    # ------------------------------------------------------------------
+    #
+    # For each (Compound, Isomer, Matrix, Day), if at least one animal has
+    # a concentration above the matrix-specific LOQ, then all censored
+    # values (< LOQ) at that timepoint in that matrix are set to LOQ/2.
+    # If no animal has a value above LOQ at that timepoint, censored
+    # values are left as-is (typically 0).
+    #
+    loq_default = 0.5
+    loq_milk = 0.005
+
+    if {"Compound", "Isomer", "Matrix", "Day", "Animal", "Concentration"}.issubset(
+        df_pfas.columns
+    ):
+        for (compound, isomer, matrix, day), g in df_pfas.groupby(
+            ["Compound", "Isomer", "Matrix", "Day"], dropna=False
+        ):
+            conc = pd.to_numeric(g["Concentration"], errors="coerce")
+            if conc.isna().all():
+                continue
+            threshold = loq_milk if str(matrix).strip().lower() == "milk" else loq_default
+            if (conc > threshold).any():
+                mask = g.index[conc < threshold]
+                if not mask.empty:
+                    df_pfas.loc[mask, "Concentration"] = threshold / 2.0
     df_intake = pd.read_csv(intake_path)
 
     # Sum daily intake per animal / compound / isomer (µg)
@@ -480,6 +512,9 @@ def plot_mass_balance() -> None:
     df = df[df["mass_balance"].notna()]
     df = df[df["Isomer"] != "Total"]
     df = df[~df["Compound"].apply(_is_summary_compound)]
+    # Exclude compound–isomer combinations with zero total intake
+    df["total_intake"] = pd.to_numeric(df["total_intake"], errors="coerce")
+    df = df[df["total_intake"] > 0]
 
     if df.empty:
         print("No valid mass balance data after filtering.")
@@ -493,11 +528,29 @@ def plot_mass_balance() -> None:
         print("No valid compound–isomer combinations after applying chain‑length filter.")
         return
 
+    # Load raw PFAS measurement data to identify model-relevant signals
+    pfas_path = data_root / "raw" / "pfas_data_no_e1.csv"
+    if not pfas_path.exists():
+        raise FileNotFoundError(f"PFAS measurement table not found: {pfas_path}")
+    data_df = pd.read_csv(pfas_path)
+
     # ------------------------------------------------------------------
     # Summarise per compound–isomer (mean ± 95% CI)
     # ------------------------------------------------------------------
     summary_rows = []
     for (compound, isomer), g in df.groupby(["Compound", "Isomer"], dropna=False):
+        # Skip pairs without detectable signals in model matrices/elimination routes
+        signals = check_data_signals(str(compound), str(isomer), data_df)
+        if not any(
+            [
+                signals.get("milk_signal", False),
+                signals.get("plasma_signal", False),
+                signals.get("feces_signal", False),
+                signals.get("feces_depuration_signal", False),
+                signals.get("urine_signal", False),
+            ]
+        ):
+            continue
         mb_values = pd.to_numeric(g["mass_balance"], errors="coerce").dropna()
         if mb_values.empty:
             continue
@@ -547,7 +600,7 @@ def plot_mass_balance() -> None:
         {"PFCA": "#2E86AB", "PFSA": "#A23B72"}
     ).to_numpy()
 
-    fig, ax = plt.subplots(figsize=(10, 4))
+    fig, ax = plt.subplots(figsize=(8, 5.5))
 
     ax.bar(
         x,

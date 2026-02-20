@@ -325,7 +325,7 @@ def plot_log_pred_vs_obs_for_passing(
     output_dir: Path,
     r2_threshold: float = 0.7,
     gmfe_threshold: float = 2.0,
-    bias_abs_threshold: float = 0.2,
+    bias_abs_threshold: float = 0.25,
 ) -> None:
     """
     Create a log10(predicted) vs log10(observed) scatter plot including only
@@ -342,6 +342,10 @@ def plot_log_pred_vs_obs_for_passing(
     if log_df.empty or summary_df.empty:
         logger.warning("[GOF] Cannot plot log_pred vs log_obs: empty input data.")
         return
+
+    # Exclude baseline (Day 0) observations, consistent with summary tables
+    if "Day" in log_df.columns:
+        log_df = log_df[log_df["Day"] > 0].copy()
 
     crit_r2 = summary_df["R2"] > r2_threshold
     crit_gm = summary_df["GM_Fold_Error"] < gmfe_threshold

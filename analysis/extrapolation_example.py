@@ -129,8 +129,8 @@ def plot_extrapolation_example(
 
     ax.set_xlabel("Time (days)")
     ax.set_ylabel(f"{compartment} concentration (µg/kg)")
-    ax.set_yscale("log")
-    ax.set_ylim(bottom=1e-1)
+    #ax.set_yscale("log")
+    #ax.set_ylim(bottom=1e-1)
     ax.legend(loc="best", fontsize=8)
     ax.grid(True, which="both", alpha=0.3)
 
@@ -145,6 +145,99 @@ def plot_extrapolation_example(
     plt.close(fig)
 
     print(f"Saved extrapolation example to {out_path}")
+    return out_path
+
+
+def plot_extrapolation_example_public_pfos_plasma(
+    results_root: Path | None = None,
+) -> Path | None:
+    """
+    Simpler, publication/fact-sheet style plot for PFOS (Linear) in plasma,
+    aimed at non‑professionals.
+
+    Shows:
+      - Typical model prediction over time (line)
+      - Main prediction range (shaded band)
+      - Measured data points
+    """
+    compound = "PFOS"
+    isomer = "Linear"
+    compartment = "plasma"
+
+    if results_root is None:
+        results_root = get_results_root()
+
+    mc_dir = results_root / "optimization" / "monte_carlo"
+    csv_path = mc_dir / f"predictions_{compound}_{isomer}_monte_carlo.csv"
+    if not csv_path.exists():
+        raise FileNotFoundError(f"MC predictions not found: {csv_path}")
+
+    pred_df = pd.read_csv(csv_path)
+    g = pred_df[pred_df["Compartment"] == compartment].copy().sort_values("Time")
+    if g.empty:
+        print(f"No data for compartment '{compartment}' in {csv_path.name}")
+        return None
+
+    t = g["Time"].values
+    median = g["Pred_Median"].values
+    # We show the main prediction band (param + animal)
+    band_lo = g["CI_Lower"].values
+    band_hi = g["CI_Upper"].values
+
+    data_path = get_data_root() / "raw" / "pfas_data_no_e1.csv"
+    obs_df = load_observations(data_path)
+    matched = match_predictions_observations(pred_df, obs_df)
+    matched = matched[
+        (matched["Compound"] == compound)
+        & (matched["Isomer"] == isomer)
+        & (matched["Compartment"] == compartment)
+    ].copy()
+
+    fig, ax = plt.subplots(figsize=(7, 4))
+
+    # Shaded prediction band
+    ax.fill_between(
+        t,
+        band_lo,
+        band_hi,
+        color="tab:blue",
+        alpha=0.2,
+        label="Most model predictions",
+    )
+
+    # Typical prediction
+    ax.plot(
+        t,
+        median,
+        color="tab:blue",
+        lw=2,
+        label="Typical model prediction",
+    )
+
+    # Measured data
+    if not matched.empty:
+        ax.scatter(
+            matched["Time"],
+            matched["Concentration"],
+            color="black",
+            s=25,
+            alpha=0.8,
+            marker="o",
+            label="Measurements",
+        )
+
+    ax.set_xlabel("Days since start of exposure")
+    ax.set_ylabel("PFOS in plasma (µg/L)")
+    ax.legend(loc="best", fontsize=9)
+
+    figures_dir = results_root / "figures"
+    figures_dir.mkdir(parents=True, exist_ok=True)
+    out_path = figures_dir / "extrapolation_example_PFOS_Linear_plasma_public.png"
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=300)
+    plt.close(fig)
+
+    print(f"Saved public-friendly PFOS plasma example to {out_path}")
     return out_path
 
 
