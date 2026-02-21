@@ -16,8 +16,13 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 import pandas as pd
 import logging
+from statsmodels.nonparametric.smoothers_lowess import lowess
 
 logger = logging.getLogger(__name__)
+
+# Default LOWESS parameters for milk yield smoothing (aligned with intake: frac=0.3)
+MILK_YIELD_LOWESS_FRAC = 0.3
+MILK_YIELD_LOWESS_IT = 3
 
 
 def get_project_root() -> Path:
@@ -203,6 +208,44 @@ def _load_milk_yield_by_animal(project_root: Path, max_day: int = 140) -> Dict[s
     return milk_yield_by_animal
 
 
+def _smooth_milk_yield_series(
+    series: np.ndarray,
+    frac: float = MILK_YIELD_LOWESS_FRAC,
+    it: int = MILK_YIELD_LOWESS_IT,
+) -> np.ndarray:
+    """
+    Smooth a single milk yield time series (kg/day) using LOWESS.
+
+    Reduces day-to-day noise so that concentration = mass / yield is less
+    sensitive to measurement error. Uses the same approach as intake smoothing.
+    """
+    n = len(series)
+    if n == 0:
+        return series.copy()
+    full_days = np.arange(n, dtype=float)
+    smoothed = lowess(
+        endog=series.astype(float),
+        exog=full_days,
+        frac=frac,
+        it=it,
+        return_sorted=False,
+    )
+    return np.maximum(smoothed, 0.0).astype(np.float64)
+
+
+def _smooth_milk_yield_by_animal(
+    milk_yield_by_animal: Dict[str, np.ndarray],
+    frac: float = MILK_YIELD_LOWESS_FRAC,
+    it: int = MILK_YIELD_LOWESS_IT,
+) -> Dict[str, np.ndarray]:
+    """Apply LOWESS smoothing to each animal's milk yield series (in place)."""
+    for animal in milk_yield_by_animal:
+        milk_yield_by_animal[animal] = _smooth_milk_yield_series(
+            milk_yield_by_animal[animal], frac=frac, it=it
+        )
+    return milk_yield_by_animal
+
+
 def _load_body_weight_by_animal(project_root: Path, max_day: int = 140) -> Dict[str, np.ndarray]:
     """
     Build per‑animal daily body‑weight time series from the unified animal data.
@@ -301,6 +344,7 @@ def load_data(config, project_root: Optional[Path] = None):
     )
     max_day = int(config.time_vector.max())
     milk_yield_by_animal = _load_milk_yield_by_animal(project_root, max_day=max_day)
+    milk_yield_by_animal = _smooth_milk_yield_by_animal(milk_yield_by_animal)
     body_weight_by_animal = _load_body_weight_by_animal(project_root, max_day=max_day)
 
     logger.info(
