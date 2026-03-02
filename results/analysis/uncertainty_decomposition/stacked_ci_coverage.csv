@@ -1,4 +1,4 @@
 CI_Level,Coverage,N
-Param_only,0.5274725274725275,91
-Param_plus_Animal,0.6373626373626373,91
-Param_plus_Animal_plus_Obs,0.967032967032967,91
+Param_only,0.4253322908522283,1279
+Param_plus_Animal,0.5910867865519938,1279
+Param_plus_Animal_plus_Obs,0.9124315871774824,1279

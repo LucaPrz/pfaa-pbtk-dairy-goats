@@ -257,9 +257,24 @@ def run_monte_carlo_for_pair(
                 chunk_samples = mc_samples[start_idx:end_idx]
                 
                 # Process this chunk
-                for params in chunk_samples.astype(np.float32):
+                # NOTE: simulate_model may occasionally fail for extreme MC draws
+                # (e.g. producing NaN/inf solutions). Instead of aborting the entire
+                # MC run, we catch and log these failures and skip the offending
+                # samples. To revert to failing hard, remove the try/except block below.
+                for local_idx, params in enumerate(chunk_samples.astype(np.float32)):
+                    global_sample_idx = start_idx + local_idx
                     for i, animal in enumerate(context.config.animals):
-                        pred, all_params = simulate_model(params, sim_configs[i], context)
+                        try:
+                            pred, all_params = simulate_model(params, sim_configs[i], context)
+                        except Exception as e:
+                            logger.error(
+                                f"[MONTE CARLO] {compound} {isomer} - "
+                                f"simulation failed for sample {global_sample_idx}, "
+                                f"animal {animal}: {e}"
+                            )
+                            # Skip this (sample, animal) combination
+                            continue
+
                         for comp in compartments_with_data:
                             series = predict_time_series(
                                 pred, all_params, comp, animal,

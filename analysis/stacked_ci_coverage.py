@@ -234,6 +234,181 @@ def decomposition_summary(matched_df: pd.DataFrame, eps: float = 1e-9) -> pd.Dat
     return pd.DataFrame(rows)
 
 
+def plot_variance_decomposition_for_passing(
+    decomp_df: pd.DataFrame,
+    results_root: Path,
+) -> None:
+    """
+    Create a stacked variance decomposition plot for compound–isomer pairs that pass GOF thresholds.
+
+    Uses Frac_param_log / Frac_animal_log / Frac_obs_log from the decomposition summary,
+    aggregated by compartment and restricted to GOF-passing pairs based on
+    results/analysis/goodness_of_fit/goodness_of_fit_summary_by_compound.csv.
+    """
+    if decomp_df.empty:
+        logger.warning("[STACKED_CI] Decomposition summary is empty; skipping variance plot.")
+        return
+
+    gof_summary_path = (
+        results_root
+        / "analysis"
+        / "goodness_of_fit"
+        / "goodness_of_fit_summary_by_compound.csv"
+    )
+    if not gof_summary_path.exists():
+        logger.warning(
+            "[STACKED_CI] GOF summary not found at %s; skipping variance-decomposition plot.",
+            gof_summary_path,
+        )
+        return
+
+    try:
+        gof_df = pd.read_csv(gof_summary_path)
+    except Exception as exc:
+        logger.warning(
+            "[STACKED_CI] Failed to read GOF summary from %s: %s; skipping variance plot.",
+            gof_summary_path,
+            exc,
+        )
+        return
+
+    # Same GOF thresholds as goodness_of_fit.plot_log_pred_vs_obs_for_passing
+    try:
+        crit_r2 = gof_df["R2"] > 0.7
+        crit_gm = gof_df["GM_Fold_Error"] < 2.0
+        crit_bias = gof_df["Bias_log10"].abs() < 0.25
+        passing = gof_df[crit_r2 & crit_gm & crit_bias][["Compound", "Isomer"]]
+    except KeyError as exc:
+        logger.warning(
+            "[STACKED_CI] GOF summary missing columns for thresholds (%s); skipping variance plot.",
+            exc,
+        )
+        return
+
+    if passing.empty:
+        logger.warning(
+            "[STACKED_CI] No compound–isomer pairs pass GOF thresholds; skipping variance plot."
+        )
+        return
+
+    passing_pairs = set(map(tuple, passing.to_numpy()))
+    mask = decomp_df[["Compound", "Isomer"]].apply(tuple, axis=1).isin(passing_pairs)
+    decomp_pass = decomp_df[mask].copy()
+    if decomp_pass.empty:
+        logger.warning(
+            "[STACKED_CI] No decomposition rows for GOF-passing pairs; skipping variance plot."
+        )
+        return
+
+    # Keep only rows with valid variance fractions
+    for col in ["Frac_param_log", "Frac_animal_log", "Frac_obs_log"]:
+        if col not in decomp_pass.columns:
+            logger.warning(
+                "[STACKED_CI] Column %s missing in decomposition summary; skipping variance plot.",
+                col,
+            )
+            return
+
+    decomp_pass = decomp_pass.dropna(
+        subset=["Frac_param_log", "Frac_animal_log", "Frac_obs_log"]
+    )
+    if decomp_pass.empty:
+        logger.warning(
+            "[STACKED_CI] No valid variance fractions after filtering; skipping variance plot."
+        )
+        return
+
+    # Aggregate by compartment: weighted mean of variance components using N as weights,
+    # then recompute fractions from aggregated variances.
+    agg_rows: list[dict[str, object]] = []
+    for compartment, g in decomp_pass.groupby("Compartment"):
+        if "N" not in g.columns:
+            weights = np.ones(len(g))
+        else:
+            weights = pd.to_numeric(g["N"], errors="coerce").fillna(0.0).to_numpy()
+        if weights.sum() <= 0:
+            continue
+
+        def _wmean(col: str) -> float:
+            if col not in g.columns:
+                return np.nan
+            vals = pd.to_numeric(g[col], errors="coerce").to_numpy()
+            mask_valid = np.isfinite(vals) & (weights > 0)
+            if not mask_valid.any():
+                return np.nan
+            w = weights[mask_valid]
+            v = vals[mask_valid]
+            return float(np.sum(w * v) / np.sum(w))
+
+        var_p = _wmean("Var_param_log")
+        var_a = _wmean("Var_animal_log")
+        var_o = _wmean("Var_obs_log")
+        var_tot = _wmean("Var_total_log")
+        if not all(np.isfinite(v) for v in [var_p, var_a, var_o, var_tot]) or var_tot <= 0:
+            continue
+
+        agg_rows.append(
+            {
+                "Compartment": compartment,
+                "Frac_param_log": var_p / var_tot,
+                "Frac_animal_log": var_a / var_tot,
+                "Frac_obs_log": var_o / var_tot,
+            }
+        )
+
+    if not agg_rows:
+        logger.warning(
+            "[STACKED_CI] No compartments with valid aggregated variances; skipping variance plot."
+        )
+        return
+
+    agg_df = pd.DataFrame(agg_rows).sort_values("Compartment")
+
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from auxiliary.plot_style import set_paper_plot_style
+
+        set_paper_plot_style()
+    except Exception as exc:  # pragma: no cover - plotting optional
+        logger.warning(
+            "[STACKED_CI] Matplotlib unavailable, skipping variance-decomposition plot: %s",
+            exc,
+        )
+        return
+
+    compartments = agg_df["Compartment"].tolist()
+    x = np.arange(len(compartments))
+    frac_p = agg_df["Frac_param_log"].to_numpy()
+    frac_a = agg_df["Frac_animal_log"].to_numpy()
+    frac_o = agg_df["Frac_obs_log"].to_numpy()
+
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.bar(x, frac_p, label="Parameter", color="C0")
+    ax.bar(x, frac_a, bottom=frac_p, label="Animal", color="C1")
+    ax.bar(x, frac_o, bottom=frac_p + frac_a, label="Observational", color="C2")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(compartments, rotation=45, ha="right")
+    ax.set_ylim(0.0, 1.0)
+    ax.set_ylabel("Fraction of variance in log-space")
+    ax.legend(fontsize=8)
+    ax.grid(True, axis="y", alpha=0.3)
+    fig.tight_layout()
+
+    figures_dir = results_root / "figures"
+    figures_dir.mkdir(parents=True, exist_ok=True)
+    out_path = figures_dir / "variance_decomposition_passing_compounds.png"
+    fig.savefig(out_path, dpi=300)
+    plt.close(fig)
+    logger.info(
+        "[STACKED_CI] Saved variance decomposition plot for GOF-passing compounds to %s",
+        out_path,
+    )
+
+
 def run(
     results_root: Optional[Path] = None,
     data_path: Optional[Path] = None,
@@ -300,6 +475,9 @@ def run(
         out_decomp = output_dir / "stacked_ci_decomposition_summary.csv"
         decomp.to_csv(out_decomp, index=False)
         logger.info(f"[STACKED_CI] Saved decomposition summary to {out_decomp}")
+
+        # Variance decomposition plot for GOF-passing compound–isomer pairs
+        plot_variance_decomposition_for_passing(decomp, results_root=results_root)
 
     # Log overall coverage
     for _, r in overall.iterrows():

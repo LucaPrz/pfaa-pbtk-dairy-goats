@@ -1,0 +1,18 @@
+Identifiability Diagnostics: PFDA Branched
+============================================================
+
+Condition Number: 4.06e+00
+(Higher = less identifiable, >1e6 suggests problems)
+Condition Number (per dim, ^2 root): 2.01e+00
+(Comparable across different # of fitted parameters; use for fair comparison)
+
+Eigenvalues (sorted, descending):
+  1. 3.68e+03
+  2. 9.08e+02
+
+No strongly unidentifiable combinations detected.
+
+Correlation Matrix:
+          k_elim       k_a
+k_elim  1.000000 -0.363727
+k_a    -0.363727  1.000000

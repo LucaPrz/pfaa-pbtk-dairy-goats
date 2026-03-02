@@ -1,0 +1,71 @@
+2026-02-21 17:17:33,239 - INFO - Loading data files...
+2026-02-21 17:17:33,272 - INFO - Loaded intake and physiological data: 17766 intake rows, 3 animals with urine volumes, 3 animals with feces mass, 3 animals with milk yield series, 3 animals with body weight series
+2026-02-21 17:17:33,272 - INFO - Determining compound-isomer pairs: hay concentration not 0 and at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ.
+2026-02-21 17:17:33,282 - INFO -   PFBA Linear: matrices above LOQ: Feces, Milk, Plasma, Urine
+2026-02-21 17:17:33,285 - INFO -   PFPeA Linear: matrices above LOQ: Feces, Milk, Muscle, Urine
+2026-02-21 17:17:33,287 - INFO -   PFHxA Linear: matrices above LOQ: Urine
+2026-02-21 17:17:33,290 - INFO -   PFHpA Linear: matrices above LOQ: Urine
+2026-02-21 17:17:33,293 - INFO -   PFOA Linear: matrices above LOQ: Brain, Feces, Milk, Plasma, Urine
+2026-02-21 17:17:33,295 - INFO -   PFOA Branched: matrices above LOQ: Milk, Plasma, Urine
+2026-02-21 17:17:33,298 - INFO -   PFDA Linear: matrices above LOQ: Liver, Milk, Plasma
+2026-02-21 17:17:33,301 - INFO -   PFUnDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-21 17:17:33,303 - INFO -   PFDoDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-21 17:17:33,307 - INFO -   PFTrDA Linear: matrices above LOQ: Milk, Plasma
+2026-02-21 17:17:33,309 - INFO -   PFTeDA Linear: matrices above LOQ: Plasma
+2026-02-21 17:17:33,311 - INFO -   PFHxS Linear: matrices above LOQ: Milk, Plasma, Urine
+2026-02-21 17:17:33,315 - INFO -   PFHpS Linear: matrices above LOQ: Milk, Plasma
+2026-02-21 17:17:33,317 - INFO -   PFOS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-21 17:17:33,320 - INFO -   PFOS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-21 17:17:33,323 - INFO -   PFNS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-21 17:17:33,325 - INFO -   PFNS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-02-21 17:17:33,328 - INFO -   PFDS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-02-21 17:17:33,331 - INFO -   PFDS Branched: matrices above LOQ: Feces, Heart, Kidney, Liver, Lung, Milk, Plasma, Spleen
+2026-02-21 17:17:33,333 - INFO -   PFUnDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-21 17:17:33,335 - INFO -   PFUnDS Branched: matrices above LOQ: Feces, Liver, Milk, Plasma
+2026-02-21 17:17:33,338 - INFO -   PFDoDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-02-21 17:17:33,341 - INFO -   PFDoDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-21 17:17:33,343 - INFO -   PFTrDS Linear: matrices above LOQ: Brain, Feces, Milk
+2026-02-21 17:17:33,346 - INFO -   PFTrDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-02-21 17:17:33,350 - INFO -   PFNA Linear: matrices above LOQ: Milk
+2026-02-21 17:17:33,358 - INFO -   PFDA Branched: matrices above LOQ: Milk
+2026-02-21 17:17:33,360 - INFO -   PFUnDA Branched: matrices above LOQ: Milk
+2026-02-21 17:17:33,362 - INFO -   PFDoDA Branched: matrices above LOQ: Milk
+2026-02-21 17:17:33,364 - INFO -   PFTrDA Branched: matrices above LOQ: Milk
+2026-02-21 17:17:33,366 - INFO -   PFTeDA Branched: matrices above LOQ: Milk
+2026-02-21 17:17:33,368 - INFO - Found 19 compounds (31 compound-isomer pairs) meeting criteria
+2026-02-21 17:17:33,374 - INFO - 
+All compound-isomer pairs to process (31 total):
+2026-02-21 17:17:33,374 - INFO -   PFBA         | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFDA         | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFDA         | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFDS         | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFDS         | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFDoDA       | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFDoDA       | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFDoDS       | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFDoDS       | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFHpA        | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFHpS        | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFHxA        | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFHxS        | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFNA         | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFNS         | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFNS         | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFOA         | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFOA         | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFOS         | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFOS         | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFPeA        | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFTeDA       | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFTeDA       | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFTrDA       | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFTrDA       | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFTrDS       | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFTrDS       | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFUnDA       | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFUnDA       | Linear    
+2026-02-21 17:17:33,374 - INFO -   PFUnDS       | Branched  
+2026-02-21 17:17:33,374 - INFO -   PFUnDS       | Linear    
+2026-02-21 17:17:33,374 - INFO - 
+2026-02-21 17:17:33,374 - ERROR - Pair ['PHxS', 'Linear'] not found in available pairs
+2026-02-21 17:17:33,374 - ERROR - Available pairs: [('PFBA', 'Linear'), ('PFDA', 'Branched'), ('PFDA', 'Linear'), ('PFDS', 'Branched'), ('PFDS', 'Linear'), ('PFDoDA', 'Branched'), ('PFDoDA', 'Linear'), ('PFDoDS', 'Branched'), ('PFDoDS', 'Linear'), ('PFHpA', 'Linear'), ('PFHpS', 'Linear'), ('PFHxA', 'Linear'), ('PFHxS', 'Linear'), ('PFNA', 'Linear'), ('PFNS', 'Branched'), ('PFNS', 'Linear'), ('PFOA', 'Branched'), ('PFOA', 'Linear'), ('PFOS', 'Branched'), ('PFOS', 'Linear'), ('PFPeA', 'Linear'), ('PFTeDA', 'Branched'), ('PFTeDA', 'Linear'), ('PFTrDA', 'Branched'), ('PFTrDA', 'Linear'), ('PFTrDS', 'Branched'), ('PFTrDS', 'Linear'), ('PFUnDA', 'Branched'), ('PFUnDA', 'Linear'), ('PFUnDS', 'Branched'), ('PFUnDS', 'Linear')]

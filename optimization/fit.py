@@ -40,14 +40,17 @@ def build_intake_function(
     days = sub["Day"].astype(int).values
     values = sub["PFAS_Intake_ug_day"].astype(float).values
 
-    # Smooth intake using LOWESS
+    # Smooth intake using LOWESS.
+    # NOTE:
+    # - Originally used frac=0.3 globally.
+    # - Reduced to 0.15 as a gentler default for all compounds.
     max_day = int(sub["Day"].max())
     full_days = np.arange(0, max_day + 1)
     series = pd.Series(values, index=days).reindex(full_days, fill_value=0.0)
     smoothed = lowess(
         endog=series.values,
         exog=full_days,
-        frac=0.3,
+        frac=0.15,
         it=3,
         return_sorted=False,
     )

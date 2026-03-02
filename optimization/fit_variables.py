@@ -7,7 +7,13 @@ import numpy as np
 ALL_PARAMETERS = ["k_ehc", "k_elim", "k_urine", "k_a", "k_feces"]
 
 # Core parameters that are always estimated.
-REQUIRED_PARAMETERS = ["k_elim", "k_a"]
+# NOTE: k_a was previously included here, but is now fixed (see below).
+REQUIRED_PARAMETERS = ["k_elim"]
+
+# Global fixed value for k_a (1/day) when treating absorption as effectively
+# instantaneous but numerically safe. To revert and re-estimate k_a, remove
+# uses of K_A_FIXED_VALUE and add "k_a" back into REQUIRED_PARAMETERS.
+K_A_FIXED_VALUE: float = 100.0
 
 FIT_RELEVANT_MATRICES = [
     "Brain", "Feces", "Heart", "Kidney", "Liver", "Lung",
@@ -178,6 +184,13 @@ def get_parameter_config(
         params_to_fit.append("k_urine")
     else:
         fixed["k_urine"] = 0.0
+
+    # Fix k_a globally for all compounds/isomers. Absorption is treated as
+    # effectively instantaneous with k_a = K_A_FIXED_VALUE, and k_a is no
+    # longer estimated. To revert, remove this block and add "k_a" back to
+    # REQUIRED_PARAMETERS above.
+    fixed["k_a"] = K_A_FIXED_VALUE
+    params_to_fit = [p for p in params_to_fit if p != "k_a"]
 
     seen = set()
     unique_params = []

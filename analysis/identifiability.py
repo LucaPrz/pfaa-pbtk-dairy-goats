@@ -455,6 +455,73 @@ def save_identifiability_report(
     logger.info(f"[IDENTIFIABILITY] Saved report to {report_path}")
 
 
+def save_mean_identifiability_plot(
+    mean_log_info: Dict[str, float],
+    output_path: Path,
+) -> None:
+    """Save a ranked horizontal plot of mean identifiability per parameter."""
+    if not mean_log_info:
+        logger.warning("[IDENTIFIABILITY] No identifiability stats available for mean plot.")
+        return
+
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from auxiliary.plot_style import set_paper_plot_style
+
+        set_paper_plot_style()
+    except Exception as exc:  # pragma: no cover - plotting optional
+        logger.warning("[IDENTIFIABILITY] Matplotlib unavailable, skipping mean plot: %s", exc)
+        return
+
+    # Sort parameters by mean identifiability (descending)
+    items = sorted(mean_log_info.items(), key=lambda kv: kv[1], reverse=True)
+    names = [k for k, _ in items]
+    scores = [v for _, v in items]
+
+    # Color by process / route for visual grouping
+    color_map = {
+        "k_elim": "C0",
+        "k_a": "C1",
+        "k_urine": "C2",
+        "k_feces": "C2",
+        "k_ehc": "C2",
+    }
+    colors = [color_map.get(n, "C0") for n in names]
+
+    y_pos = np.arange(len(names))
+    height = max(3.0, 0.4 * len(names))
+
+    fig, ax = plt.subplots(figsize=(8, height))
+
+    # Horizontal lollipop plot: line from 0 to value with a marker at the end
+    ax.hlines(y_pos, 0.0, scores, color=colors, linewidth=2.2)
+    ax.scatter(scores, y_pos, color=colors, zorder=3, s=40)
+
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(names)
+    ax.invert_yaxis()  # highest score on top
+    ax.set_xlabel("Mean log10 Fisher info (F_ii)")
+
+    # Tighten x-limits to data range with small margin
+    xmin = min(scores) - 0.2
+    xmax = max(scores) + 0.2
+    ax.set_xlim(xmin, xmax)
+
+    ax.grid(True, axis="x", alpha=0.2)
+
+    # De-clutter spines
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    logger.info(f"[IDENTIFIABILITY] Saved mean identifiability plot to {output_path}")
+
+
 def regenerate_all_identifiability_reports(
     project_root: Optional[Path] = None,
     context: Optional["FittingContext"] = None,
@@ -478,6 +545,33 @@ def regenerate_all_identifiability_reports(
     output_dir = project_root / "results" / "analysis" / "identifiability"
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Optional GOF filter: use only compound–isomer pairs that pass GOF thresholds
+    gof_summary_path = project_root / "results" / "analysis" / "goodness_of_fit" / "goodness_of_fit_summary_by_compound.csv"
+    passing_pairs: Optional[set[tuple[str, str]]] = None
+    if gof_summary_path.exists():
+        try:
+            gof_df = pd.read_csv(gof_summary_path)
+            crit_r2 = gof_df["R2"] > 0.7
+            crit_gm = gof_df["GM_Fold_Error"] < 2.0
+            crit_bias = gof_df["Bias_log10"].abs() < 0.25
+            passing = gof_df[crit_r2 & crit_gm & crit_bias][["Compound", "Isomer"]]
+            if not passing.empty:
+                passing_pairs = set(map(tuple, passing.to_numpy()))
+                logger.info(
+                    "[IDENTIFIABILITY] Using GOF filter: %d compound–isomer pairs pass thresholds.",
+                    len(passing_pairs),
+                )
+            else:
+                logger.warning(
+                    "[IDENTIFIABILITY] GOF summary found but no pairs pass thresholds; using all pairs."
+                )
+        except Exception as exc:
+            logger.warning(
+                "[IDENTIFIABILITY] Failed to apply GOF filter from %s: %s; using all pairs.",
+                gof_summary_path,
+                exc,
+            )
+
     # Find all fit files
     fit_files = sorted(phase1_dir.glob("fit_*.csv"))
 
@@ -491,6 +585,9 @@ def regenerate_all_identifiability_reports(
 
     successful = 0
     failed = 0
+
+    # Aggregate identifiability across pairs: mean log10 Fisher diagonal per parameter
+    aggregate_stats: Dict[str, Dict[str, float]] = {}
 
     for fit_file in fit_files:
         # Extract compound and isomer from filename: fit_COMPOUND_ISOMER.csv
@@ -513,6 +610,23 @@ def regenerate_all_identifiability_reports(
             if diagnostics is not None:
                 output_path = output_dir / f"identifiability_{compound}_{isomer}"
                 save_identifiability_report(diagnostics, output_path)
+
+                # Update aggregate stats only for pairs that pass GOF criteria (if available)
+                use_for_aggregate = (
+                    passing_pairs is None or (compound, isomer) in passing_pairs
+                )
+                if use_for_aggregate:
+                    param_names = diagnostics.get("param_names", [])
+                    fisher_matrix = diagnostics.get("fisher_matrix")
+                    if fisher_matrix is not None and len(param_names) == fisher_matrix.shape[0]:
+                        diag_vals = np.diag(fisher_matrix).astype(float)
+                        for name, val in zip(param_names, diag_vals):
+                            if not np.isfinite(val) or val <= 0:
+                                continue
+                            stat = aggregate_stats.setdefault(name, {"sum_log": 0.0, "count": 0.0})
+                            stat["sum_log"] += float(np.log10(val))
+                            stat["count"] += 1.0
+
                 logger.info(f"✓ Regenerated report for {compound} {isomer}")
                 successful += 1
             else:
@@ -524,6 +638,43 @@ def regenerate_all_identifiability_reports(
                 exc_info=True,
             )
             failed += 1
+
+    # Create a single ranked horizontal plot of mean identifiability per parameter
+    mean_log_info = {}
+    rows = []
+    for name, stat in aggregate_stats.items():
+        if stat["count"] <= 0:
+            continue
+        mean_val = stat["sum_log"] / stat["count"]
+        mean_log_info[name] = mean_val
+        rows.append(
+            {
+                "Parameter": name,
+                "Mean_log10_Fisher_diag": mean_val,
+                "N_pairs": stat["count"],
+            }
+        )
+
+    if mean_log_info:
+        figures_dir = project_root / "results" / "figures"
+        figures_dir.mkdir(parents=True, exist_ok=True)
+        mean_plot_path = figures_dir / "identifiability_mean_information.png"
+        save_mean_identifiability_plot(mean_log_info, mean_plot_path)
+
+        # Save the underlying numbers for inspection
+        try:
+            df_mean = pd.DataFrame(rows).sort_values(
+                "Mean_log10_Fisher_diag", ascending=False
+            )
+            csv_path = figures_dir / "identifiability_mean_information.csv"
+            df_mean.to_csv(csv_path, index=False)
+            logger.info(
+                "[IDENTIFIABILITY] Saved mean identifiability table to %s", csv_path
+            )
+        except Exception as exc:
+            logger.warning(
+                "[IDENTIFIABILITY] Failed to save mean identifiability CSV: %s", exc
+            )
 
     logger.info(f"Regeneration complete: {successful} successful, {failed} failed")
 

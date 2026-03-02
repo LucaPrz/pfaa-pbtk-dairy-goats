@@ -5,7 +5,6 @@ This script:
   1. Loads Phase 3 Monte Carlo predictions.
   2. Loads experimental observations.
   3. Matches predictions to observations by compound, isomer, compartment, and time
-     (with optional Day-0 → Day-1 shift).
   4. Computes per-compound and per-compartment goodness-of-fit metrics:
      - R² (log10 scale)
      - geometric mean fold error

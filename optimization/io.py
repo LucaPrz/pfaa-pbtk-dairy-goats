@@ -20,8 +20,10 @@ from statsmodels.nonparametric.smoothers_lowess import lowess
 
 logger = logging.getLogger(__name__)
 
-# Default LOWESS parameters for milk yield smoothing (aligned with intake: frac=0.3)
-MILK_YIELD_LOWESS_FRAC = 0.3
+# Default LOWESS parameters for milk yield smoothing.
+# NOTE: Previously used frac=0.3; reduced to 0.15 for experiments on PFHxS
+# underprediction. To revert, change MILK_YIELD_LOWESS_FRAC back to 0.3.
+MILK_YIELD_LOWESS_FRAC = 0.15
 MILK_YIELD_LOWESS_IT = 3
 
 

@@ -1,0 +1,22 @@
+Identifiability Diagnostics: PFHpS Branched
+============================================================
+
+Condition Number: inf
+(Higher = less identifiable, >1e6 suggests problems)
+
+Eigenvalues (sorted, descending):
+  1. 0.00e+00
+  2. 0.00e+00
+
+Unidentifiable Parameter Combinations:
+  1. Eigenvalue: 0.00e+00
+     Parameters: k_a, k_elim
+     Contributions: {'k_a': 0.9999999999, 'k_elim': 0.0}
+  2. Eigenvalue: 0.00e+00
+     Parameters: k_elim, k_a
+     Contributions: {'k_elim': 0.9999999999, 'k_a': 0.0}
+
+Correlation Matrix:
+        k_elim  k_a
+k_elim     1.0  0.0
+k_a        0.0  1.0
