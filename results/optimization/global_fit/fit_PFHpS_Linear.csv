@@ -1,6 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_elim,0.06400487334602231,PFHpS,Linear
-k_a,270.70791151460213,PFHpS,Linear
+k_elim,0.08883353429637626,PFHpS,Linear
 k_feces,0.0,PFHpS,Linear
 k_ehc,0.0,PFHpS,Linear
 k_urine,0.0,PFHpS,Linear
+k_a,100.0,PFHpS,Linear

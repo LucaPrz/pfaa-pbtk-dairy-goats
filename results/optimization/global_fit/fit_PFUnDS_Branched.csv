@@ -1,6 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_elim,1.572693013935158,PFUnDS,Branched
-k_a,1.9184382751705953,PFUnDS,Branched
-k_feces,0.03500705177360823,PFUnDS,Branched
-k_ehc,18.330022929368905,PFUnDS,Branched
+k_elim,0.7687035749901239,PFUnDS,Branched
+k_feces,0.05950612184079615,PFUnDS,Branched
+k_ehc,314.82341954813245,PFUnDS,Branched
 k_urine,0.0,PFUnDS,Branched
+k_a,100.0,PFUnDS,Branched
