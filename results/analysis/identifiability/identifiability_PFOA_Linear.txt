@@ -1,22 +1,20 @@
 Identifiability Diagnostics: PFOA Linear
 ============================================================
 
-Condition Number: 7.04e+01
+Condition Number: 1.92e+01
 (Higher = less identifiable, >1e6 suggests problems)
-Condition Number (per dim, ^4 root): 2.90e+00
+Condition Number (per dim, ^3 root): 2.68e+00
 (Comparable across different # of fitted parameters; use for fair comparison)
 
 Eigenvalues (sorted, descending):
-  1. 4.00e+03
-  2. 1.12e+03
-  3. 1.74e+02
-  4. 5.68e+01
+  1. 5.77e+02
+  2. 1.28e+02
+  3. 3.01e+01
 
 No strongly unidentifiable combinations detected.
 
 Correlation Matrix:
-           k_elim       k_a   k_feces   k_urine
-k_elim   1.000000 -0.121698 -0.114628 -0.909822
-k_a     -0.121698  1.000000  0.889345  0.003927
-k_feces -0.114628  0.889345  1.000000  0.006322
-k_urine -0.909822  0.003927  0.006322  1.000000
+           k_elim   k_feces   k_urine
+k_elim   1.000000 -0.013281 -0.392012
+k_feces -0.013281  1.000000 -0.002152
+k_urine -0.392012 -0.002152  1.000000

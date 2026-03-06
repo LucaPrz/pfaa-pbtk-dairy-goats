@@ -1,20 +1,18 @@
 Identifiability Diagnostics: PFOA Branched
 ============================================================
 
-Condition Number: 3.60e+06
+Condition Number: 1.00e+02
 (Higher = less identifiable, >1e6 suggests problems)
-Condition Number (per dim, ^3 root): 1.53e+02
+Condition Number (per dim, ^2 root): 1.00e+01
 (Comparable across different # of fitted parameters; use for fair comparison)
 
 Eigenvalues (sorted, descending):
-  1. 8.96e+02
-  2. 2.97e+02
-  3. 2.49e-04
+  1. 7.90e+02
+  2. 7.89e+00
 
 No strongly unidentifiable combinations detected.
 
 Correlation Matrix:
-           k_elim       k_a   k_urine
-k_elim   1.000000 -0.324656 -0.159949
-k_a     -0.324656  1.000000  0.312361
-k_urine -0.159949  0.312361  1.000000
+           k_elim   k_urine
+k_elim   1.000000 -0.973717
+k_urine -0.973717  1.000000

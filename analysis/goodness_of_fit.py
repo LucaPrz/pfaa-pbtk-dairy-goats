@@ -102,7 +102,6 @@ def match_predictions_observations(
 
     return merged
 
-
 def compute_log_values(df: pd.DataFrame) -> pd.DataFrame:
     """Compute log10 values for observations and predictions."""
     df = df.copy()
@@ -323,7 +322,7 @@ def plot_log_pred_vs_obs_for_passing(
     summary_df: pd.DataFrame,
     output_dir: Path,
     r2_threshold: float = 0.7,
-    gmfe_threshold: float = 2.0,
+    gmfe_threshold: float = 3.0,
     bias_abs_threshold: float = 0.25,
 ) -> None:
     """

@@ -26,6 +26,55 @@ from optimization.io import get_project_root
 logger = logging.getLogger(__name__)
 
 
+def _get_functional_group(compound: str) -> str:
+    """Classify PFAS functional group from compound name (PFCA vs PFSA)."""
+    if compound is None:
+        return "Unknown"
+    name = str(compound).upper()
+    if name.endswith("A") or name.endswith("ECHS"):
+        return "PFCA"
+    if name.endswith("S"):
+        return "PFSA"
+    return "Unknown"
+
+
+def _get_chain_length(compound: str) -> int:
+    """Approximate perfluoroalkyl chain length from common PFAS abbreviations."""
+    if compound is None:
+        return 99
+    name = str(compound).upper()
+
+    # Explicit mapping for PFAS in this project (perfluorinated chain length)
+    chain_map = {
+        # PFCA
+        "PFBA": 4,
+        "PFPEA": 5,
+        "PFHXA": 6,
+        "PFHPA": 7,
+        "PFOA": 8,
+        "PFNA": 9,
+        "PFDA": 10,
+        "PFUNDA": 11,
+        "PFDODA": 12,
+        "PFTRDA": 13,
+        "PFTEDA": 14,
+        # PFSA
+        "PFBS": 4,
+        "PFPES": 5,
+        "PFHXS": 6,
+        "PFHPS": 7,
+        "PFOS": 8,
+        "PFNS": 9,
+        "PFDS": 10,
+        "PFUNDS": 11,
+        "PFDODS": 12,
+        "PFTRDS": 13,
+        "PFTEDS": 14,
+    }
+
+    return chain_map.get(name, 99)
+
+
 def compute_gradients_finite_difference(
     fit_params: List[float],
     param_names: List[str],
@@ -457,9 +506,15 @@ def save_identifiability_report(
 
 def save_mean_identifiability_plot(
     mean_log_info: Dict[str, float],
+    ci_bounds: Dict[str, Tuple[float, float]],
+    n_counts: Dict[str, float],
     output_path: Path,
 ) -> None:
-    """Save a ranked horizontal plot of mean identifiability per parameter."""
+    """Save a ranked horizontal forest-style plot of mean identifiability per parameter.
+
+    Parameters are shown on the y-axis and the mean log10 Fisher information
+    (diagonal element) on the x-axis as point estimates with 95% CIs.
+    """
     if not mean_log_info:
         logger.warning("[IDENTIFIABILITY] No identifiability stats available for mean plot.")
         return
@@ -481,34 +536,72 @@ def save_mean_identifiability_plot(
     names = [k for k, _ in items]
     scores = [v for _, v in items]
 
-    # Color by process / route for visual grouping
-    color_map = {
-        "k_elim": "C0",
-        "k_a": "C1",
-        "k_urine": "C2",
-        "k_feces": "C2",
-        "k_ehc": "C2",
-    }
-    colors = [color_map.get(n, "C0") for n in names]
+    # One distinct color per parameter, using the same color cycle as other
+    # project figures (driven by seaborn's default palette via set_paper_plot_style).
+    prop_cycle = plt.rcParams.get("axes.prop_cycle", None)
+    if prop_cycle is not None:
+        base_colors = prop_cycle.by_key().get("color", ["C0"])
+    else:
+        base_colors = ["C0"]
+    colors = [base_colors[i % len(base_colors)] for i in range(len(names))]
+
+    # Extract CI bounds and sample sizes in the same order
+    lower = [ci_bounds.get(name, (val, val))[0] for name, val in zip(names, scores)]
+    upper = [ci_bounds.get(name, (val, val))[1] for name, val in zip(names, scores)]
+    ns = [n_counts.get(name, 0.0) for name in names]
 
     y_pos = np.arange(len(names))
     height = max(3.0, 0.4 * len(names))
 
     fig, ax = plt.subplots(figsize=(8, height))
 
-    # Horizontal lollipop plot: line from 0 to value with a marker at the end
-    ax.hlines(y_pos, 0.0, scores, color=colors, linewidth=2.2)
-    ax.scatter(scores, y_pos, color=colors, zorder=3, s=40)
+    # Forest-style plot: point estimates with horizontal confidence intervals.
+    for i, (m, lo, hi, c) in enumerate(zip(scores, lower, upper, colors)):
+        if np.isfinite(lo) and np.isfinite(hi) and hi >= lo:
+            xerr = np.array([[m - lo], [hi - m]])
+        else:
+            xerr = None
+        ax.errorbar(
+            m,
+            y_pos[i],
+            xerr=xerr,
+            fmt="o",
+            color=c,
+            ecolor=c,
+            elinewidth=1.5,
+            capsize=3,
+        )
 
     ax.set_yticks(y_pos)
     ax.set_yticklabels(names)
     ax.invert_yaxis()  # highest score on top
     ax.set_xlabel("Mean log10 Fisher info (F_ii)")
 
-    # Tighten x-limits to data range with small margin
-    xmin = min(scores) - 0.2
-    xmax = max(scores) + 0.2
+    # Tighten x-limits to cover CIs with small margin
+    finite_lows = [lo for lo in lower if np.isfinite(lo)]
+    finite_highs = [hi for hi in upper if np.isfinite(hi)]
+    if finite_lows and finite_highs:
+        xmin = min(finite_lows) - 0.2
+        xmax = max(finite_highs) + 0.2
+    else:
+        xmin = min(scores) - 0.2
+        xmax = max(scores) + 0.2
     ax.set_xlim(xmin, xmax)
+
+    # Annotate each point with its sample size (N_pairs)
+    x_span = xmax - xmin
+    text_offset = 0.02 * x_span
+    for i, (hi, n_val) in enumerate(zip(upper, ns)):
+        if not np.isfinite(hi):
+            continue
+        ax.text(
+            hi + text_offset,
+            y_pos[i],
+            f"n={int(n_val)}",
+            va="center",
+            ha="left",
+            fontsize=10,
+        )
 
     ax.grid(True, axis="x", alpha=0.2)
 
@@ -520,6 +613,118 @@ def save_mean_identifiability_plot(
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
     logger.info(f"[IDENTIFIABILITY] Saved mean identifiability plot to {output_path}")
+
+
+def save_parameter_correlation_plot(
+    corr_table: pd.DataFrame,
+    output_path: Path,
+) -> None:
+    """
+    Save a scatter-style heatmap of parameter–parameter correlations across compound–isomer pairs.
+
+    Rows correspond to compound–isomer labels, columns to parameter pairs, and color encodes
+    the correlation coefficient in [-1, 1].
+    """
+    if corr_table.empty:
+        logger.warning("[IDENTIFIABILITY] Empty correlation table, skipping correlation plot.")
+        return
+
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from auxiliary.plot_style import set_paper_plot_style
+
+        set_paper_plot_style()
+    except Exception as exc:  # pragma: no cover - plotting optional
+        logger.warning(
+            "[IDENTIFIABILITY] Matplotlib unavailable, skipping correlation plot: %s", exc
+        )
+        return
+
+    # Ensure deterministic column ordering but preserve the incoming row order
+    corr_table = corr_table.copy()
+    corr_table = corr_table.reindex(sorted(corr_table.columns), axis=1)
+
+    labels = list(corr_table.index)
+    pairs = list(corr_table.columns)
+
+    n_rows = len(labels)
+    n_cols = len(pairs)
+
+    y_pos = np.arange(n_rows)
+    x_pos = np.arange(n_cols)
+
+    height = max(3.0, 0.4 * n_rows)
+    fig, ax = plt.subplots(figsize=(2.5 + 0.6 * n_cols, height))
+
+    cmap = plt.get_cmap("coolwarm")
+
+    # Plot each column as a vertical strip of colored markers
+    for j, pair in enumerate(pairs):
+        vals = corr_table[pair].to_numpy(dtype=float)
+        # Only plot entries where correlation is defined (finite)
+        valid_mask = np.isfinite(vals)
+        if not np.any(valid_mask):
+            continue
+        vals_valid = vals[valid_mask]
+        y_valid = y_pos[valid_mask]
+
+        # Normalize correlations in [-1, 1] to [0, 1] for colormap
+        norm_vals = (np.clip(vals_valid, -1.0, 1.0) + 1.0) / 2.0
+        colors = cmap(norm_vals)
+
+        ax.scatter(
+            np.full_like(vals_valid, j, dtype=float),
+            y_valid,
+            color=colors,
+            s=80,
+            edgecolor="black",
+            linewidth=0.3,
+        )
+
+    ax.set_frame_on(False)
+    ax.grid(alpha=0.3, axis="x")
+    ax.set_axisbelow(True)
+
+    ax.set_xticks(x_pos)
+
+    # LaTeX-style labels for parameter pairs, e.g. "k_urine–k_feces" -> "$k_{urine}$–$k_{feces}$"
+    def _latex_param(name: str) -> str:
+        if name.startswith("k_"):
+            base = name.split("k_", 1)[1]
+            return rf"$k_{{{base}}}$"
+        return name
+
+    pair_labels = []
+    for pair in pairs:
+        parts = pair.split("–")
+        if len(parts) == 2:
+            left = _latex_param(parts[0])
+            right = _latex_param(parts[1])
+            pair_labels.append(f"{left}–{right}")
+        else:
+            pair_labels.append(pair)
+
+    ax.set_xticklabels(pair_labels, rotation=45, ha="right")
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(labels)
+
+    ax.tick_params(size=0, colors="0.3")
+    ax.set_xlabel("Parameter pair correlation", loc="right")
+
+    # Add a colorbar for correlation scale
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=-1.0, vmax=1.0))
+    sm.set_array([])
+    cbar = fig.colorbar(sm, ax=ax, pad=0.01)
+    cbar.set_label("Correlation coefficient", rotation=90)
+
+    # Adjust layout to avoid cutting off labels and colorbar
+    fig.subplots_adjust(left=0.25, bottom=0.25, right=0.85, top=0.95)
+    fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    logger.info(f"[IDENTIFIABILITY] Saved parameter correlation plot to {output_path}")
 
 
 def regenerate_all_identifiability_reports(
@@ -586,8 +791,10 @@ def regenerate_all_identifiability_reports(
     successful = 0
     failed = 0
 
-    # Aggregate identifiability across pairs: mean log10 Fisher diagonal per parameter
+    # Aggregate identifiability across pairs: log10 Fisher diagonal per parameter
     aggregate_stats: Dict[str, Dict[str, float]] = {}
+    # Long-format storage of parameter–parameter correlations across compound–isomer pairs
+    corr_long_rows: List[Dict[str, Any]] = []
 
     for fit_file in fit_files:
         # Extract compound and isomer from filename: fit_COMPOUND_ISOMER.csv
@@ -615,17 +822,40 @@ def regenerate_all_identifiability_reports(
                 use_for_aggregate = (
                     passing_pairs is None or (compound, isomer) in passing_pairs
                 )
+                param_names = diagnostics.get("param_names", [])
+                fisher_matrix = diagnostics.get("fisher_matrix")
+                corr_matrix = diagnostics.get("correlation_matrix")
+
                 if use_for_aggregate:
-                    param_names = diagnostics.get("param_names", [])
-                    fisher_matrix = diagnostics.get("fisher_matrix")
+                    # Aggregate Fisher diagonal only for passing pairs (if GOF filter is used)
                     if fisher_matrix is not None and len(param_names) == fisher_matrix.shape[0]:
                         diag_vals = np.diag(fisher_matrix).astype(float)
                         for name, val in zip(param_names, diag_vals):
                             if not np.isfinite(val) or val <= 0:
                                 continue
-                            stat = aggregate_stats.setdefault(name, {"sum_log": 0.0, "count": 0.0})
-                            stat["sum_log"] += float(np.log10(val))
-                            stat["count"] += 1.0
+                            stat = aggregate_stats.setdefault(name, {"values": []})
+                            stat["values"].append(float(np.log10(val)))
+
+                # Store parameter–parameter correlations (all pairs, no hardcoding, regardless of GOF)
+                if (
+                    corr_matrix is not None
+                    and isinstance(corr_matrix, np.ndarray)
+                    and corr_matrix.shape == (len(param_names), len(param_names))
+                ):
+                    for i in range(len(param_names)):
+                        for j in range(i + 1, len(param_names)):
+                            rho = float(corr_matrix[i, j])
+                            if not np.isfinite(rho):
+                                continue
+                            corr_long_rows.append(
+                                {
+                                    "Compound": compound,
+                                    "Isomer": isomer,
+                                    "Label": f"{compound} {isomer}",
+                                    "Pair": f"{param_names[i]}–{param_names[j]}",
+                                    "Correlation": rho,
+                                }
+                            )
 
                 logger.info(f"✓ Regenerated report for {compound} {isomer}")
                 successful += 1
@@ -640,26 +870,45 @@ def regenerate_all_identifiability_reports(
             failed += 1
 
     # Create a single ranked horizontal plot of mean identifiability per parameter
-    mean_log_info = {}
+    mean_log_info: Dict[str, float] = {}
+    ci_bounds: Dict[str, Tuple[float, float]] = {}
+    n_counts: Dict[str, float] = {}
     rows = []
     for name, stat in aggregate_stats.items():
-        if stat["count"] <= 0:
+        values = np.asarray(stat.get("values", []), dtype=float)
+        if values.size == 0:
             continue
-        mean_val = stat["sum_log"] / stat["count"]
+        n = float(values.size)
+        mean_val = float(values.mean())
+        if values.size > 1:
+            sd = float(values.std(ddof=1))
+            se = sd / np.sqrt(values.size)
+            ci_half = 1.96 * se
+            ci_low = mean_val - ci_half
+            ci_high = mean_val + ci_half
+        else:
+            ci_low = mean_val
+            ci_high = mean_val
+
         mean_log_info[name] = mean_val
+        ci_bounds[name] = (ci_low, ci_high)
+        n_counts[name] = n
         rows.append(
             {
                 "Parameter": name,
                 "Mean_log10_Fisher_diag": mean_val,
-                "N_pairs": stat["count"],
+                "CI_low": ci_low,
+                "CI_high": ci_high,
+                "N_pairs": n,
             }
         )
 
+    figures_dir = project_root / "results" / "figures"
+    figures_dir.mkdir(parents=True, exist_ok=True)
+
     if mean_log_info:
-        figures_dir = project_root / "results" / "figures"
-        figures_dir.mkdir(parents=True, exist_ok=True)
         mean_plot_path = figures_dir / "identifiability_mean_information.png"
-        save_mean_identifiability_plot(mean_log_info, mean_plot_path)
+        save_mean_identifiability_plot(mean_log_info, ci_bounds, n_counts, mean_plot_path)
 
         # Save the underlying numbers for inspection
         try:
@@ -674,6 +923,56 @@ def regenerate_all_identifiability_reports(
         except Exception as exc:
             logger.warning(
                 "[IDENTIFIABILITY] Failed to save mean identifiability CSV: %s", exc
+            )
+
+    # Build and save parameter–parameter correlation strip plot (long-format to wide pivot)
+    if corr_long_rows:
+        try:
+            df_corr_long = pd.DataFrame(corr_long_rows)
+            # Determine desired compound–isomer ordering:
+            # functional group (PFCA/PFSA), branched vs linear, then chain length.
+            order_meta = (
+                df_corr_long[["Compound", "Isomer", "Label"]]
+                .drop_duplicates()
+                .copy()
+            )
+            order_meta["Functional_Group"] = order_meta["Compound"].apply(
+                _get_functional_group
+            )
+            order_meta["Chain_Length"] = order_meta["Compound"].apply(
+                _get_chain_length
+            )
+
+            fg_order = {"PFCA": 0, "PFSA": 1, "Unknown": 2}
+            iso_order = {"Branched": 0, "Linear": 1}
+
+            order_meta["FG_Rank"] = order_meta["Functional_Group"].map(fg_order).fillna(2)
+            order_meta["Iso_Rank"] = order_meta["Isomer"].map(iso_order).fillna(1)
+
+            order_meta = order_meta.sort_values(
+                ["FG_Rank", "Iso_Rank", "Chain_Length", "Compound", "Isomer"]
+            )
+            ordered_labels = list(order_meta["Label"])
+
+            # Pivot to wide format: index = compound–isomer label, columns = parameter pair
+            corr_table = df_corr_long.pivot_table(
+                index="Label", columns="Pair", values="Correlation", aggfunc="mean"
+            )
+            corr_table = corr_table.reindex(ordered_labels)
+            corr_table = corr_table.reindex(sorted(corr_table.columns), axis=1)
+
+            corr_plot_path = figures_dir / "identifiability_parameter_correlations.png"
+            save_parameter_correlation_plot(corr_table, corr_plot_path)
+
+            # Also save underlying numbers
+            corr_csv_path = figures_dir / "identifiability_parameter_correlations.csv"
+            corr_table.to_csv(corr_csv_path)
+            logger.info(
+                "[IDENTIFIABILITY] Saved parameter correlation table to %s", corr_csv_path
+            )
+        except Exception as exc:
+            logger.warning(
+                "[IDENTIFIABILITY] Failed to build/save parameter correlation plot: %s", exc
             )
 
     logger.info(f"Regeneration complete: {successful} successful, {failed} failed")
