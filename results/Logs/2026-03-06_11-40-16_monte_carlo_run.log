@@ -1,0 +1,1421 @@
+2026-03-06 11:40:16,101 - INFO - Loading data files...
+2026-03-06 11:40:16,299 - INFO - Loaded intake and physiological data: 17766 intake rows, 3 animals with urine volumes, 3 animals with feces mass, 3 animals with milk yield series, 3 animals with body weight series
+2026-03-06 11:40:16,299 - INFO - Determining compound-isomer pairs: hay concentration not 0 and at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ.
+2026-03-06 11:40:16,362 - INFO -   PFBA Linear: matrices above LOQ: Feces, Milk, Plasma, Urine
+2026-03-06 11:40:16,376 - INFO -   PFPeA Linear: matrices above LOQ: Feces, Milk, Muscle, Urine
+2026-03-06 11:40:16,390 - INFO -   PFHxA Linear: matrices above LOQ: Urine
+2026-03-06 11:40:16,405 - INFO -   PFHpA Linear: matrices above LOQ: Urine
+2026-03-06 11:40:16,419 - INFO -   PFOA Linear: matrices above LOQ: Brain, Feces, Milk, Plasma, Urine
+2026-03-06 11:40:16,434 - INFO -   PFOA Branched: matrices above LOQ: Milk, Plasma, Urine
+2026-03-06 11:40:16,448 - INFO -   PFDA Linear: matrices above LOQ: Liver, Milk, Plasma
+2026-03-06 11:40:16,462 - INFO -   PFUnDA Linear: matrices above LOQ: Milk, Plasma
+2026-03-06 11:40:16,476 - INFO -   PFDoDA Linear: matrices above LOQ: Milk, Plasma
+2026-03-06 11:40:16,491 - INFO -   PFTrDA Linear: matrices above LOQ: Milk, Plasma
+2026-03-06 11:40:16,505 - INFO -   PFTeDA Linear: matrices above LOQ: Plasma
+2026-03-06 11:40:16,519 - INFO -   PFHxS Linear: matrices above LOQ: Milk, Plasma, Urine
+2026-03-06 11:40:16,533 - INFO -   PFHpS Linear: matrices above LOQ: Milk, Plasma
+2026-03-06 11:40:16,550 - INFO -   PFOS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-03-06 11:40:16,565 - INFO -   PFOS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-03-06 11:40:16,580 - INFO -   PFNS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-03-06 11:40:16,595 - INFO -   PFNS Branched: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine
+2026-03-06 11:40:16,609 - INFO -   PFDS Linear: matrices above LOQ: Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen
+2026-03-06 11:40:16,624 - INFO -   PFDS Branched: matrices above LOQ: Feces, Heart, Kidney, Liver, Lung, Milk, Plasma, Spleen
+2026-03-06 11:40:16,639 - INFO -   PFUnDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-03-06 11:40:16,653 - INFO -   PFUnDS Branched: matrices above LOQ: Feces, Liver, Milk, Plasma
+2026-03-06 11:40:16,667 - INFO -   PFDoDS Linear: matrices above LOQ: Brain, Feces, Milk, Plasma
+2026-03-06 11:40:16,680 - INFO -   PFDoDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-03-06 11:40:16,693 - INFO -   PFTrDS Linear: matrices above LOQ: Brain, Feces, Milk
+2026-03-06 11:40:16,706 - INFO -   PFTrDS Branched: matrices above LOQ: Feces, Milk, Plasma
+2026-03-06 11:40:16,724 - INFO -   PFNA Linear: matrices above LOQ: Milk
+2026-03-06 11:40:16,765 - INFO -   PFDA Branched: matrices above LOQ: Milk
+2026-03-06 11:40:16,775 - INFO -   PFUnDA Branched: matrices above LOQ: Milk
+2026-03-06 11:40:16,784 - INFO -   PFDoDA Branched: matrices above LOQ: Milk
+2026-03-06 11:40:16,794 - INFO -   PFTrDA Branched: matrices above LOQ: Milk
+2026-03-06 11:40:16,804 - INFO -   PFTeDA Branched: matrices above LOQ: Milk
+2026-03-06 11:40:16,814 - INFO - Found 19 compounds (31 compound-isomer pairs) meeting criteria
+2026-03-06 11:40:16,831 - INFO - 
+All compound-isomer pairs to process (31 total):
+2026-03-06 11:40:16,832 - INFO -   PFBA         | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFDA         | Branched  
+2026-03-06 11:40:16,832 - INFO -   PFDA         | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFDS         | Branched  
+2026-03-06 11:40:16,832 - INFO -   PFDS         | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFDoDA       | Branched  
+2026-03-06 11:40:16,832 - INFO -   PFDoDA       | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFDoDS       | Branched  
+2026-03-06 11:40:16,832 - INFO -   PFDoDS       | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFHpA        | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFHpS        | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFHxA        | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFHxS        | Linear    
+2026-03-06 11:40:16,832 - INFO -   PFNA         | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFNS         | Branched  
+2026-03-06 11:40:16,833 - INFO -   PFNS         | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFOA         | Branched  
+2026-03-06 11:40:16,833 - INFO -   PFOA         | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFOS         | Branched  
+2026-03-06 11:40:16,833 - INFO -   PFOS         | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFPeA        | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFTeDA       | Branched  
+2026-03-06 11:40:16,833 - INFO -   PFTeDA       | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFTrDA       | Branched  
+2026-03-06 11:40:16,833 - INFO -   PFTrDA       | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFTrDS       | Branched  
+2026-03-06 11:40:16,833 - INFO -   PFTrDS       | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFUnDA       | Branched  
+2026-03-06 11:40:16,833 - INFO -   PFUnDA       | Linear    
+2026-03-06 11:40:16,833 - INFO -   PFUnDS       | Branched  
+2026-03-06 11:40:16,834 - INFO -   PFUnDS       | Linear    
+2026-03-06 11:40:16,834 - INFO - 
+2026-03-06 11:40:16,834 - INFO - === STARTING FULL MONTE CARLO RUN ===
+2026-03-06 11:40:16,834 - INFO - Total compounds to process: 31
+2026-03-06 11:40:16,999 - INFO - === PHASE 1: Running global mean fits (two-stage: log-RMSE then censored likelihood) ===
+2026-03-06 11:40:17,000 - INFO - [PHASE 1 / Stage 1] Log-RMSE global fits (no sigma needed)
+2026-03-06 11:40:17,156 - INFO - [GLOBAL FIT] Starting PFBA Linear
+2026-03-06 11:40:17,184 - INFO - [GLOBAL FIT] PFBA Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 11:40:17,198 - INFO - [GLOBAL FIT] PFBA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_urine']
+2026-03-06 11:40:17,198 - INFO - [GLOBAL FIT] PFBA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-03-06 11:40:17,297 - INFO - [GLOBAL FIT] Starting PFDA Branched
+2026-03-06 11:40:17,312 - INFO - [GLOBAL FIT] PFDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:17,322 - INFO - [GLOBAL FIT] PFDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:17,322 - INFO - [GLOBAL FIT] PFDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:17,412 - INFO - [GLOBAL FIT] Starting PFDA Linear
+2026-03-06 11:40:17,430 - INFO - [GLOBAL FIT] PFDA Linear - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 11:40:17,443 - INFO - [GLOBAL FIT] PFDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:17,444 - INFO - [GLOBAL FIT] PFDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:17,546 - INFO - [GLOBAL FIT] Starting PFDS Branched
+2026-03-06 11:40:17,565 - INFO - [GLOBAL FIT] PFDS Branched - Data: 231 points, 8 matrices above LOQ, 3 animals
+2026-03-06 11:40:17,579 - INFO - [GLOBAL FIT] PFDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:17,579 - INFO - [GLOBAL FIT] PFDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:40:17,661 - INFO - [GLOBAL FIT] Starting PFDS Linear
+2026-03-06 11:40:17,679 - INFO - [GLOBAL FIT] PFDS Linear - Data: 231 points, 10 matrices above LOQ, 3 animals
+2026-03-06 11:40:17,693 - INFO - [GLOBAL FIT] PFDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:17,693 - INFO - [GLOBAL FIT] PFDS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:40:17,781 - INFO - [GLOBAL FIT] Starting PFDoDA Branched
+2026-03-06 11:40:17,795 - INFO - [GLOBAL FIT] PFDoDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:17,805 - INFO - [GLOBAL FIT] PFDoDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:17,806 - INFO - [GLOBAL FIT] PFDoDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:17,898 - INFO - [GLOBAL FIT] Starting PFDoDA Linear
+2026-03-06 11:40:17,920 - INFO - [GLOBAL FIT] PFDoDA Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 11:40:17,937 - INFO - [GLOBAL FIT] PFDoDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:17,937 - INFO - [GLOBAL FIT] PFDoDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:18,013 - INFO - [GLOBAL FIT] Starting PFDoDS Branched
+2026-03-06 11:40:18,031 - INFO - [GLOBAL FIT] PFDoDS Branched - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,045 - INFO - [GLOBAL FIT] PFDoDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:18,045 - INFO - [GLOBAL FIT] PFDoDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:40:18,142 - INFO - [GLOBAL FIT] Starting PFDoDS Linear
+2026-03-06 11:40:18,160 - INFO - [GLOBAL FIT] PFDoDS Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,173 - INFO - [GLOBAL FIT] PFDoDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:18,173 - INFO - [GLOBAL FIT] PFDoDS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:40:18,268 - INFO - [GLOBAL FIT] Starting PFHpA Linear
+2026-03-06 11:40:18,286 - INFO - [GLOBAL FIT] PFHpA Linear - Data: 231 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,299 - INFO - [GLOBAL FIT] PFHpA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 11:40:18,299 - INFO - [GLOBAL FIT] PFHpA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 11:40:18,383 - INFO - [GLOBAL FIT] Starting PFHpS Linear
+2026-03-06 11:40:18,401 - INFO - [GLOBAL FIT] PFHpS Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,414 - INFO - [GLOBAL FIT] PFHpS Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:18,414 - INFO - [GLOBAL FIT] PFHpS Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:18,504 - INFO - [GLOBAL FIT] Starting PFHxA Linear
+2026-03-06 11:40:18,530 - INFO - [GLOBAL FIT] PFHxA Linear - Data: 231 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,550 - INFO - [GLOBAL FIT] PFHxA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 11:40:18,550 - INFO - [GLOBAL FIT] PFHxA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 11:40:18,617 - INFO - [GLOBAL FIT] Starting PFHxS Linear
+2026-03-06 11:40:18,640 - INFO - [GLOBAL FIT] PFHxS Linear - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,657 - INFO - [GLOBAL FIT] PFHxS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 11:40:18,657 - INFO - [GLOBAL FIT] PFHxS Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 11:40:18,763 - INFO - [GLOBAL FIT] Starting PFNA Linear
+2026-03-06 11:40:18,778 - INFO - [GLOBAL FIT] PFNA Linear - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,787 - INFO - [GLOBAL FIT] PFNA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:18,788 - INFO - [GLOBAL FIT] PFNA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:18,892 - INFO - [GLOBAL FIT] Starting PFNS Branched
+2026-03-06 11:40:18,916 - INFO - [GLOBAL FIT] PFNS Branched - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-03-06 11:40:18,932 - INFO - [GLOBAL FIT] PFNS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc', 'k_urine']
+2026-03-06 11:40:19,021 - INFO - [GLOBAL FIT] Starting PFNS Linear
+2026-03-06 11:40:19,037 - INFO - [GLOBAL FIT] PFNS Linear - Data: 231 points, 10 matrices above LOQ, 3 animals
+2026-03-06 11:40:19,049 - INFO - [GLOBAL FIT] PFNS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:19,049 - INFO - [GLOBAL FIT] PFNS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:40:19,139 - INFO - [GLOBAL FIT] Starting PFOA Branched
+2026-03-06 11:40:19,155 - INFO - [GLOBAL FIT] PFOA Branched - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 11:40:19,167 - INFO - [GLOBAL FIT] PFOA Branched - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 11:40:19,167 - INFO - [GLOBAL FIT] PFOA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 11:40:19,263 - INFO - [GLOBAL FIT] Starting PFOA Linear
+2026-03-06 11:40:19,286 - INFO - [GLOBAL FIT] PFOA Linear - Data: 231 points, 5 matrices above LOQ, 3 animals
+2026-03-06 11:40:19,303 - INFO - [GLOBAL FIT] PFOA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_urine']
+2026-03-06 11:40:19,304 - INFO - [GLOBAL FIT] PFOA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-03-06 11:40:19,425 - INFO - [GLOBAL FIT] Starting PFOS Branched
+2026-03-06 11:40:19,446 - INFO - [GLOBAL FIT] PFOS Branched - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-03-06 11:40:19,459 - INFO - [GLOBAL FIT] PFOS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc', 'k_urine']
+2026-03-06 11:40:19,649 - INFO - [GLOBAL FIT] Starting PFOS Linear
+2026-03-06 11:40:19,671 - INFO - [GLOBAL FIT] PFOS Linear - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-03-06 11:40:19,687 - INFO - [GLOBAL FIT] PFOS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc', 'k_urine']
+2026-03-06 11:40:19,814 - INFO - [GLOBAL FIT] Starting PFPeA Linear
+2026-03-06 11:40:19,831 - INFO - [GLOBAL FIT] PFPeA Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 11:40:19,842 - INFO - [GLOBAL FIT] PFPeA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_urine']
+2026-03-06 11:40:19,842 - INFO - [GLOBAL FIT] PFPeA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-03-06 11:40:19,932 - INFO - [GLOBAL FIT] Starting PFTeDA Branched
+2026-03-06 11:40:19,950 - INFO - [GLOBAL FIT] PFTeDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:19,962 - INFO - [GLOBAL FIT] PFTeDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:19,962 - INFO - [GLOBAL FIT] PFTeDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:20,049 - INFO - [GLOBAL FIT] Starting PFTeDA Linear
+2026-03-06 11:40:20,074 - INFO - [GLOBAL FIT] PFTeDA Linear - Data: 231 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:20,092 - INFO - [GLOBAL FIT] PFTeDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:20,092 - INFO - [GLOBAL FIT] PFTeDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:20,171 - INFO - [GLOBAL FIT] Starting PFTrDA Branched
+2026-03-06 11:40:20,191 - INFO - [GLOBAL FIT] PFTrDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:20,203 - INFO - [GLOBAL FIT] PFTrDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:20,204 - INFO - [GLOBAL FIT] PFTrDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:20,295 - INFO - [GLOBAL FIT] Starting PFTrDA Linear
+2026-03-06 11:40:20,311 - INFO - [GLOBAL FIT] PFTrDA Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 11:40:20,323 - INFO - [GLOBAL FIT] PFTrDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:20,323 - INFO - [GLOBAL FIT] PFTrDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:20,412 - INFO - [GLOBAL FIT] Starting PFTrDS Branched
+2026-03-06 11:40:20,434 - INFO - [GLOBAL FIT] PFTrDS Branched - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 11:40:20,446 - INFO - [GLOBAL FIT] PFTrDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:20,446 - INFO - [GLOBAL FIT] PFTrDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:40:20,529 - INFO - [GLOBAL FIT] Starting PFTrDS Linear
+2026-03-06 11:40:20,545 - INFO - [GLOBAL FIT] PFTrDS Linear - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 11:40:20,557 - INFO - [GLOBAL FIT] PFTrDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces']
+2026-03-06 11:40:20,557 - INFO - [GLOBAL FIT] PFTrDS Linear - Fixed parameters: {'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:20,648 - INFO - [GLOBAL FIT] Starting PFUnDA Branched
+2026-03-06 11:40:20,667 - INFO - [GLOBAL FIT] PFUnDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 11:40:20,681 - INFO - [GLOBAL FIT] PFUnDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:20,681 - INFO - [GLOBAL FIT] PFUnDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:20,826 - INFO - [GLOBAL FIT] Starting PFUnDA Linear
+2026-03-06 11:40:20,850 - INFO - [GLOBAL FIT] PFUnDA Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 11:40:20,867 - INFO - [GLOBAL FIT] PFUnDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 11:40:20,868 - INFO - [GLOBAL FIT] PFUnDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 11:40:21,037 - INFO - [GLOBAL FIT] Starting PFUnDS Branched
+2026-03-06 11:40:21,054 - INFO - [GLOBAL FIT] PFUnDS Branched - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 11:40:21,066 - INFO - [GLOBAL FIT] PFUnDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:21,066 - INFO - [GLOBAL FIT] PFUnDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:40:21,256 - INFO - [GLOBAL FIT] Starting PFUnDS Linear
+2026-03-06 11:40:21,279 - INFO - [GLOBAL FIT] PFUnDS Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 11:40:21,298 - INFO - [GLOBAL FIT] PFUnDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 11:40:21,298 - INFO - [GLOBAL FIT] PFUnDS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 11:42:21,048 - INFO - [GLOBAL FIT] PFUnDA Linear - Success: loss=1.27, iterations=13
+2026-03-06 11:42:21,049 - INFO - [GLOBAL FIT] PFUnDA Linear - Parameters: k_elim=0.181, k_a=215.174, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:21,062 - INFO - [GLOBAL FIT] PFUnDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDA_Linear.csv
+2026-03-06 11:42:21,062 - INFO - [GLOBAL FIT] PFUnDA Linear - Completed in 120.2s
+2026-03-06 11:42:22,350 - INFO - [GLOBAL FIT] PFHpS Linear - Success: loss=2.10, iterations=12
+2026-03-06 11:42:22,351 - INFO - [GLOBAL FIT] PFHpS Linear - Parameters: k_elim=0.166, k_a=54.020, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:22,354 - INFO - [GLOBAL FIT] PFHpS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHpS_Linear.csv
+2026-03-06 11:42:22,354 - INFO - [GLOBAL FIT] PFHpS Linear - Completed in 124.0s
+2026-03-06 11:42:22,658 - INFO - [GLOBAL FIT] PFNA Linear - Success: loss=0.55, iterations=11
+2026-03-06 11:42:22,658 - INFO - [GLOBAL FIT] PFNA Linear - Parameters: k_elim=40.186, k_a=293.852, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:22,661 - INFO - [GLOBAL FIT] PFNA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFNA_Linear.csv
+2026-03-06 11:42:22,661 - INFO - [GLOBAL FIT] PFNA Linear - Completed in 123.9s
+2026-03-06 11:42:22,759 - INFO - [GLOBAL FIT] PFTrDA Linear - Success: loss=0.88, iterations=13
+2026-03-06 11:42:22,759 - INFO - [GLOBAL FIT] PFTrDA Linear - Parameters: k_elim=0.210, k_a=311.128, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:22,763 - INFO - [GLOBAL FIT] PFTrDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDA_Linear.csv
+2026-03-06 11:42:22,763 - INFO - [GLOBAL FIT] PFTrDA Linear - Completed in 122.5s
+2026-03-06 11:42:30,316 - INFO - [GLOBAL FIT] PFDA Linear - Success: loss=1.60, iterations=14
+2026-03-06 11:42:30,316 - INFO - [GLOBAL FIT] PFDA Linear - Parameters: k_elim=0.153, k_a=246.818, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:30,319 - INFO - [GLOBAL FIT] PFDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDA_Linear.csv
+2026-03-06 11:42:30,319 - INFO - [GLOBAL FIT] PFDA Linear - Completed in 132.9s
+2026-03-06 11:42:31,860 - INFO - [GLOBAL FIT] PFTeDA Linear - Success: loss=2.46, iterations=9
+2026-03-06 11:42:31,860 - INFO - [GLOBAL FIT] PFTeDA Linear - Parameters: k_elim=30.774, k_a=0.304, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:31,863 - INFO - [GLOBAL FIT] PFTeDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTeDA_Linear.csv
+2026-03-06 11:42:31,863 - INFO - [GLOBAL FIT] PFTeDA Linear - Completed in 131.8s
+2026-03-06 11:42:39,979 - INFO - [GLOBAL FIT] PFDoDA Linear - Success: loss=0.93, iterations=14
+2026-03-06 11:42:39,980 - INFO - [GLOBAL FIT] PFDoDA Linear - Parameters: k_elim=0.213, k_a=286.426, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:39,983 - INFO - [GLOBAL FIT] PFDoDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDA_Linear.csv
+2026-03-06 11:42:39,983 - INFO - [GLOBAL FIT] PFDoDA Linear - Completed in 142.1s
+2026-03-06 11:42:40,187 - INFO - [GLOBAL FIT] PFDA Branched - Success: loss=0.16, iterations=13
+2026-03-06 11:42:40,188 - INFO - [GLOBAL FIT] PFDA Branched - Parameters: k_elim=21.866, k_a=0.363, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:40,191 - INFO - [GLOBAL FIT] PFDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDA_Branched.csv
+2026-03-06 11:42:40,191 - INFO - [GLOBAL FIT] PFDA Branched - Completed in 142.9s
+2026-03-06 11:42:44,190 - INFO - [GLOBAL FIT] PFDoDA Branched - Success: loss=0.47, iterations=16
+2026-03-06 11:42:44,191 - INFO - [GLOBAL FIT] PFDoDA Branched - Parameters: k_elim=16.080, k_a=0.044, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:44,194 - INFO - [GLOBAL FIT] PFDoDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDA_Branched.csv
+2026-03-06 11:42:44,194 - INFO - [GLOBAL FIT] PFDoDA Branched - Completed in 146.4s
+2026-03-06 11:42:53,026 - INFO - [GLOBAL FIT] PFTeDA Branched - Success: loss=0.60, iterations=16
+2026-03-06 11:42:53,026 - INFO - [GLOBAL FIT] PFTeDA Branched - Parameters: k_elim=117.982, k_a=0.781, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:53,030 - INFO - [GLOBAL FIT] PFTeDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTeDA_Branched.csv
+2026-03-06 11:42:53,030 - INFO - [GLOBAL FIT] PFTeDA Branched - Completed in 153.1s
+2026-03-06 11:42:57,073 - INFO - [GLOBAL FIT] PFTrDA Branched - Success: loss=0.41, iterations=17
+2026-03-06 11:42:57,073 - INFO - [GLOBAL FIT] PFTrDA Branched - Parameters: k_elim=34.120, k_a=0.427, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:57,076 - INFO - [GLOBAL FIT] PFTrDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDA_Branched.csv
+2026-03-06 11:42:57,076 - INFO - [GLOBAL FIT] PFTrDA Branched - Completed in 156.9s
+2026-03-06 11:42:57,871 - INFO - [GLOBAL FIT] PFUnDA Branched - Success: loss=0.59, iterations=14
+2026-03-06 11:42:57,871 - INFO - [GLOBAL FIT] PFUnDA Branched - Parameters: k_elim=10.714, k_a=0.021, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:42:57,875 - INFO - [GLOBAL FIT] PFUnDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDA_Branched.csv
+2026-03-06 11:42:57,875 - INFO - [GLOBAL FIT] PFUnDA Branched - Completed in 157.2s
+2026-03-06 11:44:21,129 - INFO - [GLOBAL FIT] PFHxS Linear - Success: loss=1.32, iterations=18
+2026-03-06 11:44:21,130 - INFO - [GLOBAL FIT] PFHxS Linear - Parameters: k_elim=0.113, k_a=283.814, k_urine=0.163, k_feces=0.000, k_ehc=0.000
+2026-03-06 11:44:21,133 - INFO - [GLOBAL FIT] PFHxS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHxS_Linear.csv
+2026-03-06 11:44:21,133 - INFO - [GLOBAL FIT] PFHxS Linear - Completed in 242.5s
+2026-03-06 11:44:51,559 - INFO - [GLOBAL FIT] PFTrDS Linear - Success: loss=0.83, iterations=20
+2026-03-06 11:44:51,560 - INFO - [GLOBAL FIT] PFTrDS Linear - Parameters: k_elim=98.577, k_a=0.029, k_feces=0.007, k_ehc=0.000, k_urine=0.000
+2026-03-06 11:44:51,564 - INFO - [GLOBAL FIT] PFTrDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDS_Linear.csv
+2026-03-06 11:44:51,564 - INFO - [GLOBAL FIT] PFTrDS Linear - Completed in 271.0s
+2026-03-06 11:45:15,611 - INFO - [GLOBAL FIT] PFOA Branched - Success: loss=2.15, iterations=19
+2026-03-06 11:45:15,612 - INFO - [GLOBAL FIT] PFOA Branched - Parameters: k_elim=14.154, k_a=289.271, k_urine=5.871, k_feces=0.000, k_ehc=0.000
+2026-03-06 11:45:15,615 - INFO - [GLOBAL FIT] PFOA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOA_Branched.csv
+2026-03-06 11:45:15,616 - INFO - [GLOBAL FIT] PFOA Branched - Completed in 296.5s
+2026-03-06 11:45:31,825 - INFO - [GLOBAL FIT] PFPeA Linear - Success: loss=6.42, iterations=17
+2026-03-06 11:45:31,825 - INFO - [GLOBAL FIT] PFPeA Linear - Parameters: k_elim=0.623, k_a=0.002, k_feces=0.005, k_urine=86.863, k_ehc=0.000
+2026-03-06 11:45:31,828 - INFO - [GLOBAL FIT] PFPeA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFPeA_Linear.csv
+2026-03-06 11:45:31,828 - INFO - [GLOBAL FIT] PFPeA Linear - Completed in 312.0s
+2026-03-06 11:45:47,688 - INFO - [GLOBAL FIT] PFOA Linear - Success: loss=4.55, iterations=17
+2026-03-06 11:45:47,688 - INFO - [GLOBAL FIT] PFOA Linear - Parameters: k_elim=8.931, k_a=139.084, k_feces=1.692, k_urine=3.302, k_ehc=0.000
+2026-03-06 11:45:47,691 - INFO - [GLOBAL FIT] PFOA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOA_Linear.csv
+2026-03-06 11:45:47,691 - INFO - [GLOBAL FIT] PFOA Linear - Completed in 328.4s
+2026-03-06 11:47:14,064 - INFO - [GLOBAL FIT] PFHpA Linear - Success: loss=0.61, iterations=33
+2026-03-06 11:47:14,064 - INFO - [GLOBAL FIT] PFHpA Linear - Parameters: k_elim=316.228, k_a=216.010, k_urine=316.228, k_feces=0.000, k_ehc=0.000
+2026-03-06 11:47:14,068 - INFO - [GLOBAL FIT] PFHpA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHpA_Linear.csv
+2026-03-06 11:47:14,068 - INFO - [GLOBAL FIT] PFHpA Linear - Completed in 415.8s
+2026-03-06 11:48:14,983 - INFO - [GLOBAL FIT] PFHxA Linear - Success: loss=1.39, iterations=36
+2026-03-06 11:48:14,983 - INFO - [GLOBAL FIT] PFHxA Linear - Parameters: k_elim=301.893, k_a=0.007, k_urine=316.177, k_feces=0.000, k_ehc=0.000
+2026-03-06 11:48:14,987 - INFO - [GLOBAL FIT] PFHxA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHxA_Linear.csv
+2026-03-06 11:48:14,987 - INFO - [GLOBAL FIT] PFHxA Linear - Completed in 476.5s
+2026-03-06 11:48:45,909 - INFO - [GLOBAL FIT] PFDoDS Linear - Success: loss=2.21, iterations=27
+2026-03-06 11:48:45,909 - INFO - [GLOBAL FIT] PFDoDS Linear - Parameters: k_elim=1.739, k_a=1.674, k_feces=0.059, k_ehc=73.684, k_urine=0.000
+2026-03-06 11:48:45,912 - INFO - [GLOBAL FIT] PFDoDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDS_Linear.csv
+2026-03-06 11:48:45,912 - INFO - [GLOBAL FIT] PFDoDS Linear - Completed in 507.8s
+2026-03-06 11:49:42,955 - INFO - [GLOBAL FIT] PFDoDS Branched - Success: loss=1.89, iterations=34
+2026-03-06 11:49:42,955 - INFO - [GLOBAL FIT] PFDoDS Branched - Parameters: k_elim=0.635, k_a=228.630, k_feces=277.415, k_ehc=0.396, k_urine=0.000
+2026-03-06 11:49:42,959 - INFO - [GLOBAL FIT] PFDoDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDS_Branched.csv
+2026-03-06 11:49:42,959 - INFO - [GLOBAL FIT] PFDoDS Branched - Completed in 564.9s
+2026-03-06 11:50:31,883 - INFO - [GLOBAL FIT] PFTrDS Branched - Success: loss=1.87, iterations=36
+2026-03-06 11:50:31,884 - INFO - [GLOBAL FIT] PFTrDS Branched - Parameters: k_elim=2.753, k_a=63.356, k_feces=87.279, k_ehc=0.660, k_urine=0.000
+2026-03-06 11:50:31,887 - INFO - [GLOBAL FIT] PFTrDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDS_Branched.csv
+2026-03-06 11:50:31,887 - INFO - [GLOBAL FIT] PFTrDS Branched - Completed in 611.5s
+2026-03-06 11:51:12,507 - INFO - [GLOBAL FIT] PFUnDS Linear - Success: loss=2.14, iterations=36
+2026-03-06 11:51:12,508 - INFO - [GLOBAL FIT] PFUnDS Linear - Parameters: k_elim=0.002, k_a=14.420, k_feces=154.266, k_ehc=0.131, k_urine=0.000
+2026-03-06 11:51:12,512 - INFO - [GLOBAL FIT] PFUnDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDS_Linear.csv
+2026-03-06 11:51:12,512 - INFO - [GLOBAL FIT] PFUnDS Linear - Completed in 651.3s
+2026-03-06 11:51:44,531 - INFO - [GLOBAL FIT] PFBA Linear - Success: loss=2.65, iterations=37
+2026-03-06 11:51:44,532 - INFO - [GLOBAL FIT] PFBA Linear - Parameters: k_elim=23.654, k_a=2.877, k_feces=0.115, k_urine=10.019, k_ehc=0.000
+2026-03-06 11:51:44,538 - INFO - [GLOBAL FIT] PFBA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFBA_Linear.csv
+2026-03-06 11:51:44,538 - INFO - [GLOBAL FIT] PFBA Linear - Completed in 687.4s
+2026-03-06 11:53:37,973 - INFO - [GLOBAL FIT] PFUnDS Branched - Success: loss=3.33, iterations=48
+2026-03-06 11:53:37,973 - INFO - [GLOBAL FIT] PFUnDS Branched - Parameters: k_elim=1.384, k_a=17.945, k_feces=0.031, k_ehc=197.140, k_urine=0.000
+2026-03-06 11:53:37,976 - INFO - [GLOBAL FIT] PFUnDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDS_Branched.csv
+2026-03-06 11:53:37,977 - INFO - [GLOBAL FIT] PFUnDS Branched - Completed in 796.9s
+2026-03-06 11:55:02,738 - INFO - [GLOBAL FIT] PFDS Branched - Success: loss=2.08, iterations=53
+2026-03-06 11:55:02,738 - INFO - [GLOBAL FIT] PFDS Branched - Parameters: k_elim=0.200, k_a=264.689, k_feces=12.843, k_ehc=0.675, k_urine=0.000
+2026-03-06 11:55:02,741 - INFO - [GLOBAL FIT] PFDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDS_Branched.csv
+2026-03-06 11:55:02,741 - INFO - [GLOBAL FIT] PFDS Branched - Completed in 885.2s
+2026-03-06 11:55:30,207 - INFO - [GLOBAL FIT] PFNS Linear - Success: loss=2.06, iterations=56
+2026-03-06 11:55:30,207 - INFO - [GLOBAL FIT] PFNS Linear - Parameters: k_elim=0.284, k_a=9.437, k_feces=0.083, k_ehc=4.919, k_urine=0.000
+2026-03-06 11:55:30,210 - INFO - [GLOBAL FIT] PFNS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFNS_Linear.csv
+2026-03-06 11:55:30,211 - INFO - [GLOBAL FIT] PFNS Linear - Completed in 911.2s
+2026-03-06 11:55:56,325 - INFO - [GLOBAL FIT] PFOS Branched - Success: loss=1.93, iterations=40
+2026-03-06 11:55:56,325 - INFO - [GLOBAL FIT] PFOS Branched - Parameters: k_elim=0.060, k_a=170.164, k_feces=0.466, k_ehc=3.331, k_urine=0.007
+2026-03-06 11:55:56,329 - INFO - [GLOBAL FIT] PFOS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOS_Branched.csv
+2026-03-06 11:55:56,329 - INFO - [GLOBAL FIT] PFOS Branched - Completed in 936.9s
+2026-03-06 11:56:05,479 - INFO - [GLOBAL FIT] PFOS Linear - Success: loss=1.83, iterations=44
+2026-03-06 11:56:05,479 - INFO - [GLOBAL FIT] PFOS Linear - Parameters: k_elim=0.092, k_a=23.710, k_feces=0.069, k_ehc=8.437, k_urine=0.003
+2026-03-06 11:56:05,483 - INFO - [GLOBAL FIT] PFOS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOS_Linear.csv
+2026-03-06 11:56:05,484 - INFO - [GLOBAL FIT] PFOS Linear - Completed in 945.8s
+2026-03-06 11:56:36,843 - INFO - [GLOBAL FIT] PFDS Linear - Success: loss=3.47, iterations=59
+2026-03-06 11:56:36,843 - INFO - [GLOBAL FIT] PFDS Linear - Parameters: k_elim=0.652, k_a=236.639, k_feces=17.525, k_ehc=0.716, k_urine=0.000
+2026-03-06 11:56:36,846 - INFO - [GLOBAL FIT] PFDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDS_Linear.csv
+2026-03-06 11:56:36,846 - INFO - [GLOBAL FIT] PFDS Linear - Completed in 979.2s
+2026-03-06 12:03:30,209 - INFO - [GLOBAL FIT] PFNS Branched - Success: loss=1.93, iterations=67
+2026-03-06 12:03:30,209 - INFO - [GLOBAL FIT] PFNS Branched - Parameters: k_elim=0.223, k_a=37.658, k_feces=0.016, k_ehc=63.509, k_urine=0.001
+2026-03-06 12:03:30,212 - INFO - [GLOBAL FIT] PFNS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFNS_Branched.csv
+2026-03-06 12:03:30,213 - INFO - [GLOBAL FIT] PFNS Branched - Completed in 1391.3s
+2026-03-06 12:03:30,215 - INFO - === Estimating pooled sigma from Stage 1 fits ===
+2026-03-06 12:03:30,226 - INFO - [SIGMA EST] Estimating pooled sigma from 31 compound-isomer pairs (pooled residuals per matrix)...
+2026-03-06 12:03:39,462 - INFO - [SIGMA EST] brain: pooled σ=2.707 (from 23 pooled residuals)
+2026-03-06 12:03:39,463 - INFO - [SIGMA EST] liver: pooled σ=0.506 (from 22 pooled residuals)
+2026-03-06 12:03:39,463 - INFO - [SIGMA EST] feces: pooled σ=0.854 (from 157 pooled residuals)
+2026-03-06 12:03:39,463 - INFO - [SIGMA EST] muscle: pooled σ=0.716 (from 13 pooled residuals)
+2026-03-06 12:03:39,464 - INFO - [SIGMA EST] lung: pooled σ=0.361 (from 18 pooled residuals)
+2026-03-06 12:03:39,464 - INFO - [SIGMA EST] spleen: pooled σ=0.306 (from 16 pooled residuals)
+2026-03-06 12:03:39,464 - INFO - [SIGMA EST] plasma: pooled σ=0.677 (from 342 pooled residuals)
+2026-03-06 12:03:39,464 - INFO - [SIGMA EST] kidney: pooled σ=0.471 (from 18 pooled residuals)
+2026-03-06 12:03:39,465 - INFO - [SIGMA EST] urine: pooled σ=1.677 (from 49 pooled residuals)
+2026-03-06 12:03:39,465 - INFO - [SIGMA EST] heart: pooled σ=0.283 (from 17 pooled residuals)
+2026-03-06 12:03:39,465 - INFO - [SIGMA EST] milk: pooled σ=0.887 (from 526 pooled residuals)
+2026-03-06 12:03:39,469 - INFO - [SIGMA EST] Saved pooled sigma estimates to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/sigma_estimates/sigma_pooled.csv
+2026-03-06 12:03:48,265 - INFO - Pooled sigma estimates computed successfully
+2026-03-06 12:03:48,265 - INFO -   brain: σ=2.707
+2026-03-06 12:03:48,265 - INFO -   liver: σ=0.506
+2026-03-06 12:03:48,265 - INFO -   feces: σ=0.854
+2026-03-06 12:03:48,265 - INFO -   muscle: σ=0.716
+2026-03-06 12:03:48,265 - INFO -   lung: σ=0.361
+2026-03-06 12:03:48,265 - INFO -   stomach: σ=0.400
+2026-03-06 12:03:48,265 - INFO -   rest: σ=0.400
+2026-03-06 12:03:48,265 - INFO -   intestine: σ=0.400
+2026-03-06 12:03:48,266 - INFO -   spleen: σ=0.306
+2026-03-06 12:03:48,266 - INFO -   plasma: σ=0.677
+2026-03-06 12:03:48,266 - INFO -   kidney: σ=0.471
+2026-03-06 12:03:48,266 - INFO -   urine: σ=1.677
+2026-03-06 12:03:48,266 - INFO -   heart: σ=0.283
+2026-03-06 12:03:48,266 - INFO -   milk: σ=0.887
+2026-03-06 12:03:48,266 - INFO - [PHASE 1 / Stage 2] Censored-likelihood (Tobit) global fits using estimated sigma
+2026-03-06 12:03:48,413 - INFO - [GLOBAL FIT] Starting PFBA Linear
+2026-03-06 12:03:48,428 - INFO - [GLOBAL FIT] PFBA Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 12:03:48,441 - INFO - [GLOBAL FIT] PFBA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_urine']
+2026-03-06 12:03:48,442 - INFO - [GLOBAL FIT] PFBA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-03-06 12:03:48,564 - INFO - [GLOBAL FIT] Starting PFDA Branched
+2026-03-06 12:03:48,577 - INFO - [GLOBAL FIT] PFDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:48,586 - INFO - [GLOBAL FIT] PFDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:48,586 - INFO - [GLOBAL FIT] PFDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:48,705 - INFO - [GLOBAL FIT] Starting PFDA Linear
+2026-03-06 12:03:48,721 - INFO - [GLOBAL FIT] PFDA Linear - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 12:03:48,733 - INFO - [GLOBAL FIT] PFDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:48,733 - INFO - [GLOBAL FIT] PFDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:48,824 - INFO - [GLOBAL FIT] Starting PFDS Branched
+2026-03-06 12:03:48,840 - INFO - [GLOBAL FIT] PFDS Branched - Data: 231 points, 8 matrices above LOQ, 3 animals
+2026-03-06 12:03:48,853 - INFO - [GLOBAL FIT] PFDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:48,853 - INFO - [GLOBAL FIT] PFDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:03:48,935 - INFO - [GLOBAL FIT] Starting PFDS Linear
+2026-03-06 12:03:48,950 - INFO - [GLOBAL FIT] PFDS Linear - Data: 231 points, 10 matrices above LOQ, 3 animals
+2026-03-06 12:03:48,962 - INFO - [GLOBAL FIT] PFDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:48,962 - INFO - [GLOBAL FIT] PFDS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:03:49,047 - INFO - [GLOBAL FIT] Starting PFDoDA Branched
+2026-03-06 12:03:49,060 - INFO - [GLOBAL FIT] PFDoDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,071 - INFO - [GLOBAL FIT] PFDoDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:49,071 - INFO - [GLOBAL FIT] PFDoDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:49,163 - INFO - [GLOBAL FIT] Starting PFDoDA Linear
+2026-03-06 12:03:49,185 - INFO - [GLOBAL FIT] PFDoDA Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,199 - INFO - [GLOBAL FIT] PFDoDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:49,199 - INFO - [GLOBAL FIT] PFDoDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:49,287 - INFO - [GLOBAL FIT] Starting PFDoDS Branched
+2026-03-06 12:03:49,302 - INFO - [GLOBAL FIT] PFDoDS Branched - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,314 - INFO - [GLOBAL FIT] PFDoDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:49,314 - INFO - [GLOBAL FIT] PFDoDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:03:49,408 - INFO - [GLOBAL FIT] Starting PFDoDS Linear
+2026-03-06 12:03:49,425 - INFO - [GLOBAL FIT] PFDoDS Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,438 - INFO - [GLOBAL FIT] PFDoDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:49,438 - INFO - [GLOBAL FIT] PFDoDS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:03:49,522 - INFO - [GLOBAL FIT] Starting PFHpA Linear
+2026-03-06 12:03:49,537 - INFO - [GLOBAL FIT] PFHpA Linear - Data: 231 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,549 - INFO - [GLOBAL FIT] PFHpA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 12:03:49,549 - INFO - [GLOBAL FIT] PFHpA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 12:03:49,640 - INFO - [GLOBAL FIT] Starting PFHpS Linear
+2026-03-06 12:03:49,657 - INFO - [GLOBAL FIT] PFHpS Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,671 - INFO - [GLOBAL FIT] PFHpS Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:49,672 - INFO - [GLOBAL FIT] PFHpS Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:49,760 - INFO - [GLOBAL FIT] Starting PFHxA Linear
+2026-03-06 12:03:49,776 - INFO - [GLOBAL FIT] PFHxA Linear - Data: 231 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,789 - INFO - [GLOBAL FIT] PFHxA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 12:03:49,789 - INFO - [GLOBAL FIT] PFHxA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 12:03:49,903 - INFO - [GLOBAL FIT] Starting PFHxS Linear
+2026-03-06 12:03:49,918 - INFO - [GLOBAL FIT] PFHxS Linear - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 12:03:49,929 - INFO - [GLOBAL FIT] PFHxS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 12:03:49,929 - INFO - [GLOBAL FIT] PFHxS Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 12:03:50,018 - INFO - [GLOBAL FIT] Starting PFNA Linear
+2026-03-06 12:03:50,030 - INFO - [GLOBAL FIT] PFNA Linear - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,039 - INFO - [GLOBAL FIT] PFNA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:50,039 - INFO - [GLOBAL FIT] PFNA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:50,136 - INFO - [GLOBAL FIT] Starting PFNS Branched
+2026-03-06 12:03:50,150 - INFO - [GLOBAL FIT] PFNS Branched - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,162 - INFO - [GLOBAL FIT] PFNS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc', 'k_urine']
+2026-03-06 12:03:50,260 - INFO - [GLOBAL FIT] Starting PFNS Linear
+2026-03-06 12:03:50,279 - INFO - [GLOBAL FIT] PFNS Linear - Data: 231 points, 10 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,296 - INFO - [GLOBAL FIT] PFNS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:50,296 - INFO - [GLOBAL FIT] PFNS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:03:50,451 - INFO - [GLOBAL FIT] Starting PFOA Branched
+2026-03-06 12:03:50,465 - INFO - [GLOBAL FIT] PFOA Branched - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,477 - INFO - [GLOBAL FIT] PFOA Branched - Fitting parameters: ['k_elim', 'k_a', 'k_urine']
+2026-03-06 12:03:50,477 - INFO - [GLOBAL FIT] PFOA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0}
+2026-03-06 12:03:50,567 - INFO - [GLOBAL FIT] Starting PFOA Linear
+2026-03-06 12:03:50,583 - INFO - [GLOBAL FIT] PFOA Linear - Data: 231 points, 5 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,596 - INFO - [GLOBAL FIT] PFOA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_urine']
+2026-03-06 12:03:50,596 - INFO - [GLOBAL FIT] PFOA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-03-06 12:03:50,690 - INFO - [GLOBAL FIT] Starting PFOS Branched
+2026-03-06 12:03:50,705 - INFO - [GLOBAL FIT] PFOS Branched - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,717 - INFO - [GLOBAL FIT] PFOS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc', 'k_urine']
+2026-03-06 12:03:50,803 - INFO - [GLOBAL FIT] Starting PFOS Linear
+2026-03-06 12:03:50,817 - INFO - [GLOBAL FIT] PFOS Linear - Data: 231 points, 11 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,829 - INFO - [GLOBAL FIT] PFOS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc', 'k_urine']
+2026-03-06 12:03:50,916 - INFO - [GLOBAL FIT] Starting PFPeA Linear
+2026-03-06 12:03:50,933 - INFO - [GLOBAL FIT] PFPeA Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 12:03:50,947 - INFO - [GLOBAL FIT] PFPeA Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_urine']
+2026-03-06 12:03:50,948 - INFO - [GLOBAL FIT] PFPeA Linear - Fixed parameters: {'k_ehc': 0.0}
+2026-03-06 12:03:51,032 - INFO - [GLOBAL FIT] Starting PFTeDA Branched
+2026-03-06 12:03:51,048 - INFO - [GLOBAL FIT] PFTeDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,061 - INFO - [GLOBAL FIT] PFTeDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:51,061 - INFO - [GLOBAL FIT] PFTeDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:51,152 - INFO - [GLOBAL FIT] Starting PFTeDA Linear
+2026-03-06 12:03:51,167 - INFO - [GLOBAL FIT] PFTeDA Linear - Data: 231 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,179 - INFO - [GLOBAL FIT] PFTeDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:51,179 - INFO - [GLOBAL FIT] PFTeDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:51,280 - INFO - [GLOBAL FIT] Starting PFTrDA Branched
+2026-03-06 12:03:51,294 - INFO - [GLOBAL FIT] PFTrDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,306 - INFO - [GLOBAL FIT] PFTrDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:51,306 - INFO - [GLOBAL FIT] PFTrDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:51,398 - INFO - [GLOBAL FIT] Starting PFTrDA Linear
+2026-03-06 12:03:51,414 - INFO - [GLOBAL FIT] PFTrDA Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,429 - INFO - [GLOBAL FIT] PFTrDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:51,429 - INFO - [GLOBAL FIT] PFTrDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:51,515 - INFO - [GLOBAL FIT] Starting PFTrDS Branched
+2026-03-06 12:03:51,533 - INFO - [GLOBAL FIT] PFTrDS Branched - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,549 - INFO - [GLOBAL FIT] PFTrDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:51,549 - INFO - [GLOBAL FIT] PFTrDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:03:51,656 - INFO - [GLOBAL FIT] Starting PFTrDS Linear
+2026-03-06 12:03:51,671 - INFO - [GLOBAL FIT] PFTrDS Linear - Data: 231 points, 3 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,683 - INFO - [GLOBAL FIT] PFTrDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces']
+2026-03-06 12:03:51,683 - INFO - [GLOBAL FIT] PFTrDS Linear - Fixed parameters: {'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:51,776 - INFO - [GLOBAL FIT] Starting PFUnDA Branched
+2026-03-06 12:03:51,791 - INFO - [GLOBAL FIT] PFUnDA Branched - Data: 150 points, 1 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,803 - INFO - [GLOBAL FIT] PFUnDA Branched - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:51,803 - INFO - [GLOBAL FIT] PFUnDA Branched - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:51,892 - INFO - [GLOBAL FIT] Starting PFUnDA Linear
+2026-03-06 12:03:51,910 - INFO - [GLOBAL FIT] PFUnDA Linear - Data: 231 points, 2 matrices above LOQ, 3 animals
+2026-03-06 12:03:51,925 - INFO - [GLOBAL FIT] PFUnDA Linear - Fitting parameters: ['k_elim', 'k_a']
+2026-03-06 12:03:51,925 - INFO - [GLOBAL FIT] PFUnDA Linear - Fixed parameters: {'k_feces': 0.0, 'k_ehc': 0.0, 'k_urine': 0.0}
+2026-03-06 12:03:52,002 - INFO - [GLOBAL FIT] Starting PFUnDS Branched
+2026-03-06 12:03:52,019 - INFO - [GLOBAL FIT] PFUnDS Branched - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 12:03:52,034 - INFO - [GLOBAL FIT] PFUnDS Branched - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:52,034 - INFO - [GLOBAL FIT] PFUnDS Branched - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:03:52,125 - INFO - [GLOBAL FIT] Starting PFUnDS Linear
+2026-03-06 12:03:52,143 - INFO - [GLOBAL FIT] PFUnDS Linear - Data: 231 points, 4 matrices above LOQ, 3 animals
+2026-03-06 12:03:52,158 - INFO - [GLOBAL FIT] PFUnDS Linear - Fitting parameters: ['k_elim', 'k_a', 'k_feces', 'k_ehc']
+2026-03-06 12:03:52,158 - INFO - [GLOBAL FIT] PFUnDS Linear - Fixed parameters: {'k_urine': 0.0}
+2026-03-06 12:05:28,066 - INFO - [GLOBAL FIT] PFTrDA Linear - Success: loss=-44.76, iterations=8
+2026-03-06 12:05:28,066 - INFO - [GLOBAL FIT] PFTrDA Linear - Parameters: k_elim=0.240, k_a=50.756, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:05:28,067 - INFO - [GLOBAL FIT] PFTrDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDA_Linear.csv
+2026-03-06 12:05:28,067 - INFO - [GLOBAL FIT] PFTrDA Linear - Completed in 96.7s
+2026-03-06 12:05:35,587 - INFO - [GLOBAL FIT] PFUnDA Branched - Success: loss=-70.15, iterations=11
+2026-03-06 12:05:35,587 - INFO - [GLOBAL FIT] PFUnDA Branched - Parameters: k_elim=12.239, k_a=0.026, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:05:35,589 - INFO - [GLOBAL FIT] PFUnDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDA_Branched.csv
+2026-03-06 12:05:35,589 - INFO - [GLOBAL FIT] PFUnDA Branched - Completed in 103.8s
+2026-03-06 12:05:37,992 - INFO - [GLOBAL FIT] PFTrDA Branched - Success: loss=-55.09, iterations=11
+2026-03-06 12:05:37,992 - INFO - [GLOBAL FIT] PFTrDA Branched - Parameters: k_elim=33.687, k_a=0.455, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:05:37,993 - INFO - [GLOBAL FIT] PFTrDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDA_Branched.csv
+2026-03-06 12:05:37,993 - INFO - [GLOBAL FIT] PFTrDA Branched - Completed in 106.7s
+2026-03-06 12:05:44,977 - INFO - [GLOBAL FIT] PFTeDA Linear - Success: loss=193.15, iterations=9
+2026-03-06 12:05:44,977 - INFO - [GLOBAL FIT] PFTeDA Linear - Parameters: k_elim=1.042, k_a=207.057, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:05:44,978 - INFO - [GLOBAL FIT] PFTeDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTeDA_Linear.csv
+2026-03-06 12:05:44,979 - INFO - [GLOBAL FIT] PFTeDA Linear - Completed in 113.8s
+2026-03-06 12:06:01,562 - INFO - [GLOBAL FIT] PFTeDA Branched - Success: loss=-24.83, iterations=9
+2026-03-06 12:06:01,562 - INFO - [GLOBAL FIT] PFTeDA Branched - Parameters: k_elim=143.521, k_a=307.722, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:06:01,563 - INFO - [GLOBAL FIT] PFTeDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTeDA_Branched.csv
+2026-03-06 12:06:01,564 - INFO - [GLOBAL FIT] PFTeDA Branched - Completed in 130.5s
+2026-03-06 12:06:05,472 - INFO - [GLOBAL FIT] PFDoDA Branched - Success: loss=-54.69, iterations=15
+2026-03-06 12:06:05,472 - INFO - [GLOBAL FIT] PFDoDA Branched - Parameters: k_elim=16.054, k_a=0.045, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:06:05,474 - INFO - [GLOBAL FIT] PFDoDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDA_Branched.csv
+2026-03-06 12:06:05,474 - INFO - [GLOBAL FIT] PFDoDA Branched - Completed in 136.4s
+2026-03-06 12:06:10,561 - INFO - [GLOBAL FIT] PFDA Branched - Success: loss=-7.02, iterations=14
+2026-03-06 12:06:10,561 - INFO - [GLOBAL FIT] PFDA Branched - Parameters: k_elim=26.641, k_a=0.298, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:06:10,562 - INFO - [GLOBAL FIT] PFDA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDA_Branched.csv
+2026-03-06 12:06:10,563 - INFO - [GLOBAL FIT] PFDA Branched - Completed in 142.0s
+2026-03-06 12:06:13,425 - INFO - [GLOBAL FIT] PFHpS Linear - Success: loss=56.47, iterations=11
+2026-03-06 12:06:13,425 - INFO - [GLOBAL FIT] PFHpS Linear - Parameters: k_elim=0.088, k_a=239.939, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:06:13,427 - INFO - [GLOBAL FIT] PFHpS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHpS_Linear.csv
+2026-03-06 12:06:13,427 - INFO - [GLOBAL FIT] PFHpS Linear - Completed in 143.8s
+2026-03-06 12:06:23,837 - INFO - [GLOBAL FIT] PFDoDA Linear - Success: loss=-43.43, iterations=15
+2026-03-06 12:06:23,837 - INFO - [GLOBAL FIT] PFDoDA Linear - Parameters: k_elim=0.220, k_a=284.418, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:06:23,838 - INFO - [GLOBAL FIT] PFDoDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDA_Linear.csv
+2026-03-06 12:06:23,838 - INFO - [GLOBAL FIT] PFDoDA Linear - Completed in 154.7s
+2026-03-06 12:06:51,838 - INFO - [GLOBAL FIT] PFUnDA Linear - Success: loss=-37.80, iterations=12
+2026-03-06 12:06:51,838 - INFO - [GLOBAL FIT] PFUnDA Linear - Parameters: k_elim=0.190, k_a=296.176, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:06:51,840 - INFO - [GLOBAL FIT] PFUnDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDA_Linear.csv
+2026-03-06 12:06:51,840 - INFO - [GLOBAL FIT] PFUnDA Linear - Completed in 179.9s
+2026-03-06 12:07:28,414 - INFO - [GLOBAL FIT] PFDA Linear - Success: loss=-15.49, iterations=17
+2026-03-06 12:07:28,415 - INFO - [GLOBAL FIT] PFDA Linear - Parameters: k_elim=0.171, k_a=311.399, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:07:28,417 - INFO - [GLOBAL FIT] PFDA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDA_Linear.csv
+2026-03-06 12:07:28,417 - INFO - [GLOBAL FIT] PFDA Linear - Completed in 219.7s
+2026-03-06 12:07:53,837 - INFO - [GLOBAL FIT] PFOA Branched - Success: loss=128.39, iterations=15
+2026-03-06 12:07:53,837 - INFO - [GLOBAL FIT] PFOA Branched - Parameters: k_elim=7.992, k_a=186.238, k_urine=10.845, k_feces=0.000, k_ehc=0.000
+2026-03-06 12:07:53,839 - INFO - [GLOBAL FIT] PFOA Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOA_Branched.csv
+2026-03-06 12:07:53,839 - INFO - [GLOBAL FIT] PFOA Branched - Completed in 243.4s
+2026-03-06 12:08:11,929 - INFO - [GLOBAL FIT] PFNA Linear - Success: loss=-0.08, iterations=24
+2026-03-06 12:08:11,929 - INFO - [GLOBAL FIT] PFNA Linear - Parameters: k_elim=48.100, k_a=315.791, k_feces=0.000, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:08:11,931 - INFO - [GLOBAL FIT] PFNA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFNA_Linear.csv
+2026-03-06 12:08:11,931 - INFO - [GLOBAL FIT] PFNA Linear - Completed in 261.9s
+2026-03-06 12:08:46,197 - INFO - [GLOBAL FIT] PFPeA Linear - Success: loss=39.04, iterations=15
+2026-03-06 12:08:46,197 - INFO - [GLOBAL FIT] PFPeA Linear - Parameters: k_elim=0.002, k_a=0.085, k_feces=69.650, k_urine=0.128, k_ehc=0.000
+2026-03-06 12:08:46,198 - INFO - [GLOBAL FIT] PFPeA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFPeA_Linear.csv
+2026-03-06 12:08:46,199 - INFO - [GLOBAL FIT] PFPeA Linear - Completed in 295.3s
+2026-03-06 12:08:54,464 - INFO - [GLOBAL FIT] PFHxS Linear - Success: loss=-5.59, iterations=21
+2026-03-06 12:08:54,464 - INFO - [GLOBAL FIT] PFHxS Linear - Parameters: k_elim=0.144, k_a=266.474, k_urine=0.180, k_feces=0.000, k_ehc=0.000
+2026-03-06 12:08:54,466 - INFO - [GLOBAL FIT] PFHxS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHxS_Linear.csv
+2026-03-06 12:08:54,466 - INFO - [GLOBAL FIT] PFHxS Linear - Completed in 304.6s
+2026-03-06 12:09:10,120 - INFO - [GLOBAL FIT] PFHxA Linear - Success: loss=13.90, iterations=22
+2026-03-06 12:09:10,120 - INFO - [GLOBAL FIT] PFHxA Linear - Parameters: k_elim=311.981, k_a=0.001, k_urine=316.228, k_feces=0.000, k_ehc=0.000
+2026-03-06 12:09:10,122 - INFO - [GLOBAL FIT] PFHxA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHxA_Linear.csv
+2026-03-06 12:09:10,122 - INFO - [GLOBAL FIT] PFHxA Linear - Completed in 320.4s
+2026-03-06 12:09:53,820 - INFO - [GLOBAL FIT] PFTrDS Linear - Success: loss=34.34, iterations=25
+2026-03-06 12:09:53,820 - INFO - [GLOBAL FIT] PFTrDS Linear - Parameters: k_elim=0.002, k_a=1.208, k_feces=304.836, k_ehc=0.000, k_urine=0.000
+2026-03-06 12:09:53,821 - INFO - [GLOBAL FIT] PFTrDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDS_Linear.csv
+2026-03-06 12:09:53,821 - INFO - [GLOBAL FIT] PFTrDS Linear - Completed in 362.2s
+2026-03-06 12:10:00,112 - INFO - [GLOBAL FIT] PFOA Linear - Success: loss=37.34, iterations=18
+2026-03-06 12:10:00,113 - INFO - [GLOBAL FIT] PFOA Linear - Parameters: k_elim=13.692, k_a=234.021, k_feces=1.363, k_urine=1.795, k_ehc=0.000
+2026-03-06 12:10:00,115 - INFO - [GLOBAL FIT] PFOA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOA_Linear.csv
+2026-03-06 12:10:00,115 - INFO - [GLOBAL FIT] PFOA Linear - Completed in 369.5s
+2026-03-06 12:11:56,067 - INFO - [GLOBAL FIT] PFHpA Linear - Success: loss=9.64, iterations=35
+2026-03-06 12:11:56,067 - INFO - [GLOBAL FIT] PFHpA Linear - Parameters: k_elim=316.182, k_a=222.099, k_urine=315.115, k_feces=0.000, k_ehc=0.000
+2026-03-06 12:11:56,068 - INFO - [GLOBAL FIT] PFHpA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFHpA_Linear.csv
+2026-03-06 12:11:56,069 - INFO - [GLOBAL FIT] PFHpA Linear - Completed in 486.5s
+2026-03-06 12:12:46,393 - INFO - [GLOBAL FIT] PFDS Branched - Success: loss=168.70, iterations=28
+2026-03-06 12:12:46,393 - INFO - [GLOBAL FIT] PFDS Branched - Parameters: k_elim=0.202, k_a=90.306, k_feces=3.974, k_ehc=0.746, k_urine=0.000
+2026-03-06 12:12:46,395 - INFO - [GLOBAL FIT] PFDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDS_Branched.csv
+2026-03-06 12:12:46,396 - INFO - [GLOBAL FIT] PFDS Branched - Completed in 537.6s
+2026-03-06 12:14:07,720 - INFO - [GLOBAL FIT] PFDoDS Branched - Success: loss=58.89, iterations=34
+2026-03-06 12:14:07,720 - INFO - [GLOBAL FIT] PFDoDS Branched - Parameters: k_elim=0.738, k_a=53.337, k_feces=58.634, k_ehc=0.382, k_urine=0.000
+2026-03-06 12:14:07,722 - INFO - [GLOBAL FIT] PFDoDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDS_Branched.csv
+2026-03-06 12:14:07,722 - INFO - [GLOBAL FIT] PFDoDS Branched - Completed in 618.4s
+2026-03-06 12:14:30,728 - INFO - [GLOBAL FIT] PFTrDS Branched - Success: loss=24.20, iterations=34
+2026-03-06 12:14:30,728 - INFO - [GLOBAL FIT] PFTrDS Branched - Parameters: k_elim=3.076, k_a=182.976, k_feces=253.536, k_ehc=0.586, k_urine=0.000
+2026-03-06 12:14:30,730 - INFO - [GLOBAL FIT] PFTrDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFTrDS_Branched.csv
+2026-03-06 12:14:30,730 - INFO - [GLOBAL FIT] PFTrDS Branched - Completed in 639.2s
+2026-03-06 12:15:05,658 - INFO - [GLOBAL FIT] PFNS Linear - Success: loss=184.44, iterations=38
+2026-03-06 12:15:05,658 - INFO - [GLOBAL FIT] PFNS Linear - Parameters: k_elim=0.297, k_a=27.435, k_feces=0.070, k_ehc=17.914, k_urine=0.000
+2026-03-06 12:15:05,660 - INFO - [GLOBAL FIT] PFNS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFNS_Linear.csv
+2026-03-06 12:15:05,660 - INFO - [GLOBAL FIT] PFNS Linear - Completed in 675.4s
+2026-03-06 12:15:50,942 - INFO - [GLOBAL FIT] PFDS Linear - Success: loss=164.13, iterations=41
+2026-03-06 12:15:50,943 - INFO - [GLOBAL FIT] PFDS Linear - Parameters: k_elim=0.663, k_a=218.634, k_feces=10.839, k_ehc=1.055, k_urine=0.000
+2026-03-06 12:15:50,944 - INFO - [GLOBAL FIT] PFDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDS_Linear.csv
+2026-03-06 12:15:50,945 - INFO - [GLOBAL FIT] PFDS Linear - Completed in 722.0s
+2026-03-06 12:15:54,632 - INFO - [GLOBAL FIT] PFBA Linear - Success: loss=67.91, iterations=40
+2026-03-06 12:15:54,632 - INFO - [GLOBAL FIT] PFBA Linear - Parameters: k_elim=24.399, k_a=2.919, k_feces=0.117, k_urine=7.971, k_ehc=0.000
+2026-03-06 12:15:54,633 - INFO - [GLOBAL FIT] PFBA Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFBA_Linear.csv
+2026-03-06 12:15:54,633 - INFO - [GLOBAL FIT] PFBA Linear - Completed in 726.2s
+2026-03-06 12:15:55,222 - INFO - [GLOBAL FIT] PFUnDS Branched - Success: loss=139.10, iterations=40
+2026-03-06 12:15:55,222 - INFO - [GLOBAL FIT] PFUnDS Branched - Parameters: k_elim=1.410, k_a=18.388, k_feces=0.038, k_ehc=171.729, k_urine=0.000
+2026-03-06 12:15:55,224 - INFO - [GLOBAL FIT] PFUnDS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDS_Branched.csv
+2026-03-06 12:15:55,224 - INFO - [GLOBAL FIT] PFUnDS Branched - Completed in 723.2s
+2026-03-06 12:17:19,275 - INFO - [GLOBAL FIT] PFOS Branched - Success: loss=133.30, iterations=33
+2026-03-06 12:17:19,275 - INFO - [GLOBAL FIT] PFOS Branched - Parameters: k_elim=0.064, k_a=154.085, k_feces=0.630, k_ehc=2.219, k_urine=0.007
+2026-03-06 12:17:19,276 - INFO - [GLOBAL FIT] PFOS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOS_Branched.csv
+2026-03-06 12:17:19,276 - INFO - [GLOBAL FIT] PFOS Branched - Completed in 808.6s
+2026-03-06 12:17:31,494 - INFO - [GLOBAL FIT] PFDoDS Linear - Success: loss=8.69, iterations=45
+2026-03-06 12:17:31,494 - INFO - [GLOBAL FIT] PFDoDS Linear - Parameters: k_elim=0.001, k_a=10.266, k_feces=274.119, k_ehc=0.097, k_urine=0.000
+2026-03-06 12:17:31,495 - INFO - [GLOBAL FIT] PFDoDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFDoDS_Linear.csv
+2026-03-06 12:17:31,496 - INFO - [GLOBAL FIT] PFDoDS Linear - Completed in 822.1s
+2026-03-06 12:18:47,546 - INFO - [GLOBAL FIT] PFOS Linear - Success: loss=230.55, iterations=35
+2026-03-06 12:18:47,547 - INFO - [GLOBAL FIT] PFOS Linear - Parameters: k_elim=0.092, k_a=16.639, k_feces=0.072, k_ehc=5.988, k_urine=0.003
+2026-03-06 12:18:47,548 - INFO - [GLOBAL FIT] PFOS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFOS_Linear.csv
+2026-03-06 12:18:47,548 - INFO - [GLOBAL FIT] PFOS Linear - Completed in 896.7s
+2026-03-06 12:20:18,093 - INFO - [GLOBAL FIT] PFUnDS Linear - Success: loss=32.79, iterations=56
+2026-03-06 12:20:18,094 - INFO - [GLOBAL FIT] PFUnDS Linear - Parameters: k_elim=2.866, k_a=12.071, k_feces=0.030, k_ehc=273.007, k_urine=0.000
+2026-03-06 12:20:18,095 - INFO - [GLOBAL FIT] PFUnDS Linear - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFUnDS_Linear.csv
+2026-03-06 12:20:18,095 - INFO - [GLOBAL FIT] PFUnDS Linear - Completed in 986.0s
+2026-03-06 12:25:41,812 - INFO - [GLOBAL FIT] PFNS Branched - Success: loss=249.33, iterations=59
+2026-03-06 12:25:41,812 - INFO - [GLOBAL FIT] PFNS Branched - Parameters: k_elim=0.212, k_a=88.095, k_feces=0.018, k_ehc=122.025, k_urine=0.001
+2026-03-06 12:25:41,814 - INFO - [GLOBAL FIT] PFNS Branched - Saved parameters to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/global_fit/fit_PFNS_Branched.csv
+2026-03-06 12:25:41,814 - INFO - [GLOBAL FIT] PFNS Branched - Completed in 1311.7s
+2026-03-06 12:25:41,817 - INFO - === PHASE 1/3 COMPLETED ===
+2026-03-06 12:25:41,818 - INFO - Global mean fits (two-stage): 31/31 successful in 2724.8s
+2026-03-06 12:25:41,818 - INFO - === PHASE 2: Running jackknife fits ===
+2026-03-06 12:25:42,012 - INFO - [JACKKNIFE] Starting PFBA Linear
+2026-03-06 12:25:42,033 - INFO - [JACKKNIFE] PFBA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:42,146 - INFO - [JACKKNIFE] Starting PFDA Branched
+2026-03-06 12:25:42,162 - INFO - [JACKKNIFE] PFDA Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:42,273 - INFO - [JACKKNIFE] Starting PFDA Linear
+2026-03-06 12:25:42,291 - INFO - [JACKKNIFE] PFDA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:42,391 - INFO - [JACKKNIFE] Starting PFDS Branched
+2026-03-06 12:25:42,407 - INFO - [JACKKNIFE] PFDS Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:42,545 - INFO - [JACKKNIFE] Starting PFDS Linear
+2026-03-06 12:25:42,570 - INFO - [JACKKNIFE] PFDS Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:42,665 - INFO - [JACKKNIFE] Starting PFDoDA Branched
+2026-03-06 12:25:42,689 - INFO - [JACKKNIFE] PFDoDA Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:42,765 - INFO - [JACKKNIFE] Starting PFDoDA Linear
+2026-03-06 12:25:42,781 - INFO - [JACKKNIFE] PFDoDA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:42,882 - INFO - [JACKKNIFE] Starting PFDoDS Branched
+2026-03-06 12:25:42,904 - INFO - [JACKKNIFE] PFDoDS Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:43,001 - INFO - [JACKKNIFE] Starting PFDoDS Linear
+2026-03-06 12:25:43,018 - INFO - [JACKKNIFE] PFDoDS Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:43,125 - INFO - [JACKKNIFE] Starting PFHpA Linear
+2026-03-06 12:25:43,149 - INFO - [JACKKNIFE] PFHpA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:43,247 - INFO - [JACKKNIFE] Starting PFHpS Linear
+2026-03-06 12:25:43,270 - INFO - [JACKKNIFE] PFHpS Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:43,369 - INFO - [JACKKNIFE] Starting PFHxA Linear
+2026-03-06 12:25:43,388 - INFO - [JACKKNIFE] PFHxA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:43,507 - INFO - [JACKKNIFE] Starting PFHxS Linear
+2026-03-06 12:25:43,524 - INFO - [JACKKNIFE] PFHxS Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:43,647 - INFO - [JACKKNIFE] Starting PFNA Linear
+2026-03-06 12:25:43,663 - INFO - [JACKKNIFE] PFNA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:43,788 - INFO - [JACKKNIFE] Starting PFNS Branched
+2026-03-06 12:25:43,807 - INFO - [JACKKNIFE] PFNS Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:43,923 - INFO - [JACKKNIFE] Starting PFNS Linear
+2026-03-06 12:25:43,944 - INFO - [JACKKNIFE] PFNS Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:44,064 - INFO - [JACKKNIFE] Starting PFOA Branched
+2026-03-06 12:25:44,083 - INFO - [JACKKNIFE] PFOA Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:44,201 - INFO - [JACKKNIFE] Starting PFOA Linear
+2026-03-06 12:25:44,221 - INFO - [JACKKNIFE] PFOA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:44,317 - INFO - [JACKKNIFE] Starting PFOS Branched
+2026-03-06 12:25:44,335 - INFO - [JACKKNIFE] PFOS Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:44,440 - INFO - [JACKKNIFE] Starting PFOS Linear
+2026-03-06 12:25:44,463 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:44,555 - INFO - [JACKKNIFE] Starting PFPeA Linear
+2026-03-06 12:25:44,573 - INFO - [JACKKNIFE] PFPeA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:44,666 - INFO - [JACKKNIFE] Starting PFTeDA Branched
+2026-03-06 12:25:44,681 - INFO - [JACKKNIFE] PFTeDA Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:44,791 - INFO - [JACKKNIFE] Starting PFTeDA Linear
+2026-03-06 12:25:44,814 - INFO - [JACKKNIFE] PFTeDA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:44,902 - INFO - [JACKKNIFE] Starting PFTrDA Branched
+2026-03-06 12:25:44,922 - INFO - [JACKKNIFE] PFTrDA Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:45,021 - INFO - [JACKKNIFE] Starting PFTrDA Linear
+2026-03-06 12:25:45,042 - INFO - [JACKKNIFE] PFTrDA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:45,130 - INFO - [JACKKNIFE] Starting PFTrDS Branched
+2026-03-06 12:25:45,148 - INFO - [JACKKNIFE] PFTrDS Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:45,246 - INFO - [JACKKNIFE] Starting PFTrDS Linear
+2026-03-06 12:25:45,264 - INFO - [JACKKNIFE] PFTrDS Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:45,360 - INFO - [JACKKNIFE] Starting PFUnDA Branched
+2026-03-06 12:25:45,374 - INFO - [JACKKNIFE] PFUnDA Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:45,485 - INFO - [JACKKNIFE] Starting PFUnDA Linear
+2026-03-06 12:25:45,508 - INFO - [JACKKNIFE] PFUnDA Linear - Processing animal E2 (1/3)
+2026-03-06 12:25:45,596 - INFO - [JACKKNIFE] Starting PFUnDS Branched
+2026-03-06 12:25:45,615 - INFO - [JACKKNIFE] PFUnDS Branched - Processing animal E2 (1/3)
+2026-03-06 12:25:45,723 - INFO - [JACKKNIFE] Starting PFUnDS Linear
+2026-03-06 12:25:45,743 - INFO - [JACKKNIFE] PFUnDS Linear - Processing animal E2 (1/3)
+2026-03-06 12:26:38,162 - INFO - [JACKKNIFE] PFTeDA Branched - Animal E2 completed in 53.5s (loss=-12.37)
+2026-03-06 12:26:38,162 - INFO - [JACKKNIFE] PFTeDA Branched - Processing animal E3 (2/3)
+2026-03-06 12:26:54,608 - INFO - [JACKKNIFE] PFDA Branched - Animal E2 completed in 72.4s (loss=-3.42)
+2026-03-06 12:26:54,608 - INFO - [JACKKNIFE] PFDA Branched - Processing animal E3 (2/3)
+2026-03-06 12:27:00,138 - INFO - [JACKKNIFE] PFTrDA Branched - Animal E2 completed in 75.2s (loss=-37.36)
+2026-03-06 12:27:00,140 - INFO - [JACKKNIFE] PFTrDA Branched - Processing animal E3 (2/3)
+2026-03-06 12:27:12,305 - INFO - [JACKKNIFE] PFUnDA Branched - Animal E2 completed in 86.9s (loss=-47.53)
+2026-03-06 12:27:12,306 - INFO - [JACKKNIFE] PFUnDA Branched - Processing animal E3 (2/3)
+2026-03-06 12:27:13,064 - INFO - [JACKKNIFE] PFTrDA Linear - Animal E2 completed in 88.0s (loss=-33.47)
+2026-03-06 12:27:13,065 - INFO - [JACKKNIFE] PFTrDA Linear - Processing animal E3 (2/3)
+2026-03-06 12:27:18,541 - INFO - [JACKKNIFE] PFTeDA Linear - Animal E2 completed in 93.7s (loss=99.01)
+2026-03-06 12:27:18,542 - INFO - [JACKKNIFE] PFTeDA Linear - Processing animal E3 (2/3)
+2026-03-06 12:27:28,729 - INFO - [JACKKNIFE] PFDoDA Linear - Animal E2 completed in 105.9s (loss=-37.22)
+2026-03-06 12:27:28,730 - INFO - [JACKKNIFE] PFDoDA Linear - Processing animal E3 (2/3)
+2026-03-06 12:27:28,753 - INFO - [JACKKNIFE] PFNA Linear - Animal E2 completed in 105.1s (loss=0.19)
+2026-03-06 12:27:28,754 - INFO - [JACKKNIFE] PFNA Linear - Processing animal E3 (2/3)
+2026-03-06 12:27:33,369 - INFO - [JACKKNIFE] PFUnDA Linear - Animal E2 completed in 107.9s (loss=-26.48)
+2026-03-06 12:27:33,370 - INFO - [JACKKNIFE] PFUnDA Linear - Processing animal E3 (2/3)
+2026-03-06 12:27:38,997 - INFO - [JACKKNIFE] PFDoDA Branched - Animal E2 completed in 116.3s (loss=-38.61)
+2026-03-06 12:27:38,998 - INFO - [JACKKNIFE] PFDoDA Branched - Processing animal E3 (2/3)
+2026-03-06 12:27:39,555 - INFO - [JACKKNIFE] PFHpS Linear - Animal E2 completed in 116.3s (loss=20.13)
+2026-03-06 12:27:39,556 - INFO - [JACKKNIFE] PFHpS Linear - Processing animal E3 (2/3)
+2026-03-06 12:27:46,658 - INFO - [JACKKNIFE] PFDA Linear - Animal E2 completed in 124.4s (loss=-8.96)
+2026-03-06 12:27:46,659 - INFO - [JACKKNIFE] PFDA Linear - Processing animal E3 (2/3)
+2026-03-06 12:28:02,730 - INFO - [JACKKNIFE] PFTeDA Branched - Animal E3 completed in 84.6s (loss=-19.03)
+2026-03-06 12:28:02,731 - INFO - [JACKKNIFE] PFTeDA Branched - Processing animal E4 (3/3)
+2026-03-06 12:28:22,402 - INFO - [JACKKNIFE] PFDA Branched - Animal E3 completed in 87.8s (loss=-9.90)
+2026-03-06 12:28:22,403 - INFO - [JACKKNIFE] PFDA Branched - Processing animal E4 (3/3)
+2026-03-06 12:28:24,596 - INFO - [JACKKNIFE] PFTeDA Linear - Animal E3 completed in 66.1s (loss=141.90)
+2026-03-06 12:28:24,597 - INFO - [JACKKNIFE] PFTeDA Linear - Processing animal E4 (3/3)
+2026-03-06 12:28:27,819 - INFO - [JACKKNIFE] PFHxS Linear - Animal E2 completed in 164.3s (loss=-11.43)
+2026-03-06 12:28:27,820 - INFO - [JACKKNIFE] PFHxS Linear - Processing animal E3 (2/3)
+2026-03-06 12:28:29,723 - INFO - [JACKKNIFE] PFTrDA Branched - Animal E3 completed in 89.6s (loss=-38.58)
+2026-03-06 12:28:29,724 - INFO - [JACKKNIFE] PFTrDA Branched - Processing animal E4 (3/3)
+2026-03-06 12:28:31,693 - INFO - [JACKKNIFE] PFUnDA Branched - Animal E3 completed in 79.4s (loss=-45.48)
+2026-03-06 12:28:31,693 - INFO - [JACKKNIFE] PFUnDA Branched - Processing animal E4 (3/3)
+2026-03-06 12:28:59,941 - INFO - [JACKKNIFE] PFDoDA Branched - Animal E3 completed in 80.9s (loss=-36.61)
+2026-03-06 12:28:59,942 - INFO - [JACKKNIFE] PFDoDA Branched - Processing animal E4 (3/3)
+2026-03-06 12:29:00,734 - INFO - [JACKKNIFE] PFTrDA Linear - Animal E3 completed in 107.7s (loss=-25.73)
+2026-03-06 12:29:00,735 - INFO - [JACKKNIFE] PFTrDA Linear - Processing animal E4 (3/3)
+2026-03-06 12:29:02,339 - INFO - [JACKKNIFE] PFDoDA Linear - Animal E3 completed in 93.6s (loss=-22.20)
+2026-03-06 12:29:02,339 - INFO - [JACKKNIFE] PFDoDA Linear - Processing animal E4 (3/3)
+2026-03-06 12:29:06,049 - INFO - [JACKKNIFE] PFTeDA Branched - Animal E4 completed in 63.3s (loss=-19.43)
+2026-03-06 12:29:06,053 - INFO - [JACKKNIFE] PFTeDA Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFTeDA_Branched_LOAO.csv
+2026-03-06 12:29:06,053 - INFO - [JACKKNIFE] PFTeDA Branched - Completed in 201.4s
+2026-03-06 12:29:12,427 - INFO - [JACKKNIFE] PFUnDA Linear - Animal E3 completed in 99.1s (loss=-23.90)
+2026-03-06 12:29:12,428 - INFO - [JACKKNIFE] PFUnDA Linear - Processing animal E4 (3/3)
+2026-03-06 12:29:13,364 - INFO - [JACKKNIFE] PFNA Linear - Animal E3 completed in 104.6s (loss=-1.55)
+2026-03-06 12:29:13,365 - INFO - [JACKKNIFE] PFNA Linear - Processing animal E4 (3/3)
+2026-03-06 12:29:14,603 - INFO - [JACKKNIFE] PFHpS Linear - Animal E3 completed in 95.0s (loss=52.79)
+2026-03-06 12:29:14,605 - INFO - [JACKKNIFE] PFHpS Linear - Processing animal E4 (3/3)
+2026-03-06 12:29:18,064 - INFO - [JACKKNIFE] PFOA Branched - Animal E2 completed in 214.0s (loss=77.70)
+2026-03-06 12:29:18,066 - INFO - [JACKKNIFE] PFOA Branched - Processing animal E3 (2/3)
+2026-03-06 12:29:36,487 - INFO - [JACKKNIFE] PFDA Linear - Animal E3 completed in 109.8s (loss=-13.50)
+2026-03-06 12:29:36,488 - INFO - [JACKKNIFE] PFDA Linear - Processing animal E4 (3/3)
+2026-03-06 12:29:43,758 - INFO - [JACKKNIFE] PFHxA Linear - Animal E2 completed in 240.4s (loss=9.04)
+2026-03-06 12:29:43,759 - INFO - [JACKKNIFE] PFHxA Linear - Processing animal E3 (2/3)
+2026-03-06 12:29:48,869 - INFO - [JACKKNIFE] PFTeDA Linear - Animal E4 completed in 84.3s (loss=134.06)
+2026-03-06 12:29:48,873 - INFO - [JACKKNIFE] PFTeDA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFTeDA_Linear_LOAO.csv
+2026-03-06 12:29:48,873 - INFO - [JACKKNIFE] PFTeDA Linear - Completed in 244.1s
+2026-03-06 12:29:50,080 - INFO - [JACKKNIFE] PFTrDS Linear - Animal E2 completed in 244.8s (loss=-42.44)
+2026-03-06 12:29:50,081 - INFO - [JACKKNIFE] PFTrDS Linear - Processing animal E3 (2/3)
+2026-03-06 12:29:54,708 - INFO - [JACKKNIFE] PFUnDA Branched - Animal E4 completed in 83.0s (loss=-48.80)
+2026-03-06 12:29:54,712 - INFO - [JACKKNIFE] PFUnDA Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFUnDA_Branched_LOAO.csv
+2026-03-06 12:29:54,712 - INFO - [JACKKNIFE] PFUnDA Branched - Completed in 249.4s
+2026-03-06 12:29:57,601 - INFO - [JACKKNIFE] PFTrDA Branched - Animal E4 completed in 87.9s (loss=-37.07)
+2026-03-06 12:29:57,607 - INFO - [JACKKNIFE] PFTrDA Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFTrDA_Branched_LOAO.csv
+2026-03-06 12:29:57,607 - INFO - [JACKKNIFE] PFTrDA Branched - Completed in 252.7s
+2026-03-06 12:30:00,837 - INFO - [JACKKNIFE] PFDA Branched - Animal E4 completed in 98.4s (loss=-3.07)
+2026-03-06 12:30:00,841 - INFO - [JACKKNIFE] PFDA Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDA_Branched_LOAO.csv
+2026-03-06 12:30:00,842 - INFO - [JACKKNIFE] PFDA Branched - Completed in 258.7s
+2026-03-06 12:30:08,792 - INFO - [JACKKNIFE] PFPeA Linear - Animal E2 completed in 264.2s (loss=29.35)
+2026-03-06 12:30:08,792 - INFO - [JACKKNIFE] PFPeA Linear - Processing animal E3 (2/3)
+2026-03-06 12:30:11,157 - INFO - [JACKKNIFE] PFTrDA Linear - Animal E4 completed in 70.4s (loss=-32.88)
+2026-03-06 12:30:11,162 - INFO - [JACKKNIFE] PFTrDA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFTrDA_Linear_LOAO.csv
+2026-03-06 12:30:11,162 - INFO - [JACKKNIFE] PFTrDA Linear - Completed in 266.1s
+2026-03-06 12:30:41,129 - INFO - [JACKKNIFE] PFUnDA Linear - Animal E4 completed in 88.7s (loss=-26.66)
+2026-03-06 12:30:41,133 - INFO - [JACKKNIFE] PFUnDA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFUnDA_Linear_LOAO.csv
+2026-03-06 12:30:41,133 - INFO - [JACKKNIFE] PFUnDA Linear - Completed in 295.6s
+2026-03-06 12:30:44,160 - INFO - [JACKKNIFE] PFHpS Linear - Animal E4 completed in 89.6s (loss=34.52)
+2026-03-06 12:30:44,164 - INFO - [JACKKNIFE] PFHpS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFHpS_Linear_LOAO.csv
+2026-03-06 12:30:44,164 - INFO - [JACKKNIFE] PFHpS Linear - Completed in 300.9s
+2026-03-06 12:30:47,508 - INFO - [JACKKNIFE] PFDoDA Branched - Animal E4 completed in 107.6s (loss=-37.30)
+2026-03-06 12:30:47,513 - INFO - [JACKKNIFE] PFDoDA Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDoDA_Branched_LOAO.csv
+2026-03-06 12:30:47,513 - INFO - [JACKKNIFE] PFDoDA Branched - Completed in 304.8s
+2026-03-06 12:30:56,255 - INFO - [JACKKNIFE] PFNA Linear - Animal E4 completed in 102.9s (loss=-1.84)
+2026-03-06 12:30:56,259 - INFO - [JACKKNIFE] PFNA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFNA_Linear_LOAO.csv
+2026-03-06 12:30:56,259 - INFO - [JACKKNIFE] PFNA Linear - Completed in 312.6s
+2026-03-06 12:30:57,474 - INFO - [JACKKNIFE] PFHpA Linear - Animal E2 completed in 314.3s (loss=7.46)
+2026-03-06 12:30:57,475 - INFO - [JACKKNIFE] PFHpA Linear - Processing animal E3 (2/3)
+2026-03-06 12:30:59,887 - INFO - [JACKKNIFE] PFOA Linear - Animal E2 completed in 315.7s (loss=18.33)
+2026-03-06 12:30:59,888 - INFO - [JACKKNIFE] PFOA Linear - Processing animal E3 (2/3)
+2026-03-06 12:31:03,799 - INFO - [JACKKNIFE] PFDoDA Linear - Animal E4 completed in 121.5s (loss=-30.43)
+2026-03-06 12:31:03,803 - INFO - [JACKKNIFE] PFDoDA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDoDA_Linear_LOAO.csv
+2026-03-06 12:31:03,803 - INFO - [JACKKNIFE] PFDoDA Linear - Completed in 321.0s
+2026-03-06 12:31:19,267 - INFO - [JACKKNIFE] PFDA Linear - Animal E4 completed in 102.8s (loss=-10.04)
+2026-03-06 12:31:19,272 - INFO - [JACKKNIFE] PFDA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDA_Linear_LOAO.csv
+2026-03-06 12:31:19,272 - INFO - [JACKKNIFE] PFDA Linear - Completed in 337.0s
+2026-03-06 12:31:51,833 - INFO - [JACKKNIFE] PFBA Linear - Animal E2 completed in 369.8s (loss=43.16)
+2026-03-06 12:31:51,834 - INFO - [JACKKNIFE] PFBA Linear - Processing animal E3 (2/3)
+2026-03-06 12:31:56,378 - INFO - [JACKKNIFE] PFDS Branched - Animal E2 completed in 374.0s (loss=110.69)
+2026-03-06 12:31:56,379 - INFO - [JACKKNIFE] PFDS Branched - Processing animal E3 (2/3)
+2026-03-06 12:32:39,165 - INFO - [JACKKNIFE] PFDoDS Branched - Animal E2 completed in 416.3s (loss=35.28)
+2026-03-06 12:32:39,166 - INFO - [JACKKNIFE] PFDoDS Branched - Processing animal E3 (2/3)
+2026-03-06 12:33:18,967 - INFO - [JACKKNIFE] PFOA Branched - Animal E3 completed in 240.9s (loss=77.75)
+2026-03-06 12:33:18,968 - INFO - [JACKKNIFE] PFOA Branched - Processing animal E4 (3/3)
+2026-03-06 12:33:37,713 - INFO - [JACKKNIFE] PFHxS Linear - Animal E3 completed in 309.9s (loss=0.21)
+2026-03-06 12:33:37,714 - INFO - [JACKKNIFE] PFHxS Linear - Processing animal E4 (3/3)
+2026-03-06 12:33:54,714 - INFO - [JACKKNIFE] PFOS Branched - Animal E2 completed in 490.4s (loss=83.07)
+2026-03-06 12:33:54,715 - INFO - [JACKKNIFE] PFOS Branched - Processing animal E3 (2/3)
+2026-03-06 12:34:10,766 - INFO - [JACKKNIFE] PFTrDS Linear - Animal E3 completed in 260.7s (loss=-39.73)
+2026-03-06 12:34:10,766 - INFO - [JACKKNIFE] PFTrDS Linear - Processing animal E4 (3/3)
+2026-03-06 12:34:22,295 - INFO - [JACKKNIFE] PFHxA Linear - Animal E3 completed in 278.5s (loss=9.50)
+2026-03-06 12:34:22,296 - INFO - [JACKKNIFE] PFHxA Linear - Processing animal E4 (3/3)
+2026-03-06 12:34:26,008 - INFO - [JACKKNIFE] PFUnDS Branched - Animal E2 completed in 520.4s (loss=89.65)
+2026-03-06 12:34:26,009 - INFO - [JACKKNIFE] PFUnDS Branched - Processing animal E3 (2/3)
+2026-03-06 12:34:40,501 - INFO - [JACKKNIFE] PFTrDS Branched - Animal E2 completed in 535.4s (loss=15.37)
+2026-03-06 12:34:40,502 - INFO - [JACKKNIFE] PFTrDS Branched - Processing animal E3 (2/3)
+2026-03-06 12:34:50,534 - INFO - [JACKKNIFE] PFPeA Linear - Animal E3 completed in 281.7s (loss=30.86)
+2026-03-06 12:34:50,534 - INFO - [JACKKNIFE] PFPeA Linear - Processing animal E4 (3/3)
+2026-03-06 12:34:56,559 - INFO - [JACKKNIFE] PFOA Linear - Animal E3 completed in 236.7s (loss=25.11)
+2026-03-06 12:34:56,560 - INFO - [JACKKNIFE] PFOA Linear - Processing animal E4 (3/3)
+2026-03-06 12:35:09,633 - INFO - [JACKKNIFE] PFDoDS Linear - Animal E2 completed in 566.6s (loss=3.98)
+2026-03-06 12:35:09,634 - INFO - [JACKKNIFE] PFDoDS Linear - Processing animal E3 (2/3)
+2026-03-06 12:35:27,937 - INFO - [JACKKNIFE] PFNS Linear - Animal E2 completed in 584.0s (loss=117.23)
+2026-03-06 12:35:27,938 - INFO - [JACKKNIFE] PFNS Linear - Processing animal E3 (2/3)
+2026-03-06 12:35:47,391 - INFO - [JACKKNIFE] PFHpA Linear - Animal E3 completed in 289.9s (loss=6.31)
+2026-03-06 12:35:47,392 - INFO - [JACKKNIFE] PFHpA Linear - Processing animal E4 (3/3)
+2026-03-06 12:35:47,647 - INFO - [JACKKNIFE] PFUnDS Linear - Animal E2 completed in 601.9s (loss=15.05)
+2026-03-06 12:35:47,648 - INFO - [JACKKNIFE] PFUnDS Linear - Processing animal E3 (2/3)
+2026-03-06 12:36:11,286 - INFO - [JACKKNIFE] PFDS Linear - Animal E2 completed in 628.7s (loss=93.53)
+2026-03-06 12:36:11,287 - INFO - [JACKKNIFE] PFDS Linear - Processing animal E3 (2/3)
+2026-03-06 12:36:19,144 - INFO - [JACKKNIFE] PFOA Branched - Animal E4 completed in 180.2s (loss=98.55)
+2026-03-06 12:36:19,149 - INFO - [JACKKNIFE] PFOA Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFOA_Branched_LOAO.csv
+2026-03-06 12:36:19,149 - INFO - [JACKKNIFE] PFOA Branched - Completed in 635.1s
+2026-03-06 12:37:19,204 - INFO - [JACKKNIFE] PFBA Linear - Animal E3 completed in 327.4s (loss=42.30)
+2026-03-06 12:37:19,205 - INFO - [JACKKNIFE] PFBA Linear - Processing animal E4 (3/3)
+2026-03-06 12:37:22,868 - INFO - [JACKKNIFE] PFHxS Linear - Animal E4 completed in 225.2s (loss=-4.59)
+2026-03-06 12:37:22,872 - INFO - [JACKKNIFE] PFHxS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFHxS_Linear_LOAO.csv
+2026-03-06 12:37:22,872 - INFO - [JACKKNIFE] PFHxS Linear - Completed in 699.4s
+2026-03-06 12:37:39,616 - INFO - [JACKKNIFE] PFOS Linear - Animal E2 completed in 715.2s (loss=151.64)
+2026-03-06 12:37:39,617 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E3 (2/3)
+2026-03-06 12:38:25,355 - INFO - [JACKKNIFE] PFHxA Linear - Animal E4 completed in 243.1s (loss=9.28)
+2026-03-06 12:38:25,359 - INFO - [JACKKNIFE] PFHxA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFHxA_Linear_LOAO.csv
+2026-03-06 12:38:25,359 - INFO - [JACKKNIFE] PFHxA Linear - Completed in 762.0s
+2026-03-06 12:38:30,041 - INFO - [JACKKNIFE] PFTrDS Linear - Animal E4 completed in 259.3s (loss=15.77)
+2026-03-06 12:38:30,046 - INFO - [JACKKNIFE] PFTrDS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFTrDS_Linear_LOAO.csv
+2026-03-06 12:38:30,046 - INFO - [JACKKNIFE] PFTrDS Linear - Completed in 764.8s
+2026-03-06 12:38:55,146 - INFO - [JACKKNIFE] PFDoDS Branched - Animal E3 completed in 376.0s (loss=40.47)
+2026-03-06 12:38:55,147 - INFO - [JACKKNIFE] PFDoDS Branched - Processing animal E4 (3/3)
+2026-03-06 12:40:11,647 - INFO - [JACKKNIFE] PFHpA Linear - Animal E4 completed in 264.3s (loss=5.48)
+2026-03-06 12:40:11,652 - INFO - [JACKKNIFE] PFHpA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFHpA_Linear_LOAO.csv
+2026-03-06 12:40:11,652 - INFO - [JACKKNIFE] PFHpA Linear - Completed in 868.5s
+2026-03-06 12:40:16,316 - INFO - [JACKKNIFE] PFNS Branched - Animal E2 completed in 872.5s (loss=166.87)
+2026-03-06 12:40:16,317 - INFO - [JACKKNIFE] PFNS Branched - Processing animal E3 (2/3)
+2026-03-06 12:40:28,811 - INFO - [JACKKNIFE] PFOA Linear - Animal E4 completed in 332.3s (loss=30.10)
+2026-03-06 12:40:28,815 - INFO - [JACKKNIFE] PFOA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFOA_Linear_LOAO.csv
+2026-03-06 12:40:28,816 - INFO - [JACKKNIFE] PFOA Linear - Completed in 884.6s
+2026-03-06 12:41:02,151 - INFO - [JACKKNIFE] PFUnDS Branched - Animal E3 completed in 396.1s (loss=97.33)
+2026-03-06 12:41:02,152 - INFO - [JACKKNIFE] PFUnDS Branched - Processing animal E4 (3/3)
+2026-03-06 12:41:28,748 - INFO - [JACKKNIFE] PFDS Branched - Animal E3 completed in 572.4s (loss=113.35)
+2026-03-06 12:41:28,749 - INFO - [JACKKNIFE] PFDS Branched - Processing animal E4 (3/3)
+2026-03-06 12:42:37,911 - INFO - [JACKKNIFE] PFUnDS Linear - Animal E3 completed in 410.3s (loss=28.77)
+2026-03-06 12:42:37,911 - INFO - [JACKKNIFE] PFUnDS Linear - Processing animal E4 (3/3)
+2026-03-06 12:42:45,809 - INFO - [JACKKNIFE] PFTrDS Branched - Animal E3 completed in 485.3s (loss=15.58)
+2026-03-06 12:42:45,809 - INFO - [JACKKNIFE] PFTrDS Branched - Processing animal E4 (3/3)
+2026-03-06 12:43:27,547 - INFO - [JACKKNIFE] PFBA Linear - Animal E4 completed in 368.3s (loss=49.55)
+2026-03-06 12:43:27,551 - INFO - [JACKKNIFE] PFBA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFBA_Linear_LOAO.csv
+2026-03-06 12:43:27,551 - INFO - [JACKKNIFE] PFBA Linear - Completed in 1065.5s
+2026-03-06 12:43:32,915 - INFO - [JACKKNIFE] PFNS Linear - Animal E3 completed in 485.0s (loss=122.80)
+2026-03-06 12:43:32,916 - INFO - [JACKKNIFE] PFNS Linear - Processing animal E4 (3/3)
+2026-03-06 12:43:51,803 - INFO - [JACKKNIFE] PFOS Branched - Animal E3 completed in 597.1s (loss=91.63)
+2026-03-06 12:43:51,804 - INFO - [JACKKNIFE] PFOS Branched - Processing animal E4 (3/3)
+2026-03-06 12:44:07,881 - INFO - [JACKKNIFE] PFDoDS Linear - Animal E3 completed in 538.2s (loss=8.75)
+2026-03-06 12:44:07,881 - INFO - [JACKKNIFE] PFDoDS Linear - Processing animal E4 (3/3)
+2026-03-06 12:45:26,675 - INFO - [JACKKNIFE] PFDS Linear - Animal E3 completed in 555.4s (loss=111.18)
+2026-03-06 12:45:26,676 - INFO - [JACKKNIFE] PFDS Linear - Processing animal E4 (3/3)
+2026-03-06 12:47:10,563 - INFO - [JACKKNIFE] PFPeA Linear - Animal E4 completed in 740.0s (loss=-3.61)
+2026-03-06 12:47:10,567 - INFO - [JACKKNIFE] PFPeA Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFPeA_Linear_LOAO.csv
+2026-03-06 12:47:10,567 - INFO - [JACKKNIFE] PFPeA Linear - Completed in 1286.0s
+2026-03-06 12:47:15,782 - INFO - [JACKKNIFE] PFDoDS Branched - Animal E4 completed in 500.6s (loss=40.85)
+2026-03-06 12:47:15,786 - INFO - [JACKKNIFE] PFDoDS Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDoDS_Branched_LOAO.csv
+2026-03-06 12:47:15,786 - INFO - [JACKKNIFE] PFDoDS Branched - Completed in 1292.9s
+2026-03-06 12:49:06,047 - INFO - [JACKKNIFE] PFDS Branched - Animal E4 completed in 457.3s (loss=111.01)
+2026-03-06 12:49:06,051 - INFO - [JACKKNIFE] PFDS Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDS_Branched_LOAO.csv
+2026-03-06 12:49:06,051 - INFO - [JACKKNIFE] PFDS Branched - Completed in 1403.7s
+2026-03-06 12:49:39,347 - INFO - [JACKKNIFE] PFUnDS Branched - Animal E4 completed in 517.2s (loss=88.49)
+2026-03-06 12:49:39,352 - INFO - [JACKKNIFE] PFUnDS Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFUnDS_Branched_LOAO.csv
+2026-03-06 12:49:39,352 - INFO - [JACKKNIFE] PFUnDS Branched - Completed in 1433.8s
+2026-03-06 12:50:01,346 - INFO - [JACKKNIFE] PFOS Linear - Animal E3 completed in 741.7s (loss=152.74)
+2026-03-06 12:50:01,347 - INFO - [JACKKNIFE] PFOS Linear - Processing animal E4 (3/3)
+2026-03-06 12:51:24,130 - INFO - [JACKKNIFE] PFTrDS Branched - Animal E4 completed in 518.3s (loss=15.84)
+2026-03-06 12:51:24,135 - INFO - [JACKKNIFE] PFTrDS Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFTrDS_Branched_LOAO.csv
+2026-03-06 12:51:24,135 - INFO - [JACKKNIFE] PFTrDS Branched - Completed in 1539.0s
+2026-03-06 12:52:02,351 - INFO - [JACKKNIFE] PFUnDS Linear - Animal E4 completed in 564.4s (loss=17.47)
+2026-03-06 12:52:02,356 - INFO - [JACKKNIFE] PFUnDS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFUnDS_Linear_LOAO.csv
+2026-03-06 12:52:02,356 - INFO - [JACKKNIFE] PFUnDS Linear - Completed in 1576.6s
+2026-03-06 12:52:57,122 - INFO - [JACKKNIFE] PFOS Branched - Animal E4 completed in 545.3s (loss=87.70)
+2026-03-06 12:52:57,126 - INFO - [JACKKNIFE] PFOS Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFOS_Branched_LOAO.csv
+2026-03-06 12:52:57,127 - INFO - [JACKKNIFE] PFOS Branched - Completed in 1632.8s
+2026-03-06 12:54:09,906 - INFO - [JACKKNIFE] PFNS Linear - Animal E4 completed in 637.0s (loss=124.67)
+2026-03-06 12:54:09,910 - INFO - [JACKKNIFE] PFNS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFNS_Linear_LOAO.csv
+2026-03-06 12:54:09,910 - INFO - [JACKKNIFE] PFNS Linear - Completed in 1706.0s
+2026-03-06 12:54:38,390 - INFO - [JACKKNIFE] PFDS Linear - Animal E4 completed in 551.7s (loss=116.48)
+2026-03-06 12:54:38,395 - INFO - [JACKKNIFE] PFDS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDS_Linear_LOAO.csv
+2026-03-06 12:54:38,395 - INFO - [JACKKNIFE] PFDS Linear - Completed in 1735.9s
+2026-03-06 12:56:00,510 - INFO - [JACKKNIFE] PFDoDS Linear - Animal E4 completed in 712.6s (loss=3.70)
+2026-03-06 12:56:00,515 - INFO - [JACKKNIFE] PFDoDS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFDoDS_Linear_LOAO.csv
+2026-03-06 12:56:00,515 - INFO - [JACKKNIFE] PFDoDS Linear - Completed in 1817.5s
+2026-03-06 12:56:30,100 - INFO - [JACKKNIFE] PFNS Branched - Animal E3 completed in 973.8s (loss=162.18)
+2026-03-06 12:56:30,101 - INFO - [JACKKNIFE] PFNS Branched - Processing animal E4 (3/3)
+2026-03-06 13:00:34,483 - INFO - [JACKKNIFE] PFOS Linear - Animal E4 completed in 633.1s (loss=151.67)
+2026-03-06 13:00:34,488 - INFO - [JACKKNIFE] PFOS Linear - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFOS_Linear_LOAO.csv
+2026-03-06 13:00:34,488 - INFO - [JACKKNIFE] PFOS Linear - Completed in 2090.0s
+2026-03-06 13:11:35,776 - INFO - [JACKKNIFE] PFNS Branched - Animal E4 completed in 905.7s (loss=164.79)
+2026-03-06 13:11:35,781 - INFO - [JACKKNIFE] PFNS Branched - Saved jackknife results to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/jackknife/jackknife_PFNS_Branched_LOAO.csv
+2026-03-06 13:11:35,781 - INFO - [JACKKNIFE] PFNS Branched - Completed in 2752.0s
+2026-03-06 13:11:35,783 - INFO - === PHASE 2/3 COMPLETED ===
+2026-03-06 13:11:35,783 - INFO - Jackknife fits: 31/31 successful in 2754.0s
+2026-03-06 13:11:35,784 - INFO - === PHASE 3: Running Monte Carlo sampling ===
+2026-03-06 13:11:35,913 - INFO - [MONTE CARLO] Starting PFBA Linear
+2026-03-06 13:11:36,048 - INFO - [MONTE CARLO] Starting PFDA Branched
+2026-03-06 13:11:36,185 - INFO - [MONTE CARLO] Starting PFDA Linear
+2026-03-06 13:11:36,313 - INFO - [MONTE CARLO] Starting PFDS Branched
+2026-03-06 13:11:36,436 - INFO - [MONTE CARLO] Starting PFDS Linear
+2026-03-06 13:11:36,551 - INFO - [MONTE CARLO] Starting PFDoDA Branched
+2026-03-06 13:11:36,661 - INFO - [MONTE CARLO] Starting PFDoDA Linear
+2026-03-06 13:11:36,783 - INFO - [MONTE CARLO] Starting PFDoDS Branched
+2026-03-06 13:11:36,896 - INFO - [MONTE CARLO] Starting PFDoDS Linear
+2026-03-06 13:11:37,010 - INFO - [MONTE CARLO] Starting PFHpA Linear
+2026-03-06 13:11:37,124 - INFO - [MONTE CARLO] Starting PFHpS Linear
+2026-03-06 13:11:37,232 - INFO - [MONTE CARLO] Starting PFHxA Linear
+2026-03-06 13:11:37,352 - INFO - [MONTE CARLO] Starting PFHxS Linear
+2026-03-06 13:11:37,468 - INFO - [MONTE CARLO] Starting PFNA Linear
+2026-03-06 13:11:37,584 - INFO - [MONTE CARLO] Starting PFNS Branched
+2026-03-06 13:11:37,701 - INFO - [MONTE CARLO] Starting PFNS Linear
+2026-03-06 13:11:37,812 - INFO - [MONTE CARLO] Starting PFOA Branched
+2026-03-06 13:11:37,926 - INFO - [MONTE CARLO] Starting PFOA Linear
+2026-03-06 13:11:38,037 - INFO - [MONTE CARLO] Starting PFOS Branched
+2026-03-06 13:11:38,151 - INFO - [MONTE CARLO] Starting PFOS Linear
+2026-03-06 13:11:38,271 - INFO - [MONTE CARLO] Starting PFPeA Linear
+2026-03-06 13:11:38,385 - INFO - [MONTE CARLO] PFDA Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:38,386 - INFO - [MONTE CARLO] PFDA Branched - Phase 1 point estimates (linear): [ 0.         26.64077262  0.          0.29776556  0.        ]
+2026-03-06 13:11:38,386 - INFO - [MONTE CARLO] PFDA Branched - Phase 1 central values (log10): [-12.           1.42554682 -12.          -0.52612553 -12.        ]
+2026-03-06 13:11:38,386 - INFO - [MONTE CARLO] PFDA Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:38,391 - INFO - [MONTE CARLO] PFDA Branched - Sample means: [1.00000000e-12 2.68382159e+01 1.00000000e-12 4.04669464e-01
+ 1.00000000e-12]
+2026-03-06 13:11:38,391 - INFO - [MONTE CARLO] PFDA Branched - Sample stds: [2.92825168e-26 3.33429045e+00 2.92825168e-26 3.57899283e-01
+ 2.92825168e-26]
+2026-03-06 13:11:38,392 - INFO - [MONTE CARLO] Starting PFTeDA Branched
+2026-03-06 13:11:38,399 - INFO - [MONTE CARLO] PFDA Branched - Collecting predictions for: ['milk', 'elim']
+2026-03-06 13:11:38,508 - INFO - [MONTE CARLO] Starting PFTeDA Linear
+2026-03-06 13:11:38,614 - INFO - [MONTE CARLO] Starting PFTrDA Branched
+2026-03-06 13:11:38,741 - INFO - [MONTE CARLO] Starting PFTrDA Linear
+2026-03-06 13:11:38,806 - INFO - [MONTE CARLO] PFDA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:38,807 - INFO - [MONTE CARLO] PFDA Linear - Phase 1 point estimates (linear): [0.00000000e+00 1.71265188e-01 0.00000000e+00 3.11399419e+02
+ 0.00000000e+00]
+2026-03-06 13:11:38,807 - INFO - [MONTE CARLO] PFDA Linear - Phase 1 central values (log10): [-12.         -0.7663309 -12.          2.4933178 -12.       ]
+2026-03-06 13:11:38,807 - INFO - [MONTE CARLO] PFDA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:38,811 - INFO - [MONTE CARLO] PFDA Linear - Sample means: [1.00000000e-12 1.71495535e-01 1.00000000e-12 2.01206456e+10
+ 1.00000000e-12]
+2026-03-06 13:11:38,812 - INFO - [MONTE CARLO] PFDA Linear - Sample stds: [2.92825168e-26 9.26332896e-03 2.92825168e-26 1.47442782e+12
+ 2.92825168e-26]
+2026-03-06 13:11:38,815 - INFO - [MONTE CARLO] PFDoDA Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:38,816 - INFO - [MONTE CARLO] PFDoDA Branched - Phase 1 point estimates (linear): [ 0.         16.05386419  0.          0.04461997  0.        ]
+2026-03-06 13:11:38,816 - INFO - [MONTE CARLO] PFDoDA Branched - Phase 1 central values (log10): [-12.           1.20557958 -12.          -1.3504707  -12.        ]
+2026-03-06 13:11:38,816 - INFO - [MONTE CARLO] PFDoDA Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:38,820 - INFO - [MONTE CARLO] PFDA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:38,820 - INFO - [MONTE CARLO] PFDoDA Branched - Sample means: [1.00000000e-12 1.61489667e+01 1.00000000e-12 4.50614908e-02
+ 1.00000000e-12]
+2026-03-06 13:11:38,821 - INFO - [MONTE CARLO] PFDoDA Branched - Sample stds: [2.92825168e-26 1.79638498e+00 2.92825168e-26 5.82072822e-03
+ 2.92825168e-26]
+2026-03-06 13:11:38,828 - INFO - [MONTE CARLO] PFDoDA Branched - Collecting predictions for: ['milk', 'elim']
+2026-03-06 13:11:38,857 - INFO - [MONTE CARLO] Starting PFTrDS Branched
+2026-03-06 13:11:38,968 - INFO - [MONTE CARLO] Starting PFTrDS Linear
+2026-03-06 13:11:39,100 - INFO - [MONTE CARLO] Starting PFUnDA Branched
+2026-03-06 13:11:39,218 - INFO - [MONTE CARLO] Starting PFUnDA Linear
+2026-03-06 13:11:39,255 - INFO - [MONTE CARLO] PFDoDA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:39,256 - INFO - [MONTE CARLO] PFDoDA Linear - Phase 1 point estimates (linear): [0.00000000e+00 2.19843168e-01 0.00000000e+00 2.84417514e+02
+ 0.00000000e+00]
+2026-03-06 13:11:39,256 - INFO - [MONTE CARLO] PFDoDA Linear - Phase 1 central values (log10): [-12.          -0.65788703 -12.           2.45395634 -12.        ]
+2026-03-06 13:11:39,256 - INFO - [MONTE CARLO] PFDoDA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:39,263 - INFO - [MONTE CARLO] PFDoDA Linear - Sample means: [1.00000000e-12 2.20253405e-01 1.00000000e-12 4.01785243e+10
+ 1.00000000e-12]
+2026-03-06 13:11:39,263 - INFO - [MONTE CARLO] PFDoDA Linear - Sample stds: [2.92825168e-26 1.39332384e-02 2.92825168e-26 2.96750575e+12
+ 2.92825168e-26]
+2026-03-06 13:11:39,273 - INFO - [MONTE CARLO] PFDoDA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:39,415 - INFO - [MONTE CARLO] Starting PFUnDS Branched
+2026-03-06 13:11:39,532 - INFO - [MONTE CARLO] Starting PFUnDS Linear
+2026-03-06 13:11:39,825 - INFO - [MONTE CARLO] PFNA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:39,826 - INFO - [MONTE CARLO] PFNA Linear - Phase 1 point estimates (linear): [  0.          48.09995179   0.         315.79052558   0.        ]
+2026-03-06 13:11:39,826 - INFO - [MONTE CARLO] PFNA Linear - Phase 1 central values (log10): [-12.           1.68214464 -12.           2.4993991  -12.        ]
+2026-03-06 13:11:39,826 - INFO - [MONTE CARLO] PFNA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:39,830 - INFO - [MONTE CARLO] PFNA Linear - Sample means: [1.00000000e-12 4.85252824e+01 1.00000000e-12 3.73081385e+10
+ 1.00000000e-12]
+2026-03-06 13:11:39,831 - INFO - [MONTE CARLO] PFNA Linear - Sample stds: [2.92825168e-26 6.57881711e+00 2.92825168e-26 2.73550199e+12
+ 2.92825168e-26]
+2026-03-06 13:11:39,838 - INFO - [MONTE CARLO] PFNA Linear - Collecting predictions for: ['milk', 'elim']
+2026-03-06 13:11:39,932 - INFO - [MONTE CARLO] PFHpS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:39,933 - INFO - [MONTE CARLO] PFHpS Linear - Phase 1 point estimates (linear): [0.00000000e+00 8.84779563e-02 0.00000000e+00 2.39938937e+02
+ 0.00000000e+00]
+2026-03-06 13:11:39,933 - INFO - [MONTE CARLO] PFHpS Linear - Phase 1 central values (log10): [-12.          -1.05316492 -12.           2.38010073 -12.        ]
+2026-03-06 13:11:39,933 - INFO - [MONTE CARLO] PFHpS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:39,938 - INFO - [MONTE CARLO] PFHpS Linear - Sample means: [1.00000000e-12 8.87308996e-02 1.00000000e-12 9.79840791e+10
+ 1.00000000e-12]
+2026-03-06 13:11:39,938 - INFO - [MONTE CARLO] PFHpS Linear - Sample stds: [2.92825168e-26 6.90588552e-03 2.92825168e-26 7.31183285e+12
+ 2.92825168e-26]
+2026-03-06 13:11:39,946 - INFO - [MONTE CARLO] PFHpS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:40,833 - INFO - [MONTE CARLO] PFTeDA Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:40,833 - INFO - [MONTE CARLO] PFTeDA Branched - Phase 1 point estimates (linear): [  0.         143.52100462   0.         307.72234381   0.        ]
+2026-03-06 13:11:40,834 - INFO - [MONTE CARLO] PFTeDA Branched - Phase 1 central values (log10): [-12.           2.15691547 -12.           2.48815903 -12.        ]
+2026-03-06 13:11:40,834 - INFO - [MONTE CARLO] PFTeDA Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:40,838 - INFO - [MONTE CARLO] PFTeDA Branched - Sample means: [1.00000000e-12 1.49800385e+02 1.00000000e-12 3.23145987e+20
+ 1.00000000e-12]
+2026-03-06 13:11:40,839 - INFO - [MONTE CARLO] PFTeDA Branched - Sample stds: [2.92825168e-26 4.52310051e+01 2.92825168e-26 2.70628135e+22
+ 2.92825168e-26]
+2026-03-06 13:11:40,847 - INFO - [MONTE CARLO] PFTeDA Branched - Collecting predictions for: ['milk', 'elim']
+2026-03-06 13:11:41,070 - INFO - [MONTE CARLO] PFTrDA Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:41,070 - INFO - [MONTE CARLO] PFTrDA Branched - Phase 1 point estimates (linear): [ 0.         33.68740938  0.          0.45459517  0.        ]
+2026-03-06 13:11:41,070 - INFO - [MONTE CARLO] PFTrDA Branched - Phase 1 central values (log10): [-12.           1.52746761 -12.          -0.34237518 -12.        ]
+2026-03-06 13:11:41,070 - INFO - [MONTE CARLO] PFTrDA Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:41,075 - INFO - [MONTE CARLO] PFTrDA Branched - Sample means: [1.00000000e-12 3.40143045e+01 1.00000000e-12 4.73098719e-01
+ 1.00000000e-12]
+2026-03-06 13:11:41,075 - INFO - [MONTE CARLO] PFTrDA Branched - Sample stds: [2.92825168e-26 4.82877735e+00 2.92825168e-26 1.30100971e-01
+ 2.92825168e-26]
+2026-03-06 13:11:41,083 - INFO - [MONTE CARLO] PFTrDA Branched - Collecting predictions for: ['milk', 'elim']
+2026-03-06 13:11:41,110 - INFO - [MONTE CARLO] PFTeDA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:41,110 - INFO - [MONTE CARLO] PFTeDA Linear - Phase 1 point estimates (linear): [  0.           1.04171882   0.         207.0568633    0.        ]
+2026-03-06 13:11:41,111 - INFO - [MONTE CARLO] PFTeDA Linear - Phase 1 central values (log10): [-12.           0.01775051 -12.           2.31608963 -12.        ]
+2026-03-06 13:11:41,111 - INFO - [MONTE CARLO] PFTeDA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:41,115 - INFO - [MONTE CARLO] PFTeDA Linear - Sample means: [1.00000000e-12 1.05733297e+00 1.00000000e-12 6.58027037e+13
+ 1.00000000e-12]
+2026-03-06 13:11:41,115 - INFO - [MONTE CARLO] PFTeDA Linear - Sample stds: [2.92825168e-26 1.86319591e-01 2.92825168e-26 5.15377729e+15
+ 2.92825168e-26]
+2026-03-06 13:11:41,123 - INFO - [MONTE CARLO] PFTeDA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:41,542 - INFO - [MONTE CARLO] PFUnDA Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:41,542 - INFO - [MONTE CARLO] PFUnDA Branched - Phase 1 point estimates (linear): [ 0.         12.23946198  0.          0.02635704  0.        ]
+2026-03-06 13:11:41,542 - INFO - [MONTE CARLO] PFUnDA Branched - Phase 1 central values (log10): [-12.           1.08776233 -12.          -1.57910336 -12.        ]
+2026-03-06 13:11:41,542 - INFO - [MONTE CARLO] PFUnDA Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:41,547 - INFO - [MONTE CARLO] PFUnDA Branched - Sample means: [1.00000000e-12 1.23999667e+01 1.00000000e-12 2.71783460e-02
+ 1.00000000e-12]
+2026-03-06 13:11:41,547 - INFO - [MONTE CARLO] PFUnDA Branched - Sample stds: [2.92825168e-26 2.04435423e+00 2.92825168e-26 6.55524360e-03
+ 2.92825168e-26]
+2026-03-06 13:11:41,555 - INFO - [MONTE CARLO] PFUnDA Branched - Collecting predictions for: ['milk', 'elim']
+2026-03-06 13:11:41,694 - INFO - [MONTE CARLO] PFTrDA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:41,694 - INFO - [MONTE CARLO] PFTrDA Linear - Phase 1 point estimates (linear): [ 0.          0.23977621  0.         50.75616715  0.        ]
+2026-03-06 13:11:41,695 - INFO - [MONTE CARLO] PFTrDA Linear - Phase 1 central values (log10): [-12.          -0.62019391 -12.           1.70548882 -12.        ]
+2026-03-06 13:11:41,695 - INFO - [MONTE CARLO] PFTrDA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:41,699 - INFO - [MONTE CARLO] PFTrDA Linear - Sample means: [1.00000000e-12 2.40931787e-01 1.00000000e-12 2.75678563e+06
+ 1.00000000e-12]
+2026-03-06 13:11:41,699 - INFO - [MONTE CARLO] PFTrDA Linear - Sample stds: [2.92825168e-26 2.42135654e-02 2.92825168e-26 1.70309613e+08
+ 2.92825168e-26]
+2026-03-06 13:11:41,708 - INFO - [MONTE CARLO] PFTrDA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:41,847 - INFO - [MONTE CARLO] PFUnDA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:41,848 - INFO - [MONTE CARLO] PFUnDA Linear - Phase 1 point estimates (linear): [0.00000000e+00 1.90290565e-01 0.00000000e+00 2.96176205e+02
+ 0.00000000e+00]
+2026-03-06 13:11:41,848 - INFO - [MONTE CARLO] PFUnDA Linear - Phase 1 central values (log10): [-12.          -0.72058275 -12.           2.47155016 -12.        ]
+2026-03-06 13:11:41,848 - INFO - [MONTE CARLO] PFUnDA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:41,852 - INFO - [MONTE CARLO] PFUnDA Linear - Sample means: [1.00000000e-12 1.90789893e-01 1.00000000e-12 3.54834613e+07
+ 1.00000000e-12]
+2026-03-06 13:11:41,853 - INFO - [MONTE CARLO] PFUnDA Linear - Sample stds: [2.92825168e-26 1.42417836e-02 2.92825168e-26 2.29172868e+09
+ 2.92825168e-26]
+2026-03-06 13:11:41,861 - INFO - [MONTE CARLO] PFUnDA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:42,522 - INFO - [MONTE CARLO] PFHpA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:42,523 - INFO - [MONTE CARLO] PFHpA Linear - Phase 1 point estimates (linear): [  0.         316.18232221 315.11536745 222.09852811   0.        ]
+2026-03-06 13:11:42,524 - INFO - [MONTE CARLO] PFHpA Linear - Phase 1 central values (log10): [-12.           2.49993758   2.49846958   2.34654568 -12.        ]
+2026-03-06 13:11:42,524 - INFO - [MONTE CARLO] PFHpA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:42,530 - INFO - [MONTE CARLO] PFHpA Linear - Sample means: [1.00000000e-12 3.43637038e+02 3.42487218e+02 7.33811930e+14
+ 1.00000000e-12]
+2026-03-06 13:11:42,531 - INFO - [MONTE CARLO] PFHpA Linear - Sample stds: [2.92825168e-26 1.40440881e+02 1.39794114e+02 6.19214832e+16
+ 2.92825168e-26]
+2026-03-06 13:11:42,542 - INFO - [MONTE CARLO] PFHpA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:42,932 - INFO - [MONTE CARLO] PFHxA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:42,933 - INFO - [MONTE CARLO] PFHxA Linear - Phase 1 point estimates (linear): [0.00000000e+00 3.11981224e+02 3.16227766e+02 1.14242251e-03
+ 0.00000000e+00]
+2026-03-06 13:11:42,934 - INFO - [MONTE CARLO] PFHxA Linear - Phase 1 central values (log10): [-12.           2.49412846   2.5         -2.94217325 -12.        ]
+2026-03-06 13:11:42,934 - INFO - [MONTE CARLO] PFHxA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:42,940 - INFO - [MONTE CARLO] PFHxA Linear - Sample means: [1.00000000e-12 3.29370124e+02 1.11289203e+03 1.42048839e-03
+ 1.00000000e-12]
+2026-03-06 13:11:42,940 - INFO - [MONTE CARLO] PFHxA Linear - Sample stds: [2.92825168e-26 1.05974427e+02 3.14704911e+03 1.06814311e-03
+ 2.92825168e-26]
+2026-03-06 13:11:42,952 - INFO - [MONTE CARLO] PFHxA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:43,072 - INFO - [MONTE CARLO] PFHxS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:43,073 - INFO - [MONTE CARLO] PFHxS Linear - Phase 1 point estimates (linear): [0.00000000e+00 1.43951372e-01 1.79837166e-01 2.66473532e+02
+ 0.00000000e+00]
+2026-03-06 13:11:43,074 - INFO - [MONTE CARLO] PFHxS Linear - Phase 1 central values (log10): [-12.          -0.84178419  -0.74512055   2.42565408 -12.        ]
+2026-03-06 13:11:43,074 - INFO - [MONTE CARLO] PFHxS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:43,081 - INFO - [MONTE CARLO] PFHxS Linear - Sample means: [1.00000000e-12 1.46808849e-01 1.81335092e-01 6.48136515e+17
+ 1.00000000e-12]
+2026-03-06 13:11:43,082 - INFO - [MONTE CARLO] PFHxS Linear - Sample stds: [2.92825168e-26 2.70151175e-02 2.44155433e-02 5.88953149e+19
+ 2.92825168e-26]
+2026-03-06 13:11:43,094 - INFO - [MONTE CARLO] PFHxS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:43,535 - INFO - [MONTE CARLO] PFOA Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:43,536 - INFO - [MONTE CARLO] PFOA Branched - Phase 1 point estimates (linear): [  0.           7.9920306   10.84459317 186.23756201   0.        ]
+2026-03-06 13:11:43,536 - INFO - [MONTE CARLO] PFOA Branched - Phase 1 central values (log10): [-12.           0.90265714   1.03521326   2.27006728 -12.        ]
+2026-03-06 13:11:43,537 - INFO - [MONTE CARLO] PFOA Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:43,545 - INFO - [MONTE CARLO] PFOA Branched - Sample means: [1.00000000e-12 2.89671422e+01 2.08051241e+01 2.60099143e+03
+ 1.00000000e-12]
+2026-03-06 13:11:43,545 - INFO - [MONTE CARLO] PFOA Branched - Sample stds: [2.92825168e-26 1.00969231e+02 3.44412231e+01 1.64394813e+04
+ 2.92825168e-26]
+2026-03-06 13:11:43,557 - INFO - [MONTE CARLO] PFOA Branched - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:44,494 - INFO - [MONTE CARLO] PFTrDS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:44,495 - INFO - [MONTE CARLO] PFTrDS Linear - Phase 1 point estimates (linear): [0.00000000e+00 2.07395551e-03 0.00000000e+00 1.20781132e+00
+ 3.04836422e+02]
+2026-03-06 13:11:44,496 - INFO - [MONTE CARLO] PFTrDS Linear - Phase 1 central values (log10): [-12.          -2.68320056 -12.           0.08199909   2.48406686]
+2026-03-06 13:11:44,496 - INFO - [MONTE CARLO] PFTrDS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:44,502 - INFO - [MONTE CARLO] PFTrDS Linear - Sample means: [1.00000000e-12 2.21574118e+01 1.00000000e-12 1.24882001e+01
+ 3.10806059e+03]
+2026-03-06 13:11:44,503 - INFO - [MONTE CARLO] PFTrDS Linear - Sample stds: [2.92825168e-26 1.24516294e+03 2.92825168e-26 6.79811178e+01
+ 1.59404071e+04]
+2026-03-06 13:11:44,515 - INFO - [MONTE CARLO] PFTrDS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:45,623 - INFO - [MONTE CARLO] PFDS Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:45,625 - INFO - [MONTE CARLO] PFDS Branched - Phase 1 point estimates (linear): [ 0.74598617  0.20205586  0.         90.30566453  3.9740251 ]
+2026-03-06 13:11:45,625 - INFO - [MONTE CARLO] PFDS Branched - Phase 1 central values (log10): [ -0.12726922  -0.69452855 -12.           1.95571499   0.59923061]
+2026-03-06 13:11:45,625 - INFO - [MONTE CARLO] PFDS Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:45,631 - INFO - [MONTE CARLO] PFDS Branched - Sample means: [7.46854899e-01 2.03233886e-01 1.00000000e-12 9.05417623e+01
+ 3.98049526e+00]
+2026-03-06 13:11:45,632 - INFO - [MONTE CARLO] PFDS Branched - Sample stds: [4.24934693e-02 2.21225226e-02 2.92825168e-26 5.91807375e+00
+ 2.58801680e-01]
+2026-03-06 13:11:45,643 - INFO - [MONTE CARLO] PFDS Branched - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:45,714 - INFO - [MONTE CARLO] PFBA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:45,715 - INFO - [MONTE CARLO] PFBA Linear - Phase 1 point estimates (linear): [ 0.         24.39896422  7.97143016  2.91948827  0.11714311]
+2026-03-06 13:11:45,715 - INFO - [MONTE CARLO] PFBA Linear - Phase 1 central values (log10): [-12.           1.38737139   0.90153625   0.46530673  -0.93128324]
+2026-03-06 13:11:45,715 - INFO - [MONTE CARLO] PFBA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:45,723 - INFO - [MONTE CARLO] PFBA Linear - Sample means: [1.00000000e-12 2.60612335e+01 1.22986174e+01 2.98917513e+00
+ 1.34952489e-01]
+2026-03-06 13:11:45,723 - INFO - [MONTE CARLO] PFBA Linear - Sample stds: [2.92825168e-26 9.80317535e+00 1.42167478e+01 5.93233833e-01
+ 7.73850585e-02]
+2026-03-06 13:11:45,773 - INFO - [MONTE CARLO] PFBA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:45,920 - INFO - [MONTE CARLO] PFDS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:45,921 - INFO - [MONTE CARLO] PFDS Linear - Phase 1 point estimates (linear): [  1.05523693   0.66273087   0.         218.63423087  10.83853297]
+2026-03-06 13:11:45,921 - INFO - [MONTE CARLO] PFDS Linear - Phase 1 central values (log10): [  0.02334998  -0.1786628  -12.           2.33971816   1.0349705 ]
+2026-03-06 13:11:45,921 - INFO - [MONTE CARLO] PFDS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:45,928 - INFO - [MONTE CARLO] PFDS Linear - Sample means: [1.05707134e+00 6.72984639e-01 1.00000000e-12 2.19285530e+02
+ 1.08637746e+01]
+2026-03-06 13:11:45,928 - INFO - [MONTE CARLO] PFDS Linear - Sample stds: [6.75409700e-02 1.19399604e-01 2.92825168e-26 1.60486816e+01
+ 7.89085200e-01]
+2026-03-06 13:11:45,940 - INFO - [MONTE CARLO] PFDS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:46,270 - INFO - [MONTE CARLO] PFDoDS Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:46,271 - INFO - [MONTE CARLO] PFDoDS Branched - Phase 1 point estimates (linear): [ 0.38192144  0.73775001  0.         53.33689324 58.63392874]
+2026-03-06 13:11:46,272 - INFO - [MONTE CARLO] PFDoDS Branched - Phase 1 central values (log10): [ -0.41802596  -0.13209077 -12.           1.72702772   1.76814899]
+2026-03-06 13:11:46,272 - INFO - [MONTE CARLO] PFDoDS Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:46,278 - INFO - [MONTE CARLO] PFDoDS Branched - Sample means: [4.57032075e-01 8.21651967e-01 1.00000000e-12 5.89893185e+02
+ 6.55275361e+02]
+2026-03-06 13:11:46,279 - INFO - [MONTE CARLO] PFDoDS Branched - Sample stds: [2.92829690e-01 4.02805199e-01 2.92825168e-26 5.00538781e+03
+ 5.54207468e+03]
+2026-03-06 13:11:46,291 - INFO - [MONTE CARLO] PFDoDS Branched - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:46,672 - INFO - [MONTE CARLO] PFDoDS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:46,673 - INFO - [MONTE CARLO] PFDoDS Linear - Phase 1 point estimates (linear): [9.72122727e-02 1.23776236e-03 0.00000000e+00 1.02663720e+01
+ 2.74119008e+02]
+2026-03-06 13:11:46,674 - INFO - [MONTE CARLO] PFDoDS Linear - Phase 1 central values (log10): [ -1.0122789   -2.90736273 -12.           1.011417     2.43793915]
+2026-03-06 13:11:46,674 - INFO - [MONTE CARLO] PFDoDS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:46,683 - INFO - [MONTE CARLO] PFDoDS Linear - Sample means: [9.80586658e-02 6.78310777e+03 1.00000000e-12 5.98806831e+17
+ 1.91842548e+19]
+2026-03-06 13:11:46,683 - INFO - [MONTE CARLO] PFDoDS Linear - Sample stds: [1.25652346e-02 1.80590690e+05 2.92825168e-26 5.98415917e+19
+ 1.91732626e+21]
+2026-03-06 13:11:46,695 - INFO - [MONTE CARLO] PFDoDS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:47,585 - INFO - [MONTE CARLO] PFOA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:47,586 - INFO - [MONTE CARLO] PFOA Linear - Phase 1 point estimates (linear): [  0.          13.69210638   1.7952349  234.02137146   1.36323871]
+2026-03-06 13:11:47,586 - INFO - [MONTE CARLO] PFOA Linear - Phase 1 central values (log10): [-12.           1.13647026   0.25412128   2.36925552   0.13457191]
+2026-03-06 13:11:47,586 - INFO - [MONTE CARLO] PFOA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:47,595 - INFO - [MONTE CARLO] PFOA Linear - Sample means: [1.00000000e-12 1.41570700e+01 4.13964886e+00 1.13115343e+14
+ 1.64788812e+12]
+2026-03-06 13:11:47,595 - INFO - [MONTE CARLO] PFOA Linear - Sample stds: [2.92825168e-26 3.73394465e+00 7.68470545e+00 1.12270151e+16
+ 1.64095685e+14]
+2026-03-06 13:11:47,607 - INFO - [MONTE CARLO] PFOA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:47,929 - INFO - [MONTE CARLO] PFPeA Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:47,930 - INFO - [MONTE CARLO] PFPeA Linear - Phase 1 point estimates (linear): [0.00000000e+00 1.53251871e-03 1.28364166e-01 8.47637779e-02
+ 6.96498055e+01]
+2026-03-06 13:11:47,931 - INFO - [MONTE CARLO] PFPeA Linear - Phase 1 central values (log10): [-12.          -2.81459421  -0.8915562   -1.07178969   1.84291991]
+2026-03-06 13:11:47,931 - INFO - [MONTE CARLO] PFPeA Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:47,937 - INFO - [MONTE CARLO] PFPeA Linear - Sample means: [1.00000000e-12 4.22939594e+04 1.68395977e-01 7.04441324e+09
+ 8.14730181e+12]
+2026-03-06 13:11:47,938 - INFO - [MONTE CARLO] PFPeA Linear - Sample stds: [2.92825168e-26 1.21529628e+06 1.41290847e-01 6.98371609e+11
+ 8.09599964e+14]
+2026-03-06 13:11:47,949 - INFO - [MONTE CARLO] PFPeA Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:48,695 - INFO - [MONTE CARLO] PFTrDS Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:48,697 - INFO - [MONTE CARLO] PFTrDS Branched - Phase 1 point estimates (linear): [  0.58616376   3.07649748   0.         182.97590673 253.53587029]
+2026-03-06 13:11:48,696 - INFO - [MONTE CARLO] PFNS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:48,697 - INFO - [MONTE CARLO] PFTrDS Branched - Phase 1 central values (log10): [ -0.23198103   0.48805656 -12.           2.26239391   2.40403941]
+2026-03-06 13:11:48,697 - INFO - [MONTE CARLO] PFTrDS Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:48,698 - INFO - [MONTE CARLO] PFNS Linear - Phase 1 point estimates (linear): [17.91388206  0.29693614  0.         27.43524375  0.0700939 ]
+2026-03-06 13:11:48,698 - INFO - [MONTE CARLO] PFNS Linear - Phase 1 central values (log10): [  1.25318971  -0.52733694 -12.           1.43830882  -1.15431975]
+2026-03-06 13:11:48,698 - INFO - [MONTE CARLO] PFNS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:48,705 - INFO - [MONTE CARLO] PFNS Linear - Sample means: [1.89027107e+01 3.49435137e-01 1.00000000e-12 3.95498202e+01
+ 1.65883297e-01]
+2026-03-06 13:11:48,705 - INFO - [MONTE CARLO] PFNS Linear - Sample stds: [6.57651354e+00 2.15927629e-01 2.92825168e-26 3.93869612e+01
+ 3.16356348e-01]
+2026-03-06 13:11:48,705 - INFO - [MONTE CARLO] PFTrDS Branched - Sample means: [7.99205536e-01 3.18754997e+00 1.00000000e-12 2.77977036e+06
+ 3.89946956e+06]
+2026-03-06 13:11:48,706 - INFO - [MONTE CARLO] PFTrDS Branched - Sample stds: [7.08515504e-01 8.67161315e-01 2.92825168e-26 2.01288070e+08
+ 2.82483502e+08]
+2026-03-06 13:11:48,718 - INFO - [MONTE CARLO] PFNS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:48,757 - INFO - [MONTE CARLO] PFTrDS Branched - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:48,990 - INFO - [MONTE CARLO] PFUnDS Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:48,991 - INFO - [MONTE CARLO] PFUnDS Branched - Phase 1 point estimates (linear): [1.71728625e+02 1.40979654e+00 0.00000000e+00 1.83881348e+01
+ 3.78663271e-02]
+2026-03-06 13:11:48,991 - INFO - [MONTE CARLO] PFUnDS Branched - Phase 1 central values (log10): [  2.23484269   0.14915644 -12.           1.26453768  -1.42174682]
+2026-03-06 13:11:48,991 - INFO - [MONTE CARLO] PFUnDS Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:48,998 - INFO - [MONTE CARLO] PFUnDS Branched - Sample means: [1.72498651e+02 1.50153348e+00 1.00000000e-12 1.85539834e+01
+ 4.23287279e-02]
+2026-03-06 13:11:48,998 - INFO - [MONTE CARLO] PFUnDS Branched - Sample stds: [2.01358686e+01 5.51661103e-01 2.92825168e-26 2.15018346e+00
+ 2.13471395e-02]
+2026-03-06 13:11:49,052 - INFO - [MONTE CARLO] PFUnDS Branched - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:49,379 - INFO - [MONTE CARLO] PFUnDS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:49,380 - INFO - [MONTE CARLO] PFUnDS Linear - Phase 1 point estimates (linear): [2.73007169e+02 2.86614311e+00 0.00000000e+00 1.20706782e+01
+ 2.97814922e-02]
+2026-03-06 13:11:49,381 - INFO - [MONTE CARLO] PFUnDS Linear - Phase 1 central values (log10): [  2.43617405   0.45729787 -12.           1.08173167  -1.52605355]
+2026-03-06 13:11:49,381 - INFO - [MONTE CARLO] PFUnDS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:49,387 - INFO - [MONTE CARLO] PFUnDS Linear - Sample means: [2.73253143e+02 3.00671477e+00 1.00000000e-12 1.21203843e+01
+ 3.29912159e-02]
+2026-03-06 13:11:49,387 - INFO - [MONTE CARLO] PFUnDS Linear - Sample stds: [1.93375589e+01 9.55956366e-01 2.92825168e-26 8.58740282e-01
+ 1.57433273e-02]
+2026-03-06 13:11:49,399 - INFO - [MONTE CARLO] PFUnDS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:52,806 - INFO - [MONTE CARLO] PFOS Linear - Using Hessian full covariance (log10)
+2026-03-06 13:11:52,807 - INFO - [MONTE CARLO] PFOS Linear - Phase 1 point estimates (linear): [5.98779238e+00 9.15810784e-02 2.84686930e-03 1.66389818e+01
+ 7.15688389e-02]
+2026-03-06 13:11:52,807 - INFO - [MONTE CARLO] PFOS Linear - Phase 1 central values (log10): [ 0.77726673 -1.03819425 -2.54563247  1.22112675 -1.14527603]
+2026-03-06 13:11:52,808 - INFO - [MONTE CARLO] PFOS Linear - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:52,814 - INFO - [MONTE CARLO] PFOS Linear - Sample means: [6.00107463e+00 9.18471568e-02 2.91898672e-03 1.66536253e+01
+ 7.17126939e-02]
+2026-03-06 13:11:52,814 - INFO - [MONTE CARLO] PFOS Linear - Sample stds: [3.29421886e-01 8.58216686e-03 6.21958932e-04 9.47894652e-01
+ 3.47916876e-03]
+2026-03-06 13:11:52,826 - INFO - [MONTE CARLO] PFOS Linear - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:52,955 - INFO - [MONTE CARLO] PFNS Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:52,956 - INFO - [MONTE CARLO] PFNS Branched - Phase 1 point estimates (linear): [1.22024553e+02 2.12120044e-01 1.05472528e-03 8.80952494e+01
+ 1.79075798e-02]
+2026-03-06 13:11:52,961 - INFO - [MONTE CARLO] PFNS Branched - Phase 1 central values (log10): [ 2.08644722 -0.67341829 -2.97686064  1.94495249 -1.7469631 ]
+2026-03-06 13:11:52,962 - INFO - [MONTE CARLO] PFNS Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:52,980 - INFO - [MONTE CARLO] PFNS Branched - Sample means: [6.10585528e+02 2.12838172e-01 1.75303075e-03 4.28832377e+02
+ 1.85672781e-02]
+2026-03-06 13:11:52,981 - INFO - [MONTE CARLO] PFNS Branched - Sample stds: [3.22995052e+03 2.11595848e-02 2.38769576e-03 2.07286316e+03
+ 4.73651059e-03]
+2026-03-06 13:11:53,011 - INFO - [MONTE CARLO] PFNS Branched - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:11:53,041 - INFO - [MONTE CARLO] PFOS Branched - Using Hessian full covariance (log10)
+2026-03-06 13:11:53,042 - INFO - [MONTE CARLO] PFOS Branched - Phase 1 point estimates (linear): [2.21864795e+00 6.42491299e-02 6.93723996e-03 1.54084501e+02
+ 6.30495222e-01]
+2026-03-06 13:11:53,043 - INFO - [MONTE CARLO] PFOS Branched - Phase 1 central values (log10): [ 0.34608839 -1.19213275 -2.15881328  2.18775896 -0.2003182 ]
+2026-03-06 13:11:53,043 - INFO - [MONTE CARLO] PFOS Branched - Generating 10000 samples in log10-space (full covariance)
+2026-03-06 13:11:53,049 - INFO - [MONTE CARLO] PFOS Branched - Sample means: [2.22129474e+00 6.43133702e-02 7.07637717e-03 1.54194483e+02
+ 6.31273539e-01]
+2026-03-06 13:11:53,049 - INFO - [MONTE CARLO] PFOS Branched - Sample stds: [9.61437926e-02 4.04283613e-03 1.32387138e-03 6.78900784e+00
+ 2.77822669e-02]
+2026-03-06 13:11:53,061 - INFO - [MONTE CARLO] PFOS Branched - Collecting predictions for: ['brain', 'liver', 'feces', 'muscle', 'lung', 'spleen', 'plasma', 'kidney', 'urine', 'heart', 'milk', 'elim']
+2026-03-06 13:15:41,071 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 954, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:15:41,166 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 954, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:15:41,262 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 954, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:16:12,894 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1035, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:16:12,990 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1035, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:16:13,085 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1035, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:16:18,851 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1101, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:16:18,946 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1101, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:16:19,041 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1101, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:17:30,027 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1380, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:17:30,126 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1380, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:17:30,224 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1380, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:17:37,000 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1407, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:17:37,095 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1407, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:17:37,190 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 1407, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:08,178 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1487, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:08,273 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1487, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:08,368 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1487, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:28,970 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1568, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:29,065 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1568, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:29,159 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 1568, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:31,255 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 1570, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:31,353 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 1570, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:18:31,450 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 1570, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:20:42,362 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2070, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:20:42,463 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2070, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:20:42,563 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2070, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:05,735 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2159, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:05,832 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2159, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:05,929 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2159, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:40,957 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2312, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:41,069 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2312, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:41,181 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2312, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:44,173 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 2379, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:44,268 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 2379, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:21:44,363 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 2379, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:22:57,909 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2591, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:22:58,007 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2591, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:22:58,104 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2591, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:09,219 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2658, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:09,313 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2658, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:09,406 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2658, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:42,451 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2790, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:42,544 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2790, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:42,636 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2790, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:47,109 - ERROR - [MONTE CARLO] PFOA Linear - simulation failed for sample 2897, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:47,201 - ERROR - [MONTE CARLO] PFOA Linear - simulation failed for sample 2897, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:23:47,293 - ERROR - [MONTE CARLO] PFOA Linear - simulation failed for sample 2897, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:08,807 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2861, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:08,905 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2861, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:09,004 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2861, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:09,162 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2897, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:09,260 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2897, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:09,358 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 2897, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:38,628 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2974, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:38,727 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2974, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:24:38,827 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 2974, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:26:40,571 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3544, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:26:40,666 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3544, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:26:40,763 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3544, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:27:17,183 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3687, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:27:17,277 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3687, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:27:17,371 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3687, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:27:25,483 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3720, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:27:25,578 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3720, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:27:25,672 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 3720, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:07,688 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 4083, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:07,781 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 4083, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:07,876 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 4083, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:21,849 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4045, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:21,953 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4045, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:22,057 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4045, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:42,671 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4266, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:42,773 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4266, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:29:42,866 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4266, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:30:24,602 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4433, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:30:24,695 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4433, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:30:24,788 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4433, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:08,614 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4599, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:08,710 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4599, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:08,806 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 4599, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:31,769 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4523, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:31,869 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4523, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:31,970 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4523, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:58,370 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4624, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:58,468 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4624, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:31:58,566 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 4624, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:36:13,252 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 5580, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:36:13,349 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 5580, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:36:13,448 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 5580, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:37:09,128 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 5794, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:37:09,232 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 5794, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:37:09,336 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 5794, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:38:33,266 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 6304, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:38:33,358 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 6304, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:38:33,450 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 6304, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:39:47,590 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 6399, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:39:47,688 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 6399, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:39:47,785 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 6399, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:41:24,458 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 6700, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:41:24,569 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 6700, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:41:24,680 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 6700, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:47:34,763 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 8166, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:47:34,862 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 8166, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:47:34,960 - ERROR - [MONTE CARLO] PFTeDA Branched - simulation failed for sample 8166, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:48:06,790 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 8076, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:48:06,900 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 8076, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:48:07,009 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 8076, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:51:19,746 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 8742, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:51:19,857 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 8742, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:51:19,968 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 8742, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:52:02,441 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 9530, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:52:02,534 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 9530, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:52:02,627 - ERROR - [MONTE CARLO] PFDoDS Linear - simulation failed for sample 9530, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:52:48,243 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 9043, animal E2: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:52:48,360 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 9043, animal E3: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:52:48,476 - ERROR - [MONTE CARLO] PFHxS Linear - simulation failed for sample 9043, animal E4: Model solution contains NaN or infinite values at index 0
+2026-03-06 13:52:56,843 - INFO - [MONTE CARLO] PFNS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFNS_Linear_monte_carlo.csv
+2026-03-06 13:52:56,843 - INFO - [MONTE CARLO] PFNS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:52:56,843 - INFO - [MONTE CARLO] PFNS Linear - Completed in 2479.1s
+2026-03-06 13:52:56,891 - INFO - [MONTE CARLO] PFOA Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFOA_Branched_monte_carlo.csv
+2026-03-06 13:52:56,891 - INFO - [MONTE CARLO] PFOA Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:52:56,891 - INFO - [MONTE CARLO] PFOA Branched - Completed in 2479.1s
+2026-03-06 13:53:03,090 - INFO - [MONTE CARLO] PFDS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDS_Linear_monte_carlo.csv
+2026-03-06 13:53:03,091 - INFO - [MONTE CARLO] PFDS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:03,091 - INFO - [MONTE CARLO] PFDS Linear - Completed in 2486.7s
+2026-03-06 13:53:06,049 - INFO - [MONTE CARLO] PFOS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFOS_Linear_monte_carlo.csv
+2026-03-06 13:53:06,049 - INFO - [MONTE CARLO] PFOS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:06,049 - INFO - [MONTE CARLO] PFOS Linear - Completed in 2487.9s
+2026-03-06 13:53:07,090 - INFO - [MONTE CARLO] PFNS Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFNS_Branched_monte_carlo.csv
+2026-03-06 13:53:07,090 - INFO - [MONTE CARLO] PFNS Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:07,090 - INFO - [MONTE CARLO] PFNS Branched - Completed in 2489.5s
+2026-03-06 13:53:08,469 - INFO - [MONTE CARLO] PFDA Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDA_Branched_monte_carlo.csv
+2026-03-06 13:53:08,469 - INFO - [MONTE CARLO] PFDA Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:08,469 - INFO - [MONTE CARLO] PFDA Branched - Completed in 2492.4s
+2026-03-06 13:53:15,164 - INFO - [MONTE CARLO] PFUnDS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFUnDS_Linear_monte_carlo.csv
+2026-03-06 13:53:15,165 - INFO - [MONTE CARLO] PFUnDS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:15,165 - INFO - [MONTE CARLO] PFUnDS Linear - Completed in 2495.6s
+2026-03-06 13:53:32,392 - INFO - [MONTE CARLO] PFDS Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDS_Branched_monte_carlo.csv
+2026-03-06 13:53:32,392 - INFO - [MONTE CARLO] PFDS Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:32,392 - INFO - [MONTE CARLO] PFDS Branched - Completed in 2516.1s
+2026-03-06 13:53:36,267 - INFO - [MONTE CARLO] PFBA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFBA_Linear_monte_carlo.csv
+2026-03-06 13:53:36,267 - INFO - [MONTE CARLO] PFBA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:36,267 - INFO - [MONTE CARLO] PFBA Linear - Completed in 2520.4s
+2026-03-06 13:53:38,404 - INFO - [MONTE CARLO] PFUnDS Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFUnDS_Branched_monte_carlo.csv
+2026-03-06 13:53:38,404 - INFO - [MONTE CARLO] PFUnDS Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:38,404 - INFO - [MONTE CARLO] PFUnDS Branched - Completed in 2519.0s
+2026-03-06 13:53:41,427 - INFO - [MONTE CARLO] PFTrDS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFTrDS_Linear_monte_carlo.csv
+2026-03-06 13:53:41,427 - INFO - [MONTE CARLO] PFTrDS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:41,427 - INFO - [MONTE CARLO] PFTrDS Linear - Completed in 2522.5s
+2026-03-06 13:53:45,038 - INFO - [MONTE CARLO] PFOS Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFOS_Branched_monte_carlo.csv
+2026-03-06 13:53:45,038 - INFO - [MONTE CARLO] PFOS Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:45,038 - INFO - [MONTE CARLO] PFOS Branched - Completed in 2527.0s
+2026-03-06 13:53:54,243 - INFO - [MONTE CARLO] PFDoDA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDoDA_Linear_monte_carlo.csv
+2026-03-06 13:53:54,243 - INFO - [MONTE CARLO] PFDoDA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:54,243 - INFO - [MONTE CARLO] PFDoDA Linear - Completed in 2537.6s
+2026-03-06 13:53:58,542 - INFO - [MONTE CARLO] PFHxA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFHxA_Linear_monte_carlo.csv
+2026-03-06 13:53:58,543 - INFO - [MONTE CARLO] PFHxA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:53:58,543 - INFO - [MONTE CARLO] PFHxA Linear - Completed in 2541.3s
+2026-03-06 13:54:01,582 - INFO - [MONTE CARLO] PFDoDA Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDoDA_Branched_monte_carlo.csv
+2026-03-06 13:54:01,582 - INFO - [MONTE CARLO] PFDoDA Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:01,582 - INFO - [MONTE CARLO] PFDoDA Branched - Completed in 2545.0s
+2026-03-06 13:54:03,212 - INFO - [MONTE CARLO] PFUnDA Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFUnDA_Branched_monte_carlo.csv
+2026-03-06 13:54:03,213 - INFO - [MONTE CARLO] PFUnDA Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:03,213 - INFO - [MONTE CARLO] PFUnDA Branched - Completed in 2544.1s
+2026-03-06 13:54:10,252 - INFO - [MONTE CARLO] PFDoDS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDoDS_Linear_monte_carlo.csv
+2026-03-06 13:54:10,253 - INFO - [MONTE CARLO] PFDoDS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:10,253 - INFO - [MONTE CARLO] PFDoDS Linear - Completed in 2553.4s
+2026-03-06 13:54:18,132 - INFO - [MONTE CARLO] PFPeA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFPeA_Linear_monte_carlo.csv
+2026-03-06 13:54:18,132 - INFO - [MONTE CARLO] PFPeA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:18,132 - INFO - [MONTE CARLO] PFPeA Linear - Completed in 2559.9s
+2026-03-06 13:54:19,833 - INFO - [MONTE CARLO] PFTrDA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFTrDA_Linear_monte_carlo.csv
+2026-03-06 13:54:19,833 - INFO - [MONTE CARLO] PFTrDA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:19,833 - INFO - [MONTE CARLO] PFTrDA Linear - Completed in 2561.1s
+2026-03-06 13:54:20,772 - INFO - [MONTE CARLO] PFOA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFOA_Linear_monte_carlo.csv
+2026-03-06 13:54:20,772 - INFO - [MONTE CARLO] PFOA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:20,772 - INFO - [MONTE CARLO] PFOA Linear - Completed in 2562.8s
+2026-03-06 13:54:21,067 - INFO - [MONTE CARLO] PFTeDA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFTeDA_Linear_monte_carlo.csv
+2026-03-06 13:54:21,067 - INFO - [MONTE CARLO] PFTeDA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:21,067 - INFO - [MONTE CARLO] PFTeDA Linear - Completed in 2562.6s
+2026-03-06 13:54:22,800 - INFO - [MONTE CARLO] PFTrDA Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFTrDA_Branched_monte_carlo.csv
+2026-03-06 13:54:22,801 - INFO - [MONTE CARLO] PFTrDA Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:22,801 - INFO - [MONTE CARLO] PFTrDA Branched - Completed in 2564.2s
+2026-03-06 13:54:33,813 - INFO - [MONTE CARLO] PFHpS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFHpS_Linear_monte_carlo.csv
+2026-03-06 13:54:33,813 - INFO - [MONTE CARLO] PFHpS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:33,813 - INFO - [MONTE CARLO] PFHpS Linear - Completed in 2576.7s
+2026-03-06 13:54:37,265 - INFO - [MONTE CARLO] PFHpA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFHpA_Linear_monte_carlo.csv
+2026-03-06 13:54:37,265 - INFO - [MONTE CARLO] PFHpA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:37,265 - INFO - [MONTE CARLO] PFHpA Linear - Completed in 2580.3s
+2026-03-06 13:54:41,943 - INFO - [MONTE CARLO] PFTrDS Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFTrDS_Branched_monte_carlo.csv
+2026-03-06 13:54:41,943 - INFO - [MONTE CARLO] PFTrDS Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:41,943 - INFO - [MONTE CARLO] PFTrDS Branched - Completed in 2583.1s
+2026-03-06 13:54:45,958 - INFO - [MONTE CARLO] PFDoDS Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDoDS_Branched_monte_carlo.csv
+2026-03-06 13:54:45,958 - INFO - [MONTE CARLO] PFDoDS Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:45,958 - INFO - [MONTE CARLO] PFDoDS Branched - Completed in 2589.2s
+2026-03-06 13:54:46,078 - INFO - [MONTE CARLO] PFNA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFNA_Linear_monte_carlo.csv
+2026-03-06 13:54:46,078 - INFO - [MONTE CARLO] PFNA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:46,078 - INFO - [MONTE CARLO] PFNA Linear - Completed in 2588.6s
+2026-03-06 13:54:52,629 - INFO - [MONTE CARLO] PFUnDA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFUnDA_Linear_monte_carlo.csv
+2026-03-06 13:54:52,629 - INFO - [MONTE CARLO] PFUnDA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:54:52,629 - INFO - [MONTE CARLO] PFUnDA Linear - Completed in 2593.4s
+2026-03-06 13:55:29,052 - INFO - [MONTE CARLO] PFTeDA Branched - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFTeDA_Branched_monte_carlo.csv
+2026-03-06 13:55:29,052 - INFO - [MONTE CARLO] PFTeDA Branched - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:55:29,052 - INFO - [MONTE CARLO] PFTeDA Branched - Completed in 2630.7s
+2026-03-06 13:56:25,480 - INFO - [MONTE CARLO] PFDA Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFDA_Linear_monte_carlo.csv
+2026-03-06 13:56:25,480 - INFO - [MONTE CARLO] PFDA Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:56:25,481 - INFO - [MONTE CARLO] PFDA Linear - Completed in 2689.3s
+2026-03-06 13:57:14,032 - INFO - [MONTE CARLO] PFHxS Linear - Saved predictions to /home/przygoda/Desktop/pfaa-pbtk-dairy-goats/results/optimization/monte_carlo/predictions_PFHxS_Linear_monte_carlo.csv
+2026-03-06 13:57:14,032 - INFO - [MONTE CARLO] PFHxS Linear - Total samples: 10000 parameter draws × 3 animals = 30000 total predictions
+2026-03-06 13:57:14,032 - INFO - [MONTE CARLO] PFHxS Linear - Completed in 2736.7s
+2026-03-06 13:57:14,286 - INFO - === PHASE 3/3 COMPLETED ===
+2026-03-06 13:57:14,286 - INFO - Monte Carlo sampling: 31/31 successful in 2738.5s
+2026-03-06 13:57:14,426 - INFO - === ALL PHASES COMPLETED ===
+2026-03-06 13:57:14,427 - INFO - Total execution time: 8217.6s (2.3 hours)
+2026-03-06 13:57:14,427 - INFO - Success rates: Global=31/31, Jackknife=31/31, Monte Carlo=31/31
+2026-03-06 13:57:14,427 - INFO - Average global fit time: 87.9s per compound
+2026-03-06 13:57:14,427 - INFO - Average jackknife time: 88.8s per compound
+2026-03-06 13:57:14,427 - INFO - Average Monte Carlo time: 88.3s per compound
+2026-03-06 13:57:14,427 - INFO - Fully successful compounds: 31/31
