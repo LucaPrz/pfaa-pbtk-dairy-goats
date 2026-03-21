@@ -1,8 +1,10 @@
 from pathlib import Path
 import pandas as pd
 import numpy as np
-from typing import Callable, Dict, Any, Optional
+from typing import Callable, Dict, Any, Optional, Tuple
 import warnings
+
+from auxiliary.project_paths import get_data_root
 
 # Import physiological curves (same directory).
 # The original code expected a `physiological` module; in this cleaned
@@ -52,23 +54,52 @@ FLOW_FACTORS = {
     "Q_brain": 0.0295,
 }
 
-# Cow-specific plasma flow fractions (Holstein, percent of cardiac output)
-# Kidneys: 7%, Hepatic artery: 10%, Portal vein (intestine drainage): 49%
-# Other organs (spleen, stomach, muscle, heart, brain) use goat fractions
-COW_FLOW_FACTORS = {
-    "Q_spleen": 0.0454,    # approximated from goat (no cow-specific data)
-    "Q_stomach": 0.0776,   # approximated from goat
-    "Q_intestine": 0.49,   # 49% portal vein
-    "Q_hepatic": 0.10,     # 10% hepatic artery
-    "Q_kidney": 0.07,      # 7% kidneys
-    "Q_muscle": 0.1009,    # approximated from goat
-    "Q_heart": 0.0559,     # approximated from goat
-    "Q_brain": 0.0295,     # approximated from goat
-}
+# Concentrate (supplement) DMI for k_sto calculation (kg/day), consistent with feces_volume
+CONCENTRATE_DMI_KG_PER_DAY = 0.5
+EXPOSURE_DAYS = (1, 56)  # days 1-56 for NI/PCO calculation
+
+
+def _compute_k_sto_ni_pco() -> Tuple[float, float, float]:
+    """
+    Compute k_sto from INRA equation using NI and PCO derived from animal_data.csv.
+
+    NI = total DMI / BW (nutrient intake as fraction of body weight)
+    PCO = proportion of concentrate = concentrate / total DMI
+
+    Uses median NI and PCO over exposure days (1-56) for animals E2, E3, E4.
+    Falls back to NI=0.04, PCO=0.22 if data unavailable.
+    """
+    path = get_data_root() / "raw" / "animal_data.csv"
+    if not path.exists():
+        ni, pco = 0.04, 0.22
+    else:
+        df = pd.read_csv(path)
+        mask = (
+            df["Animal"].isin(["E2", "E3", "E4"])
+            & (df["Day"] >= EXPOSURE_DAYS[0])
+            & (df["Day"] <= EXPOSURE_DAYS[1])
+        )
+        sub = df.loc[mask, ["Feed_Intake_kg_per_day", "Body_Weight_kg"]].dropna()
+        if sub.empty:
+            ni, pco = 0.04, 0.22
+        else:
+            hay = sub["Feed_Intake_kg_per_day"]
+            total_dmi = hay + CONCENTRATE_DMI_KG_PER_DAY
+            pco_vals = CONCENTRATE_DMI_KG_PER_DAY / total_dmi
+            ni_vals = total_dmi / sub["Body_Weight_kg"]
+            ni = float(ni_vals.median())
+            pco = float(pco_vals.median())
+    k_sto = (2.53 + (1.22 * ni)) - ((2.61 * (pco ** 2)) / 6000.0)
+    return k_sto, ni, pco
+
+
+_K_STO, _NI, _PCO = _compute_k_sto_ni_pco()
+K_STO_NI = _NI
+K_STO_PCO = _PCO
 
 # Default absorption and excretion rates
 DEFAULT_ABSORPTION_EXCRETION = {
-    "k_sto": (2.53 + (1.22 * 1.0)) - ((2.61 * (1.0 ** 2)) / 6000.0),  # NI=1.0, PCO=1.0
+    "k_sto": _K_STO,  # INRA eq from animal_data (NI, PCO computed)
     "k_a": 10,
     "k_feces": 0.05,
     "k_urine": 0,
@@ -83,18 +114,10 @@ def calculate_physiology_from_body_weight(
     parity: Optional[str] = None,
     breed: Optional[str] = None,
 ) -> Dict[str, float]:
-    # Choose species-specific volume and flow factors (default: goats)
-    if breed is not None and breed.startswith("Holstein_cow"):
-        vol_factors = COW_VOLUME_FACTORS
-        flow_factors = COW_FLOW_FACTORS
-        # Cow-specific cardiac output and hematocrit (Holstein)
-        cow_hematocrit = 0.378
-        cow_cardiac_output = 8.7 * (1 - cow_hematocrit)  # L/(h·kg) plasma-equivalent
-        plasma_flow_per_hour = body_weight * cow_cardiac_output
-    else:
-        vol_factors = VOLUME_FACTORS
-        flow_factors = FLOW_FACTORS
-        plasma_flow_per_hour = body_weight * CARDIAC_OUTPUT
+
+    vol_factors = VOLUME_FACTORS
+    flow_factors = FLOW_FACTORS
+    plasma_flow_per_hour = body_weight * CARDIAC_OUTPUT
     
     # Calculate volumes (all in L)
     physiological_dict = {}
@@ -173,11 +196,12 @@ def load_partition_coefficients(compound: str, isomer: str) -> Dict[str, float]:
         )
     
     partition_dict = dict(zip(filtered["Matrix"], filtered["Mean_Partition_Coefficient"]))
-    # Ensure required entries exist with sensible fallbacks
-    # P_milk: plasma–milk partition (canonical name). CSV may use "Mammary" or "Milk"
-    p_milk = partition_dict.get("Mammary", partition_dict.get("Milk", 1.0))
+
+    p_milk = partition_dict.get("Milk", 1.0)
     partition_dict["P_milk"] = p_milk
-    partition_dict.setdefault("Rest", 0.01)
+    # P_rest = 1.388 * P_muscle (polar lipid ratio between rest and muscle compartments)
+    p_muscle = partition_dict.get("Muscle", 0.01)
+    partition_dict["Rest"] = 1.388 * p_muscle
     return partition_dict
 
 def build_parameters(config, fit_params=None) -> dict:
@@ -241,7 +265,9 @@ def build_dynamic_physiology_provider(
     # Get body weight curve parameters (for fallback, if needed)
     bw_params = None
     if breed is not None and parity is not None:
-        bw_params = physiological.get_params(breed, parity)
+        # Physiology registry is keyed by (species, breed, parity).
+        # For this project, all current entries are goats.
+        bw_params = physiological.get_params("goat", breed, parity)
     
     
     def physiology_provider(t: float) -> Dict[str, float]:
@@ -288,8 +314,15 @@ def build_dynamic_physiology_provider(
         else:
             # Use lactation curve
             if parity is None:
-                raise ValueError("Cannot calculate milk yield: parity not provided and milk_yield_array not provided")
-            milk_yield = physiological.lactation_curve(np.array([dim]), parity, breed=breed)[0]
+                raise ValueError(
+                    "Cannot calculate milk yield: parity not provided and milk_yield_array not provided"
+                )
+            if bw_params is None:
+                raise ValueError(
+                    "Cannot calculate milk yield: physiology parameters (bw_params) "
+                    "not available; ensure breed/parity are provided."
+                )
+            milk_yield = physiological.lactation_curve(np.array([dim]), bw_params)[0]
         
         phys["milk_yield"] = milk_yield
         
@@ -306,7 +339,7 @@ def build_dynamic_physiology_provider(
                 BW_array = np.array([BW])
                 lactation_array = np.array([milk_yield])
                 dmi = physiological.dry_matter_intake_curve(
-                    np.array([dim]), BW_array, lactation_array
+                    np.array([dim]), BW_array, lactation_array, species="goat"
                 )[0]
             except Exception:
                 # DMI is optional, so we can skip if calculation fails

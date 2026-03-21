@@ -49,8 +49,8 @@ REGULATORY_LIMITS: Dict[str, float] = {
 COMPOUNDS: List[str] = ["PFOS", "PFOA", "PFNA", "PFHxS"]
 ISOMER: str = "Linear"
 
-# Breed and parity combinations – dairy goats + simple Holstein profile
-BREEDS: List[str] = ["Alpine", "Saanen", "Holstein_cow"]
+# Breed and parity combinations – dairy goats
+BREEDS: List[str] = ["Alpine", "Saanen"]
 PARITIES: List[str] = ["primiparous", "multiparous"]
 
 # Simulation settings
@@ -401,7 +401,8 @@ def main() -> None:
 
     df_results = pd.DataFrame(rows)
 
-    analysis_root = results_root / "analysis"
+    # Store under applications subfolder to keep analysis outputs organised
+    analysis_root = results_root / "analysis" / "applications"
     analysis_root.mkdir(parents=True, exist_ok=True)
     out_path = analysis_root / "max_feed_concentrations.csv"
     df_results.to_csv(out_path, index=False)

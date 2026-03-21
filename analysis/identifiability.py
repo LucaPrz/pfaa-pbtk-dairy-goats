@@ -756,9 +756,12 @@ def regenerate_all_identifiability_reports(
     if gof_summary_path.exists():
         try:
             gof_df = pd.read_csv(gof_summary_path)
+            # Use the same GOF thresholds as the goodness_of_fit plotting script
+            # (plot_log_pred_vs_log_obs_for_passing) so that "passing" compounds
+            # are defined consistently across analyses.
             crit_r2 = gof_df["R2"] > 0.7
-            crit_gm = gof_df["GM_Fold_Error"] < 2.0
-            crit_bias = gof_df["Bias_log10"].abs() < 0.25
+            crit_gm = gof_df["GM_Fold_Error"] < 3.0
+            crit_bias = gof_df["Bias_log10"].abs() < 0.3
             passing = gof_df[crit_r2 & crit_gm & crit_bias][["Compound", "Isomer"]]
             if not passing.empty:
                 passing_pairs = set(map(tuple, passing.to_numpy()))
@@ -836,8 +839,9 @@ def regenerate_all_identifiability_reports(
                             stat = aggregate_stats.setdefault(name, {"values": []})
                             stat["values"].append(float(np.log10(val)))
 
-                # Store parameter–parameter correlations (all pairs, no hardcoding, regardless of GOF)
-                if (
+                # Store parameter–parameter correlations only for pairs used in the main identifiability
+                # summaries (i.e., passing GOF criteria when a GOF filter is available).
+                if use_for_aggregate and (
                     corr_matrix is not None
                     and isinstance(corr_matrix, np.ndarray)
                     and corr_matrix.shape == (len(param_names), len(param_names))

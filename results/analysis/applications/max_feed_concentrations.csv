@@ -1,0 +1,17 @@
+compound,isomer,breed,parity,max_feed_concentration_ug_kg_DMI,regulatory_limit_ug_kg_milk
+PFOS,Linear,Alpine,primiparous,0.06,0.02
+PFOS,Linear,Alpine,multiparous,0.07,0.02
+PFOS,Linear,Saanen,primiparous,0.07,0.02
+PFOS,Linear,Saanen,multiparous,0.07,0.02
+PFOA,Linear,Alpine,primiparous,5.65,0.01
+PFOA,Linear,Alpine,multiparous,7.05,0.01
+PFOA,Linear,Saanen,primiparous,5.89,0.01
+PFOA,Linear,Saanen,multiparous,7.65,0.01
+PFNA,Linear,Alpine,primiparous,1.14,0.05
+PFNA,Linear,Alpine,multiparous,1.42,0.05
+PFNA,Linear,Saanen,primiparous,1.2,0.05
+PFNA,Linear,Saanen,multiparous,1.5,0.05
+PFHxS,Linear,Alpine,primiparous,2.94,0.06
+PFHxS,Linear,Alpine,multiparous,3.64,0.06
+PFHxS,Linear,Saanen,primiparous,3.09,0.06
+PFHxS,Linear,Saanen,multiparous,3.93,0.06

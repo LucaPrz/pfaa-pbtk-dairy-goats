@@ -1,22 +1,24 @@
 Identifiability Diagnostics: PFNS Branched
 ============================================================
 
-Condition Number: 1.81e+02
+Condition Number: 1.69e+04
 (Higher = less identifiable, >1e6 suggests problems)
-Condition Number (per dim, ^4 root): 3.67e+00
+Condition Number (per dim, ^5 root): 7.00e+00
 (Comparable across different # of fitted parameters; use for fair comparison)
 
 Eigenvalues (sorted, descending):
-  1. 5.09e+03
-  2. 2.52e+02
-  3. 5.07e+01
-  4. 2.80e+01
+  1. 5.18e+03
+  2. 2.86e+02
+  3. 4.22e+01
+  4. 2.13e+01
+  5. 3.07e-01
 
 No strongly unidentifiable combinations detected.
 
 Correlation Matrix:
-           k_elim   k_feces     k_ehc   k_urine
-k_elim   1.000000 -0.914736  0.890704  0.251076
-k_feces -0.914736  1.000000 -0.747792 -0.199289
-k_ehc    0.890704 -0.747792  1.000000  0.275852
-k_urine  0.251076 -0.199289  0.275852  1.000000
+           k_elim       k_a   k_feces     k_ehc   k_urine
+k_elim   1.000000 -0.092788 -0.933560 -0.011566  0.138342
+k_a     -0.092788  1.000000  0.090041  0.994960 -0.024716
+k_feces -0.933560  0.090041  1.000000  0.022746 -0.115683
+k_ehc   -0.011566  0.994960  0.022746  1.000000 -0.006863
+k_urine  0.138342 -0.024716 -0.115683 -0.006863  1.000000

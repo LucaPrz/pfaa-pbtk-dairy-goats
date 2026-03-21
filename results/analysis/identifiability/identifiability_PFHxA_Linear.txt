@@ -1,18 +1,20 @@
 Identifiability Diagnostics: PFHxA Linear
 ============================================================
 
-Condition Number: 5.47e+00
+Condition Number: 2.23e+02
 (Higher = less identifiable, >1e6 suggests problems)
-Condition Number (per dim, ^2 root): 2.34e+00
+Condition Number (per dim, ^3 root): 6.06e+00
 (Comparable across different # of fitted parameters; use for fair comparison)
 
 Eigenvalues (sorted, descending):
-  1. 9.29e+01
-  2. 1.70e+01
+  1. 1.43e+03
+  2. 2.87e+01
+  3. 6.40e+00
 
 No strongly unidentifiable combinations detected.
 
 Correlation Matrix:
-           k_elim   k_urine
-k_elim   1.000000 -0.690702
-k_urine -0.690702  1.000000
+           k_elim       k_a   k_urine
+k_elim   1.000000  0.793302 -0.603271
+k_a      0.793302  1.000000 -0.025967
+k_urine -0.603271 -0.025967  1.000000

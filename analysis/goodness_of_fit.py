@@ -323,7 +323,7 @@ def plot_log_pred_vs_obs_for_passing(
     output_dir: Path,
     r2_threshold: float = 0.7,
     gmfe_threshold: float = 3.0,
-    bias_abs_threshold: float = 0.25,
+    bias_abs_threshold: float = 0.3,
 ) -> None:
     """
     Create a log10(predicted) vs log10(observed) scatter plot including only

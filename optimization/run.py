@@ -18,13 +18,16 @@ import numpy as np
 
 from optimization.config import ModelConfig, FittingContext, setup_context
 from optimization.io import get_project_root
-from optimization.fit import run_global_fit_for_pair, run_jackknife_for_pair
+from optimization.fit import run_global_fit_for_pair
 from optimization.mc import run_monte_carlo_for_pair
 
 logger = logging.getLogger(__name__)
 
 # Constants
-TOTAL_PHASES_FULL_RUN = 3
+# Default pipeline now has two phases:
+#   Phase 1: Global mean fits (two-stage)
+#   Phase 2: Monte Carlo sampling (Hessian-based uncertainty)
+TOTAL_PHASES_FULL_RUN = 2
 TOTAL_PHASES_MC_ONLY = 1
 
 # Exit codes
@@ -45,22 +48,19 @@ def main() -> int:
     """
     Main entry point for PBPK model fitting and Monte Carlo sampling pipeline.
     
-    This function orchestrates a 3-phase computational workflow:
+    This function orchestrates a 2-phase computational workflow:
     
     Phase 1: Global Mean Fits
         - Fits PBPK model parameters using all available data
         - Determines optimal parameter values for each compound-isomer pair
-        - Results saved to results/Phase1_GlobalFits/
+        - Results saved to results/optimization/global_fit/
     
-    Phase 2: Jackknife Fits  
-        - Performs leave-one-out cross-validation
-        - Estimates parameter uncertainty via resampling
-        - Results saved to results/Phase2_JackknifeFits/
-    
-    Phase 3: Monte Carlo Sampling
-        - Generates prediction distributions using parameter uncertainty
-        - Produces probabilistic forecasts for each compound
-        - Results saved to results/Phase3_MonteCarloPredictions/
+    Phase 2: Monte Carlo Sampling (Hessian-based)
+        - Uses a numerical Hessian around the Phase 1 optimum to derive a
+          full covariance in log10-space for the fitted parameters
+        - Generates prediction distributions using this covariance together
+          with animal variability and observation-level σ
+        - Results saved to results/optimization/monte_carlo/
     
     Command-line Arguments:
         --mc-only: Skip phases 1-2, run only Monte Carlo (requires existing fits)
@@ -173,13 +173,10 @@ def main() -> int:
     
     # Initialize timing and success tracking variables
     mean_time = 0.0
-    jack_time = 0.0
     mc_time = 0.0
     successful_mean = 0
-    successful_jack = 0
     successful_mc = 0
     results_mean: List[Optional[List[float]]] = []
-    results_jackknife: List[Optional[np.ndarray]] = []
     results_mc: List[Optional[Path]] = []
     
     # Setup multiprocessing pool with proper resource management
@@ -256,31 +253,7 @@ def main() -> int:
             logger.info(f"=== PHASE {current_phase}/{total_phases} COMPLETED ===")
             logger.info(f"Global mean fits (two-stage): {successful_mean}/{len(selected_pairs)} successful in {mean_time:.1f}s")
             
-            # ------------------------------------------------------------------
-            # PHASE 2: Jackknife fits (use censored-likelihood by default)
-            # ------------------------------------------------------------------
-            logger.info("=== PHASE 2: Running jackknife fits ===")
-            start_time = time.time()
-            
-            # Create partial function with context
-            run_jackknife_partial = partial(run_jackknife_for_pair, context=context)
-            try:
-                results_jackknife = pool.map(run_jackknife_partial, selected_pairs)
-            except KeyboardInterrupt:
-                logger.warning("User interrupted during jackknife fit phase")
-                raise  # Re-raise to ensure finally block executes
-            except Exception as e:
-                logger.error(f"Jackknife fit phase failed: {e}", exc_info=True)
-                raise  # Re-raise to ensure finally block executes
-            
-            update_progress(overall_pbar, len(selected_pairs))
-            jack_time = time.time() - start_time
-            current_phase += 1
-            successful_jack = count_successful(results_jackknife)
-            logger.info(f"=== PHASE {current_phase}/{total_phases} COMPLETED ===")
-            logger.info(f"Jackknife fits: {successful_jack}/{len(selected_pairs)} successful in {jack_time:.1f}s")
-
-        phase_label = "PHASE 1" if args.mc_only else "PHASE 3"
+        phase_label = "PHASE 1" if args.mc_only else "PHASE 2"
         logger.info(f"=== {phase_label}: Running Monte Carlo sampling ===")
         start_time = time.time()
         
@@ -329,14 +302,12 @@ def main() -> int:
     else:
         logger.info(f"=== ALL PHASES COMPLETED ===")
         logger.info(f"Total execution time: {elapsed_total:.1f}s ({elapsed_total/3600:.1f} hours)")
-        logger.info(f"Success rates: Global={successful_mean}/{len(selected_pairs)}, Jackknife={successful_jack}/{len(selected_pairs)}, Monte Carlo={successful_mc}/{len(selected_pairs)}")
+        logger.info(f"Success rates: Global={successful_mean}/{len(selected_pairs)}, Monte Carlo={successful_mc}/{len(selected_pairs)}")
         if successful_mean > 0:
             logger.info(f"Average global fit time: {mean_time / successful_mean:.1f}s per compound")
-        if successful_jack > 0:
-            logger.info(f"Average jackknife time: {jack_time / successful_jack:.1f}s per compound")
         if successful_mc > 0:
             logger.info(f"Average Monte Carlo time: {mc_time / successful_mc:.1f}s per compound")
-        total_successful = min(successful_mean, successful_jack, successful_mc)
+        total_successful = min(successful_mean, successful_mc)
         logger.info(f"Fully successful compounds: {total_successful}/{len(selected_pairs)}")
     
     return EXIT_SUCCESS

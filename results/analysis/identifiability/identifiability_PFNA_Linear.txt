@@ -1,16 +1,18 @@
 Identifiability Diagnostics: PFNA Linear
 ============================================================
 
-Condition Number: 1.00e+00
+Condition Number: 1.26e+04
 (Higher = less identifiable, >1e6 suggests problems)
-Condition Number (per dim, ^1 root): 1.00e+00
+Condition Number (per dim, ^2 root): 1.12e+02
 (Comparable across different # of fitted parameters; use for fair comparison)
 
 Eigenvalues (sorted, descending):
-  1. 8.82e+01
+  1. 1.27e+02
+  2. 1.01e-02
 
 No strongly unidentifiable combinations detected.
 
 Correlation Matrix:
-        k_elim
-k_elim     1.0
+          k_elim       k_a
+k_elim  1.000000 -0.268133
+k_a    -0.268133  1.000000

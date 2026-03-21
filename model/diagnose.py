@@ -2,7 +2,7 @@
 Diagnostic helpers
 """
 
-from typing import Tuple
+from typing import Tuple, List, Optional
 
 import numpy as np
 
@@ -135,4 +135,107 @@ class PBTKModel(PBTKSolver):
             print("Matrix looks numerically stable")
 
         return len(issues) == 0
+
+    # ------------------------------------------------------------------
+    # Eigenmode half-lives and steady-state transfer
+    # ------------------------------------------------------------------
+    def eigenmode_half_lives(self, t: float = 0.0, tol: float = 1e-8) -> np.ndarray:
+        """
+        Return eigenmode half-lives (days) for the transition matrix at time t.
+
+        Each eigenmode i with real, negative eigenvalue λ_i contributes a decay
+        term exp(λ_i t). The associated half-life is:
+
+            t_{1/2,i} = ln(2) / |Re(λ_i)|
+
+        This function returns all such half-lives, sorted ascending
+        (fastest to slowest mode).
+        """
+        T = self.transition_matrix(t)
+        eigvals = np.linalg.eigvals(T)
+
+        # Select modes with sufficiently small imaginary part and negative real part
+        real_parts = np.real(eigvals)
+        imag_parts = np.imag(eigvals)
+        mask = (np.abs(imag_parts) <= tol) & (real_parts < 0.0)
+        rates = -real_parts[mask]  # positive decay rates
+
+        if rates.size == 0:
+            return np.array([], dtype=float)
+
+        half_lives = np.log(2.0) / rates  # days, since T is in 1/day
+        return np.sort(half_lives)
+
+    def systemic_half_life(
+        self,
+        t: float = 0.0,
+        tol: float = 1e-8,
+    ) -> Optional[float]:
+        """
+        Return a single "systemic" half-life (days) based on the slowest
+        positive eigenmode of the transition matrix at time t.
+
+        If no suitable eigenmodes are found, returns None.
+        """
+        half_lives = self.eigenmode_half_lives(t=t, tol=tol)
+        if half_lives.size == 0:
+            return None
+        # Slowest mode = largest half-life
+        return float(half_lives[-1])
+
+    def steady_state_milk_transfer_rate(self, t: float = 0.0) -> Optional[float]:
+        """
+        Compute a model-based steady-state milk transfer rate TR_milk.
+
+        Assumes:
+          - Constant, unit intake into the stomach compartment (1 arbitrary
+            mass unit per day).
+          - Linear, time-invariant transition matrix at time t.
+
+        The steady-state amount vector A_ss satisfies:
+
+            T A_ss + u = 0  →  A_ss = -T^{-1} u
+
+        From A_ss we derive:
+          - Steady-state plasma concentration C_plasma_ss,
+          - Steady-state milk concentration via P_milk,
+          - Milk mass excreted per day = C_milk_ss * milk_yield(t),
+          - TR_milk = (milk mass/day) / (intake mass/day).
+
+        Returns:
+          TR_milk as a dimensionless fraction of intake, or None if the
+          steady-state system cannot be solved.
+        """
+        # Build transition matrix and a unit intake vector into the stomach
+        T = self.transition_matrix(t)
+        u = np.zeros((self.compartment_number, 1))
+        if "stomach" not in self.compartment_idx:
+            return None
+        u[self.compartment_idx["stomach"], 0] = 1.0  # 1 unit/day into stomach
+
+        try:
+            A_ss = -np.linalg.solve(T, u)
+        except np.linalg.LinAlgError:
+            return None
+
+        # Steady-state plasma amount and concentration
+        pi_plasma = self.projection_vector("plasma")
+        plasma_amount = float(pi_plasma @ A_ss)
+        phys = self._get_physiology(t)
+        V_plasma = float(phys.get("V_plasma", 0.0))
+        if V_plasma <= 0.0:
+            return None
+        C_plasma_ss = plasma_amount / V_plasma
+
+        # Milk concentration via partition coefficient
+        PC = self.params.get("partition_coefficients", {})
+        P_milk = float(PC.get("P_milk", 1.0))
+        C_milk_ss = P_milk * C_plasma_ss
+
+        # Milk yield (kg/day) at time t
+        milk_yield = float(self._get_milk_yield(t))
+
+        # Steady-state milk mass per day divided by intake mass per day (1.0)
+        TR_milk = C_milk_ss * milk_yield
+        return float(TR_milk)
 

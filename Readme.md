@@ -37,7 +37,14 @@ pfaa-pbtk-dairy-goats
 │   ├── sigma_estimation.py
 │   └── run.py
 ├── analysis
-│   └── identifiability.py
+│   ├── goodness_of_fit.py          (GOF metrics and log‑log plots)
+│   ├── half_life_vs_milk_transfer.py
+│   ├── identifiability.py          (FIM‑based identifiability diagnostics)
+│   ├── kinetic_characteristics.py  (kinetic summary metrics under standard exposure)
+│   ├── breed_parity_exposure_scenarios.py  (Application 1: breed × parity × exposure/depuration)
+│   ├── max_feed_estimation.py      (Application 2: maximum allowed feed concentrations)
+│   ├── sensitivity_summary.py      (local sensitivity ranking using FIM diagonal)
+│   └── plot_max_feed_results.py    (helper to plot max_feed_concentrations.csv)
 └── results
     ├── optimization
     │   ├── global_fit/          (Phase 1 fits: fit_*.csv)
@@ -130,4 +137,114 @@ To see available command‑line options:
 ```bash
 python optimization/run.py --help
 ```
+
+Analysis scripts for the paper
+------------------------------
+
+After the optimisation pipeline has finished (i.e. Phase 1–3 fits and
+predictions are available in `results/optimization` and the mass‑balance
+and partition‑coefficient scripts have been run), the main analysis
+scripts for the paper can be executed from the project root as:
+
+1. **Goodness of fit and passing compounds:**
+
+   ```bash
+   python analysis/goodness_of_fit.py
+   ```
+
+   - Writes per‑compound and per‑compartment GOF tables under
+     `results/analysis/goodness_of_fit/`.
+   - Identifies compound–isomer pairs that pass predefined GOF thresholds
+     (R², GMFE, bias), and generates a log10(pred) vs log10(obs) scatter
+     plot for these pairs.
+
+2. **Half‑life vs milk transfer:**
+
+   ```bash
+   python analysis/half_life_vs_milk_transfer.py
+   ```
+
+   - Estimates elimination half‑lives from plasma depuration data.
+   - Merges them with milk transfer rates from the experimental
+     mass‑balance analysis and produces
+     `results/analysis/toxicokinetics/half_life_vs_milk_transfer_rate.png`.
+
+3. **Kinetic characteristics under a standard exposure:**
+
+   ```bash
+   python analysis/kinetic_characteristics.py
+   ```
+
+   - For each PFAS that passes GOF, simulates a standard exposure scenario
+     for a reference breed/parity and computes:
+       - Time to 90% and 95% of steady state in milk and plasma,
+       - Time to 50% and 90% decline after switching to clean feed,
+       - Approximate feed→milk transfer factor and milk:plasma ratio.
+   - Writes a single summary table:
+     `results/analysis/kinetic_characteristics.csv`.
+
+4. **Application 1 – Breed × parity × exposure/depuration scenarios:**
+
+   ```bash
+   python analysis/breed_parity_exposure_scenarios.py
+   ```
+
+   - For each passing PFAS and each (breed, parity) combination, simulates:
+       - Constant low exposure (1 µg/kg DM),
+       - Constant high exposure (5 µg/kg DM),
+       - Exposure followed by depuration (1 µg/kg DM up to a fixed day,
+         then 0 µg/kg DM).
+   - Summarises end‑of‑exposure milk concentrations and, for the
+     depuration scenario, times to 50% and 90% decline and time to drop
+     below regulatory limits (where defined).
+   - Outputs:
+     `results/analysis/breed_parity_exposure_scenarios.csv`.
+
+5. **Application 2 – Maximum allowable PFAS concentrations in feed:**
+
+   ```bash
+   python analysis/max_feed_estimation.py
+   ```
+
+   - Uses Phase 1 fits plus jackknife diagnostics to build a parameter
+     distribution per compound–isomer.
+   - For each breed/parity and compound, finds the maximum constant feed
+     concentration such that the 97.5th percentile of milk concentrations
+     stays below regulatory limits.
+   - Outputs:
+     `results/analysis/max_feed_concentrations.csv`.
+
+   To produce a simple barplot of these results:
+
+   ```bash
+   python analysis/plot_max_feed_results.py
+   ```
+
+   which saves
+   `results/figures/max_feed_barplot_by_compound_breed_parity.png`.
+
+6. **Identifiability and local sensitivity:**
+
+   - Identifiability diagnostics:
+
+     ```bash
+     python analysis/identifiability.py
+     ```
+
+     This computes finite‑difference gradients and Fisher Information
+     Matrices for each compound–isomer, writing CSV summaries and text
+     reports under `results/analysis/identifiability/`.
+
+   - Local sensitivity summary for a representative PFAS (by default
+     PFOS Linear):
+
+     ```bash
+     python analysis/sensitivity_summary.py
+     ```
+
+     This converts the FIM diagonal into simple local sensitivity
+     indices and saves them to
+     `results/analysis/sensitivity_summary_PFOS_Linear.csv` for use as a
+     parameter‑importance ranking plot in the paper.
+
 

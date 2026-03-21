@@ -221,7 +221,7 @@ def add_empirical_partition_coefficients(
     return mean_pc_by_tissue
 
 
-def compute_mammary_partition_coefficients(data: pd.DataFrame) -> pd.DataFrame:
+def compute_milk_partition_coefficients(data: pd.DataFrame) -> pd.DataFrame:
     # Filter to plasma and milk records
     sub = data[
         data["Matrix"].str.lower().isin(["plasma", "milk"])
@@ -324,12 +324,12 @@ def main() -> None:
         mean_pc_by_tissue, all_compounds, tissue_medians
     )
 
-    # Compute mammary (plasma–milk) partition coefficients and append
+    # Compute milk (plasma–milk) partition coefficients and append
     print("Computing plasma–milk partition coefficients for mammary/milk space...")
-    mammary_pc = compute_mammary_partition_coefficients(data)
-    if not mammary_pc.empty:
-        mean_pc_by_tissue = pd.concat([mean_pc_by_tissue, mammary_pc], ignore_index=True)
-        print(f"Added {len(mammary_pc)} mammary partition coefficient entries.")
+    milk_pc = compute_milk_partition_coefficients(data)
+    if not milk_pc.empty:
+        mean_pc_by_tissue = pd.concat([mean_pc_by_tissue, milk_pc], ignore_index=True)
+        print(f"Added {len(milk_pc)} milk partition coefficient entries.")
     else:
         print("No mammary partition coefficients could be computed from data.")
     

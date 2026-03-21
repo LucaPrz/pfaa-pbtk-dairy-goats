@@ -242,7 +242,23 @@ class FittingContext:
     folder_phase2: Path
     folder_phase3: Path
 
-def setup_context(project_root: Optional[Path] = None) -> FittingContext:
+def setup_context(
+    project_root: Optional[Path] = None,
+    verbose: bool = True,
+) -> FittingContext:
+    """
+    Set up the fitting context (data, config, paths).
+
+    Parameters
+    ----------
+    project_root
+        Repository root; uses get_project_root() if None.
+    verbose
+        If False, suppress INFO logs from data loading and compound discovery.
+        Useful when setup_context is called from scripts that only need one
+        compound (e.g. prediction_grid) and the per-compound discovery output
+        is distracting.
+    """
     # Import here to avoid circular imports
     from optimization.io import DataCache, load_data, get_project_root
 
@@ -261,51 +277,61 @@ def setup_context(project_root: Optional[Path] = None) -> FittingContext:
     folder_phase1.mkdir(parents=True, exist_ok=True)
     folder_phase2.mkdir(parents=True, exist_ok=True)
     folder_phase3.mkdir(parents=True, exist_ok=True)
-    
-    # Load all data
-    logger.info("Loading data files...")
-    (
-        intake_df,
-        urine_volume_by_animal,
-        feces_mass_by_animal,
-        milk_yield_by_animal,
-        feces_mass_default,
-        body_weight_by_animal,
-    ) = load_data(
-        config, project_root=project_root
-    )
-    
-    # Determine compounds from data if not explicitly set
-    data_path = project_root / "data" / "raw" / "pfas_data_no_e1.csv"
-    if config.compounds is None:
-        logger.info(
-            "Determining compound-isomer pairs: hay concentration not 0 and "
-            "at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ."
+
+    # When not verbose, suppress INFO from optimization package (load_data, compound discovery)
+    opt_logger = logging.getLogger("optimization")
+    prev_level = opt_logger.level if not verbose else None
+    if not verbose:
+        opt_logger.setLevel(logging.WARNING)
+
+    try:
+        # Load all data
+        logger.info("Loading data files...")
+        (
+            intake_df,
+            urine_volume_by_animal,
+            feces_mass_by_animal,
+            milk_yield_by_animal,
+            feces_mass_default,
+            body_weight_by_animal,
+        ) = load_data(
+            config, project_root=project_root
         )
-        config.compounds = config.get_compounds_from_data(data_path=data_path)
-        n_pairs = len(config.fittable_pairs) if config.fittable_pairs else 0
-        logger.info(f"Found {len(config.compounds)} compounds ({n_pairs} compound-isomer pairs) meeting criteria")
-    else:
-        logger.info(f"Using explicitly set compounds: {', '.join(config.compounds)}")
-    
-    # Create data cache (only fittable pairs are returned by get_all_pairs if set)
-    data_cache = DataCache(
-        compounds=config.compounds,
-        data_path=data_path,
-        fittable_pairs=config.fittable_pairs,
-    )
-    
-    # Create and return context
-    return FittingContext(
-        config=config,
-        data_cache=data_cache,
-        intake_df=intake_df,
-        urine_volume_by_animal=urine_volume_by_animal,
-        feces_mass_by_animal=feces_mass_by_animal,
-        feces_mass_default=feces_mass_default,
-        milk_yield_by_animal=milk_yield_by_animal,
-        body_weight_by_animal=body_weight_by_animal,
-        folder_phase1=folder_phase1,
-        folder_phase2=folder_phase2,
-        folder_phase3=folder_phase3
-    )
+
+        # Determine compounds from data if not explicitly set
+        data_path = project_root / "data" / "raw" / "pfas_data_no_e1.csv"
+        if config.compounds is None:
+            logger.info(
+                "Determining compound-isomer pairs: hay concentration not 0 and "
+                "at least one of [Brain, Feces, Heart, Kidney, Liver, Lung, Milk, Muscle, Plasma, Spleen, Urine] above LOQ."
+            )
+            config.compounds = config.get_compounds_from_data(data_path=data_path)
+            n_pairs = len(config.fittable_pairs) if config.fittable_pairs else 0
+            logger.info(f"Found {len(config.compounds)} compounds ({n_pairs} compound-isomer pairs) meeting criteria")
+        else:
+            logger.info(f"Using explicitly set compounds: {', '.join(config.compounds)}")
+
+        # Create data cache (only fittable pairs are returned by get_all_pairs if set)
+        data_cache = DataCache(
+            compounds=config.compounds,
+            data_path=data_path,
+            fittable_pairs=config.fittable_pairs,
+        )
+
+        # Create and return context
+        return FittingContext(
+            config=config,
+            data_cache=data_cache,
+            intake_df=intake_df,
+            urine_volume_by_animal=urine_volume_by_animal,
+            feces_mass_by_animal=feces_mass_by_animal,
+            feces_mass_default=feces_mass_default,
+            milk_yield_by_animal=milk_yield_by_animal,
+            body_weight_by_animal=body_weight_by_animal,
+            folder_phase1=folder_phase1,
+            folder_phase2=folder_phase2,
+            folder_phase3=folder_phase3
+        )
+    finally:
+        if prev_level is not None:
+            opt_logger.setLevel(prev_level)

@@ -1,0 +1,3 @@
+Compound,Isomer,Parameter,Fisher_Diagonal,Local_Sensitivity_S,Local_Sensitivity_S_norm
+PFDA,Branched,k_a,369.31197048517754,19.21749126408485,0.6235811743447939
+PFDA,Branched,k_elim,134.57056148401725,11.60045522744764,0.3764188256552061

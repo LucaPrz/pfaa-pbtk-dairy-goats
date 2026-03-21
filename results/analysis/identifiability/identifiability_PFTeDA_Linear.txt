@@ -1,16 +1,18 @@
 Identifiability Diagnostics: PFTeDA Linear
 ============================================================
 
-Condition Number: 1.00e+00
+Condition Number: 2.48e+06
 (Higher = less identifiable, >1e6 suggests problems)
-Condition Number (per dim, ^1 root): 1.00e+00
+Condition Number (per dim, ^2 root): 1.58e+03
 (Comparable across different # of fitted parameters; use for fair comparison)
 
 Eigenvalues (sorted, descending):
-  1. 9.07e+02
+  1. 9.63e+02
+  2. 3.88e-04
 
 No strongly unidentifiable combinations detected.
 
 Correlation Matrix:
-        k_elim
-k_elim     1.0
+          k_elim       k_a
+k_elim  1.000000 -0.387684
+k_a    -0.387684  1.000000
