@@ -1,6 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_elim,0.1902905647073682,PFUnDA,Linear
-k_a,296.1762053708553,PFUnDA,Linear
+k_elim,0.2072934783573641,PFUnDA,Linear
+k_a,305.58462257772294,PFUnDA,Linear
 k_feces,0.0,PFUnDA,Linear
 k_ehc,0.0,PFUnDA,Linear
 k_urine,0.0,PFUnDA,Linear

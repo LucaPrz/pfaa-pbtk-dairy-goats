@@ -1,6 +1,6 @@
 Parameter,Value,Compound,Isomer
-k_elim,13.69210638184355,PFOA,Linear
-k_a,234.02137146037458,PFOA,Linear
-k_feces,1.3632387116717077,PFOA,Linear
-k_urine,1.795234904383659,PFOA,Linear
+k_elim,14.124620276971466,PFOA,Linear
+k_a,288.4934921520428,PFOA,Linear
+k_feces,1.8760031137570354,PFOA,Linear
+k_urine,2.2591923469359174,PFOA,Linear
 k_ehc,0.0,PFOA,Linear
